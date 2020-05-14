@@ -1,0 +1,25 @@
+{
+  "name": "pet-rescue-app",
+  "version": "1.0.0",
+  "description": "An Application to track animals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AstroProjection/PetRescueApp.git"
+  },
+  "author": "Akshay Hemant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AstroProjection/PetRescueApp/issues"
+  },
+  "homepage": "https://github.com/AstroProjection/PetRescueApp#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.14"
+  }
+}
