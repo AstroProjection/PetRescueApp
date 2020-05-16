@@ -3,21 +3,20 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 /// model
 const Post = require('../model/Post');
-const random = require('../auth/auth');
+const User = require('../model/User');
+const auth = require('../auth/auth');
 
 //   @route POST api/post
 //   @desc creating a post on the bulletin
-//   @access public
+//   @access private
 
 // above are just descriptions of the route.
 
 router.post(
   '/',
   [
-    random,
+    auth,
     check('text', 'text is required').notEmpty(),
-    check('email', 'email is required!').isEmail().notEmpty(),
-    check('name', 'name is required').notEmpty(),
     check('title', 'title is required').notEmpty(),
   ],
   async (req, res) => {
@@ -28,17 +27,10 @@ router.post(
     }
 
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
       const newPost = new Post({
         text: req.body.text,
         title: req.body.title,
-        name: req.body.name,
-        email: req.body.email,
+        user: req.user.id,
       });
 
       await newPost.save();
@@ -51,28 +43,31 @@ router.post(
 );
 
 //   @route GET api/post
-//   @desc fetching all the bulletin posts
+//   @desc get all the bulletin posts
 //   @access public
 
 // above are just descriptions of the route.
 
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find().populate('post', ['name', 'title', 'text']);
+    const posts = await Post.find({}).populate({
+      path: 'user',
+      select: 'name _id',
+    });
     res.json(posts);
   } catch (error) {
     res.status(400).json(error.errors);
   }
 });
 
-//   @route GET api/posts/:post_id
+//   @route GET api/post/:post_id
 //   @desc Get post by id
 //   @access public
 
 router.get('/:postId', async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
-    if (!post) return res.status(404).json({ msg: 'post not found!' });
+    if (!post) return res.status(404).json({ msg: 'Post not found!' });
     res.json(post);
   } catch (error) {
     console.error(error);
@@ -80,67 +75,82 @@ router.get('/:postId', async (req, res) => {
   }
 });
 
-//   @route GET api/posts/:post_id
-//   @desc Get post by id
-//   @access public
-
-router.get('/:postId', async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    if (!post) return res.status(404).json({ msg: 'post not found!' });
-    res.json(post);
-  } catch (error) {
-    console.error(error);
-    res.status(400).json(error.errors);
-  }
-});
-//   @route POST api/posts/comments/:post_id
+//   @route POST api/post/comments/:post_id
 //   @desc Create a comment for post of id
-//   @access public
+//   @access private
 
 router.post(
   '/comments/:postId',
-  [random, check('text', 'text is required').notEmpty()],
+  [auth, check('text', 'text is required').notEmpty()],
   async (req, res) => {
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const user = User.findById(req.user.id).select('-password');
-      const post = Post.findById(req.params.postId);
+      const user = await User.findById(req.user.id).select('-password');
+      const post = await Post.findById(req.params.postId);
 
       const newComment = {
+        user: req.user.id,
         name: user.name,
         text: req.body.text,
-        user: req.user._id,
       };
-
-      post.comments.unshift(newComment);
+      post.comment.push(newComment);
       await post.save();
+      res.json(post);
     } catch (error) {
-      console.error(error);
       res.status(400).json(error.errors);
     }
   }
 );
 
-//   @route DEL api/posts/:post_id
+//   @route DEL api/post/comment/:postIdd/:commentId
+//   @desc delete a comment[commentId] on post[postId]
+//   @access private
+
+router.delete('/comment/:postId/:commentId', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    const comment = post.comment.find((comment) => {
+      return comment.id === req.params.commentId;
+    });
+
+    //comment exist?
+    if (!comment)
+      return res.status(404).json({ msg: 'Comment does not exist' });
+    //comment creator is not loggedin user?
+    if (comment.user.toString() !== req.user.id)
+      return res.status(401).json({ msg: 'User not authorized' });
+
+    // remove the comment from the backend
+    const removeIndex = await post.comment.map((comment) => {
+      return comment.id.toString().indexOf(req.params.commentId);
+    });
+    await post.comment.splice(removeIndex, 1);
+    // save in the backend
+    await post.save();
+    res.json({ msg: 'comment removed', post: await post });
+  } catch (error) {
+    res.status(400).json({ errors: error });
+  }
+});
+
+//   @route DEL api/post/:post_id
 //   @desc Get post by id
 //   @access private
 
-router.delete('/:postId', random, async (req, res) => {
+router.delete('/:postId', auth, async (req, res) => {
+  console.log('deleting');
   try {
-    const post = Post.findById({ _id: req.params.postId });
+    const post = await Post.findById(req.params.postId);
+    if (!post) return res.status(404).json({ msg: 'post not found' });
+
     if (post.user.toString() !== req.user.id)
       return res.status(401).json({ msg: 'User not authorized' });
 
     await post.remove();
+
+    res.json({ msg: 'post removed' });
   } catch (error) {
     console.error(error);
-    res.status(400).json(error.errors);
+    res.status(400).json({ msg: 'post not found' });
   }
 });
 

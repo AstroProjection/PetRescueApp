@@ -72,7 +72,7 @@ router.post(
 
 //   @route GET api/user/
 //   @desc Get user Info
-//   @access public
+//   @access private
 
 // above are just descriptions of the route.
 

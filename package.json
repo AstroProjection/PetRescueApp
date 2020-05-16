@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -26,11 +28,11 @@
     "express-validator": "^6.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.14",
-    "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "react-router-dom": "^5.2.0",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.3"
   }
 }
