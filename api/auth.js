@@ -9,7 +9,7 @@ const Post = require('../model/Post');
 const User = require('../model/User');
 const auth = require('../auth/auth');
 
-//   @route POST api/post
+//   @route POST api/auth
 //   @desc Authorize user and get auth token [Login]
 //   @access public
 
@@ -30,9 +30,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
-
     try {
+      const { email, password } = req.body;
+
       const user = await User.findOne({ email });
       const isMatch = await bcrypt.compare(password, user.password);
 

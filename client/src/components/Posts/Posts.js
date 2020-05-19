@@ -18,7 +18,17 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
             <Spinner />
           </>
         ) : (
-          <>Posts</>
+          <>
+            {posts.map((post, index) => (
+              <div className='' key={index}>
+                Title:{post.title}
+                <br />
+                text:{post.text}
+                <br />
+                posted by:{post.user.name}
+              </div>
+            ))}
+          </>
         )}
       </div>
     </section>
