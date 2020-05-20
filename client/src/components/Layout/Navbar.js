@@ -3,8 +3,29 @@ import { LinkContainer } from 'react-router-bootstrap';
 import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { connect } from 'react-redux';
+import { logout } from '../../store/actions/auth';
 
-const NavbarComponent = (props) => {
+const NavbarComponent = ({ logout, isLoggedin }) => {
+  const guestLinks = (
+    <React.Fragment>
+      <LinkContainer to='/register'>
+        <Nav.Link>Register</Nav.Link>
+      </LinkContainer>
+      <LinkContainer to='/login'>
+        <Nav.Link>Login</Nav.Link>
+      </LinkContainer>
+    </React.Fragment>
+  );
+
+  const authLinks = (
+    <React.Fragment>
+      <Nav.Link onClick={logout}>
+        <i className='fa fa-sign-out' /> Logout
+      </Nav.Link>
+    </React.Fragment>
+  );
+
   return (
     <Navbar bg='light' expand='lg'>
       <LinkContainer to='/home'>
@@ -18,44 +39,23 @@ const NavbarComponent = (props) => {
           <LinkContainer to='/home'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to='/link'>
-            <Nav.Link>About</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='/link'>
+          <LinkContainer to='/about'>
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
         </Nav>
-        <Nav>
-          <LinkContainer to='/login'>
-            <Nav.Link>Logout</Nav.Link>
-          </LinkContainer>
-        </Nav>
+        <Nav>{isLoggedin ? authLinks : guestLinks}</Nav>
       </Navbar.Collapse>
     </Navbar>
   );
-  // (
-  //   <nav className='navbar bg-success'>
-  //     <h1>
-  //       <Link to='/'>
-  //         <i className='fas fa-paw bg-yellow' /> Pet Rescue
-  //       </Link>
-  //     </h1>
-  //     <ul>
-  //       <li>
-  //         <Link to='/register'>
-  //           <strong>Register</strong>
-  //         </Link>
-  //       </li>
-  //       <li>
-  //         <Link to='/login'>
-  //           <strong>Login</strong>
-  //         </Link>
-  //       </li>
-  //     </ul>
-  //   </nav>
-  // );
 };
 
-Navbar.propTypes = {};
+NavbarComponent.propTypes = {
+  logout: PropTypes.func.isRequired,
+  isLoggedin: PropTypes.bool.isRequired,
+};
 
-export default NavbarComponent;
+const mapStateToProps = (state) => ({
+  isLoggedin: state.auth.isLoggedin,
+});
+
+export default connect(mapStateToProps, { logout })(NavbarComponent);

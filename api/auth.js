@@ -35,7 +35,6 @@ router.post(
 
       const user = await User.findOne({ email });
       const isMatch = await bcrypt.compare(password, user.password);
-
       /// check if password or user matches with db
       if (!user || !isMatch)
         return res.status(400).json({ error: 'invalid credentials' });
@@ -51,7 +50,6 @@ router.post(
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err;
-          console.log('success');
           res.json({ token });
         }
       );
@@ -60,5 +58,21 @@ router.post(
     }
   }
 );
+
+//   @route GET api/auth
+//   @desc get user information [Login]
+//   @access public
+
+// above are just descriptions of the route.
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    // console.log('error:', err);
+    return res.status(500).json({ error: 'server error' });
+  }
+});
 
 module.exports = router;

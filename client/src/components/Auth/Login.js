@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/auth';
-const Login = ({ login }) => {
+const Login = ({ login, auth: { isLoggedin } }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,6 +19,8 @@ const Login = ({ login }) => {
     login(formData);
   };
   const { email, password } = formData;
+
+  if (isLoggedin) return <Redirect to='/home' />;
   return (
     <React.Fragment>
       <Container>
@@ -57,7 +60,7 @@ const Login = ({ login }) => {
             <Form.Check type='checkbox' label='Check me out' />
           </Form.Group>
           <Button variant='primary' type='submit'>
-            Submit
+            Login
           </Button>
         </Form>
       </Container>

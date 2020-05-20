@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import store from './store/store';
 import Navbar from './components/Layout/Navbar';
-import PostsComponent from './components/Posts/PostsComponent';
-import About from './components/About';
+import About from './components/Info/About';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+
+import PrivateRoute from './utils/PrivateRoute';
+import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import { loadUser } from './store/actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
-function App() {
+function App({ loadUser }) {
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    loadUser();
+  }, [loadUser]);
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/posts' component={PostsComponent} />
-          <Route exact path='/' component={Landing} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
+        <Route exact path='/about' component={About} />
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/home' component={Home} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
-export default App;
+export default connect(null, { loadUser })(App);

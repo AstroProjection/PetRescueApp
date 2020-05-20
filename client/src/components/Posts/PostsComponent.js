@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import PostButtons from './../Buttons/PostButtons';
+import PostButtons from './PostButtons';
 import Posts from './../Posts/Posts';
 
 const PostsComponent = (props) => {
   return (
     <React.Fragment>
-      <PostButtons />
-      <Posts />
+      <section className='container'>
+        <PostButtons />
+        <Posts />
+      </section>
     </React.Fragment>
   );
 };
-
-PostsComponent.propTypes = {};
 
 export default PostsComponent;

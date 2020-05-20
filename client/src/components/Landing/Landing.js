@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 const Landing = (props) => {
@@ -12,7 +11,5 @@ const Landing = (props) => {
     </Jumbotron>
   );
 };
-
-Landing.propTypes = {};
 
 export default Landing;

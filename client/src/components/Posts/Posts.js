@@ -1,8 +1,9 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import Spinner from '../Layout/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAllPosts } from '../../store/actions/post';
+import Post from './Post';
 
 const Posts = ({ getAllPosts, post: { posts, loading } }) => {
   useEffect(() => {
@@ -20,13 +21,13 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
         ) : (
           <>
             {posts.map((post, index) => (
-              <div className='' key={index}>
-                Title:{post.title}
-                <br />
-                text:{post.text}
-                <br />
-                posted by:{post.user.name}
-              </div>
+              <Post
+                key={post._id}
+                img={post.img}
+                title={post.title}
+                text={post.text}
+                user={post.user}
+              />
             ))}
           </>
         )}
@@ -37,6 +38,7 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
 
 Posts.propTypes = {
   getAllPosts: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
