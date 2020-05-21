@@ -164,6 +164,26 @@ img {
   align-self: flex-end;
 }
 
+.post-image {
+  width: 10rem;
+}
+
+.post-image-disabled {
+  background-color: #6b6d6e;
+  color: white;
+  opacity: 0.65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  flex-basis: 100%;
+  height: 100%;
+}
+
+.upload-input {
+  display: none;
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 0.1rem;

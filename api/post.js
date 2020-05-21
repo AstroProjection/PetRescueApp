@@ -1,5 +1,36 @@
 const express = require('express');
 const router = express.Router();
+
+/// multer [ for images] enctype="multipart/form-data"
+const multer = require('multer');
+
+const fileFilter = (req, file, callback) => {
+  /// cb(null,false) rejects file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    callback(null, true);
+  } else {
+    callback(null, false);
+  }
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, './uploads/');
+  },
+  filename: (req, file, callback) => {
+    callback(
+      null,
+      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`
+    );
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 1024 * 1024 * 15 },
+  fileFilter: fileFilter,
+});
+
 const { check, validationResult } = require('express-validator');
 /// model
 const Post = require('../model/Post');
@@ -7,7 +38,7 @@ const User = require('../model/User');
 const auth = require('../auth/auth');
 
 //   @route POST api/post
-//   @desc creating a post on the bulletin
+//   @desc Create a post on the bulletin
 //   @access private
 
 // above are just descriptions of the route.
@@ -16,12 +47,14 @@ router.post(
   '/',
   [
     auth,
+    upload.array('image', 1),
     check('text', 'text is required').notEmpty(),
     check('title', 'title is required').notEmpty(),
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -31,13 +64,40 @@ router.post(
         text: req.body.text,
         title: req.body.title,
         user: req.user.id,
+        image: req.files.length > 0 ? req.files[0].path : null,
       });
-
       await newPost.save();
 
       res.json(newPost);
     } catch (error) {
-      res.status(400).json(error.errors);
+      res.status(400).json(error);
+    }
+  }
+);
+
+//   @route POST api/post
+//   @desc Upload picture to post on the bulletin
+//   @access private
+
+// above are just descriptions of the route.
+
+router.post(
+  '/upload/:postId',
+  [auth, upload.array('image', 1)],
+  async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.postId).populate({
+        path: 'user',
+        select: 'name _id',
+      });
+
+      post.image = await req.files[0].path;
+
+      await post.save();
+
+      res.json(post);
+    } catch (error) {
+      res.status(400).json(error);
     }
   }
 );
@@ -50,10 +110,12 @@ router.post(
 
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find({}).populate({
-      path: 'user',
-      select: 'name _id',
-    });
+    const posts = await Post.find()
+      .populate({
+        path: 'user',
+        select: 'name _id',
+      })
+      .sort({ date: -1 });
     res.json(posts);
   } catch (error) {
     res.status(400).json(error.errors);

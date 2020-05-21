@@ -35,6 +35,7 @@ export default function (state = initalState, action) {
         ...state,
         user: payload,
         loading: false,
+        isLoggedin: true,
       };
 
     default:

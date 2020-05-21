@@ -23,7 +23,8 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
             {posts.map((post, index) => (
               <Post
                 key={post._id}
-                img={post.img}
+                postId={post._id}
+                img={post.image}
                 title={post.title}
                 text={post.text}
                 user={post.user}

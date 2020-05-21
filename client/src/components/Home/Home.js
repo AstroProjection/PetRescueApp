@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PostsComponent from '../Posts/PostsComponent';
 import Badge from 'react-bootstrap/Badge';
 import { loadUser } from '../../store/actions/auth';
+import setAuthToken from '../../utils/setAuthToken';
 const Home = ({ auth: { user }, loadUser }) => {
   useEffect(() => {
     loadUser();
@@ -27,6 +28,7 @@ const Home = ({ auth: { user }, loadUser }) => {
 
 Home.propTypes = {
   auth: PropTypes.object.isRequired,
+  loadUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

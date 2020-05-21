@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 connectDB();
 
 /// initializing middleware
+app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
 app.use('/api/auth', require('./api/auth'));
