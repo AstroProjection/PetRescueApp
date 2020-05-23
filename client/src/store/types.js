@@ -7,4 +7,7 @@ export const LOAD_USER = 'LOAD_USER';
 
 export const UPDATE_PIC = 'UPDATE_PIC';
 export const UPLOADING = 'UPLOADING';
-export const UPLOAD_ERROR = 'UPLOADING';
+
+export const UPLOAD_ERROR = 'UPLOAD_ERROR';
+export const POST_ERROR = 'POST_ERROR';
+export const POST_REMOVED = 'POST_REMOVED';

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 
 /// multer [ for images] enctype="multipart/form-data"
 const multer = require('multer');
@@ -66,11 +67,19 @@ router.post(
         user: req.user.id,
         image: req.files.length > 0 ? req.files[0].path : null,
       });
-      await newPost.save();
 
-      res.json(newPost);
+      newPost.save(async (err, post) => {
+        /// get populated user post for posts array
+        const nPost = await Post.findById(post.id).populate({
+          path: 'user',
+          select: 'name _id',
+        });
+        res.json(nPost);
+      });
+
+      // res.json(newPost);
     } catch (error) {
-      res.status(400).json(error);
+      return res.status(400).json(error);
     }
   }
 );
@@ -86,11 +95,24 @@ router.post(
   [auth, upload.array('image', 1)],
   async (req, res) => {
     try {
+      //getting post
       const post = await Post.findById(req.params.postId).populate({
         path: 'user',
         select: 'name _id',
       });
+      // remove old image from img path
+      if (post.image) {
+        const oldPath = post.image;
+        fs.unlink(oldPath, (err) => {
+          if (err) {
+            throw err;
+          } else {
+            console.log('removed old image');
+          }
+        });
+      }
 
+      /// saving new image to img path
       post.image = await req.files[0].path;
 
       await post.save();

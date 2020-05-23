@@ -1,4 +1,12 @@
-import { GET_POSTS, UPDATE_PIC, UPLOADING, UPLOAD_ERROR } from '../types';
+import {
+  GET_POSTS,
+  UPDATE_PIC,
+  UPLOADING,
+  UPLOAD_ERROR,
+  POST_ERROR,
+  CREATE_POST,
+  POST_REMOVED,
+} from '../types';
 import axios from 'axios';
 
 export const getAllPosts = () => async (dispatch) => {
@@ -9,7 +17,11 @@ export const getAllPosts = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    dispatch({
+      type: POST_ERROR,
+      payload: error,
+    });
   }
 };
 
@@ -23,8 +35,9 @@ export const uploadImage = (formData, postId) => async (dispatch) => {
     dispatch({
       type: UPLOADING,
     });
-    const res = await axios.post(`api/post/upload/${postId}`, formData, config);
 
+    ///uploading new pic
+    const res = await axios.post(`api/post/upload/${postId}`, formData, config);
     dispatch({
       type: UPDATE_PIC,
       payload: {
@@ -36,6 +49,44 @@ export const uploadImage = (formData, postId) => async (dispatch) => {
     console.error(error);
     dispatch({
       type: UPLOAD_ERROR,
+      payload: error,
+    });
+  }
+};
+
+export const createPost = (formData) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    const res = await axios.post('api/post', formData, config);
+    dispatch({
+      type: CREATE_POST,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: error.errors,
+    });
+  }
+};
+
+export const removePost = (postId) => async (dispatch) => {
+  try {
+    await axios.delete(`api/post/${postId}`);
+
+    dispatch({
+      type: POST_REMOVED,
+      payload: postId,
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: error.errors,
     });
   }
 };

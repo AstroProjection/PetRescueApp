@@ -1,4 +1,12 @@
-import { GET_POSTS, UPDATE_PIC, UPLOADING, UPLOAD_ERROR } from '../types';
+import {
+  GET_POSTS,
+  UPDATE_PIC,
+  UPLOADING,
+  UPLOAD_ERROR,
+  POST_ERROR,
+  CREATE_POST,
+  POST_REMOVED,
+} from '../types';
 
 const initialState = {
   posts: [],
@@ -15,6 +23,21 @@ export default function (state = initialState, action) {
         posts: payload,
         loading: false,
       };
+    case CREATE_POST:
+      let arr = state.posts;
+      arr.unshift(payload);
+      return {
+        ...state,
+        loading: false,
+        posts: arr,
+      };
+
+    case POST_REMOVED:
+      return {
+        ...state,
+        loading: false,
+        posts: state.posts.filter((post) => post._id !== payload),
+      };
     case UPDATE_PIC:
       return {
         ...state,
@@ -30,10 +53,12 @@ export default function (state = initialState, action) {
         loading: true,
       };
 
+    case POST_ERROR:
     case UPLOAD_ERROR:
       return {
         ...state,
         loading: false,
+        errors: payload,
       };
     default:
       return state;
