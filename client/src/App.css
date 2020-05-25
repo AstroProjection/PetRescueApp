@@ -1,5 +1,4 @@
-/* Global Styles */
-:root {
+Global Styles :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
@@ -21,6 +20,27 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+}
+
+.leaflet-container {
+  height: 30rem;
+  width: 40rem;
+}
+
+.tab-content {
+  display: flex;
+  justify-content: center;
+}
+
+.map-containement {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-contents {
+  display: flex;
+  /* flex-direction: row; */
 }
 
 a {
@@ -519,6 +539,14 @@ button {
     margin-top: 2rem;
   }
 
+  .map-containment > nav {
+    align-items: center;
+  }
+
+  .map-contents {
+    align-items: center;
+    flex-direction: column;
+  }
   .hide-sm {
     display: none;
   }

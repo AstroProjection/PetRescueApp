@@ -39,6 +39,9 @@ const NavbarComponent = ({ logout, isLoggedin }) => {
           <LinkContainer to='/home'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
+          <LinkContainer to='/map'>
+            <Nav.Link>Map</Nav.Link>
+          </LinkContainer>
           <LinkContainer to='/about'>
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
