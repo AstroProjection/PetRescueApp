@@ -11,3 +11,9 @@ export const UPLOADING = 'UPLOADING';
 export const UPLOAD_ERROR = 'UPLOAD_ERROR';
 export const POST_ERROR = 'POST_ERROR';
 export const POST_REMOVED = 'POST_REMOVED';
+
+export const GET_ALL_ANIMALS = 'GET_ALL_ANIMALS';
+export const GET_ALL_DATA = 'GET_ALL_DATA';
+export const GET_DOGS = 'GET_DOGS';
+export const GET_CATS = 'GET_CATS';
+export const GET_FEEDERS = 'GET_FEEDERS';

@@ -1,16 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const MapInformation = (props) => {
-  console.log('MapInformation Rendering');
+const MapInformation = ({ animals }) => {
   return (
     <div>
       <h1>Information</h1>
-      <div>Information box</div>
+      <div>
+        Information box:
+        <br />
+        Total count:
+        <br />
+        Dogs:{animals.dogs.length}
+        <br />
+        Cats:{animals.cats.length}
+      </div>
     </div>
   );
 };
 
-MapInformation.propTypes = {};
+MapInformation.propTypes = {
+  animals: PropTypes.object.isRequired,
+};
 
-export default MapInformation;
+const mapStateToProps = (state) => ({
+  animals: state.animals,
+});
+
+export default connect(mapStateToProps)(MapInformation);

@@ -32,11 +32,13 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
+/// authentication middleware
+const auth = require('../auth/auth');
+
 const { check, validationResult } = require('express-validator');
 /// model
 const Post = require('../model/Post');
 const User = require('../model/User');
-const auth = require('../auth/auth');
 
 //   @route POST api/post
 //   @desc Create a post on the bulletin
@@ -79,7 +81,7 @@ router.post(
 
       // res.json(newPost);
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ error });
     }
   }
 );
@@ -111,12 +113,9 @@ router.post(
           }
         });
       }
-
       /// saving new image to img path
       post.image = await req.files[0].path;
-
       await post.save();
-
       res.json(post);
     } catch (error) {
       res.status(400).json(error);

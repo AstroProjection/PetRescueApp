@@ -1,0 +1,403 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "6th-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "6th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61553287506104, 12.965938905440181],
+          [77.61612296104431, 12.96415104449812],
+          [77.61565089225769, 12.965531148812094],
+          [77.6153290271759, 12.965447506344274]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "7th-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61463165283203, 12.964841097611773],
+          [77.61576890945435, 12.965165212807795]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "2nd-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "2nd Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61601567268372, 12.96452743734275],
+          [77.61688470840454, 12.964914284950995],
+          [77.61692762374878, 12.96549978288997]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "linden-street",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Linden Street",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61139154434204, 12.963262336911889],
+          [77.61456727981567, 12.96370146340992]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "palm-grove-road",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Palm Groove Main Road",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61393427848816, 12.966472124638013],
+          [77.61439561843872, 12.964966561608696],
+          [77.61463165283203, 12.963732829558703]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "victoria-road",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Victoria Main Road",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61742115020752, 12.965353408534352],
+          [77.61393427848816, 12.966513945703252],
+          [77.61301159858704, 12.966670774635285]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "xavier-layout-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Xavier Layout",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6130223274231, 12.966618498335585],
+          [77.61301159858704, 12.965541604118611],
+          [77.61329054832458, 12.964569258734786]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "xavier-layout-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Xavier Layout",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61439561843872, 12.964600624774208],
+          [77.6129150390625, 12.96457971408171],
+          [77.61197090148926, 12.9643601517043],
+          [77.61198163032532, 12.963962847862344]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "8th-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "8th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61474967002869, 12.966231653376516],
+          [77.61503934860228, 12.964945650946932]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "palm-groove-crossroad",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Palm Groove Crossroad",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61437416076659, 12.965039748911023],
+          [77.61541485786438, 12.963868749491093]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "1st-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "1st Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61463165283203, 12.963722374176221],
+          [77.61688470840454, 12.96453789269142],
+          [77.6168954372406, 12.964914284950995]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "4th-cross",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "4th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61687397956848, 12.96451698199364],
+          [77.61685252189635, 12.964140589133207],
+          [77.61629462242126, 12.96391057099381],
+          [77.61614441871643, 12.96415104449812]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "nandans-road",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Nandans main road",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61467456817627, 12.96364918648649],
+          [77.61478185653687, 12.962917308405643],
+          [77.61478185653687, 12.96178812085958],
+          [77.6147711277008, 12.961495367696678]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "austin-town-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Austin town",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61333346366882, 12.96345053407734],
+          [77.61335492134094, 12.96289639757171],
+          [77.61473894119263, 12.962969585482783]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "austin-town-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Austin town",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61334419250488, 12.963210059896221],
+          [77.61470675468445, 12.963314613916562]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6133871078491, 12.96283366505938],
+          [77.61355876922607, 12.962039051868045],
+          [77.61371970176697, 12.961767209930791],
+          [77.61406302452087, 12.96179857632332],
+          [77.61393427848816, 12.962875486736035]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "austin-town-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Austin town",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.614266872406, 12.962927763821954],
+          [77.61440634727478, 12.961819487249477],
+          [77.61409521102905, 12.961819487249477],
+          [77.61456727981567, 12.961829942711892],
+          [77.61444926261902, 12.962917308405643]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "austin-town-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Austin town",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61474967002869, 12.962404992468626],
+          [77.61399865150452, 12.962352715272901]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "loyola-layout",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "Loyola Layout",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61301159858704, 12.965562514730287],
+          [77.61237859725952, 12.965102480867316]
+        ]
+      }
+    }
+  ]
+}

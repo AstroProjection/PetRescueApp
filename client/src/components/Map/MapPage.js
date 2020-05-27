@@ -3,17 +3,25 @@ import PropTypes from 'prop-types';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import MapComponent from './MapComponent';
+import { getAllAnimals } from '../../store/actions/animal';
 
-const MapPage = (props) => {
+import { connect } from 'react-redux';
+
+const MapPage = ({ getAllAnimals }) => {
   console.log('MapPage Rendering');
+
+  React.useEffect(() => {
+    getAllAnimals();
+  }, []);
+
   return (
     <React.Fragment>
       <h1>Victoria layout</h1>
       <div className='map-containment'>
-        <Tabs defaultActiveKey='home' id='uncontrolled-tab-example'>
-          <Tab eventKey='home' title='Adoption'></Tab>
-          <Tab eventKey='profile' title='Animal Tracker'></Tab>
-          <Tab eventKey='contact' title='Feeding Routes'></Tab>
+        <Tabs defaultActiveKey='animal-tracker' id='uncontrolled-tab-example'>
+          <Tab eventKey='animal-tracker' title='Animal Tracker'></Tab>
+          <Tab eventKey='feeding-route' title='Feeding Routes'></Tab>
+          <Tab eventKey='adoption' title='Adoption' disabled></Tab>
         </Tabs>
         <MapComponent />
       </div>
@@ -21,6 +29,8 @@ const MapPage = (props) => {
   );
 };
 
-MapPage.propTypes = {};
+MapPage.propTypes = {
+  getAllAnimals: PropTypes.func.isRequired,
+};
 
-export default MapPage;
+export default connect(null, { getAllAnimals })(MapPage);
