@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
+import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 
 import MapPage from './components/Map/MapPage';
 
-import PrivateRoute from './utils/PrivateRoute';
+// import PrivateRoute from './utils/PrivateRoute';
 import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import './App.css';
@@ -27,6 +28,7 @@ function App({ loadUser }) {
   return (
     <BrowserRouter>
       <Navbar />
+      <Alert />
       <Switch>
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />

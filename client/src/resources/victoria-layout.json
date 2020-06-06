@@ -1,4 +1,5 @@
 {
+  "locality": "Victoria Layout",
   "type": "FeatureCollection",
   "features": [
     {
@@ -91,7 +92,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Palm Groove Main Road",
+        "displayName": "Palm Grove Main Road",
         "style": {
           "active": "false"
         }
@@ -192,11 +193,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "palm-groove-crossroad",
+        "name": "palm-grove-crossroad",
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Palm Groove Crossroad",
+        "displayName": "Palm Grove Crossroad",
         "style": {
           "active": "false"
         }
@@ -277,7 +278,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "austin-town-2",
+        "name": "austin-town-1",
         "dogs": [],
         "cats": [],
         "feeder": "",
@@ -321,6 +322,8 @@
         "stroke": "#555555",
         "stroke-width": 2,
         "stroke-opacity": 1,
+        "name": "austin-town-3",
+        "displayName": "Austin town",
         "style": {
           "active": "false"
         }
@@ -339,7 +342,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "austin-town-2",
+        "name": "austin-town-4",
         "dogs": [],
         "cats": [],
         "feeder": "",
@@ -362,7 +365,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "austin-town-2",
+        "name": "austin-town-5",
         "dogs": [],
         "cats": [],
         "feeder": "",

@@ -2,10 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const MapInformation = ({ animals }) => {
+const MapInformation = ({ animals, street: { street } }) => {
   return (
     <div>
-      <h1>Information</h1>
+      <h1>
+        {street ? (
+          <React.Fragment>{`${street.displayName}: `}</React.Fragment>
+        ) : (
+          ''
+        )}
+      </h1>
       <div>
         Information box:
         <br />
@@ -25,6 +31,7 @@ MapInformation.propTypes = {
 
 const mapStateToProps = (state) => ({
   animals: state.animals,
+  street: state.street,
 });
 
 export default connect(mapStateToProps)(MapInformation);

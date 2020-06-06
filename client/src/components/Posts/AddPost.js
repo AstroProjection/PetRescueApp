@@ -17,11 +17,11 @@ const AddPost = (props) => {
     text: '',
     image: '',
   });
-  const { title, text, image } = formDataState;
+  const { title } = formDataState;
 
   const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
-  let formData = new FormData();
+  // let formData = new FormData();
 
   const onChange = (e) =>
     setFormData({ ...formDataState, [e.target.name]: e.target.value });

@@ -11,6 +11,7 @@ const StreetsSchema = new mongoose.Schema({
   },
   feeder: {
     type: String,
+    default: '',
   },
   dogs: [
     {
@@ -27,4 +28,4 @@ const StreetsSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model('streets', StreetsSchema);
+module.exports = mongoose.model('streets', StreetsSchema, 'streets');

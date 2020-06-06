@@ -61,6 +61,7 @@ router.post('/', [auth, upload.array('image', 1)], async (req, res) => {
     const newAnimal = new Animals({
       name: req.body.name,
       location: req.body.location,
+      locality: 'victoria-layout',
       type: req.body.type,
       image: req.files.length > 0 ? req.files[0].path : null,
     });

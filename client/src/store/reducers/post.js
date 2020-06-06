@@ -6,6 +6,7 @@ import {
   POST_ERROR,
   CREATE_POST,
   POST_REMOVED,
+  FETCH_ERROR,
 } from '../types';
 
 const initialState = {
@@ -55,6 +56,7 @@ export default function (state = initialState, action) {
 
     case POST_ERROR:
     case UPLOAD_ERROR:
+    case FETCH_ERROR:
       return {
         ...state,
         loading: false,

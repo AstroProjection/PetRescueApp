@@ -4,6 +4,7 @@ import {
   GET_DOGS,
   GET_CATS,
   GET_FEEDERS,
+  ADD_ANIMAL,
 } from '../types';
 
 const initialState = {
@@ -52,6 +53,11 @@ export default function (state = initialState, action) {
         loading: false,
       };
     }
+
+    case ADD_ANIMAL:
+      return {
+        ...state,
+      };
 
     default:
       return {

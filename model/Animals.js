@@ -10,6 +10,10 @@ const AnimalsSchema = new mongoose.Schema({
     default: 'victoria-layout',
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,

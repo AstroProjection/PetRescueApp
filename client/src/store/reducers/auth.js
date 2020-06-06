@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, AUTH_ERROR, LOGOUT, LOAD_USER } from '../types';
+import {
+  LOGIN_SUCCESS,
+  AUTH_ERROR,
+  LOGOUT,
+  LOAD_USER,
+  LOADING,
+} from '../types';
 
 const initalState = {
   isLoggedin: false,
@@ -11,6 +17,11 @@ export default function (state = initalState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
