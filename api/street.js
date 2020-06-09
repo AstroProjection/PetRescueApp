@@ -13,9 +13,7 @@ const Locality = require('../model/Locality');
 
 router.get('/:locality', async (req, res) => {
   try {
-    console.log('checking street collection');
     const streets = await Streets.find({ locality: req.params.locality });
-    // console.log(streets);
     res.json(streets);
   } catch (error) {
     res.status(500).json({ error });
@@ -29,19 +27,15 @@ router.get('/:locality', async (req, res) => {
 router.get('/:locality/:streetname', async (req, res) => {
   try {
     // console.log(req.params.locality, req.params.streetname);
-    const street = await Streets.find(
-      {
-        name: req.params.streetname,
-        locality: req.params.locality,
-      },
-      '*'
-    );
+    const street = await Streets.findOne({
+      streetname: req.params.streetname,
+      locality: req.params.locality,
+    });
 
     res.json(street);
   } catch (error) {
     return res.status(500).json({ error });
   }
-  // console.log(street);
 });
 
 //   @route POST api/street/:locality
@@ -67,34 +61,50 @@ router.post('/:locality', auth, async (req, res) => {
                 streetname: feature.properties.name,
               });
               await newStreet.save();
-            } else {
-              // /if there is a street, update it
-              street[0].streetname = feature.properties.name;
-              street[0].cats = feature.properties.cats;
-              street[0].dogs = feature.properties.dogs;
-              street[0].feeder = feature.properties.feeder;
-
-              // await Streets.findByIdAndUpdate()
-              await street[0].save();
-              // console.log(feature);
-              // await street.save();
             }
           } catch (error) {
             res.status(500).json({ error });
           }
-          // console.log(streets);
-          //   const streetList = await Promise.all(streets);
-          //   console.log(streetList);
         }
       );
-      // console.log(streets);
     });
-    // console.log(streets);
     const streetsList = await Promise.all(streets);
     res.json(streetsList.map((street) => street[0]));
   } catch (error) {
     res.status(500).json({ error });
-    // console.error(error);
+  }
+});
+
+//   @route POST api/street/:locality/:streetname
+//   @desc Add the cat/dog to the collection
+//   @access private
+
+router.post('/:locality/:streetname', async (req, res) => {
+  try {
+    const street = await Streets.findOne({
+      locality: req.params.locality,
+      streetname: req.params.streetname,
+    });
+
+    console.group(req.body);
+
+    switch (req.body.type.toLowerCase()) {
+      case 'cat':
+        street.cats.push(req.body);
+        break;
+      case 'dog':
+        street.dogs.push(req.body);
+        break;
+      default:
+        street.animals.push(req.body);
+        break;
+    }
+
+    // console.log(street);
+    await street.save();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error });
   }
 });
 

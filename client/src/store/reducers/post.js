@@ -7,12 +7,13 @@ import {
   CREATE_POST,
   POST_REMOVED,
   FETCH_ERROR,
+  POST_LOADING,
 } from '../types';
 
 const initialState = {
   posts: [],
   post: null,
-  loading: true,
+  loading: false,
   errors: {},
 };
 export default function (state = initialState, action) {
@@ -48,6 +49,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
 
+    case POST_LOADING:
     case UPLOADING:
       return {
         ...state,

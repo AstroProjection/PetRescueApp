@@ -3,7 +3,7 @@ import {
   AUTH_ERROR,
   LOGOUT,
   LOAD_USER,
-  LOADING,
+  AUTH_LOADING,
 } from '../types';
 
 const initalState = {
@@ -17,7 +17,7 @@ export default function (state = initalState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case LOADING:
+    case AUTH_LOADING:
       return {
         ...state,
         loading: true,

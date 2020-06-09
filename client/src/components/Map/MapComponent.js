@@ -50,7 +50,6 @@ const MapComponent = ({
   };
 
   const setActiveStreet = (e) => {
-    // console.log(e);
     setCurrentStreet(e.target.feature.properties.name);
   };
 
@@ -75,11 +74,9 @@ const MapComponent = ({
   const markerClick = () => {};
 
   React.useEffect(() => {
-    console.log('useEffect', isLoggedin);
     isLoggedin && !updatedDB ? updateStreetsToDB(roadsJson) : fetchStreetData();
-  }, [updateStreetsToDB, isLoggedin]);
+  }, [updateStreetsToDB, isLoggedin, updatedDB]);
 
-  console.log('log before return');
   return (
     <div className='map-contents'>
       <Map
@@ -88,7 +85,7 @@ const MapComponent = ({
         dragging={false}
         scrollWheelZoom={false}
         doubleClickZoom={false}
-        zoomControl={false}
+        zoomControl={true}
         closePopupOnClick={true}
         // onClick={() => onClick()}
       >

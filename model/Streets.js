@@ -26,6 +26,10 @@ const StreetsSchema = new mongoose.Schema({
       ref: 'animals',
     },
   ],
+  displayName: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('streets', StreetsSchema, 'streets');

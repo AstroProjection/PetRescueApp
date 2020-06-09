@@ -6,6 +6,7 @@ const auth = require('../auth/auth');
 
 // Animals model
 const Animals = require('../model/Animals');
+const Streets = require('../model/Streets');
 
 /// multer [ for images] enctype="multipart/form-data"
 const multer = require('multer');
@@ -53,7 +54,7 @@ router.get('/', async (req, res) => {
 });
 
 /// @route  POST api/animals/
-/// @desc adding an animal
+/// @desc Adding an animal
 /// @access private
 
 router.post('/', [auth, upload.array('image', 1)], async (req, res) => {
@@ -71,6 +72,26 @@ router.post('/', [auth, upload.array('image', 1)], async (req, res) => {
     res.json(newAnimal);
   } catch (error) {
     return res.status(500).json({ error });
+  }
+});
+
+/// @route PUT api/animals/:streetname
+/// @desc fetching all the animal data
+/// @access public
+
+router.put('/', async (req, res) => {
+  try {
+    const streetId = req.body._id;
+
+    const data = await Streets.findById(streetId).populate({
+      path: 'dogs cats',
+      select: 'name _id locality location',
+    });
+
+    const { dogs, cats } = data;
+    return res.status(200).json({ dogs, cats });
+  } catch (error) {
+    res.json({ error });
   }
 });
 

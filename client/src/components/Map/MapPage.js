@@ -10,11 +10,11 @@ import { connect } from 'react-redux';
 import AnimalButtons from '../AnimalTracker/AnimalButtons';
 // import AnimalPost from '../AnimalTracker/AnimalPost';
 
-const MapPage = ({ getAllAnimals }) => {
+const MapPage = (props) => {
   console.log('MapPage Rendering');
 
   React.useEffect(() => {
-    getAllAnimals();
+    // getAllAnimals();
   }, []);
 
   return (
@@ -34,7 +34,7 @@ const MapPage = ({ getAllAnimals }) => {
 };
 
 MapPage.propTypes = {
-  getAllAnimals: PropTypes.func.isRequired,
+  // getAllAnimals: PropTypes.func.isRequired,
 };
 
-export default connect(null, { getAllAnimals })(MapPage);
+export default connect(null, null)(MapPage);

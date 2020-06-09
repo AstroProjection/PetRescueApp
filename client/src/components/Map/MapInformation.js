@@ -1,25 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Spinner from '../Layout/Spinner';
 
-const MapInformation = ({ animals, street: { street } }) => {
-  return (
-    <div>
-      <h1>
+import AnimalList from '../AnimalProfile/AnimalList';
+import { getStreetAnimals } from '../../store/actions/animal';
+
+const MapInformation = ({
+  animals,
+  street: { street, loading },
+  getStreetAnimals,
+}) => {
+  React.useEffect(() => {
+    console.log('map information useEffect');
+    street && !loading && getStreetAnimals(street);
+  }, [street, loading, getStreetAnimals]);
+
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div className=''>
+      <h2>
         {street ? (
           <React.Fragment>{`${street.displayName}: `}</React.Fragment>
         ) : (
           ''
         )}
-      </h1>
+      </h2>
       <div>
         Information box:
         <br />
-        Total count:
+        Dogs:{street ? street.dogs.length : '0'}
+        {street && street.dogs.length > 0 ? (
+          <AnimalList index={`1`} animal={`dogs`} />
+        ) : (
+          <React.Fragment>
+            <div>None...</div>
+          </React.Fragment>
+        )}
         <br />
-        Dogs:{animals.dogs.length}
-        <br />
-        Cats:{animals.cats.length}
+        Cats:{street ? street.cats.length : '0'}
+        {street && street.cats.length > 0 ? (
+          <AnimalList index={`2`} animal={`cats`} />
+        ) : (
+          <React.Fragment>
+            <div>None...</div>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
@@ -27,6 +54,7 @@ const MapInformation = ({ animals, street: { street } }) => {
 
 MapInformation.propTypes = {
   animals: PropTypes.object.isRequired,
+  getStreetAnimals: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -34,4 +62,4 @@ const mapStateToProps = (state) => ({
   street: state.street,
 });
 
-export default connect(mapStateToProps)(MapInformation);
+export default connect(mapStateToProps, { getStreetAnimals })(MapInformation);

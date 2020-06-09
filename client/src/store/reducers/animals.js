@@ -1,10 +1,12 @@
 import {
   GET_ALL_DATA,
-  GET_ALL_ANIMALS,
   GET_DOGS,
   GET_CATS,
   GET_FEEDERS,
   ADD_ANIMAL,
+  ANIMALS_LOADING,
+  // ANIMAL_DATA_RECEIVED,
+  GET_STREET_ANIMALS,
 } from '../types';
 
 const initialState = {
@@ -25,13 +27,7 @@ export default function (state = initialState, action) {
         cats: payload.cats,
         feeders: payload.feeders,
       };
-    case GET_ALL_ANIMALS:
-      return {
-        ...state,
-        dogs: payload.filter((animal) => animal.type === 'Dog'),
-        cats: payload.filter((animal) => animal.type === 'Cat'),
-        loading: false,
-      };
+
     case GET_DOGS:
       return {
         ...state,
@@ -57,6 +53,20 @@ export default function (state = initialState, action) {
     case ADD_ANIMAL:
       return {
         ...state,
+        loading: false,
+      };
+    case ANIMALS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case GET_STREET_ANIMALS:
+      return {
+        ...state,
+        loading: false,
+        dogs: payload.dogs,
+        cats: payload.cats,
       };
 
     default:

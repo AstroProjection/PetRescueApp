@@ -6,6 +6,7 @@ import {
   POST_ERROR,
   CREATE_POST,
   POST_REMOVED,
+  POST_LOADING,
 } from '../types';
 import axios from 'axios';
 
@@ -62,6 +63,9 @@ export const createPost = (formData) => async (dispatch) => {
       },
     };
 
+    dispatch({
+      type: POST_LOADING,
+    });
     const res = await axios.post('api/post', formData, config);
     dispatch({
       type: CREATE_POST,
@@ -77,6 +81,9 @@ export const createPost = (formData) => async (dispatch) => {
 
 export const removePost = (postId) => async (dispatch) => {
   try {
+    dispatch({
+      type: POST_LOADING,
+    });
     await axios.delete(`api/post/${postId}`);
 
     dispatch({

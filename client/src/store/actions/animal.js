@@ -1,51 +1,82 @@
 import axios from 'axios';
 import {
-  // GET_ALL_DATA,
-  GET_ALL_ANIMALS,
-  // GET_DOGS,
-  // GET_CATS,
-  // GET_FEEDERS,
   POST_ERROR,
   ADD_ANIMAL,
-  // SET_ALERT,
-  SET_CURRENT_STREET,
+  ANIMALS_LOADING,
+  GET_STREET_ANIMALS,
+  FETCH_ERROR,
+  // ANIMAL_DATA_RECEIVED
 } from '../types';
 import { setAlert } from './alert';
 
-export const getAllAnimals = () => async (dispatch) => {
-  const res = await axios.get('api/animals/');
-
-  dispatch({
-    type: GET_ALL_ANIMALS,
-    payload: res.data,
-  });
-};
+export const getAllAnimals = () => async (dispatch) => {};
 
 ///add an animal to animal tracker
 export const addAnimal = (formData) => async (dispatch) => {
   try {
-    const config = {
+    let config = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     };
 
+    dispatch({
+      type: ANIMALS_LOADING,
+    });
+
     const res = await axios.post('api/animals', formData, config);
+
     dispatch({
       type: ADD_ANIMAL,
       payload: res.data,
     });
 
-    dispatch(setAlert('Animal Added', 'success'));
+    // update street with animal information
 
-    dispatch({
-      type: SET_CURRENT_STREET,
-      payload: formData,
-    });
+    config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    await axios.post(
+      `api/street/${res.data.locality}/${res.data.location}`,
+      res.data,
+      config
+    );
+
+    dispatch(setAlert('Animal Added', 'success'));
   } catch (error) {
     dispatch({
       type: POST_ERROR,
       payload: error.errors,
+    });
+  }
+};
+
+export const getStreetAnimals = (street) => async (dispatch) => {
+  console.log('getstreetanimals action creator');
+  try {
+    dispatch({
+      type: ANIMALS_LOADING,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(`api/animals`, street, config);
+
+    dispatch({
+      type: GET_STREET_ANIMALS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      FETCH_ERROR,
+      payload: error,
     });
   }
 };

@@ -18,34 +18,49 @@ import mapData from '../../resources/victoria-layout.json';
 
 const AddPost = (props) => {
   let locations = mapData.features;
-  locations = locations.map((feature) => feature.properties.displayName);
-  locations = locations.filter(
-    (location, index) => locations.indexOf(location) === index
-  );
-
-  locations.sort();
-  const [formDataState, setFormData] = React.useState({
-    image: '',
-    name: '',
-    location: '',
-    type: '',
+  locations = locations.map((feature) => {
+    return {
+      displayName: feature.properties.displayName,
+      name: feature.properties.name,
+    };
   });
-  // const { name, location, image, type } = formDataState;
+
+  //filtering names for the dropdown list
+
+  // locations = locations.filter(
+  //   ({ name }, index) => locations.indexOf(name) === index
+  // );
+
+  locations.sort((locationA, locationB) =>
+    locationA.name > locationB.name ? 1 : -1
+  );
+  // const [formDataState, setFormData] = React.useState({
+  //   image: '',
+  //   name: '',
+  //   location: '',
+  //   type: '',
+  // });
 
   const loading = useSelector((state) => state.auth.loading);
-  // const dispatch = useDispatch();
-  let formData = new FormData();
 
-  const onChange = (e) =>
-    setFormData({ ...formDataState, [e.target.name]: e.target.value });
+  const onChange = (e) => {};
+  // setFormData({ ...formDataState, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
     addAnimal(new FormData(e.target));
+
+    // iterate over formData
+    // const formData = new FormData(e.target);
+    // for (let pair of formData.entries()) {
+    //   console.log(pair);
+    // }
+
     props.onHide();
   };
 
   const { addAnimal, ...rest } = props;
+
   return (
     <Modal
       {...rest}
@@ -71,10 +86,10 @@ const AddPost = (props) => {
                 <FormFile.Input
                   name='image'
                   onChange={(e) => {
-                    setFormData({
-                      ...formDataState,
-                      [e.target.name]: e.target.files[0],
-                    });
+                    // setFormData({
+                    //   ...formDataState,
+                    //   [e.target.name]: e.target.files[0],
+                    // });
                     bsCustomFileInput.init();
                   }}
                 />
@@ -101,9 +116,15 @@ const AddPost = (props) => {
                     >
                       {locations.length > 0 ? (
                         <React.Fragment>
-                          {locations.map((streetName, index) => {
-                            return <option key={index}>{streetName}</option>;
-                          })}
+                          {locations.map(
+                            ({ displayName: streetName, name }, index) => {
+                              return (
+                                <option key={index} value={name}>
+                                  {streetName}
+                                </option>
+                              );
+                            }
+                          )}
                         </React.Fragment>
                       ) : (
                         ''
