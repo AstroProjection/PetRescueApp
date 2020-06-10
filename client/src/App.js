@@ -5,6 +5,7 @@ import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import NotFound from './components/Info/NotFound';
 
 import MapPage from './components/Map/MapPage';
 
@@ -16,18 +17,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { connect } from 'react-redux';
 import { loadUser } from './store/actions/auth';
-import setAuthToken from './utils/setAuthToken';
+import UserBadge from './components/Layout/UserBadge';
+// import setAuthToken from './utils/setAuthToken';
 
 function App({ loadUser }) {
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
     loadUser();
   }, [loadUser]);
   return (
     <BrowserRouter>
       <Navbar />
+      <UserBadge />
       <Alert />
       <Switch>
         <Route exact path='/login' component={Login} />
@@ -36,6 +36,7 @@ function App({ loadUser }) {
         <Route exact path='/' component={Landing} />
         <Route exact path='/home' component={Home} />
         <Route exact path='/map' component={MapPage} />
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );

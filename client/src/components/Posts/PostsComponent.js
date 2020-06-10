@@ -6,7 +6,6 @@ const PostsComponent = (props) => {
   return (
     <React.Fragment>
       <section className='container'>
-        <PostButtons />
         <Posts />
       </section>
     </React.Fragment>

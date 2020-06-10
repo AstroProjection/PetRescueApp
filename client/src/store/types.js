@@ -17,6 +17,7 @@ export const POST_REMOVED = 'POST_REMOVED';
 export const GET_ALL_DATA = 'GET_ALL_DATA';
 export const GET_STREET_DATA = 'GET_STREET_DATA';
 export const UPDATED_STREET_DATA = 'UPDATED_STREET_DATA';
+export const STREET_UPDATED = 'STREET_UPDATED';
 export const UPDATE_STREETDB = 'UPDATE_STREETDB';
 export const GET_DOGS = 'GET_DOGS';
 export const GET_CATS = 'GET_CATS';

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAllPosts } from '../../store/actions/post';
 import Post from './Post';
+import PostButtons from './PostButtons';
 import Accordion from 'react-bootstrap/Accordion';
 
 const Posts = ({ getAllPosts, post: { posts, loading } }) => {
@@ -21,6 +22,8 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
           </Fragment>
         ) : (
           <Fragment>
+            <PostButtons />
+
             <Accordion>
               {posts.map((post, index) => (
                 <Post

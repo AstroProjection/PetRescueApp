@@ -10,12 +10,13 @@ import {
 
 import MapInformation from './MapInformation';
 import roadsJson from '../../resources/victoria-layout.json';
+import AnimalButtons from '../AnimalTracker/AnimalButtons';
 
 const MapComponent = ({
   updateStreetsToDB,
   setCurrentStreet,
   isLoggedin,
-  updatedDB,
+  // updatedDB,
   // street: { street },
 }) => {
   const DEFAULT_COLOUR = '#3388FF';
@@ -56,7 +57,10 @@ const MapComponent = ({
   const onEachFeature = (feature, layer) => {
     const toolTipContent = ` <Tooltip>Click for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
     layer.bindTooltip(toolTipContent);
-    const popupContent = ` <Popup><br/> <strong>${feature.properties.displayName}</strong> information:</pre></Popup>`;
+    const popupContent = `<Popup>
+        <br /> <strong>${feature.properties.displayName}</strong></pre>
+      </Popup>
+    `;
     layer.bindPopup(popupContent);
 
     layer.setStyle({
@@ -74,8 +78,9 @@ const MapComponent = ({
   const markerClick = () => {};
 
   React.useEffect(() => {
-    isLoggedin && !updatedDB ? updateStreetsToDB(roadsJson) : fetchStreetData();
-  }, [updateStreetsToDB, isLoggedin, updatedDB]);
+    // isLoggedin && !updatedDB ? updateStreetsToDB(roadsJson) :
+    fetchStreetData();
+  }, []);
 
   return (
     <div className='map-contents'>

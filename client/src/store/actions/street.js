@@ -32,7 +32,7 @@ export const setCurrentStreet = (pStreet) => async (dispatch, ownProps) => {
     });
   } catch (error) {
     if (axios.isCancel(error)) {
-      console.log('get req was cancelled');
+      // console.log('get req was cancelled');
       cancel('GET request was cancelled');
     } else {
       dispatch({
@@ -72,6 +72,7 @@ export const updateStreetsToDB = (streetJson) => async (dispatch) => {
 };
 
 export const fetchStreetData = () => async (dispatch) => {
+  console.log('fetching street data');
   try {
     dispatch({
       type: STREET_LOADING,

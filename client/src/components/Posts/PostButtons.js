@@ -9,8 +9,11 @@ const PostButtons = ({ isLoggedin }) => {
   return isLoggedin ? (
     <React.Fragment>
       <h1 className='large button-holder'>
-        <button className='btn btn-success' onClick={(e) => setPostModal(true)}>
-          Add Post
+        <button
+          className='btn btn-success add-post'
+          onClick={(e) => setPostModal(true)}
+        >
+          <i className='fa fa-plus-circle'></i> Add Post
         </button>
         {/* <button className='btn btn-success'>Remove Post</button> */}
         {/* <button className='btn btn-success'>Hide Posts</button> */}

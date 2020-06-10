@@ -5,11 +5,12 @@ import {
   UPDATED_STREET_DATA,
   STREET_LOADING,
   UPDATE_STREETDB,
+  STREET_UPDATED,
 } from '../types';
 
 const initialState = {
   streets: [],
-  loading: true,
+  loading: false,
   street: null,
   error: [],
   updatedDB: false,
@@ -35,6 +36,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+      };
+
+    case STREET_UPDATED:
+      return {
+        ...state,
+        loading: false,
       };
 
     case UPDATED_STREET_DATA:

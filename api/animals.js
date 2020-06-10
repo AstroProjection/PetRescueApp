@@ -85,7 +85,7 @@ router.put('/', async (req, res) => {
 
     const data = await Streets.findById(streetId).populate({
       path: 'dogs cats',
-      select: 'name _id locality location',
+      select: 'name _id locality location image type',
     });
 
     const { dogs, cats } = data;

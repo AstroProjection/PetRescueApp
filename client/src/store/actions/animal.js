@@ -5,6 +5,8 @@ import {
   ANIMALS_LOADING,
   GET_STREET_ANIMALS,
   FETCH_ERROR,
+  STREET_LOADING,
+  STREET_UPDATED,
   // ANIMAL_DATA_RECEIVED
 } from '../types';
 import { setAlert } from './alert';
@@ -39,11 +41,19 @@ export const addAnimal = (formData) => async (dispatch) => {
       },
     };
 
+    dispatch({
+      type: STREET_LOADING,
+    });
+
     await axios.post(
       `api/street/${res.data.locality}/${res.data.location}`,
       res.data,
       config
     );
+
+    dispatch({
+      type: STREET_UPDATED,
+    });
 
     dispatch(setAlert('Animal Added', 'success'));
   } catch (error) {

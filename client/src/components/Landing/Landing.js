@@ -1,7 +1,8 @@
 import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
-const Landing = (props) => {
+import { connect } from 'react-redux';
+const Landing = ({ auth: { user } }) => {
   return (
     <Jumbotron fluid>
       <Container>
@@ -12,4 +13,8 @@ const Landing = (props) => {
   );
 };
 
-export default Landing;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Landing);
