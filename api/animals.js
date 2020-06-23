@@ -59,18 +59,34 @@ router.get('/', async (req, res) => {
 
 router.post('/', [auth, upload.array('image', 1)], async (req, res) => {
   try {
+    const vaccineArrString = req.body['vaccine-arr'];
+    // as objects cannot be passed through multipart/form-data so we need to send them like this
+    let vaccineArr = vaccineArrString.map((vaccineString) =>
+      JSON.parse(vaccineString)
+    );
+    const spayedObj = {
+      status: req.body['spayed-value'] || 2,
+      hospital: req.body['spayed-hospital'] || null,
+      user: req.body['spayed-user'] || null,
+      cost: req.body['spayed-cost'] || null,
+    };
+
     const newAnimal = new Animals({
       name: req.body.name,
       location: req.body.location,
       locality: 'victoria-layout',
       type: req.body.type,
       image: req.files.length > 0 ? req.files[0].path : null,
+      user: req.user.id,
+      medical: {
+        spayed: spayedObj,
+        vaccines: vaccineArr,
+      },
     });
-
     await newAnimal.save();
-
     res.json(newAnimal);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error });
   }
 });

@@ -564,7 +564,7 @@ button {
 }
 
 .map-information {
-  width: 55%;
+  width: 50%;
   border: 2px solid black;
 }
 
@@ -574,8 +574,60 @@ button {
     'image head type'
     'image info btn'
     'image info btn';
-  grid-auto-rows: 2fr 2fr 1fr;
+  /* 'profile profile profile' */
+
+  /* grid-auto-rows: 2fr 2fr 1fr; */
   grid-auto-columns: 1fr 3fr 1fr;
+}
+
+.profile-full {
+  /* grid-area: profile; */
+  grid-column-start: 1;
+  grid-column-end: -1;
+
+  border: 1px solid gold;
+}
+
+.profile-fullinfo {
+  /* position: relative; */
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 0.3rem;
+  /* flex-flow: column-wrap; */
+}
+
+.table {
+  position: relative;
+  display: table;
+  border: 1px solid black;
+  /* float: left; */
+  margin: 0.5em 0.3em;
+}
+
+.table .td,
+.table .th {
+  display: table-cell;
+  /* position: relative; */
+  /* float: left; */
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: top;
+  word-break: break-all;
+  min-width: 6em;
+}
+
+.table .tr {
+  display: table-row;
+  width: auto;
+  clear: both;
+}
+
+.table .th {
+  column-span: all;
+}
+
+.table .td {
+  text-align: left;
 }
 
 .profile-name {
@@ -604,13 +656,17 @@ button {
 }
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .container {
     margin-top: 2rem;
   }
 
   .map-containment > nav {
     align-items: center;
+  }
+
+  .map-contents > .map-information {
+    width: 100%;
   }
 
   .map-contents {

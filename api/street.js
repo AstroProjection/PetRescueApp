@@ -111,4 +111,26 @@ router.post('/:locality/:streetname', async (req, res) => {
   }
 });
 
+//   @route DEL api/street/:locality
+//   @desc remove all dogs & cats from the locality
+//   @access private
+
+router.delete('/:locality', auth, async (req, res) => {
+  try {
+    const streets = await Streets.find({}, async (err, street) => {
+      street.dogs = [];
+      street.cats = [];
+
+      await street.save();
+    });
+
+    res
+      .status(200)
+      .json({ message: 'Removed all cats and dogs from all streets' });
+  } catch (error) {
+    // console.log(error);
+    return res.status(500).json({ error });
+  }
+});
+
 module.exports = router;

@@ -5,6 +5,7 @@ import FormFile from 'react-bootstrap/FormFile';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import AdditionalInfo from './AdditionalInfo';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -16,6 +17,8 @@ import { useSelector } from 'react-redux';
 import { addAnimal } from '../../store/actions/animal';
 import mapData from '../../resources/victoria-layout.json';
 
+export const VaccineContext = React.createContext({});
+
 const AddPost = (props) => {
   let locations = mapData.features;
   locations = locations.map((feature) => {
@@ -25,37 +28,26 @@ const AddPost = (props) => {
     };
   });
 
-  //filtering names for the dropdown list
-
-  // locations = locations.filter(
-  //   ({ name }, index) => locations.indexOf(name) === index
-  // );
-
   locations.sort((locationA, locationB) =>
     locationA.name > locationB.name ? 1 : -1
   );
-  // const [formDataState, setFormData] = React.useState({
-  //   image: '',
-  //   name: '',
-  //   location: '',
-  //   type: '',
-  // });
+
+  // const [showAddInfo, setAddInfo] = React.useState(false);
+  const [vaccineArr, setVaccineArr] = React.useState([]);
 
   const loading = useSelector((state) => state.auth.loading);
 
   const onChange = (e) => {};
-  // setFormData({ ...formDataState, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addAnimal(new FormData(e.target));
-
-    // iterate over formData
-    // const formData = new FormData(e.target);
-    // for (let pair of formData.entries()) {
-    //   console.log(pair);
-    // }
-
+    let formSubmit = new FormData(e.target);
+    // console.log(vaccineArr);
+    for (let vaccine of vaccineArr) {
+      vaccine = JSON.stringify(vaccine);
+      formSubmit.append('vaccine-arr', vaccine);
+    }
+    addAnimal(formSubmit);
     props.onHide();
   };
 
@@ -73,8 +65,7 @@ const AddPost = (props) => {
           <Modal.Header closeButton>
             <Modal.Title
               id='contained-modal-title-vcenter'
-              //   name='title'
-              //   value={'YELLOW'}
+              size='sm'
               onChange={(e) => onChange(e)}
             >
               Add an Animal
@@ -85,33 +76,59 @@ const AddPost = (props) => {
               <FormFile custom>
                 <FormFile.Input
                   name='image'
+                  size='sm'
                   onChange={(e) => {
-                    // setFormData({
-                    //   ...formDataState,
-                    //   [e.target.name]: e.target.files[0],
-                    // });
                     bsCustomFileInput.init();
                   }}
                 />
                 <FormFile.Label>Add image</FormFile.Label>
               </FormFile>
               <Form.Group controlId='addpost-title'>
-                <Form.Label>Name*</Form.Label>
-                <Form.Control
-                  name='name'
-                  type='text'
-                  placeholder='enter the animals name...'
-                  onChange={(e) => onChange(e)}
-                />
+                <Row>
+                  <Col md={9}>
+                    <Form.Label>Name*</Form.Label>
+                    <Form.Control
+                      name='name'
+                      type='text'
+                      size='sm'
+                      placeholder='enter the animals name...'
+                      onChange={(e) => onChange(e)}
+                    />
+                  </Col>
+                  <Col md={3}>
+                    <Form.Label>Type*</Form.Label>
+                    <Form.Control
+                      as='select'
+                      name='type'
+                      onChange={(e) => onChange(e)}
+                      size='sm'
+                    >
+                      <option value='dog'>dog</option>
+                      <option value='cat'>cat</option>
+                    </Form.Control>
+                  </Col>
+                </Row>
               </Form.Group>
 
               <Form.Group controlId='addpost-text'>
                 <Row>
-                  <Col md={9}>
-                    <Form.Label>location*</Form.Label>
+                  <Col md={5}>
+                    <Form.Label>Locality:</Form.Label>
+                    <Form.Control
+                      as='input'
+                      disabled
+                      name='locality'
+                      size='sm'
+                      value={`Victoria Layout`}
+                      onChange={(e) => onChange(e)}
+                    ></Form.Control>
+                  </Col>
+                  <Col md={7}>
+                    <Form.Label>Location*</Form.Label>
                     <Form.Control
                       as='select'
                       name='location'
+                      size='sm'
                       onChange={(e) => onChange(e)}
                     >
                       {locations.length > 0 ? (
@@ -131,20 +148,12 @@ const AddPost = (props) => {
                       )}
                     </Form.Control>
                   </Col>
-                  <Col md={3}>
-                    <Form.Label>Type*</Form.Label>
-                    <Form.Control
-                      as='select'
-                      name='type'
-                      onChange={(e) => onChange(e)}
-                    >
-                      <option value='dog'>dog</option>
-                      <option value='cat'>cat</option>
-                    </Form.Control>
-                  </Col>
                 </Row>
               </Form.Group>
-
+              <hr />
+              <VaccineContext.Provider value={{ vaccineArr, setVaccineArr }}>
+                <AdditionalInfo />
+              </VaccineContext.Provider>
               <Button type='submit'>Submit</Button>
             </Form>
           </Modal.Body>
