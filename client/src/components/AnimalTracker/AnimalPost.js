@@ -32,21 +32,24 @@ const AddPost = (props) => {
     locationA.name > locationB.name ? 1 : -1
   );
 
-  // const [showAddInfo, setAddInfo] = React.useState(false);
   const [vaccineArr, setVaccineArr] = React.useState([]);
 
   const loading = useSelector((state) => state.auth.loading);
-
-  const onChange = (e) => {};
 
   const onSubmit = (e) => {
     e.preventDefault();
     let formSubmit = new FormData(e.target);
     // console.log(vaccineArr);
-    for (let vaccine of vaccineArr) {
-      vaccine = JSON.stringify(vaccine);
-      formSubmit.append('vaccine-arr', vaccine);
+    if (vaccineArr.length > 0) {
+      for (let vaccine of vaccineArr) {
+        vaccine = JSON.stringify(vaccine);
+        formSubmit.append('vaccine-arr', vaccine);
+      }
+    } else {
+      // let emptyString = JSON.stringify('');
+      // formSubmit.set('vaccine-arr', emptyString);
     }
+
     addAnimal(formSubmit);
     props.onHide();
   };
@@ -63,16 +66,12 @@ const AddPost = (props) => {
       {!loading ? (
         <React.Fragment>
           <Modal.Header closeButton>
-            <Modal.Title
-              id='contained-modal-title-vcenter'
-              size='sm'
-              onChange={(e) => onChange(e)}
-            >
+            <Modal.Title id='contained-modal-title-vcenter' size='sm'>
               Add an Animal
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={(e) => onSubmit(e)}>
+            <Form onSubmit={(e) => onSubmit(e)} noValidate={true}>
               <FormFile custom>
                 <FormFile.Input
                   name='image'
@@ -85,26 +84,27 @@ const AddPost = (props) => {
               </FormFile>
               <Form.Group controlId='addpost-title'>
                 <Row>
-                  <Col md={9}>
+                  <Col md={6}>
                     <Form.Label>Name*</Form.Label>
                     <Form.Control
                       name='name'
                       type='text'
                       size='sm'
                       placeholder='enter the animals name...'
-                      onChange={(e) => onChange(e)}
                     />
                   </Col>
                   <Col md={3}>
                     <Form.Label>Type*</Form.Label>
-                    <Form.Control
-                      as='select'
-                      name='type'
-                      onChange={(e) => onChange(e)}
-                      size='sm'
-                    >
-                      <option value='dog'>dog</option>
-                      <option value='cat'>cat</option>
+                    <Form.Control as='select' name='type' size='sm'>
+                      <option value='dog'>Dog</option>
+                      <option value='cat'>Cat</option>
+                    </Form.Control>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Label>Stray/Pet*</Form.Label>
+                    <Form.Control as='select' name='identity' size='sm'>
+                      <option value='0'>Stray</option>
+                      <option value='1'>Pet</option>
                     </Form.Control>
                   </Col>
                 </Row>
@@ -120,17 +120,11 @@ const AddPost = (props) => {
                       name='locality'
                       size='sm'
                       value={`Victoria Layout`}
-                      onChange={(e) => onChange(e)}
                     ></Form.Control>
                   </Col>
                   <Col md={7}>
                     <Form.Label>Location*</Form.Label>
-                    <Form.Control
-                      as='select'
-                      name='location'
-                      size='sm'
-                      onChange={(e) => onChange(e)}
-                    >
+                    <Form.Control as='select' name='location' size='sm'>
                       {locations.length > 0 ? (
                         <React.Fragment>
                           {locations.map(

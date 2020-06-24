@@ -31,6 +31,7 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 export const FETCH_ERROR = 'FETCH_ERROR';
+export const ANIMALS_ERROR = 'ANIMALS_ERROR';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const POST_ERROR = 'POST_ERROR';
 export const UPLOAD_ERROR = 'UPLOAD_ERROR';

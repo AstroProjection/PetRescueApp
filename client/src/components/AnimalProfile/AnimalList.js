@@ -38,7 +38,7 @@ const AnimalList = (props) => {
     return street && street[`${animal}`].length > 0
       ? animals[`${animal}`].map((animal, index) => {
           if (index >= startingIndex && profileCount-- > 0) {
-            console.log('printing this profile');
+            // console.log('printing this profile');
             return (
               <AnimalProfile
                 key={animal._id}

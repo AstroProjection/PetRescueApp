@@ -5,7 +5,7 @@ import {
   GET_FEEDERS,
   ADD_ANIMAL,
   ANIMALS_LOADING,
-  // ANIMAL_DATA_RECEIVED,
+  ANIMALS_ERROR,
   GET_STREET_ANIMALS,
 } from '../types';
 
@@ -14,6 +14,7 @@ const initialState = {
   dogs: [],
   cats: [],
   loading: true,
+  errors: [],
 };
 
 export default function (state = initialState, action) {
@@ -59,6 +60,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+        errors: [],
       };
 
     case GET_STREET_ANIMALS:
@@ -67,6 +69,13 @@ export default function (state = initialState, action) {
         loading: false,
         dogs: payload.dogs,
         cats: payload.cats,
+      };
+
+    case ANIMALS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        errors: payload,
       };
 
     default:

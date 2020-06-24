@@ -7,6 +7,9 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 
 const SpayInfo = (props) => {
+  const [showInfo, setShowInfo] = React.useState(false);
+
+  console.log(showInfo);
   return (
     <React.Fragment>
       <Row>
@@ -19,6 +22,12 @@ const SpayInfo = (props) => {
               aria-describedby='basic-addon1'
               name='spayed-value'
               size='sm'
+              onChange={(e) => {
+                // console.log(e.currentTarget.value);
+                parseInt(e.currentTarget.value) === 1
+                  ? setShowInfo(true)
+                  : setShowInfo(false);
+              }}
             >
               <option value='2'>Don't know</option>
               <option value='1'>Yes</option>
@@ -26,30 +35,34 @@ const SpayInfo = (props) => {
             </Form.Control>
           </InputGroup.Prepend>
         </Col>
-        <Col lg={5}>
-          <InputGroup.Prepend id='basic-addon2'>
-            <InputGroup.Text className='mr-2'>Which vet?</InputGroup.Text>
-            <Form.Control
-              as='input'
-              placeholder='optional..'
-              // aria-describedby='basic-addon1'
-              name='spayed-hospital'
-              size='sm'
-            />
-          </InputGroup.Prepend>
-        </Col>
-        <Col lg={3}>
-          <InputGroup.Prepend id='basic-addon3'>
-            <InputGroup.Text className='mr-2'>Date:</InputGroup.Text>
-            <Form.Control
-              as='input'
-              placeholder='optional..'
-              // aria-describedby='basic-addon1'
-              name='spayed-date'
-              size='sm'
-            />
-          </InputGroup.Prepend>
-        </Col>
+        {showInfo && (
+          <React.Fragment>
+            <Col lg={5}>
+              <InputGroup.Prepend id='basic-addon2'>
+                <InputGroup.Text className='mr-2'>Which vet?</InputGroup.Text>
+                <Form.Control
+                  as='input'
+                  placeholder='optional..'
+                  // aria-describedby='basic-addon1'
+                  name='spayed-hospital'
+                  size='sm'
+                />
+              </InputGroup.Prepend>
+            </Col>
+            <Col lg={3}>
+              <InputGroup.Prepend id='basic-addon3'>
+                <InputGroup.Text className='mr-2'>Date:</InputGroup.Text>
+                <Form.Control
+                  as='input'
+                  placeholder='optional..'
+                  // aria-describedby='basic-addon1'
+                  name='spayed-date'
+                  size='sm'
+                />
+              </InputGroup.Prepend>
+            </Col>
+          </React.Fragment>
+        )}
       </Row>
     </React.Fragment>
   );

@@ -7,6 +7,7 @@ import {
   FETCH_ERROR,
   STREET_LOADING,
   STREET_UPDATED,
+  ANIMALS_ERROR,
   // ANIMAL_DATA_RECEIVED
 } from '../types';
 import { setAlert } from './alert';
@@ -26,7 +27,21 @@ export const addAnimal = (formData) => async (dispatch) => {
       type: ANIMALS_LOADING,
     });
 
+    // console.log('before post');
     const res = await axios.post('api/animals', formData, config);
+    // const res = axios
+    //   .post('api/animals', formData, config)
+    //   .then((message) => {
+    //     console.log('didnotfail');
+    //     console.log(message);
+    //   })
+    //   .catch((error) => {
+    //     console.log('didfail');
+    //     console.log(error.response);
+    //   });
+
+    // return;
+    console.log('after post');
 
     dispatch({
       type: ADD_ANIMAL,
@@ -57,15 +72,16 @@ export const addAnimal = (formData) => async (dispatch) => {
 
     dispatch(setAlert('Animal Added', 'success'));
   } catch (error) {
+    const errors = error.response.data.errors;
     dispatch({
-      type: POST_ERROR,
-      payload: error.errors,
+      type: ANIMALS_ERROR,
+      payload: errors,
     });
   }
 };
 
 export const getStreetAnimals = (street) => async (dispatch) => {
-  console.log('getstreetanimals action creator');
+  // console.log('getstreetanimals action creator');
   try {
     dispatch({
       type: ANIMALS_LOADING,

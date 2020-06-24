@@ -1,27 +1,25 @@
 const mongoose = require('mongoose');
 
 const SpaySchema = new mongoose.Schema({
-  spayed: {
-    status: {
-      type: Number,
-      // required: true,
-      default: 2,
-    },
-    hospital: {
-      type: String,
-      default: null,
-      // required: true,
-    },
-    user: {
-      type: String,
-      default: null,
-      // required: true,
-    },
-    cost: {
-      type: Number,
-      // required: true,
-      default: null,
-    },
+  status: {
+    type: Number,
+    // required: true,
+    default: 2,
+  },
+  hospital: {
+    type: String,
+    default: null,
+    // required: true,
+  },
+  user: {
+    type: String,
+    default: null,
+    // required: true,
+  },
+  cost: {
+    type: Number,
+    // required: true,
+    default: null,
   },
 });
 
@@ -99,6 +97,11 @@ const AnimalsSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
     required: true,
+  },
+  identity: {
+    type: Number,
+    required: true,
+    default: null,
   },
   medical: {
     spayed: SpaySchema,

@@ -8,6 +8,7 @@ connectDB();
 /// initializing middleware
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', require('./api/auth'));
 app.use('/api/user', require('./api/user'));

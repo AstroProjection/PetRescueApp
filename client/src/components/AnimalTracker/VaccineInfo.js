@@ -73,7 +73,7 @@ const VaccineInfo = (props) => {
           {/* </InputGroup> */}
         </Col>
         <Col lg={6}>
-          <strong>input vaccination info(if available)</strong>
+          <strong>Enter vaccination info(if available)</strong>
           <InputGroup.Prepend>
             <InputGroup.Text size='sm'>Vaccine Name:</InputGroup.Text>
           </InputGroup.Prepend>
@@ -97,6 +97,7 @@ const VaccineInfo = (props) => {
                 </InputGroup.Prepend>
                 <ReactDatePicker
                   value={dateTaken}
+                  format={'dd/MM/yyyy'}
                   onChange={(date) => {
                     let dateString = date ? date.toLocaleDateString() : null;
                     setVaccineFD({
@@ -113,6 +114,7 @@ const VaccineInfo = (props) => {
                 </InputGroup.Prepend>
                 <ReactDatePicker
                   value={dateDue}
+                  format={`dd/MM/yyyy`}
                   onChange={(date) => {
                     let dateString = date ? date.toLocaleDateString() : null;
                     setVaccineFD({

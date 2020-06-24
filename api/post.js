@@ -57,7 +57,7 @@ router.post(
   async (req, res) => {
     ///checking that text/name,email is not empty
     const errors = validationResult(req);
-
+    console.log(errors);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -81,6 +81,7 @@ router.post(
 
       // res.json(newPost);
     } catch (error) {
+      console.log(error);
       return res.status(400).json({ error });
     }
   }

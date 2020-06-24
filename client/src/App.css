@@ -573,10 +573,10 @@ button {
   grid-template-areas:
     'image head type'
     'image info btn'
-    'image info btn';
+    'image identity btn';
   /* 'profile profile profile' */
 
-  /* grid-auto-rows: 2fr 2fr 1fr; */
+  grid-auto-rows: min-content;
   grid-auto-columns: 1fr 3fr 1fr;
 }
 
@@ -653,6 +653,11 @@ button {
 
 .profile-button {
   grid-area: btn;
+}
+
+.profile-identity {
+  grid-area: identity;
+  border: 1px solid grey;
 }
 
 /* Mobile Styles */

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
 
 /// auth middleware
 const auth = require('../auth/auth');
@@ -57,39 +58,64 @@ router.get('/', async (req, res) => {
 /// @desc Adding an animal
 /// @access private
 
-router.post('/', [auth, upload.array('image', 1)], async (req, res) => {
-  try {
-    const vaccineArrString = req.body['vaccine-arr'];
-    // as objects cannot be passed through multipart/form-data so we need to send them like this
-    let vaccineArr = vaccineArrString.map((vaccineString) =>
-      JSON.parse(vaccineString)
-    );
-    const spayedObj = {
-      status: req.body['spayed-value'] || 2,
-      hospital: req.body['spayed-hospital'] || null,
-      user: req.body['spayed-user'] || null,
-      cost: req.body['spayed-cost'] || null,
-    };
+router.post(
+  '/',
+  [
+    auth,
+    upload.array('image', 1),
+    check('name', 'Please enter name!').notEmpty(),
+  ],
+  async (req, res) => {
+    // return res.status(400).send({ failed: 'yes it failed' });
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty())
+      return res.status(400).send({ errors: errors.array() });
 
-    const newAnimal = new Animals({
-      name: req.body.name,
-      location: req.body.location,
-      locality: 'victoria-layout',
-      type: req.body.type,
-      image: req.files.length > 0 ? req.files[0].path : null,
-      user: req.user.id,
-      medical: {
-        spayed: spayedObj,
-        vaccines: vaccineArr,
-      },
-    });
-    await newAnimal.save();
-    res.json(newAnimal);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error });
+    try {
+      //req.body is not of type Object..
+      req.body = JSON.parse(JSON.stringify(req.body));
+      if (!req.body.hasOwnProperty('vaccine-arr')) req.body['vaccine-arr'] = '';
+
+      const vaccineArrString =
+        req.body['vaccine-arr'] === '' ? [] : [req.body['vaccine-arr']];
+      // as objects cannot be passed through multipart/form-data so we need to send them like this
+      // console.log(vaccineArrString.length);
+      let vaccineArr =
+        vaccineArrString.length > 0
+          ? vaccineArrString.map((vaccineString) => JSON.parse(vaccineString))
+          : [];
+
+      const spayedObj = {
+        status: req.body['spayed-value'] || 2,
+        hospital: req.body['spayed-hospital'] || null,
+        user: req.body['spayed-user'] || null,
+        cost: req.body['spayed-cost'] || null,
+      };
+
+      // console.log(vaccineArr);
+      //// identity - 0 - stray , 1 - pet...
+      const newAnimal = new Animals({
+        name: req.body.name,
+        location: req.body.location,
+        locality: 'victoria-layout',
+        type: req.body.type,
+        image: req.files.length > 0 ? req.files[0].path : null,
+        user: req.user.id,
+        identity: parseInt(req.body.identity),
+        medical: {
+          spayed: spayedObj,
+          vaccines: vaccineArr,
+        },
+      });
+      await newAnimal.save();
+      res.json(newAnimal);
+    } catch (error) {
+      console.log(error.response);
+      return res.status(500).json({ error });
+    }
   }
-});
+);
 
 /// @route PUT api/animals/:streetname
 /// @desc fetching all the animal data
@@ -101,7 +127,6 @@ router.put('/', async (req, res) => {
 
     const data = await Streets.findById(streetId).populate({
       path: 'dogs cats',
-      select: 'name _id locality location image type',
     });
 
     const { dogs, cats } = data;
