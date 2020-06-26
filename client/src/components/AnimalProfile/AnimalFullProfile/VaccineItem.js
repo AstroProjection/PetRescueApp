@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const VaccineItem = ({ vaccineName, dateTaken, dateDue }) => {
   return (
@@ -14,7 +13,5 @@ const VaccineItem = ({ vaccineName, dateTaken, dateDue }) => {
     </React.Fragment>
   );
 };
-
-VaccineItem.propTypes = {};
 
 export default VaccineItem;

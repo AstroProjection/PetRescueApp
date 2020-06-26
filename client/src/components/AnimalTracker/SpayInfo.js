@@ -1,10 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import PropTypes from 'prop-types';
 
 const SpayInfo = (props) => {
   const [showInfo, setShowInfo] = React.useState(false);

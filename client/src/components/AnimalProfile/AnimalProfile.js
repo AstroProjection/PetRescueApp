@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
 import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
-import Card from 'react-bootstrap/Card';
+
 import AnimalFullProfile from './AnimalFullProfile/AnimalFullProfile';
+import { deleteAnimal } from '../../store/actions/animal';
 
 function CustomToggle({ children, eventKey, ...rest }) {
   const decoratedOnClick = useAccordionToggle(eventKey, () => {
@@ -25,8 +26,15 @@ const AnimalProfile = (props) => {
     animal,
     street: { street },
     profile_index,
+    auth: { user },
+    deleteAnimal,
   } = props;
 
+  const removeAnimal = (animalId) => {
+    if (window.confirm('Are you sure you want to remove?')) {
+      deleteAnimal(animalId, street._id);
+    }
+  };
   return (
     <Accordion>
       <div className='animal-map-profile'>
@@ -34,8 +42,19 @@ const AnimalProfile = (props) => {
           <em>Name</em>: <strong>{name}</strong>
         </div>
         <div className='profile-type'>
-          <em>Type</em>: <strong>{animal.type}</strong>
+          <div>
+            <em>Type</em>: <strong>{animal.type}</strong>
+          </div>
+          {user && user._id === animal.user && (
+            <div
+              className='profile-close'
+              onClick={() => removeAnimal(profile_index)}
+            >
+              <i className='fa fa-trash'></i>
+            </div>
+          )}
         </div>
+
         <div className='profile-identity'>
           {animal.identity ? animal.identity : 'Stray'}
         </div>
@@ -43,10 +62,10 @@ const AnimalProfile = (props) => {
         <div className='profile-image'>
           {animal && animal.image ? (
             <>
-              <img className={`profile-img`} src={`${animal.image}`} />
+              <img className={`profile-img`} src={animal.image} alt='' />
             </>
           ) : (
-            <>No Image'</>
+            <>'No Image'</>
           )}
         </div>
         <div className='profile-information'>
@@ -56,14 +75,11 @@ const AnimalProfile = (props) => {
         </div>
         <CustomToggle
           className='profile-btn btn-success profile-button'
-          eventKey={`${profile_index}`}
+          eventKey={profile_index}
         >
-          Toggle full profile
+          Show Medical Info
         </CustomToggle>
-        <Accordion.Collapse
-          eventKey={`${profile_index}`}
-          className='profile-full'
-        >
+        <Accordion.Collapse eventKey={profile_index} className='profile-full'>
           <AnimalContext.Provider value={{ animal }}>
             <AnimalFullProfile />
           </AnimalContext.Provider>
@@ -75,6 +91,7 @@ const AnimalProfile = (props) => {
 
 const mapStateToProps = (state) => ({
   street: state.street,
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps)(AnimalProfile);
+export default connect(mapStateToProps, { deleteAnimal })(AnimalProfile);

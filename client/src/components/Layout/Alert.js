@@ -9,7 +9,11 @@ const AlertComp = ({ alerts }) => {
     alert !== null &&
     alerts.length > 0 &&
     alerts.map((alert) => (
-      <Alert key={alert.id} variant={`${alert.alertType}`}>
+      <Alert
+        key={alert.id}
+        variant={`${alert.alertType}`}
+        className='fixed-top'
+      >
         {alert.message}
       </Alert>
     ))

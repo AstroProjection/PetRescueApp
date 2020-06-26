@@ -38,7 +38,6 @@ const upload = multer({
   limits: { fileSize: 1024 * 1024 * 15 },
   fileFilter: fileFilter,
 });
-
 ///////////////////////////////////////////
 
 /// @route GET api/animals/
@@ -68,7 +67,7 @@ router.post(
   async (req, res) => {
     // return res.status(400).send({ failed: 'yes it failed' });
     const errors = validationResult(req);
-    console.log(errors);
+    // console.log(errors);
     if (!errors.isEmpty())
       return res.status(400).send({ errors: errors.array() });
 
@@ -133,6 +132,26 @@ router.put('/', async (req, res) => {
     return res.status(200).json({ dogs, cats });
   } catch (error) {
     res.json({ error });
+  }
+});
+
+/// @route DELETE api/animals/:streetname
+/// @desc deleting the animal
+/// @access private
+
+router.delete('/:animalId', auth, async (req, res) => {
+  try {
+    const animal = await Animals.findById(req.params.animalId);
+
+    if (animal.user.toString() === req.user._id)
+      return res.status(401).send({ msg: 'Not authorized to delete' });
+
+    await animal.remove();
+
+    res.status(200).json({ msg: 'Animal deleted' });
+  } catch (errors) {
+    // console.dir(errors);
+    return res.status(404).send({ errors });
   }
 });
 

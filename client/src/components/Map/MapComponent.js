@@ -10,7 +10,6 @@ import {
 
 import MapInformation from './MapInformation';
 import roadsJson from '../../resources/victoria-layout.json';
-import AnimalButtons from '../AnimalTracker/AnimalButtons';
 
 const MapComponent = ({
   updateStreetsToDB,
@@ -57,10 +56,12 @@ const MapComponent = ({
   const onEachFeature = (feature, layer) => {
     const toolTipContent = ` <Tooltip>Click for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
     layer.bindTooltip(toolTipContent);
-    const popupContent = `<Popup>
-        <br /> <strong>${feature.properties.displayName}</strong></pre>
+    const popupContent = `
+      <Popup>
+        <br /> <strong>${feature.properties.displayName}</pre></strong>
       </Popup>
     `;
+
     layer.bindPopup(popupContent);
 
     layer.setStyle({

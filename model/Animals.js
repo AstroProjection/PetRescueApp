@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+//model for post hook
+const Streets = require('./Streets');
+
 const SpaySchema = new mongoose.Schema({
   status: {
     type: Number,
@@ -108,6 +111,19 @@ const AnimalsSchema = new mongoose.Schema({
     vaccines: [VaccinesSchema],
     misc: [MiscSchema],
   },
+});
+
+AnimalsSchema.post('remove', async (doc, next) => {
+  console.log(doc);
+  await Streets.updateMany(
+    {
+      $pullAll: { dogs: [doc._id], cats: [doc._id] },
+    },
+    (err, street) => {
+      console.log(street);
+    }
+  );
+  next();
 });
 
 module.exports = mongoose.model('animals', AnimalsSchema);

@@ -68,6 +68,10 @@ img {
   margin-bottom: 1rem;
 }
 
+.spacer-div {
+  height: 4.5em;
+}
+
 .inner-container {
   max-width: 1100px;
   margin: auto;
@@ -571,9 +575,9 @@ button {
 .animal-map-profile {
   display: grid;
   grid-template-areas:
-    'image head type'
-    'image info btn'
-    'image identity btn';
+    'image head type '
+    'image info btn '
+    'image identity btn ';
   /* 'profile profile profile' */
 
   grid-auto-rows: min-content;
@@ -586,6 +590,27 @@ button {
   grid-column-end: -1;
 
   border: 1px solid gold;
+}
+
+.profile-close {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  background-color: orange;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 0.5em;
+  flex-basis: 50%;
+}
+
+.position-fixed {
+  position: sticky;
+  width: 100%;
+  z-index: 1001;
+}
+
+.profile-close > i {
+  font-size: large;
 }
 
 .profile-fullinfo {
@@ -637,6 +662,9 @@ button {
 
 .profile-type {
   grid-area: type;
+
+  display: flex;
+  flex-direction: row;
   border: 1px solid gold;
 }
 

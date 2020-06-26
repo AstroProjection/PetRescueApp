@@ -25,7 +25,11 @@ const AnimalList = (props) => {
   const [pageNumber, setPageNumber] = React.useState(1);
 
   const profilePerPage = 4;
-  const noOfPages = Math.ceil(animals[`${animal}`].length / profilePerPage);
+  console.log(animals);
+  console.log(street);
+  const noOfPages = animals.hasOwnProperty(`${animal}`)
+    ? Math.ceil(animals[`${animal}`].length / profilePerPage)
+    : 1;
 
   const updatePage = (newPage) => {
     // if (newPage <= 0) return;
@@ -38,14 +42,14 @@ const AnimalList = (props) => {
     return street && street[`${animal}`].length > 0
       ? animals[`${animal}`].map((animal, index) => {
           if (index >= startingIndex && profileCount-- > 0) {
-            // console.log('printing this profile');
+            console.log('printing this profile');
             return (
               <AnimalProfile
                 key={animal._id}
                 name={animal.name}
                 location={animal.location}
                 animal={animal}
-                profile_index={`${animal._id}`}
+                profile_index={animal._id}
               />
             );
           } else {
@@ -58,7 +62,8 @@ const AnimalList = (props) => {
   };
 
   React.useEffect(() => {
-    getStreetAnimals(street);
+    console.log('useEffect');
+    if (street) getStreetAnimals(street._id);
   }, [street]);
 
   return (
@@ -94,4 +99,6 @@ const mapStateToProps = (state) => ({
   street: state.street,
   animals: state.animals,
 });
-export default connect(mapStateToProps)(AnimalList);
+export default connect(mapStateToProps, { getStreetAnimals })(
+  React.memo(AnimalList)
+);

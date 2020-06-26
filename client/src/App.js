@@ -27,6 +27,7 @@ function App({ loadUser }) {
   return (
     <BrowserRouter>
       <Navbar />
+      <div className='spacer-div'></div>
       <UserBadge />
       <Alert />
       <Switch>

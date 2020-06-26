@@ -27,7 +27,7 @@ const NavbarComponent = ({ logout, isLoggedin }) => {
   );
 
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar bg='light' expand='lg' fixed='top' collapseOnSelect>
       <LinkContainer to='/home'>
         <Navbar.Brand>
           <i className='fas fa-paw'></i>Pet RescYou

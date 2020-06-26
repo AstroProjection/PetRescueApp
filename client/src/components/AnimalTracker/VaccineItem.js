@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const VaccineItem = (props) => {
   const { vaccine } = props;

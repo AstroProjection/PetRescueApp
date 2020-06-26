@@ -45,11 +45,7 @@ const AddPost = (props) => {
         vaccine = JSON.stringify(vaccine);
         formSubmit.append('vaccine-arr', vaccine);
       }
-    } else {
-      // let emptyString = JSON.stringify('');
-      // formSubmit.set('vaccine-arr', emptyString);
     }
-
     addAnimal(formSubmit);
     props.onHide();
   };
@@ -91,6 +87,7 @@ const AddPost = (props) => {
                       type='text'
                       size='sm'
                       placeholder='enter the animals name...'
+                      required
                     />
                   </Col>
                   <Col md={3}>

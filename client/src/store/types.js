@@ -27,6 +27,7 @@ export const GET_STREET_ANIMALS = 'GET_STREET_ANIMALS';
 export const SET_CURRENT_STREET = 'SET_CURRENT_STREET';
 
 export const ADD_ANIMAL = 'ADD_ANIMAL';
+export const ANIMAL_DELETED = 'ANIMAL_DELETED';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 

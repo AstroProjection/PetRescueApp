@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { AnimalContext } from '../AnimalProfile';
 
 const SpayProfile = (props) => {
@@ -47,7 +46,5 @@ const SpayProfile = (props) => {
     </div>
   );
 };
-
-SpayProfile.propTypes = {};
 
 export default SpayProfile;

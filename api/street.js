@@ -31,8 +31,8 @@ router.get('/:locality/:streetname', async (req, res) => {
       streetname: req.params.streetname,
       locality: req.params.locality,
     });
-
-    res.json(street);
+    console.log(street);
+    res.status(200).json(street);
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -86,8 +86,6 @@ router.post('/:locality/:streetname', async (req, res) => {
       streetname: req.params.streetname,
     });
 
-    // console.group(req.body);
-
     switch (req.body.type.toLowerCase()) {
       case 'cat':
         street.cats.push(req.body);
@@ -104,9 +102,8 @@ router.post('/:locality/:streetname', async (req, res) => {
 
     await street.save();
 
-    res.status(200).json({ message: 'Successfully added to street' });
+    res.status(200).json(street);
   } catch (error) {
-    // console.log(error);
     return res.status(500).json({ error });
   }
 });

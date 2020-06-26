@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import VaccineItem from './VaccineItem';
 import { AnimalContext } from '../AnimalProfile';
 
@@ -44,7 +43,5 @@ const VaccineProfile = (props) => {
     </div>
   );
 };
-
-VaccineProfile.propTypes = {};
 
 export default VaccineProfile;

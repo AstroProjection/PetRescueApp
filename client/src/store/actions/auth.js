@@ -47,8 +47,13 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.dir(error);
+    const err = error.response
+      ? error.response.data.errors
+      : 'Connection error';
     dispatch({
       type: AUTH_ERROR,
+      errors: err,
     });
   }
 };

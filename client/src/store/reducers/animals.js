@@ -7,6 +7,7 @@ import {
   ANIMALS_LOADING,
   ANIMALS_ERROR,
   GET_STREET_ANIMALS,
+  ANIMAL_DELETED,
 } from '../types';
 
 const initialState = {
@@ -50,7 +51,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     }
-
+    case ANIMAL_DELETED:
     case ADD_ANIMAL:
       return {
         ...state,
