@@ -8,8 +8,8 @@ import { loadUser } from '../../store/actions/auth';
 const Home = ({ auth: { user }, loadUser }) => {
   useEffect(() => {
     console.log('home useEffect');
-    loadUser();
-  }, [loadUser]);
+    // loadUser();
+  }, []);
   return (
     <React.Fragment>
       {/* <UserBadge /> */}
@@ -19,7 +19,6 @@ const Home = ({ auth: { user }, loadUser }) => {
 };
 
 Home.propTypes = {
-  auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
 };
 

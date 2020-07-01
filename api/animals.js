@@ -97,7 +97,7 @@ router.post(
       const newAnimal = new Animals({
         name: req.body.name,
         location: req.body.location,
-        locality: 'victoria-layout',
+        locality: req.user.locality,
         type: req.body.type,
         image: req.files.length > 0 ? req.files[0].path : null,
         user: req.user.id,

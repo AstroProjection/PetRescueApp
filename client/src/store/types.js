@@ -15,7 +15,7 @@ export const UPLOADING = 'UPLOADING';
 export const POST_REMOVED = 'POST_REMOVED';
 
 export const GET_ALL_DATA = 'GET_ALL_DATA';
-export const GET_STREET_DATA = 'GET_STREET_DATA';
+export const FETCHED_STREET_DATA = 'FETCHED_STREET_DATA';
 export const UPDATED_STREET_DATA = 'UPDATED_STREET_DATA';
 export const STREET_UPDATED = 'STREET_UPDATED';
 export const UPDATE_STREETDB = 'UPDATE_STREETDB';
@@ -23,6 +23,7 @@ export const GET_DOGS = 'GET_DOGS';
 export const GET_CATS = 'GET_CATS';
 export const GET_FEEDERS = 'GET_FEEDERS';
 export const GET_STREET_ANIMALS = 'GET_STREET_ANIMALS';
+export const GET_LOCALITY_INFO = 'GET_LOCALITY_INFO';
 
 export const SET_CURRENT_STREET = 'SET_CURRENT_STREET';
 
@@ -32,6 +33,7 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 export const FETCH_ERROR = 'FETCH_ERROR';
+export const LOCALITY_ERROR = 'LOCALITY_ERROR';
 export const ANIMALS_ERROR = 'ANIMALS_ERROR';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const POST_ERROR = 'POST_ERROR';

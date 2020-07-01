@@ -51,6 +51,7 @@ Posts.propTypes = {
 
 const mapStateToProps = (state) => ({
   post: state.post,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { getAllPosts })(Posts);

@@ -22,7 +22,8 @@ import UserBadge from './components/Layout/UserBadge';
 
 function App({ loadUser }) {
   useEffect(() => {
-    loadUser();
+    // console.log('app calling loaduser');
+    if (localStorage.token) loadUser();
   }, [loadUser]);
   return (
     <BrowserRouter>
@@ -36,7 +37,7 @@ function App({ loadUser }) {
         <Route exact path='/about' component={About} />
         <Route exact path='/' component={Landing} />
         <Route exact path='/home' component={Home} />
-        <Route exact path='/map' component={MapPage} />
+        <Route exact path='/animal-tracker' component={MapPage} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

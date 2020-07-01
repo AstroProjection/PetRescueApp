@@ -1,5 +1,5 @@
 import {
-  GET_STREET_DATA,
+  FETCHED_STREET_DATA,
   SET_CURRENT_STREET,
   FETCH_ERROR,
   // STREET_LOADING,
@@ -81,7 +81,7 @@ export const fetchStreetData = () => async (dispatch) => {
     const res = await axios.get(`api/street/${locality}`);
 
     dispatch({
-      type: GET_STREET_DATA,
+      type: FETCHED_STREET_DATA,
       payload: res.data,
     });
   } catch (error) {

@@ -31,7 +31,7 @@ router.get('/:locality/:streetname', async (req, res) => {
       streetname: req.params.streetname,
       locality: req.params.locality,
     });
-    console.log(street);
+    // console.log(street);
     res.status(200).json(street);
   } catch (error) {
     return res.status(500).json({ error });

@@ -104,7 +104,7 @@ const AnimalsSchema = new mongoose.Schema({
   identity: {
     type: Number,
     required: true,
-    default: null,
+    default: 0,
   },
   medical: {
     spayed: SpaySchema,

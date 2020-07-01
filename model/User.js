@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  locality: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'locality',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('users', userSchema);

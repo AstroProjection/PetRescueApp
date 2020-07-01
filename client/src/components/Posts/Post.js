@@ -25,7 +25,6 @@ const Post = ({
   let loggedUser = null;
   // const loading = auth.loading;
   const fileUploadRef = useRef(null);
-  // const [fullText, toggleFullText] = useState(false);
   if (auth.user) {
     loggedUser = auth.user._id;
   }
@@ -33,20 +32,21 @@ const Post = ({
   let formData = new FormData();
   formData.append('image', null);
 
-  // const onClick = useAccordionToggle(index, () => {
-  //   toggleFullText(!fullText);
-  // });
+  // useEffect(() => {
+  //   // console.log('post useeffect');
+  // }, [img]);
 
-  useEffect(() => {}, [img]);
+  // console.log('logged in:', loggedUser);
+  // console.log('Oowner in:', postUser);
   return (
     <React.Fragment>
-      <Card className='card-post-layout'>
+      <div className='card-post-layout'>
         <div className='post-image'>
           {img ? (
             <Image thumbnail='true' src={img} key={img.uri} />
           ) : (
             <React.Fragment>
-              {loggedUser === postUser ? (
+              {loggedUser === postUser && !auth.loading ? (
                 <React.Fragment>
                   <input
                     type='file'
@@ -60,6 +60,7 @@ const Post = ({
                   ></input>
                   <Button
                     variant='info'
+                    className='stretch'
                     onClick={(e) => fileUploadRef.current.click()}
                   >
                     <i className='fas fa-plus-circle medium'></i>Add Image
@@ -74,34 +75,45 @@ const Post = ({
             </React.Fragment>
           )}
         </div>
-        <Card.Body>
+        <div className='post-information'>
           <Card.Title>{title}</Card.Title>
-
-          {/* <Card.Body> */}
-          <ReadMoreReact text={text} max={100} min={40} ideal={50} />
-          {/* </Card.Body> */}
-        </Card.Body>
-        <Card.Body>
+          <ReadMoreReact text={text} max={200} min={40} ideal={80} />
+        </div>
+        <div className='post-by'>
           <div className='card-post-by'>
-            <span className='post-by'>Created By: {name}</span>
+            <small>
+              <span className='post-by'>Created By: {name}</span>
+            </small>
           </div>
-        </Card.Body>
-        {loggedUser === postUser ? (
-          <Fragment>
-            <div
-              className='delete-button'
-              onClick={(e) => {
-                console.log('removing post');
-                removePost(postId);
-              }}
-            >
-              <i className='fas fa-times'></i>
-            </div>
-          </Fragment>
-        ) : (
-          ''
-        )}
-      </Card>
+        </div>
+        <div className='post-modifications'>
+          {loggedUser === postUser ? (
+            <Fragment>
+              <div
+                className='button edit-btn'
+                onClick={(e) => {
+                  // removePost(postId);
+                }}
+              >
+                Edit
+              </div>
+              <div
+                className='button delete-btn'
+                onClick={(e) => {
+                  if (window.confirm('Do you really want to delete the post?'))
+                    removePost(postId);
+                }}
+              >
+                Delete
+              </div>
+            </Fragment>
+          ) : (
+            <>
+              <div className='button missing'>*</div>
+            </>
+          )}
+        </div>
+      </div>
     </React.Fragment>
   );
 };

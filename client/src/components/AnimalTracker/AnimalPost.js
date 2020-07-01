@@ -17,7 +17,24 @@ import { useSelector } from 'react-redux';
 import { addAnimal } from '../../store/actions/animal';
 import mapData from '../../resources/victoria-layout.json';
 
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 export const VaccineContext = React.createContext({});
+
+const schema = yup.object({
+  name: yup.string().required('Please enter a name'),
+  type: yup.string().required('Please enter a password'),
+  identity: yup.string().required('Please select an option'),
+  locality: yup.string().required(),
+  location: yup.string().required('Please select an option'),
+  spayedValue: yup.string().required('Please select an option'),
+  spayedHospital: yup.string().notRequired(),
+  spayedDate: yup.string().notRequired(),
+  vaccineName: yup.string().req,
+  vaccineDateTaken: yup.string().required('Please enter a password').max(15),
+  vaccineDateDue: yup.string().required('Please enter a password').max(15),
+});
 
 const AddPost = (props) => {
   let locations = mapData.features;
@@ -92,16 +109,26 @@ const AddPost = (props) => {
                   </Col>
                   <Col md={3}>
                     <Form.Label>Type*</Form.Label>
-                    <Form.Control as='select' name='type' size='sm'>
+                    <Form.Control
+                      as='select'
+                      name='type'
+                      size='sm'
+                      defaultValue={'dog'}
+                    >
                       <option value='dog'>Dog</option>
                       <option value='cat'>Cat</option>
                     </Form.Control>
                   </Col>
                   <Col md={3}>
                     <Form.Label>Stray/Pet*</Form.Label>
-                    <Form.Control as='select' name='identity' size='sm'>
-                      <option value='0'>Stray</option>
+                    <Form.Control
+                      as='select'
+                      name='identity'
+                      size='sm'
+                      defaultValue={'0'}
+                    >
                       <option value='1'>Pet</option>
+                      <option value='0'>Stray</option>
                     </Form.Control>
                   </Col>
                 </Row>

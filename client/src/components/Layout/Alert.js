@@ -12,7 +12,7 @@ const AlertComp = ({ alerts }) => {
       <Alert
         key={alert.id}
         variant={`${alert.alertType}`}
-        className='fixed-top'
+        className='animate-alert'
       >
         {alert.message}
       </Alert>

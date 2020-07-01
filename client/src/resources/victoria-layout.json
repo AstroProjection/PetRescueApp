@@ -1,5 +1,6 @@
 {
   "locality": "Victoria Layout",
+  "locality_unique": "victoria-layout",
   "type": "FeatureCollection",
   "features": [
     {

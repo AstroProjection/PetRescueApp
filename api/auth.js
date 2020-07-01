@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 /// model
 const Post = require('../model/Post');
 const User = require('../model/User');
+const Locality = require('../model/Locality');
 const auth = require('../auth/auth');
 
 //   @route POST api/auth
@@ -39,9 +40,12 @@ router.post(
       if (!user || !isMatch)
         return res.status(400).json({ error: 'invalid credentials' });
       // verify and produce auth token
+      delete user['password'];
+
       const payload = {
         user: {
           id: user.id,
+          locality: user.locality,
         },
       };
       jwt.sign(
@@ -54,6 +58,7 @@ router.post(
         }
       );
     } catch (error) {
+      console.log(error);
       return res.status(400).json({ error: 'invalid credentials' });
     }
   }

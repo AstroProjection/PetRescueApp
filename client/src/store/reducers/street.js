@@ -1,5 +1,5 @@
 import {
-  GET_STREET_DATA,
+  FETCHED_STREET_DATA,
   SET_CURRENT_STREET,
   FETCH_ERROR,
   UPDATED_STREET_DATA,
@@ -19,7 +19,7 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_STREET_DATA:
+    case FETCHED_STREET_DATA:
       return {
         ...state,
         streets: payload,

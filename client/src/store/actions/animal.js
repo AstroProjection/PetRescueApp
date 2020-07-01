@@ -42,7 +42,7 @@ export const addAnimal = (formData) => async (dispatch) => {
       type: STREET_LOADING,
     });
 
-    const res_2 = await axios.post(
+    await axios.post(
       `api/street/${res.data.locality}/${res.data.location}`,
       res.data,
       config
@@ -53,8 +53,6 @@ export const addAnimal = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert('Animal Added', 'success'));
-
-    // dispatch(getStreetAnimals(res_2.data._id));
   } catch (error) {
     const errors = error.response.data.errors;
     dispatch({
@@ -81,7 +79,7 @@ export const getStreetAnimals = (streetId) => async (dispatch) => {
     };
 
     const res = await axios.put(`api/animals`, body, config);
-    console.log('after resposne');
+    // console.log('after resposne');
     dispatch({
       type: GET_STREET_ANIMALS,
       payload: res.data,

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { LOGIN_SUCCESS, AUTH_ERROR, LOGOUT, LOAD_USER } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 
+import { setAlert } from './alert';
+
 export const login = (formData) => async (dispatch) => {
   try {
     const config = {
@@ -16,16 +18,20 @@ export const login = (formData) => async (dispatch) => {
     });
 
     const res = await axios.post('/api/auth', body, config);
+    console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+
+    dispatch(loadUser());
   } catch (error) {
-    console.log(error);
+    // console.dir(error);
     dispatch({
       type: AUTH_ERROR,
-      payload: error,
     });
+
+    dispatch(setAlert(error.response.data.error, 'danger'));
   }
 };
 
@@ -47,13 +53,38 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.dir(error);
+    // console.dir(error);
     const err = error.response
       ? error.response.data.errors
       : 'Connection error';
     dispatch({
       type: AUTH_ERROR,
       errors: err,
+    });
+  }
+};
+
+export const register = (formData) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+    const body = {
+      email: formData.email,
+      password: formData.password,
+    };
+
+    const res = await axios.post('api/user', body, config);
+  } catch (error) {
+    const err = error.response
+      ? error.response.data.errors
+      : 'Connection error';
+
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err,
     });
   }
 };

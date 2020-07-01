@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 //model
 const User = require('../model/User');
+const Locality = require('../model/Locality');
 
 //   @route Post api/user/
 //   @desc Register User
@@ -24,6 +25,7 @@ router.post(
       .notEmpty()
       .isLength({ min: 6, max: 12 }),
     check('name', 'name is required').notEmpty(),
+    check('locality', 'locality is required').notEmpty(),
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
@@ -32,7 +34,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, locality } = req.body;
       /// checking if user exists
       const user = await User.findOne({ email });
       if (user) return res.status(400).json({ msg: 'User already exists!' });
@@ -40,16 +42,23 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       const encryptedPassword = await bcrypt.hash(password, salt);
       /// creating user
+      const localityID = await Locality.findOne({
+        locality_unique: locality,
+      }).select('_id');
+      // console.log(localityID);
+      // return;
       const newUser = new User({
         name: name,
         password: encryptedPassword,
         email: email,
+        locality: localityID,
       });
       await newUser.save();
       //creating token
       const payload = {
         user: {
           id: newUser.id,
+          locality: newUser.locality,
         },
       };
       //

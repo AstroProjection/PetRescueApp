@@ -5,21 +5,23 @@ const PageDisplay = ({ pageNumber, updatePage, totalPages }) => {
   return (
     totalPages > 0 && (
       <>
-        <div>
+        <div className='page-display'>
           <button
+            className='page-button'
             onClick={() => {
               updatePage(pageNumber - 1);
             }}
           >
-            prev page
+            <i className='fas fa-angle-left'></i>
           </button>
           {`${pageNumber}/${totalPages}`}
           <button
+            className='page-button'
             onClick={() => {
               updatePage(pageNumber + 1);
             }}
           >
-            next page
+            <i className='fas fa-angle-right'></i>
           </button>
         </div>
       </>

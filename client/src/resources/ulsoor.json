@@ -1,0 +1,640 @@
+{
+  "locality": "Ulsoor",
+  "locality_unique": "ulsoor-1",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6138913631439, 12.973738429220642],
+          [77.61940598487854, 12.972588380763499],
+          [77.6198673248291, 12.972713840853606]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "dickenson-road-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61388063430786, 12.973790704024143],
+          [77.61547923088074, 12.978944945689646]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "dickenson-road-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6154899597168, 12.978965855174526],
+          [77.614084482193, 12.979582684187267]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "dickenson-road-3",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.614084482193, 12.979593138903118],
+          [77.61451363563538, 12.980837246948376]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "lake-road-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61453509330748, 12.980826792284851],
+          [77.61545777320862, 12.980868610936264],
+          [77.61765718460082, 12.980115874134428],
+          [77.61912703514098, 12.977679918582552],
+          [77.62016773223877, 12.975787593290978]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aurobindo-society",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61682033538818, 12.979457227562921],
+          [77.61691689491272, 12.97968723132588],
+          [77.61699736118317, 12.979713368103651],
+          [77.61708855628967, 12.979744732233367],
+          [77.617147564888, 12.979587911545256],
+          [77.61705100536346, 12.979342225601629],
+          [77.61715292930602, 12.979624503047999],
+          [77.61707782745361, 12.979760414296736],
+          [77.61726021766663, 12.980147238213345],
+          [77.6170402765274, 12.980230875737794],
+          [77.61725485324858, 12.980147238213345],
+          [77.61728167533875, 12.980241330426368]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61469602584837, 12.976404430189167],
+          [77.61904120445251, 12.974888472359604],
+          [77.62000679969788, 12.974731648608365]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.62015700340271, 12.975787593290978],
+          [77.61996388435364, 12.974721193688106],
+          [77.62001752853394, 12.97318431562788],
+          [77.61987805366516, 12.972734750862465]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "radisson-city-center-road",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61897683143616, 12.974951201832406],
+          [77.61930942535399, 12.976320791377407],
+          [77.6196527481079, 12.976676256133128]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "haudin-road-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61922359466553, 12.977439458156454],
+          [77.61896610260008, 12.976540343198302],
+          [77.61874079704285, 12.976226697680517],
+          [77.6186442375183, 12.975735318907233],
+          [77.61841893196106, 12.975108025445177]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "haudin-road-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61890172958374, 12.97803538139513],
+          [77.61879444122314, 12.977951743132017],
+          [77.6185154914856, 12.976540343198302],
+          [77.61868715286255, 12.976320791377407],
+          [77.61869788169861, 12.976122149086684]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aga-ali-abas-road-1",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6182472705841, 12.979122676255054],
+          [77.61789321899414, 12.978735850744096],
+          [77.61766791343689, 12.978275841244862],
+          [77.61764109134674, 12.977977880092276],
+          [77.61818289756775, 12.97778446652138],
+          [77.61763036251068, 12.977972652700434],
+          [77.61760890483856, 12.977685145980553],
+          [77.61762499809265, 12.976906262468976],
+          [77.61803805828094, 12.97691671729737],
+          [77.61763036251068, 12.976906262468976],
+          [77.61760354042053, 12.976482841549657],
+          [77.6173084974289, 12.976493296395848],
+          [77.6175981760025, 12.976477614126402],
+          [77.61747479438782, 12.975975780981457],
+          [77.61744260787964, 12.975735318907233],
+          [77.61827945709229, 12.975756228662055],
+          [77.61743187904358, 12.975745773784872],
+          [77.61741042137146, 12.975473946823694]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aga-ali-abas-road-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6186442375183, 12.978484936577319],
+          [77.61843502521515, 12.978066745736559],
+          [77.61842966079712, 12.977789693917153],
+          [77.61840283870696, 12.978092882684704],
+          [77.61774837970734, 12.978375161549703]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-3",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61781007051468, 12.975311895993922],
+          [77.6175445318222, 12.973142495683991]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-2",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61841356754303, 12.97511848034919],
+          [77.61822581291199, 12.974292541578789],
+          [77.6182472705841, 12.97428731410948]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-4",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61702954769135, 12.977507414387405],
+          [77.61674523353577, 12.976623981936221],
+          [77.616428732872, 12.975818957915958]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-5",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61713683605194, 12.977036947792284],
+          [77.61710464954376, 12.976529888354085],
+          [77.61683642864227, 12.975677817072437]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-3",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61691153049468, 12.977094449312766],
+          [77.61760354042053, 12.977026492968944]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aga-ali-abas-road-3",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61675596237183, 12.97666057387521],
+          [77.61711001396179, 12.97652466093181]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "dickenson-road-4",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61503934860228, 12.977523096591915],
+          [77.6155436038971, 12.977172860455656],
+          [77.61650383472443, 12.976848760904959]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "halasuru-road-4",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61614710092543, 12.975832026508513],
+          [77.6160478591919, 12.975458264489939],
+          [77.61587351560593, 12.975481787990196],
+          [77.61578232049942, 12.97542951354218],
+          [77.61576622724533, 12.974817901683787],
+          [77.61612564325331, 12.97475778590711],
+          [77.61618196964264, 12.974791764391366],
+          [77.6162651181221, 12.975372011636647],
+          [77.61623829603195, 12.975419058651244],
+          [77.61605858802795, 12.975453037045146]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "dickenson-road-5",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61448413133621, 12.975453037045146],
+          [77.61526197195053, 12.975262235234625],
+          [77.6154363155365, 12.975251780336668],
+          [77.61554896831512, 12.97518643721447],
+          [77.61557310819626, 12.975081888183249],
+          [77.61544704437256, 12.974812674225522],
+          [77.61511713266373, 12.974606189536177],
+          [77.61482745409012, 12.974614030730043],
+          [77.61424005031586, 12.974786536932553]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-3",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61998802423477, 12.974112193824155],
+          [77.61911630630493, 12.974237653145572],
+          [77.61905461549759, 12.97419844711443],
+          [77.61906534433365, 12.974070374036303],
+          [77.61911362409592, 12.973989348177284],
+          [77.61999607086182, 12.973884798642773]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-4",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61615246534348, 12.973270569239963],
+          [77.61635631322861, 12.974449365606928]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-5",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61558920145035, 12.974263790496238],
+          [77.61553823947906, 12.974109580087624],
+          [77.61553823947906, 12.973963210797779],
+          [77.6157447695732, 12.973662630736024],
+          [77.61577695608139, 12.973351595333147]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-6",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6171287894249, 12.973884798642773],
+          [77.61702686548233, 12.973090220744222]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-7",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61635363101959, 12.973686154406137],
+          [77.61667281389236, 12.973599900938183],
+          [77.61668354272842, 12.973565922291096],
+          [77.61661112308502, 12.973173860642571]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mg-road-main-7",
+        "dogs": [],
+        "cats": [],
+        "feeder": "",
+        "displayName": "7th Cross",
+        "style": {
+          "active": "false"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61937916278839, 12.975254394061203],
+          [77.62011408805846, 12.975102797993017],
+          [77.61980026960373, 12.975170754862587],
+          [77.61988341808319, 12.975560199641631]
+        ]
+      }
+    }
+  ]
+}

@@ -9,9 +9,8 @@ import { connect } from 'react-redux';
 // import AnimalPost from '../AnimalTracker/AnimalPost';
 
 const MapPage = (props) => {
-  console.log('MapPage Rendering');
-
   React.useEffect(() => {
+    console.log('MapPage Rendering');
     // getAllAnimals();
   }, []);
 
@@ -22,10 +21,11 @@ const MapPage = (props) => {
         {/* <AnimalButtons /> */}
         <Tabs defaultActiveKey='animal-tracker' id='uncontrolled-tab-example'>
           <Tab eventKey='animal-tracker' title='Animal Tracker'>
-            Click on the road to know about the animals there...
+            <strong>Click</strong> on the <strong>road</strong> to know about
+            the animals there...
           </Tab>
-          <Tab eventKey='feeding-route' title='Feeding Routes' disabled></Tab>
-          <Tab eventKey='adoption' title='Adoption' disabled></Tab>
+          {/* <Tab eventKey='feeding-route' title='Feeding Routes' disabled></Tab> */}
+          {/* <Tab eventKey='adoption' title='Adoption' disabled></Tab> */}
         </Tabs>
         <MapComponent />
       </div>
@@ -33,4 +33,4 @@ const MapPage = (props) => {
   );
 };
 
-export default connect(null, null)(MapPage);
+export default connect(null, null)(React.memo(MapPage));

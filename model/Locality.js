@@ -5,6 +5,10 @@ const LocalitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  locality_unique: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     enum: ['FeatureCollection'],

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useSelector } from 'react';
 import AnimalProfile from './AnimalProfile';
 import PropTypes from 'prop-types';
 
@@ -23,16 +23,13 @@ const AnimalList = (props) => {
   } = props;
 
   const [pageNumber, setPageNumber] = React.useState(1);
+  const profilePerPage = 5;
 
-  const profilePerPage = 4;
-  console.log(animals);
-  console.log(street);
   const noOfPages = animals.hasOwnProperty(`${animal}`)
     ? Math.ceil(animals[`${animal}`].length / profilePerPage)
     : 1;
 
   const updatePage = (newPage) => {
-    // if (newPage <= 0) return;
     if (newPage > 0 && newPage <= noOfPages) setPageNumber(newPage);
   };
 
@@ -42,7 +39,7 @@ const AnimalList = (props) => {
     return street && street[`${animal}`].length > 0
       ? animals[`${animal}`].map((animal, index) => {
           if (index >= startingIndex && profileCount-- > 0) {
-            console.log('printing this profile');
+            // console.log('printing this profile');
             return (
               <AnimalProfile
                 key={animal._id}
@@ -71,7 +68,7 @@ const AnimalList = (props) => {
       {/* <Accordion> */}
       <Card>
         <Accordion.Toggle as={Button} variant='link' eventKey={index}>
-          {street ? street[`${animal}`].length + ` ` : '0 '}
+          {street ? street[`${animal}`].length + ` ` : ' 0 '}
           <i className={`${faClass}`}></i>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={index}>

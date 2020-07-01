@@ -30,11 +30,15 @@ const AnimalProfile = (props) => {
     deleteAnimal,
   } = props;
 
+  const identity = ['Stray', 'Pet'];
+
   const removeAnimal = (animalId) => {
     if (window.confirm('Are you sure you want to remove?')) {
       deleteAnimal(animalId, street._id);
     }
   };
+
+  // console.log(animal);
   return (
     <Accordion>
       <div className='animal-map-profile'>
@@ -42,8 +46,8 @@ const AnimalProfile = (props) => {
           <em>Name</em>: <strong>{name}</strong>
         </div>
         <div className='profile-type'>
-          <div>
-            <em>Type</em>: <strong>{animal.type}</strong>
+          <div className='profile-type-div'>
+            <em>Type</em>:<br /> <strong>{animal.type}</strong>
           </div>
           {user && user._id === animal.user && (
             <div
@@ -56,7 +60,7 @@ const AnimalProfile = (props) => {
         </div>
 
         <div className='profile-identity'>
-          {animal.identity ? animal.identity : 'Stray'}
+          {animal.hasOwnProperty('identity') ? identity[animal.identity] : ''}
         </div>
 
         <div className='profile-image'>

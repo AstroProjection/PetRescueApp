@@ -11,7 +11,7 @@ const SpayProfile = (props) => {
   } = React.useContext(AnimalContext);
   const resStatus = ['No', 'Yes', 'Unknown'];
   return (
-    <div className='table'>
+    <div className='table spay-table'>
       <div className='tr'>
         <div className='th'>
           <em>

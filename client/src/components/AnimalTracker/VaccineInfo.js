@@ -1,6 +1,5 @@
 import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import ReactDatePicker from 'react-date-picker';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,7 +7,6 @@ import Form from 'react-bootstrap/Form';
 
 import VaccineItem from './VaccineItem';
 import { VaccineContext } from './AnimalPost';
-import FormLabel from 'react-bootstrap/FormLabel';
 
 const VaccineInfo = (props) => {
   const [dateTaken, setTakenDate] = React.useState('');

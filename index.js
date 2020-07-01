@@ -11,6 +11,7 @@ app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', require('./api/auth'));
+app.use('/api/locality', require('./api/locality'));
 app.use('/api/user', require('./api/user'));
 app.use('/api/post', require('./api/post'));
 app.use('/api/animals', require('./api/animals'));

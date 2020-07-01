@@ -9,18 +9,20 @@ const AnimalButtons = ({ isLoggedin }) => {
   return isLoggedin ? (
     <React.Fragment>
       <h1 className='large button-holder'>
-        <button
+        <div
           className='btn btn-success add-post'
           onClick={(e) => setPostModal(true)}
         >
-          Add an Animal
-        </button>
+          <i className='fas fa-plus'></i> Add an Animal
+        </div>
       </h1>
 
       <AnimalPost show={postModal} onHide={() => setPostModal(false)} />
     </React.Fragment>
   ) : (
-    ''
+    <React.Fragment>
+      <h5>Login to add animals..</h5>
+    </React.Fragment>
   );
 };
 

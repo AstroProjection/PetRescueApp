@@ -9,7 +9,9 @@ const AnimalFullProfile = (props) => {
     <React.Fragment>
       <div className='profile-fullinfo'>
         <SpayProfile />
+        <hr></hr>
         <VaccineProfile />
+        <hr></hr>
         <MiscProfile />
       </div>
     </React.Fragment>
