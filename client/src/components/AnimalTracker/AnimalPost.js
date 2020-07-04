@@ -17,23 +17,29 @@ import { useSelector } from 'react-redux';
 import { addAnimal } from '../../store/actions/animal';
 import mapData from '../../resources/victoria-layout.json';
 
+import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 export const VaccineContext = React.createContext({});
 
-const schema = yup.object({
+const animalPostSchema = yup.object({
+  image: yup.mixed().notRequired(),
   name: yup.string().required('Please enter a name'),
-  type: yup.string().required('Please enter a password'),
+  type: yup.string().required('Please select an option'),
   identity: yup.string().required('Please select an option'),
   locality: yup.string().required(),
   location: yup.string().required('Please select an option'),
-  spayedValue: yup.string().required('Please select an option'),
-  spayedHospital: yup.string().notRequired(),
-  spayedDate: yup.string().notRequired(),
-  vaccineName: yup.string().req,
-  vaccineDateTaken: yup.string().required('Please enter a password').max(15),
-  vaccineDateDue: yup.string().required('Please enter a password').max(15),
+  'spayed-value': yup.string().required('Please select an option'),
+  'spayed-hospital': yup.string().notRequired(),
+  'spayed-date': yup.string().notRequired(),
+  vaccineArr: yup.array().of(
+    yup.object({
+      vaccinename: yup.string().required('Please enter a name.'),
+      vaccineDateTaken: yup.string().notRequired(),
+      vaccineDateDue: yup.string().notRequired(),
+    })
+  ),
 });
 
 const AddPost = (props) => {
@@ -44,38 +50,25 @@ const AddPost = (props) => {
       name: feature.properties.name,
     };
   });
-
   locations.sort((locationA, locationB) =>
     locationA.name > locationB.name ? 1 : -1
   );
-
-  const [vaccineArr, setVaccineArr] = React.useState([]);
-
+  const [image, setImage] = React.useState({});
   const loading = useSelector((state) => state.auth.loading);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    let formSubmit = new FormData(e.target);
-    // console.log(vaccineArr);
-    if (vaccineArr.length > 0) {
-      for (let vaccine of vaccineArr) {
-        vaccine = JSON.stringify(vaccine);
-        formSubmit.append('vaccine-arr', vaccine);
-      }
+  const onSubmit = (e, { isSubmitting, setSubmitting }) => {
+    let formSubmit = new FormData();
+    for (const [key, value] of Object.entries(e)) {
+      formSubmit.append(key, value);
     }
+
     addAnimal(formSubmit);
     props.onHide();
   };
 
   const { addAnimal, ...rest } = props;
-
   return (
-    <Modal
-      {...rest}
-      size='lg'
-      aria-labelledby='contained-modal-title-vcenter'
-      centered
-    >
+    <Modal {...rest} size='lg' centered>
       {!loading ? (
         <React.Fragment>
           <Modal.Header closeButton>
@@ -84,96 +77,176 @@ const AddPost = (props) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={(e) => onSubmit(e)} noValidate={true}>
-              <FormFile custom>
-                <FormFile.Input
-                  name='image'
-                  size='sm'
-                  onChange={(e) => {
-                    bsCustomFileInput.init();
-                  }}
-                />
-                <FormFile.Label>Add image</FormFile.Label>
-              </FormFile>
-              <Form.Group controlId='addpost-title'>
-                <Row>
-                  <Col md={6}>
-                    <Form.Label>Name*</Form.Label>
-                    <Form.Control
-                      name='name'
-                      type='text'
+            <Formik
+              validationSchema={animalPostSchema}
+              initialValues={{
+                image: '',
+                name: '',
+                type: '',
+                identity: '',
+                locality: 'victoria-layout',
+                location: '',
+                'spayed-value': '',
+                'spayed-hospital': '',
+                'spayed-date': new Date(),
+                vaccineArr: [],
+              }}
+              onSubmit={onSubmit}
+            >
+              {({
+                values,
+                errors,
+                isSubmitting,
+                setSubmitting,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                setFieldValue,
+                setValues,
+                touched,
+              }) => (
+                <Form onSubmit={handleSubmit} noValidate={true}>
+                  <FormFile custom>
+                    <FormFile.Label>Add image</FormFile.Label>
+                    <FormFile.Input
+                      name='image'
+                      type='file'
                       size='sm'
-                      placeholder='enter the animals name...'
-                      required
-                    />
-                  </Col>
-                  <Col md={3}>
-                    <Form.Label>Type*</Form.Label>
-                    <Form.Control
-                      as='select'
-                      name='type'
-                      size='sm'
-                      defaultValue={'dog'}
-                    >
-                      <option value='dog'>Dog</option>
-                      <option value='cat'>Cat</option>
-                    </Form.Control>
-                  </Col>
-                  <Col md={3}>
-                    <Form.Label>Stray/Pet*</Form.Label>
-                    <Form.Control
-                      as='select'
-                      name='identity'
-                      size='sm'
-                      defaultValue={'0'}
-                    >
-                      <option value='1'>Pet</option>
-                      <option value='0'>Stray</option>
-                    </Form.Control>
-                  </Col>
-                </Row>
-              </Form.Group>
+                      accept='image/**'
+                      onChange={(e) => {
+                        let file = e.currentTarget.files[0];
+                        setFieldValue('image', file);
 
-              <Form.Group controlId='addpost-text'>
-                <Row>
-                  <Col md={5}>
-                    <Form.Label>Locality:</Form.Label>
-                    <Form.Control
-                      as='input'
-                      disabled
-                      name='locality'
-                      size='sm'
-                      value={`Victoria Layout`}
-                    ></Form.Control>
-                  </Col>
-                  <Col md={7}>
-                    <Form.Label>Location*</Form.Label>
-                    <Form.Control as='select' name='location' size='sm'>
-                      {locations.length > 0 ? (
-                        <React.Fragment>
-                          {locations.map(
-                            ({ displayName: streetName, name }, index) => {
-                              return (
-                                <option key={index} value={name}>
-                                  {streetName}
-                                </option>
-                              );
-                            }
+                        bsCustomFileInput.init();
+                      }}
+                    />
+                  </FormFile>
+                  <Form.Group controlId='addpost-title'>
+                    <Row>
+                      <Col md={6}>
+                        <Form.Label>Name*</Form.Label>
+                        <Form.Control
+                          name='name'
+                          type='text'
+                          size='sm'
+                          placeholder='enter the animals name...'
+                          required
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={touched.name && !!errors.name}
+                        />
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.name}
+                        </Form.Control.Feedback>
+                      </Col>
+                      <Col md={3}>
+                        <Form.Label>Type*</Form.Label>
+                        <Form.Control
+                          as='select'
+                          name='type'
+                          size='sm'
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          defaultValue={'default'}
+                          isInvalid={touched.type && !!errors.type}
+                        >
+                          <option value='default' disabled={true}>
+                            Select an option
+                          </option>
+                          <option value='dog'>Dog</option>
+                          <option value='cat'>Cat</option>
+                        </Form.Control>
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.type}
+                        </Form.Control.Feedback>
+                      </Col>
+                      <Col md={3}>
+                        <Form.Label>Stray/Pet*</Form.Label>
+                        <Form.Control
+                          as='select'
+                          name='identity'
+                          size='sm'
+                          // defaultValue={'0'}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={touched.identity && !!errors.identity}
+                          defaultValue={'default'}
+                        >
+                          <option value='default' disabled={true}>
+                            Select an option
+                          </option>
+                          <option value='1'>Pet</option>
+                          <option value='0'>Stray</option>
+                        </Form.Control>
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.identity}
+                        </Form.Control.Feedback>
+                      </Col>
+                    </Row>
+                  </Form.Group>
+
+                  <Form.Group controlId='addpost-text'>
+                    <Row>
+                      <Col md={5}>
+                        <Form.Label>Locality:</Form.Label>
+                        <Form.Control
+                          as='input'
+                          disabled
+                          name='locality'
+                          size='sm'
+                          value={`Victoria Layout`}
+                        ></Form.Control>
+                      </Col>
+                      <Col md={7}>
+                        <Form.Label>Location*</Form.Label>
+                        <Form.Control
+                          as='select'
+                          name='location'
+                          size='sm'
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={touched.location && !!errors.location}
+                          defaultValue={'default'}
+                        >
+                          {locations.length > 0 ? (
+                            <React.Fragment>
+                              <option value='default' disabled={true}>
+                                Select an option
+                              </option>
+                              {locations.map(
+                                ({ displayName: streetName, name }, index) => {
+                                  return (
+                                    <option key={index} value={name}>
+                                      {streetName}
+                                    </option>
+                                  );
+                                }
+                              )}
+                            </React.Fragment>
+                          ) : (
+                            ''
                           )}
-                        </React.Fragment>
-                      ) : (
-                        ''
-                      )}
-                    </Form.Control>
-                  </Col>
-                </Row>
-              </Form.Group>
-              <hr />
-              <VaccineContext.Provider value={{ vaccineArr, setVaccineArr }}>
-                <AdditionalInfo />
-              </VaccineContext.Provider>
-              <Button type='submit'>Submit</Button>
-            </Form>
+                        </Form.Control>
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.location}
+                        </Form.Control.Feedback>
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                  <hr />
+                  <AdditionalInfo
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    setFieldValue={setFieldValue}
+                    values={values}
+                    setValues={setValues}
+                  />
+                  <Button type='submit'>Submit</Button>
+                  <pre>{JSON.stringify(values, null, 2)} </pre>
+                  <pre>{JSON.stringify(errors, null, 2)} </pre>
+                </Form>
+              )}
+            </Formik>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
         </React.Fragment>

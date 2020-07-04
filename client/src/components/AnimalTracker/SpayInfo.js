@@ -4,10 +4,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const SpayInfo = (props) => {
+const SpayInfo = ({ handleChange, handleBlur }) => {
   const [showInfo, setShowInfo] = React.useState(false);
 
-  console.log(showInfo);
+  // console.log(showInfo);
   return (
     <React.Fragment>
       <Row>
@@ -20,13 +20,18 @@ const SpayInfo = (props) => {
               aria-describedby='basic-addon1'
               name='spayed-value'
               size='sm'
+              default='default'
               onChange={(e) => {
                 // console.log(e.currentTarget.value);
+                handleChange(e);
                 parseInt(e.currentTarget.value) === 1
                   ? setShowInfo(true)
                   : setShowInfo(false);
               }}
             >
+              <option value='default' disabled={true}>
+                Select an option
+              </option>
               <option value='2'>Don't know</option>
               <option value='1'>Yes</option>
               <option value='0'>No</option>
@@ -44,6 +49,8 @@ const SpayInfo = (props) => {
                   // aria-describedby='basic-addon1'
                   name='spayed-hospital'
                   size='sm'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </InputGroup.Prepend>
             </Col>
@@ -56,6 +63,8 @@ const SpayInfo = (props) => {
                   // aria-describedby='basic-addon1'
                   name='spayed-date'
                   size='sm'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </InputGroup.Prepend>
             </Col>
@@ -65,7 +74,5 @@ const SpayInfo = (props) => {
     </React.Fragment>
   );
 };
-
-SpayInfo.propTypes = {};
 
 export default SpayInfo;

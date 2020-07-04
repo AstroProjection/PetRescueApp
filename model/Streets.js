@@ -6,7 +6,8 @@ const StreetsSchema = new mongoose.Schema({
     required: true,
   },
   locality: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'locality',
     required: true,
   },
   feeder: {

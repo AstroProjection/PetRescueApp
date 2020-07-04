@@ -26,6 +26,7 @@ router.post(
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -46,6 +47,7 @@ router.post(
         user: {
           id: user.id,
           locality: user.locality,
+          role: user.role,
         },
       };
       jwt.sign(

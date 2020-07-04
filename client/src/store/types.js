@@ -3,7 +3,10 @@ export const CREATE_POST = 'CREATE_POST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const LOAD_USER = 'LOAD_USER';
+export const USER_REGISTERED = 'USER_REGISTERED';
+
 export const LOADING = 'LOADING';
+export const LOCALITY_LOADING = 'LOCALITY_LOADING';
 export const AUTH_LOADING = 'AUTH_LOADING';
 export const ANIMALS_LOADING = 'ANIMAL_LOADING';
 export const POST_LOADING = 'POST_LOADING';
@@ -15,6 +18,7 @@ export const UPLOADING = 'UPLOADING';
 export const POST_REMOVED = 'POST_REMOVED';
 
 export const GET_ALL_DATA = 'GET_ALL_DATA';
+export const FETCHED_LOCALITY = 'FETCHED_LOCALITY';
 export const FETCHED_STREET_DATA = 'FETCHED_STREET_DATA';
 export const UPDATED_STREET_DATA = 'UPDATED_STREET_DATA';
 export const STREET_UPDATED = 'STREET_UPDATED';

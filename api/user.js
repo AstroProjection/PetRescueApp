@@ -29,6 +29,7 @@ router.post(
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
+    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -45,7 +46,6 @@ router.post(
       const localityID = await Locality.findOne({
         locality_unique: locality,
       }).select('_id');
-      // console.log(localityID);
       // return;
       const newUser = new User({
         name: name,
@@ -59,6 +59,7 @@ router.post(
         user: {
           id: newUser.id,
           locality: newUser.locality,
+          role: newUser.role,
         },
       };
       //

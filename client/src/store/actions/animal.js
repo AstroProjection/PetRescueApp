@@ -26,7 +26,15 @@ export const addAnimal = (formData) => async (dispatch) => {
     dispatch({
       type: ANIMALS_LOADING,
     });
-    const res = await axios.post('api/animals', formData, config);
+    const res = await axios.post('api/animals', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress: (progressEvent) => {
+        console.log(progressEvent.loaded);
+        console.log(progressEvent.total);
+      },
+    });
     dispatch({
       type: ADD_ANIMAL,
       payload: res.data,

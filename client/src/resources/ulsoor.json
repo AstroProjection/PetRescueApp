@@ -1,4 +1,8 @@
 {
+  "position": {
+    "center": [12.97655, 77.61797],
+    "zoom": 17
+  },
   "locality": "Ulsoor",
   "locality_unique": "ulsoor-1",
   "type": "FeatureCollection",
@@ -10,10 +14,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -31,10 +32,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -51,10 +49,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -71,10 +66,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -91,10 +83,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -114,10 +103,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -144,10 +130,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -165,10 +148,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -187,10 +167,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -208,10 +185,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -231,10 +205,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -254,10 +225,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -290,10 +258,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -313,10 +278,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -333,10 +295,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -354,10 +313,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -375,10 +331,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -396,10 +349,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -416,10 +366,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -436,10 +383,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -457,10 +401,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -485,10 +426,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -512,10 +450,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -536,10 +471,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -556,10 +488,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -579,10 +508,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -599,10 +525,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -621,10 +544,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",

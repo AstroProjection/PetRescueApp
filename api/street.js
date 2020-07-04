@@ -1,36 +1,28 @@
 const express = require('express');
 const router = express.Router();
 
+const mongoose = require('mongoose');
+//middleware
 const auth = require('../auth/auth');
+const adminAuth = require('../auth/adminAuth');
 
 // models
 const Streets = require('../model/Streets');
 const Locality = require('../model/Locality');
 
-//   @route GET api/streets
-//   @desc Get the street information of the locality
-//   @access private
-
-router.get('/:locality', async (req, res) => {
-  try {
-    const streets = await Streets.find({ locality: req.params.locality });
-    res.json(streets);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});
-
 //   @route GET api/street/:locality/:streetname
-//   @desc Get the street information of the locality
+//   @desc Get the street information by streetId
 //   @access public
 
-router.get('/:locality/:streetname', async (req, res) => {
+router.get('/:localityname/:streetname', async (req, res) => {
   try {
-    // console.log(req.params.locality, req.params.streetname);
     const street = await Streets.findOne({
       streetname: req.params.streetname,
-      locality: req.params.locality,
-    });
+      // localityName: req.params.localityname,
+    }).populate({ path: 'locality', select: 'locality_unique _id' });
+
+    if (street.locality.locality_unique !== req.params.localityname)
+      return res.status(400).json({ msg: 'Street Error!' });
     // console.log(street);
     res.status(200).json(street);
   } catch (error) {
@@ -46,14 +38,20 @@ router.post('/:locality', auth, async (req, res) => {
   // const features = req.body.features;
   let streets = [];
   try {
-    streets = req.body.features.map(async (feature, index) => {
-      return await Streets.find(
+    // console.log(req.body.features);
+    streets = req.body.features.map(async (feature) => {
+      return await Streets.findOneAndUpdate(
         {
-          locality: req.params.locality,
+          // locality: req.params.locality,
           streetname: feature.properties.name,
         },
+        {
+          locality: mongoose.Types.ObjectId(req.params.locality),
+        },
         async (err, street) => {
+          console.log(street);
           try {
+            return;
             if (!street) {
               /// if street doesn't exit, create street
               const newStreet = Streets({
@@ -68,6 +66,7 @@ router.post('/:locality', auth, async (req, res) => {
         }
       );
     });
+
     const streetsList = await Promise.all(streets);
     res.json(streetsList.map((street) => street[0]));
   } catch (error) {
@@ -79,7 +78,7 @@ router.post('/:locality', auth, async (req, res) => {
 //   @desc Add the cat/dog to the collection
 //   @access private
 
-router.post('/:locality/:streetname', async (req, res) => {
+router.post('/:locality/:streetname', auth, async (req, res) => {
   try {
     const street = await Streets.findOne({
       locality: req.params.locality,
@@ -98,8 +97,6 @@ router.post('/:locality/:streetname', async (req, res) => {
         break;
     }
 
-    // console.log(street);
-
     await street.save();
 
     res.status(200).json(street);
@@ -113,10 +110,10 @@ router.post('/:locality/:streetname', async (req, res) => {
 //   @desc remove all dogs & cats from the locality
 //   @access private
 
-router.delete('/:locality', auth, async (req, res) => {
+router.delete('/:locality', adminAuth, async (req, res) => {
   try {
     const streets = await Streets.updateMany(
-      { locality: req.params.locality.toLowerCase() },
+      { locality: req.params.locality },
       { cats: [], dogs: [] }
     );
 

@@ -32,12 +32,6 @@ const Post = ({
   let formData = new FormData();
   formData.append('image', null);
 
-  // useEffect(() => {
-  //   // console.log('post useeffect');
-  // }, [img]);
-
-  // console.log('logged in:', loggedUser);
-  // console.log('Oowner in:', postUser);
   return (
     <React.Fragment>
       <div className='card-post-layout'>

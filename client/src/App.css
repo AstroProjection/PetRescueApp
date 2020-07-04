@@ -21,10 +21,17 @@ hr {
 }
 
 .leaflet-container {
-  height: 30rem;
   width: 100%;
   max-width: 800px;
   border: 2px solid black;
+}
+
+.animal-tracker-map {
+  height: 30rem;
+}
+
+.post-map {
+  height: 15rem;
 }
 
 a {
@@ -111,6 +118,11 @@ img {
   outline: none;
   border-bottom-right-radius: 10px;
   margin: 0;
+}
+
+.delete-button {
+  background-color: red !important;
+  border: 1px solid black !important;
 }
 
 .card-post-layout {
@@ -237,6 +249,12 @@ img {
   display: none;
 }
 
+.locality-selector {
+  background-color: #e99d4e !important;
+  width: 50% !important;
+  margin: 0 auto !important;
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 0.1rem;
@@ -260,6 +278,10 @@ img {
   animation-name: slideout;
   animation-duration: 0.7s;
   animation-iteration-count: 1;
+}
+
+.remove-padding {
+  padding: 0 !important;
 }
 
 @keyframes slideout {
@@ -537,5 +559,9 @@ img {
 
   .animal-map-profile {
     grid-auto-columns: 3fr 3fr 1fr;
+  }
+
+  .modal-body {
+    padding: 0.2rem !important;
   }
 }

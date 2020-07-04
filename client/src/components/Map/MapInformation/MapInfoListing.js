@@ -11,7 +11,7 @@ const MapInfoListing = ({
   heading,
   faSize,
 }) => {
-  const { localityInfo } = locality;
+  // const { localityInfo } = locality;
   return (
     <React.Fragment>
       <i className={`${faClass} ${faSize}`}></i>

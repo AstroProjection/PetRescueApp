@@ -1,15 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { register } from '../../store/actions/auth';
-
 import { useDispatch } from 'react-redux';
 const schema = yup.object({
   name: yup.string().required('Please enter a name'),
@@ -21,15 +24,14 @@ const schema = yup.object({
     .max(15, 'Password must be less than 15 characters'),
   locality: yup.string().required('Please select a locality'),
 });
-const Register = (props) => {
+const Register = ({ isLoggedin }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (data, { setSubmitting }) => {
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 1000);
-    console.log('submitting');
+    // setSubmitting(true);
+    // console.log('submitting');
+    console.log(data);
+    dispatch(register(data));
   };
   return (
     <React.Fragment>
@@ -43,7 +45,6 @@ const Register = (props) => {
             email: '',
             password: '',
             locality: '',
-            vaccineArr: [],
           }}
         >
           {({
@@ -57,8 +58,10 @@ const Register = (props) => {
             isSubmitting,
             setSubmitting,
           }) => {
+            if (isLoggedin) return <Redirect to='/home' />;
+
             return (
-              <Form noValidate onSubmit={handleSubmit}>
+              <Form noValidate={true} onSubmit={handleSubmit}>
                 <Form.Group>
                   <Row>
                     <Col lg={6}>
@@ -96,7 +99,7 @@ const Register = (props) => {
                           Please pick a locality..
                         </option>
                         <option value='victoria-layout'>Victoria Layout</option>
-                        <option value='ulsoor'>Ulsoor</option>
+                        <option value='ulsoor-1'>Ulsoor</option>
                       </Form.Control>
                       <Form.Control.Feedback type='invalid'>
                         {errors.locality}
@@ -156,4 +159,12 @@ const Register = (props) => {
   );
 };
 
-export default React.memo(Register);
+Register.propTypes = {
+  isLoggedin: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isLoggedin: state.auth.isLoggedin,
+});
+
+export default connect(mapStateToProps)(React.memo(Register));

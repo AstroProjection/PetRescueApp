@@ -5,24 +5,30 @@ import { connect } from 'react-redux';
 import {
   setCurrentStreet,
   updateStreetsToDB,
-  fetchStreetData,
+  // fetchStreetData,
 } from '../../store/actions/street';
 
 import MapInformation from './MapInformation/MapInformation';
-import roadsJson from '../../resources/victoria-layout.json';
+import victoriaLayoutJSON from '../../resources/victoria-layout.json';
+import ulsoorJSON from '../../resources/ulsoor.json';
 
 const MapComponent = ({
   setCurrentStreet,
-  fetchStreetData,
   street: { street },
+  selectedLocality,
 }) => {
   const DEFAULT_COLOUR = '#3388FF';
   const ACTIVE_COLOUR = '#00FFFF';
 
-  const initCenter = {
-    center: [12.96421, 77.6145],
-    zoom: 17,
+  const mapList = {
+    'victoria-layout': victoriaLayoutJSON,
+    'ulsoor-1': ulsoorJSON,
   };
+
+  //  center:[lat,lng]
+  //  zoom:'int'
+  //
+  let initCenter = mapList[selectedLocality].position;
 
   const dogCount = street ? street.dogs.length : 0;
   const catCount = street ? street.cats.length : 0;
@@ -34,12 +40,6 @@ const MapComponent = ({
 
   const mobileWindow = window.innerWidth <= 1000;
 
-  // const center = {
-  //   lng: 77.6145,
-  //   lat: 12.96421,
-  //   zoom: 17,
-  // };
-  // [lat,lng]
   const position = [initCenter.center[0], initCenter.center[1]];
 
   const addHighlight = (e) => {
@@ -105,15 +105,15 @@ const MapComponent = ({
       click: setActiveStreet,
     });
   };
+  console.log('render');
+  console.log(selectedLocality);
 
   React.useEffect(() => {
-    console.log('map component fetchingStreetData');
-    fetchStreetData();
-  }, [fetchStreetData]);
-
-  console.log('render');
-
-  // console.log(displayInformation);
+    console.log(
+      'this is the selectedlocality value changing',
+      selectedLocality
+    );
+  }, [selectedLocality]);
   return (
     <div className='map-contents'>
       {!displayInformation && (
@@ -133,28 +133,36 @@ const MapComponent = ({
               <i className='fas fa-map-marker'></i>Center the Map
             </div>
           </div>
-          <Map
-            // center={center}
-            // zoom={locationState.zoom}
-            scrollWheelZoom={false}
-            doubleClickZoom={false}
-            zoomControl={true}
-            closePopupOnClick={true}
-            viewport={locationState}
-            onViewportChanged={(viewport) => setLocationState(viewport)}
-            maxZoom={`${initCenter.zoom + 1}`}
-            minZoom={`${initCenter.zoom - 1}`}
-          >
-            <TileLayer
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            />
-            <Marker position={position} onclick={() => markerClick()}>
-              <Tooltip>Victoria Layout</Tooltip>
-            </Marker>
+          {selectedLocality && (
+            <Map
+              className='animal-tracker-map'
+              key={'1'}
+              scrollWheelZoom={false}
+              doubleClickZoom={false}
+              center={position}
+              zoomControl={true}
+              closePopupOnClick={true}
+              viewport={locationState}
+              onViewportChanged={(viewport) => setLocationState(viewport)}
+              maxZoom={`${initCenter.zoom + 1}`}
+              minZoom={`${initCenter.zoom - 1}`}
+            >
+              <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+              />
+              <Marker position={position} onclick={() => markerClick()}>
+                <Tooltip>{mapList[selectedLocality].locality}</Tooltip>
+              </Marker>
 
-            <GeoJSON data={roadsJson} onEachFeature={onEachFeature} />
-          </Map>
+              <GeoJSON
+                key={selectedLocality}
+                id='geojson_roads'
+                data={mapList[selectedLocality]}
+                onEachFeature={onEachFeature}
+              />
+            </Map>
+          )}
         </React.Fragment>
       )}
 
@@ -170,8 +178,9 @@ const MapComponent = ({
 
 MapComponent.propTypes = {
   setCurrentStreet: PropTypes.func.isRequired,
-  fetchStreetData: PropTypes.func.isRequired,
+  // fetchStreetData: PropTypes.func.isRequired,
   updateStreetsToDB: PropTypes.func.isRequired,
+  selectedLocality: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -182,5 +191,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   updateStreetsToDB,
   setCurrentStreet,
-  fetchStreetData,
-})(React.memo(MapComponent));
+  // fetchStreetData,
+})(MapComponent);

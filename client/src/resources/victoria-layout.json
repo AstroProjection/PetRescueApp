@@ -1,4 +1,8 @@
 {
+  "position": {
+    "center": [12.96421, 77.6145],
+    "zoom": 17
+  },
   "locality": "Victoria Layout",
   "locality_unique": "victoria-layout",
   "type": "FeatureCollection",
@@ -10,10 +14,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "6th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "6th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -32,10 +33,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "7th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "7th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -52,10 +50,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "2nd Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "2nd Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -73,10 +68,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Linden Street",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Linden Street"
       },
       "geometry": {
         "type": "LineString",
@@ -93,10 +85,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Palm Grove Main Road",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Palm Grove Main Road"
       },
       "geometry": {
         "type": "LineString",
@@ -114,10 +103,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Victoria Main Road",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Victoria Main Road"
       },
       "geometry": {
         "type": "LineString",
@@ -135,10 +121,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Xavier Layout",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Xavier Layout"
       },
       "geometry": {
         "type": "LineString",
@@ -156,10 +139,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Xavier Layout",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Xavier Layout"
       },
       "geometry": {
         "type": "LineString",
@@ -178,10 +158,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "8th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "8th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -198,10 +175,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Palm Grove Crossroad",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Palm Grove Crossroad"
       },
       "geometry": {
         "type": "LineString",
@@ -218,10 +192,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "1st Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "1st Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -239,10 +210,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "4th Cross",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "4th Cross"
       },
       "geometry": {
         "type": "LineString",
@@ -261,10 +229,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Nandans main road",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Nandans main road"
       },
       "geometry": {
         "type": "LineString",
@@ -283,10 +248,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Austin town",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Austin town"
       },
       "geometry": {
         "type": "LineString",
@@ -304,10 +266,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Austin town",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Austin town"
       },
       "geometry": {
         "type": "LineString",
@@ -324,10 +283,7 @@
         "stroke-width": 2,
         "stroke-opacity": 1,
         "name": "austin-town-3",
-        "displayName": "Austin town",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Austin town"
       },
       "geometry": {
         "type": "LineString",
@@ -347,10 +303,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Austin town",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Austin town"
       },
       "geometry": {
         "type": "LineString",
@@ -370,10 +323,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Austin town",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Austin town"
       },
       "geometry": {
         "type": "LineString",
@@ -390,10 +340,7 @@
         "dogs": [],
         "cats": [],
         "feeder": "",
-        "displayName": "Loyola Layout",
-        "style": {
-          "active": "false"
-        }
+        "displayName": "Loyola Layout"
       },
       "geometry": {
         "type": "LineString",

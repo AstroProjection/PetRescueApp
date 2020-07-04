@@ -4,6 +4,7 @@ import {
   LOGOUT,
   LOAD_USER,
   AUTH_LOADING,
+  USER_REGISTERED,
 } from '../types';
 
 const initalState = {
@@ -46,6 +47,15 @@ export default function (state = initalState, action) {
       return {
         ...state,
         user: payload,
+        loading: false,
+        isLoggedin: true,
+      };
+
+    case USER_REGISTERED:
+      localStorage.setItem('token', payload.token);
+      return {
+        ...state,
+        token: payload.token,
         loading: false,
         isLoggedin: true,
       };

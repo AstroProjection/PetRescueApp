@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, AUTH_ERROR, LOGOUT, LOAD_USER } from '../types';
+import {
+  LOGIN_SUCCESS,
+  AUTH_ERROR,
+  LOGOUT,
+  LOAD_USER,
+  AUTH_LOADING,
+  USER_REGISTERED,
+} from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 
 import { setAlert } from './alert';
@@ -18,7 +25,7 @@ export const login = (formData) => async (dispatch) => {
     });
 
     const res = await axios.post('/api/auth', body, config);
-    console.log(res);
+    // console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -68,15 +75,27 @@ export const register = (formData) => async (dispatch) => {
   try {
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
     };
     const body = {
-      email: formData.email,
-      password: formData.password,
+      ...formData,
     };
 
-    const res = await axios.post('api/user', body, config);
+    dispatch({
+      type: AUTH_LOADING,
+    });
+
+    const res = await axios.post('api/user/', body, config);
+
+    dispatch(setAlert('User Registered! logging in...', 'success'));
+
+    dispatch({
+      type: USER_REGISTERED,
+      payload: res.data,
+    });
+
+    dispatch(loadUser());
   } catch (error) {
     const err = error.response
       ? error.response.data.errors

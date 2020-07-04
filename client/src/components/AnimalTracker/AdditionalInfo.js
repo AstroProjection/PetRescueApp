@@ -3,7 +3,13 @@ import Form from 'react-bootstrap/Form';
 import VaccineInfo from './VaccineInfo';
 import SpayInfo from './SpayInfo';
 
-const AdditionalInfo = (props) => {
+const AdditionalInfo = ({
+  handleChange,
+  handleBlur,
+  setFieldValue,
+  values,
+  setValues,
+}) => {
   return (
     <React.Fragment>
       <h5>
@@ -11,9 +17,20 @@ const AdditionalInfo = (props) => {
       </h5>
       <hr />
       <Form.Group>
-        <SpayInfo />
+        <SpayInfo
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          setFieldValue={setFieldValue}
+          values={values}
+        />
         <hr />
-        <VaccineInfo />
+        <VaccineInfo
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          setFieldValue={setFieldValue}
+          values={values}
+          setValues={setValues}
+        />
       </Form.Group>
     </React.Fragment>
   );
