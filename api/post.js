@@ -176,7 +176,7 @@ router.post(
         name: user.name,
         text: req.body.text,
       };
-      post.comment.push(newComment);
+      post.comments.unshift(newComment);
       await post.save();
       res.json(post);
     } catch (error) {
@@ -185,14 +185,14 @@ router.post(
   }
 );
 
-//   @route DEL api/post/comment/:postIdd/:commentId
+//   @route DEL api/post/comment/:postId/:commentId
 //   @desc delete a comment[commentId] on post[postId]
 //   @access private
 
-router.delete('/comment/:postId/:commentId', auth, async (req, res) => {
+router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
-    const comment = post.comment.find((comment) => {
+    const comment = post.comments.find((comment) => {
       return comment.id === req.params.commentId;
     });
 
@@ -204,15 +204,17 @@ router.delete('/comment/:postId/:commentId', auth, async (req, res) => {
       return res.status(401).json({ msg: 'User not authorized' });
 
     // remove the comment from the backend
-    const removeIndex = await post.comment.map((comment) => {
-      return comment.id.toString().indexOf(req.params.commentId);
-    });
-    await post.comment.splice(removeIndex, 1);
+    const removeIndex = post.comments
+      .map((comment) => {
+        return comment.id.toString();
+      })
+      .indexOf(req.params.commentId);
+    post.comment.splice(removeIndex, 1);
     // save in the backend
     await post.save();
-    res.json({ msg: 'comment removed', post: await post });
+    res.status(200).json({ msg: 'Comment Removed!' });
   } catch (error) {
-    res.status(400).json({ errors: error });
+    res.status(500).json('Server error');
   }
 });
 

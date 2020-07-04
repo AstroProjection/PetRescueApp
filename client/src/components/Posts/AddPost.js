@@ -12,7 +12,7 @@ import bsCustomFileInput from 'bs-custom-file-input';
 
 import Spinner from '../Layout/Spinner';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import { createPost } from '../../store/actions/post';
 
 import { Formik } from 'formik';
@@ -22,35 +22,42 @@ const postValidationSchema = yup.object({
   title: yup.string().required('Please enter a title'),
   text: yup.string().required('Please enter a description'),
   image: yup.mixed().notRequired(),
+  tag: yup.string().required('Please choose a tag'),
+  urgency: yup.string().required('Set the urgency'),
 });
+const postTags = [
+  ['injury', 'Medical Attention'],
+  ['hunger', 'Hunger'],
+  ['tag1', 'Tag1'],
+  ['tag2', 'Tag2'],
+];
 
-const AddPost = (props) => {
+const urgencyTags = [
+  ['low', 'Low '],
+  ['med', 'Medium'],
+  ['high', 'High'],
+];
+const AddPost = ({ createPost, ...props }) => {
   /// tags to include for post types
   // value | HTML
-  const postTags = [
-    ['injury', 'Medical Attention'],
-    ['hunger', 'Hunger'],
-    ['tag1', 'Tag1'],
-    ['tag2', 'Tag2'],
-  ];
+
   const loading = useSelector((state) => state.auth.loading);
-  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     let formData = new FormData();
     for (const [key, value] of Object.entries(e)) {
       formData.append(key, value);
     }
-    dispatch(createPost(formData));
-    props.onHide();
+    createPost(formData);
+    // props.onHide();
   };
 
   return (
     <Modal
-      {...props}
       size='lg'
       aria-labelledby='contained-modal-title-vcenter'
       centered
+      {...props}
     >
       {!loading ? (
         <React.Fragment>
@@ -67,7 +74,11 @@ const AddPost = (props) => {
                 text: '',
                 image: '',
                 tag: '',
-                locationState: {},
+                showLocation: true,
+                locationState: {
+                  center: [],
+                  zoom: 17,
+                },
               }}
               validationSchema={postValidationSchema}
             >
@@ -79,7 +90,7 @@ const AddPost = (props) => {
                 setFieldValue,
                 values,
               }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} noValidate={true}>
                   <FormFile custom>
                     <FormFile.Input
                       name='image'
@@ -107,7 +118,7 @@ const AddPost = (props) => {
                         </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={3} sm={6}>
                       <Form.Group controlId='addpost-title'>
                         <Form.Label>Tag*</Form.Label>
                         <Form.Control
@@ -117,12 +128,38 @@ const AddPost = (props) => {
                           // placeholder='Please select an option...'
                           defaultValue={''}
                           onChange={handleChange}
-                          isInvalid={touched.title && !!errors.title}
+                          isInvalid={touched.tag && !!errors.tag}
                         >
                           <option value='' disabled={true}>
-                            Please select an Option
+                            select an option
                           </option>
                           {postTags.map((tag, index) => (
+                            <option key={index} value={tag[0]}>
+                              {tag[1]}
+                            </option>
+                          ))}
+                        </Form.Control>
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.tag}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col lg={3} sm={6}>
+                      <Form.Group controlId='addpost-title'>
+                        <Form.Label>Urgency*</Form.Label>
+                        <Form.Control
+                          name='urgency'
+                          as='select'
+                          autoComplete='new-password'
+                          // placeholder='Please select an option...'
+                          defaultValue={''}
+                          onChange={handleChange}
+                          isInvalid={touched.urgency && !!errors.urgency}
+                        >
+                          <option value='' disabled={true}>
+                            select an option
+                          </option>
+                          {urgencyTags.map((tag, index) => (
                             <option key={index} value={tag[0]}>
                               {tag[1]}
                             </option>
@@ -147,16 +184,26 @@ const AddPost = (props) => {
                       {errors.text}
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Location</Form.Label>
-                    <Geolocation
-                      values={values}
-                      handleChange={handleChange}
-                      setFieldValue={setFieldValue}
-                    />
-                  </Form.Group>
+                  <Form.Check
+                    type='checkbox'
+                    name='showLocation'
+                    label='Add Location'
+                    checked={values.showLocation}
+                    onChange={handleChange}
+                  />
+                  {values.showLocation && (
+                    <Form.Group>
+                      <Geolocation
+                        values={values}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                      />
+                    </Form.Group>
+                  )}
+
                   <Button type='submit'>Submit</Button>
-                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                  {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+                  {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
                 </Form>
               )}
             </Formik>
@@ -172,4 +219,4 @@ const AddPost = (props) => {
 
 AddPost.propTypes = {};
 
-export default AddPost;
+export default connect(null, { createPost })(AddPost);

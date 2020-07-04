@@ -16,6 +16,8 @@ export const UPDATE_PIC = 'UPDATE_PIC';
 export const UPLOADING = 'UPLOADING';
 
 export const POST_REMOVED = 'POST_REMOVED';
+export const ADDED_COMMENT = 'ADDED_COMMENT';
+export const REMOVED_COMMENT = 'REMOVED_COMMENT';
 
 export const GET_ALL_DATA = 'GET_ALL_DATA';
 export const FETCHED_LOCALITY = 'FETCHED_LOCALITY';

@@ -8,6 +8,8 @@ import {
   POST_REMOVED,
   FETCH_ERROR,
   POST_LOADING,
+  ADDED_COMMENT,
+  REMOVED_COMMENT,
 } from '../types';
 
 const initialState = {
@@ -32,6 +34,25 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         posts: arr,
+      };
+
+    case ADDED_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        post: { ...state.post, comments: payload },
+      };
+
+    case REMOVED_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            (comment) => comment._id.toString() !== payload
+          ),
+        },
       };
 
     case POST_REMOVED:

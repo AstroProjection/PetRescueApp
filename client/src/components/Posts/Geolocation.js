@@ -5,10 +5,9 @@ import { Map, TileLayer, Marker, Tooltip, Popup, GeoJSON } from 'react-leaflet';
 import Spinner from '../Layout/Spinner';
 
 const Geolocation = ({ values, setFieldValue }) => {
-  const [locationState, setLocationState] = React.useState({
-    center: [],
-    zoom: 17,
-  });
+  const [locationState, setLocationState] = React.useState(
+    values.locationState
+  );
   //  center:[lat,lng]
   //  zoom:'int'
   //
@@ -27,25 +26,31 @@ const Geolocation = ({ values, setFieldValue }) => {
   //     console.log('geolocation failed');
   //   };
 
+  const fetchGeoLocation = () => {
+    console.log('fetching');
+    geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        setFieldValue('locationState', {
+          ...locationState,
+          center: [latitude, longitude],
+        });
+        setLocationState({ ...locationState, center: [latitude, longitude] });
+      },
+      (geoLocationObj) => {
+        console.log('geolocation failed');
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 2000,
+      }
+    );
+  };
   const geolocation = navigator.geolocation;
   if ('geolocation' in navigator) {
-    if (locationState.center.length == 0) {
-      console.log('geoLocating');
-      geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          setLocationState({ ...locationState, center: [latitude, longitude] });
-        },
-        (geoLocationObj) => {
-          console.log('geolocation failed');
-          console.log(geoLocationObj);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 3000,
-        }
-      );
+    if (values.locationState.center.length == 0) {
+      fetchGeoLocation();
     }
   } else {
     console.log('cannot geolocate');
@@ -63,6 +68,10 @@ const Geolocation = ({ values, setFieldValue }) => {
           name='locationState'
           value={values.locationState}
         />
+        <br />
+        <button type='button' onClick={(e) => fetchGeoLocation()}>
+          Reset Location
+        </button>
         <Map
           className='post-map'
           key={'2'}
