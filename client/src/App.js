@@ -6,6 +6,7 @@ import About from './components/Info/About';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import NotFound from './components/Info/NotFound';
+import PostPage from './components/PostPage/PostPage';
 
 import MapPage from './components/Map/MapPage';
 
@@ -17,14 +18,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { connect } from 'react-redux';
 import { loadUser } from './store/actions/auth';
+import { mobileCheck } from './store/actions/device';
 import UserBadge from './components/Layout/UserBadge';
-// import setAuthToken from './utils/setAuthToken';
 
-function App({ loadUser }) {
+function App({ loadUser, mobileCheck }) {
   useEffect(() => {
-    // console.log('app calling loaduser');
-    // if (localStorage.token) loadUser();
-  }, [loadUser]);
+    mobileCheck();
+  }, [loadUser, mobileCheck]);
+
+  // console.dir(process);
   return (
     <BrowserRouter>
       <Navbar />
@@ -38,10 +40,15 @@ function App({ loadUser }) {
         <Route exact path='/' component={Landing} />
         <Route exact path='/home' component={Home} />
         <Route exact path='/animal-tracker' component={MapPage} />
+        <Route exact path='/post/:postId' component={PostPage} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
 }
 
-export default connect(null, { loadUser })(App);
+// const mapStateToProps = (state) => ({
+//   device: state.device,
+// });
+
+export default connect(null, { loadUser, mobileCheck })(App);

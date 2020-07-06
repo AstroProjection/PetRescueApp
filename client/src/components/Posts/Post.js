@@ -1,10 +1,12 @@
 import React, { useRef, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import ReadMoreReact from 'read-more-react';
 
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import Whatsapp from './Whatsapp';
 // import Accordion from 'react-bootstrap/Accordion';
 // import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 import { connect } from 'react-redux';
@@ -79,6 +81,20 @@ const Post = ({
             </small>
           </div>
         </div>
+        <div className='post-share'>
+          <div className='whatsapp'>
+            <Whatsapp />
+          </div>
+        </div>
+        <div className='post-discuss'>
+          <Link
+            to={`/post/${postId}`}
+            className='comments-btn'
+            onClick={() => {}}
+          >
+            Comments[ <b>0</b> ]
+          </Link>
+        </div>
         <div className='post-modifications'>
           {loggedUser === postUser ? (
             <Fragment>
@@ -88,7 +104,7 @@ const Post = ({
                   // removePost(postId);
                 }}
               >
-                Edit
+                <i className='fas fa-edit'></i>
               </div>
               <div
                 className='button delete-btn'
@@ -97,7 +113,7 @@ const Post = ({
                     removePost(postId);
                 }}
               >
-                Delete
+                <i className='fas fa-trash'></i>
               </div>
             </Fragment>
           ) : (

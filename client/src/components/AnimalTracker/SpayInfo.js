@@ -20,7 +20,7 @@ const SpayInfo = ({ handleChange, handleBlur }) => {
               aria-describedby='basic-addon1'
               name='spayedValue'
               size='sm'
-              default='default'
+              defaultValue='default'
               onChange={(e) => {
                 // console.log(e.currentTarget.value);
                 handleChange(e);

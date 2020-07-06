@@ -14,6 +14,19 @@ const Locality = require('../model/Locality');
 //   @desc Get the street information by streetId
 //   @access public
 
+router.get('/:localityId', async (req, res) => {
+  try {
+    const streets = await Streets.find({ locality: req.params.localityId });
+    return res.status(200).json(streets);
+  } catch (error) {
+    return res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+//   @route GET api/street/:locality/:streetname
+//   @desc Get the street information by streetId
+//   @access public
+
 router.get('/:localityname/:streetname', async (req, res) => {
   try {
     const street = await Streets.findOne({

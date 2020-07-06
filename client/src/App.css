@@ -34,9 +34,9 @@ hr {
   height: 15rem;
 }
 
-a {
-  color: #17a2b8;
-  text-decoration: none;
+a:hover {
+  color: lightgrey;
+  text-decoration: none !important;
 }
 
 ul {
@@ -128,20 +128,35 @@ img {
 .card-post-layout {
   display: grid;
   grid-template-areas:
-    'post-img post-info post-info'
-    'post-img post-info post-info'
-    'post-img post-by  post-edits';
+    'post-img post-info post-info post-report'
+    'post-img post-info post-info post-report'
+    'post-by post-share post-discuss post-edits';
 
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
 
   border: 1px solid darkgreen;
   box-shadow: 0px 2px 1px rgb(1, 77, 1);
-  grid-auto-columns: 2fr 2fr 2fr;
+  grid-auto-columns: 2fr 2fr 2fr 2fr;
   grid-auto-rows: 2fr 2fr 0.5fr;
   padding: 0.2em 0.5em;
 
   border-radius: 10px;
+}
+
+.post-discuss {
+  grid-area: post-discuss;
+  display: flex;
+}
+
+.comments-btn {
+  background-color: lightseagreen;
+  padding: 0.4rem 0.9rem;
+  border: 2px solid dimgrey;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  color: white;
+  cursor: pointer;
 }
 
 .card-post-by {
@@ -156,12 +171,31 @@ img {
   flex-direction: column-reverse;
 }
 
+.port-report {
+  grid-area: post-report;
+  display: flex;
+  flex-direction: column;
+}
+
 .post-modifications {
   grid-area: post-edits;
   display: grid;
   grid-template-areas: 'edit-btn delete-btn';
   grid-template-columns: 1fr 1fr;
   flex-direction: row;
+}
+
+.post-share {
+  grid-area: post-share;
+  display: flex;
+  grid-template-areas: 'whatsapp twitter instagram filler';
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-direction: row;
+}
+
+.whatsapp {
+  grid-area: whatsapp;
+  margin-left: 0.5rem;
 }
 
 .post-information {
@@ -407,7 +441,7 @@ img {
   display: table-cell;
   /* position: relative; */
   /* float: left; */
-  border-radius: 10px;
+  border-radius: 7px;
   border: 1px solid black;
   text-align: center;
   vertical-align: top;
@@ -465,6 +499,10 @@ img {
 .profile-identity {
   grid-area: identity;
   border: 1px solid grey;
+}
+
+.large-icon {
+  font-size: 2rem;
 }
 
 /* Post styles for Home */
@@ -549,9 +587,9 @@ img {
 }
 
 @media (max-width: 576px) {
-  .post-image {
-    display: none;
-  }
+  /* .post-image {
+    /* display: none; */
+  /* } */
 
   .table {
     font-size: 90%;
@@ -563,5 +601,24 @@ img {
 
   .modal-body {
     padding: 0.2rem !important;
+  }
+
+  .card-post-layout {
+    display: grid;
+    grid-template-areas:
+      'post-img post-info post-info post-report'
+      'post-by post-info post-info post-report'
+      'post-by post-share post-discuss post-edits';
+
+    /* margin-top: 0.8rem; */
+    /* margin-bottom: 0.8rem; */
+
+    border: 1px solid darkgreen;
+    /* box-shadow: 0px 2px 1px rgb(1, 77, 1); */
+    grid-auto-columns: 100px 2fr 2fr 2fr;
+    grid-auto-rows: 100px 1fr 1fr;
+    /* padding: 0.2em 0.5em; */
+
+    border-radius: 10px;
   }
 }

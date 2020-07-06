@@ -5,6 +5,7 @@ import animals from './reducers/animals';
 import street from './reducers/street';
 import alerts from './reducers/alert';
 import locality from './reducers/locality';
+import device from './reducers/device';
 
 export default combineReducers({
   post,
@@ -13,4 +14,5 @@ export default combineReducers({
   street,
   alerts,
   locality,
+  device,
 });

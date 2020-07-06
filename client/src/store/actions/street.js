@@ -1,5 +1,5 @@
 import {
-  // FETCHED_STREET_DATA,
+  FETCHED_STREET_DATA,
   SET_CURRENT_STREET,
   FETCH_ERROR,
   // STREET_LOADING,
@@ -71,20 +71,18 @@ export const updateStreetsToDB = (streetJson) => async (dispatch) => {
   }
 };
 
-// export const fetchStreetData = () => async (dispatch) => {
-//   console.log('fetching street data');
-//   try {
-//     dispatch({
-//       type: STREET_LOADING,
-//     });
+export const fetchStreetData = (localityId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: STREET_LOADING,
+    });
+    const res = await axios.get(`api/street/${localityId}`);
 
-//     const res = await axios.get(`api/street/${locality}`);
-
-//     dispatch({
-//       type: FETCHED_STREET_DATA,
-//       payload: res.data,
-//     });
-//   } catch (error) {
-//     dispatch({ type: FETCH_ERROR, payload: error });
-//   }
-// };
+    dispatch({
+      type: FETCHED_STREET_DATA,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({ type: FETCH_ERROR, payload: error });
+  }
+};

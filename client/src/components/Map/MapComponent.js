@@ -4,28 +4,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   setCurrentStreet,
-  updateStreetsToDB,
-  // fetchStreetData,
+  // updateStreetsToDB,
+  fetchStreetData,
 } from '../../store/actions/street';
 
 import MapInformation from './MapInformation/MapInformation';
 
 const MapComponent = ({
   setCurrentStreet,
-  street: { street },
+  fetchStreetData,
+  street: { street, streets },
   locality: { locality, loading },
+  device: { isMobile },
 }) => {
   const DEFAULT_COLOUR = '#3388FF';
   const ACTIVE_COLOUR = '#00FFFF';
 
-  // const mapList = {
-  //   'victoria-layout': victoriaLayoutJSON,
-  //   'ulsoor-1': ulsoorJSON,
-  // };
-
-  //  center:[lat,lng]
-  //  zoom:'int'
-  //
   let initCenter = locality.position;
 
   const dogCount = street ? street.dogs.length : 0;
@@ -33,11 +27,7 @@ const MapComponent = ({
 
   const [clickedLayer, setClickedLayer] = React.useState();
   const [displayInformation, setDisplayInfo] = React.useState(false);
-
   const [locationState, setLocationState] = React.useState(initCenter);
-
-  // const mobileWindow = window.innerWidth <= 1000;
-
   const position = [initCenter.center[0], initCenter.center[1]];
 
   const addHighlight = (e) => {
@@ -60,24 +50,43 @@ const MapComponent = ({
     setDisplayInfo(true);
   };
 
+  const onClick = (e) => {
+    setClickedLayer(e.target);
+    addHighlight(e);
+  };
+
   React.useEffect(() => {
     if (!clickedLayer) return;
     const popupContent = `
     <Popup>
       <br /> <strong>${clickedLayer.feature.properties.displayName}:
       <br/>  <strong>Total</strong>
-      <br/>  Dogs:${dogCount}              
-      <br/>  Cats:${catCount}              
+      <br/>  Dogs:${
+        streets.filter(
+          (street) => street.streetname === clickedLayer.feature.properties.name
+        )[0].dogs.length
+      }              
+      <br/>  Cats:${
+        streets.filter(
+          (street) => street.streetname === clickedLayer.feature.properties.name
+        )[0].cats.length
+      }              
       </pre></strong>
+      <br/>
+      <br/>
+        <strong><em>Double Click</em></strong> <br/>
+        to access road Information
     </Popup>
   `;
+    clickedLayer.closeTooltip();
     clickedLayer.setPopupContent(popupContent);
-  }, [street, catCount, clickedLayer, dogCount]);
+    console.log('this is entering');
+  }, [streets, clickedLayer]);
 
   const markerClick = () => {};
 
   const onEachFeature = (feature, layer) => {
-    const toolTipContent = ` <Tooltip>Click for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
+    const toolTipContent = ` <Tooltip><strong>Click</strong> for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
     layer.bindTooltip(toolTipContent).openTooltip();
     console.log('oneachfeature');
     const popupContent = `
@@ -87,6 +96,10 @@ const MapComponent = ({
         <br/>  Dogs:${dogCount}              
         <br/>  Cats:${catCount}              
         </strong>
+        <br/>
+        <br/>
+        <strong><em>Double Click</em></strong> <br/>
+        to access road Information
       </Popup>
     `;
 
@@ -95,25 +108,23 @@ const MapComponent = ({
     layer.setStyle({
       fill: 'true',
       fillColor: 'white',
-      weight: 5,
+      weight: isMobile ? 9 : 5,
       opacity: 0.7,
     });
 
     layer.on({
       mouseover: addHighlight,
       mouseout: removeHighlight,
-      click: setActiveStreet,
+      click: onClick,
+      dblclick: setActiveStreet,
+      popupclose: removeHighlight,
     });
   };
   console.log('render');
-  // console.log(selectedLocality);
 
   React.useEffect(() => {
-    console.log(
-      'this is the selected locality value changing',
-      locality.locality_unique
-    );
-  }, [locality]);
+    if (locality) fetchStreetData(locality._id);
+  }, [locality, fetchStreetData]);
   return (
     <div className='map-contents'>
       {!displayInformation && (
@@ -178,18 +189,19 @@ const MapComponent = ({
 
 MapComponent.propTypes = {
   setCurrentStreet: PropTypes.func.isRequired,
-  // fetchStreetData: PropTypes.func.isRequired,
-  updateStreetsToDB: PropTypes.func.isRequired,
+  fetchStreetData: PropTypes.func.isRequired,
+  // updateStreetsToDB: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
   street: state.street,
   locality: state.locality,
+  device: state.device,
 });
 
 export default connect(mapStateToProps, {
-  updateStreetsToDB,
+  // updateStreetsToDB,
   setCurrentStreet,
-  // fetchStreetData,
+  fetchStreetData,
 })(MapComponent);

@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POST,
   UPDATE_PIC,
   UPLOADING,
   UPLOAD_ERROR,
@@ -23,6 +24,24 @@ export const getAllPosts = () => async (dispatch) => {
     });
   } catch (error) {
     // console.log(error);
+    dispatch({
+      type: POST_ERROR,
+      payload: error,
+    });
+  }
+};
+
+export const getPost = (postId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: POST_LOADING,
+    });
+    const res = await axios.get(`/api/post/${postId}`);
+    dispatch({
+      type: GET_POST,
+      payload: res.data,
+    });
+  } catch (error) {
     dispatch({
       type: POST_ERROR,
       payload: error,

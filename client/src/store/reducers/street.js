@@ -12,6 +12,7 @@ import {
 const initialState = {
   loading: false,
   street: null,
+  streets: [],
   error: {},
 };
 

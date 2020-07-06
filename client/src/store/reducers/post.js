@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POST,
   UPDATE_PIC,
   UPLOADING,
   UPLOAD_ERROR,
@@ -25,6 +26,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: payload,
+        loading: false,
+      };
+    case GET_POST:
+      return {
+        ...state,
+        post: payload,
         loading: false,
       };
     case CREATE_POST:

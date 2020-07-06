@@ -207,28 +207,7 @@ const AddPost = (props) => {
                           // onChange={handleChange}
                           value={street.displayName}
                           disabled
-                          // onBlur={handleBlur}
-                          // isInvalid={touched.location && !!errors.location}
                         />
-                        {/* {locations.length > 0 ? ( */}
-                        {/* <React.Fragment> */}
-                        {/* <option value={street.streetname} disabled={true}>
-                                {street.streetname}
-                              </option> */}
-                        {/* {locations.map(
-                                ({ displayName: streetName, name }, index) => {
-                                  return (
-                                    <option key={index} value={name}>
-                                      {streetName}
-                                    </option>
-                                  );
-                                }
-                              )} */}
-                        {/* </React.Fragment> */}
-                        {/* ) : ( */}
-                        {/* '' */}
-                        {/* )} */}
-                        {/* </Form.Control> */}
                         <Form.Control.Feedback type='invalid'>
                           {errors.location}
                         </Form.Control.Feedback>
@@ -244,8 +223,8 @@ const AddPost = (props) => {
                     setValues={setValues}
                   />
                   <Button type='submit'>Submit</Button>
-                  <pre>{JSON.stringify(values, null, 2)} </pre>
-                  <pre>{JSON.stringify(errors, null, 2)} </pre>
+                  {/* <pre>{JSON.stringify(values, null, 2)} </pre> */}
+                  {/* <pre>{JSON.stringify(errors, null, 2)} </pre> */}
                 </Form>
               )}
             </Formik>

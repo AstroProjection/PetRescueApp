@@ -1,4 +1,5 @@
 export const GET_POSTS = 'GET_POSTS';
+export const GET_POST = 'GET_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
@@ -32,6 +33,7 @@ export const GET_STREET_ANIMALS = 'GET_STREET_ANIMALS';
 export const GET_LOCALITY_INFO = 'GET_LOCALITY_INFO';
 
 export const SET_CURRENT_STREET = 'SET_CURRENT_STREET';
+export const DEVICE_IDENTIFIED = 'DEVICE_IDENTIFIED';
 
 export const ANIMAL_ADDED = 'ANIMAL_ADDED';
 export const ANIMAL_DELETED = 'ANIMAL_DELETED';
