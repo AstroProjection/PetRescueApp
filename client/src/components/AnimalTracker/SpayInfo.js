@@ -18,7 +18,7 @@ const SpayInfo = ({ handleChange, handleBlur }) => {
               as='select'
               placeholder='select an option'
               aria-describedby='basic-addon1'
-              name='spayed-value'
+              name='spayedValue'
               size='sm'
               default='default'
               onChange={(e) => {
@@ -47,7 +47,7 @@ const SpayInfo = ({ handleChange, handleBlur }) => {
                   as='input'
                   placeholder='optional..'
                   // aria-describedby='basic-addon1'
-                  name='spayed-hospital'
+                  name='spayedHospital'
                   size='sm'
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -61,7 +61,7 @@ const SpayInfo = ({ handleChange, handleBlur }) => {
                   as='input'
                   placeholder='optional..'
                   // aria-describedby='basic-addon1'
-                  name='spayed-date'
+                  name='spayedDate'
                   size='sm'
                   onChange={handleChange}
                   onBlur={handleBlur}

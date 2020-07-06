@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { Map, TileLayer, Marker, Tooltip, Popup, GeoJSON } from 'react-leaflet';
-import Spinner from '../Layout/Spinner';
+import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
 
 const Geolocation = ({ values, setFieldValue }) => {
   const [locationState, setLocationState] = React.useState(
@@ -10,24 +8,13 @@ const Geolocation = ({ values, setFieldValue }) => {
   );
   //  center:[lat,lng]
   //  zoom:'int'
-  //
-  //   const success = (position) => {
-  //     const latitude = position.coords.latitude;
-  //     const longitude = position.coords.longitude;
-  //     setLocationState({ ...locationState, center: [latitude, longitude] });
-  //   };
 
   const handleViewPortChange = (viewPort) => {
     setFieldValue('locationState', viewPort);
     setLocationState(viewPort);
   };
 
-  //   const error = (geoLocationObj) => {
-  //     console.log('geolocation failed');
-  //   };
-
   const fetchGeoLocation = () => {
-    console.log('fetching');
     geolocation.getCurrentPosition(
       (position) => {
         const latitude = position.coords.latitude;
@@ -49,7 +36,7 @@ const Geolocation = ({ values, setFieldValue }) => {
   };
   const geolocation = navigator.geolocation;
   if ('geolocation' in navigator) {
-    if (values.locationState.center.length == 0) {
+    if (values.locationState.center.length === 0) {
       fetchGeoLocation();
     }
   } else {

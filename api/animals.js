@@ -74,27 +74,23 @@ router.post(
     try {
       //req.body is not of type Object..
       req.body = JSON.parse(JSON.stringify(req.body));
-      if (!req.body.hasOwnProperty('vaccine-arr')) req.body['vaccine-arr'] = '';
 
-      const vaccineArrString =
-        req.body['vaccine-arr'] === '' ? [] : [req.body['vaccine-arr']];
-      // as objects cannot be passed through multipart/form-data so we need to send them like this
-      // console.log(vaccineArrString.length);
       let vaccineArr =
-        vaccineArrString.length > 0
-          ? vaccineArrString.map((vaccineString) => JSON.parse(vaccineString))
+        req.body.hasOwnProperty('vaccineArr') && req.body.vaccineArr.length > 0
+          ? req.body.vaccineArr.map((vaccineString) =>
+              JSON.parse(vaccineString)
+            )
           : [];
-
       const spayedObj = {
-        status: req.body['spayed-value'] || 2,
-        hospital: req.body['spayed-hospital'] || null,
-        user: req.body['spayed-user'] || null,
-        cost: req.body['spayed-cost'] || null,
+        status: req.body.spayedValue || 2,
+        hospital: req.body.spayedHospital || null,
+        user: req.body.spayedUser || null,
+        cost: req.body.spayedCost || null,
       };
 
       // console.log(vaccineArr);
       //// identity - 0 - stray , 1 - pet...
-      const newAnimal = new Animals({
+      const animal = new Animals({
         name: req.body.name,
         location: req.body.location,
         locality: req.user.locality,
@@ -107,10 +103,23 @@ router.post(
           vaccines: vaccineArr,
         },
       });
-      await newAnimal.save();
-      res.json(newAnimal);
+      await animal.save(async (err) => {
+        if (err) return res.status(500).json({ msg: 'Error adding animal!' });
+        // console.log('successful addition');
+        const street = await Streets.findOne({
+          streetname: req.body.location,
+        });
+
+        if (animal.locality !== street.locality.toString())
+          throw Error('Locality dont match');
+
+        street[animal.type + 's'].unshift(animal);
+        await street.save();
+
+        res.status(200).json({ animal, type: animal.type });
+      });
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
       return res.status(500).json({ error });
     }
   }
@@ -145,12 +154,12 @@ router.delete('/:animalId', auth, async (req, res) => {
 
     if (animal.user.toString() === req.user._id)
       return res.status(401).send({ msg: 'Not authorized to delete' });
-
+    const type = animal.type;
     await animal.remove();
 
-    res.status(200).json({ msg: 'Animal deleted' });
+    res.status(200).json(type);
   } catch (errors) {
-    // console.dir(errors);
+    console.dir(errors);
     return res.status(404).send({ errors });
   }
 });

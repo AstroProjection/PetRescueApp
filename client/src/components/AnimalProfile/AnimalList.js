@@ -1,4 +1,4 @@
-import React, { useSelector } from 'react';
+import React from 'react';
 import AnimalProfile from './AnimalProfile';
 import PropTypes from 'prop-types';
 
@@ -11,23 +11,21 @@ import PageDisplay from './PageDisplay';
 
 import { connect } from 'react-redux';
 
-import { getStreetAnimals } from '../../store/actions/animal';
-
 const AnimalList = (props) => {
   const {
     index,
     animal,
     faClass,
     street: { street },
-    animals,
   } = props;
 
   const [pageNumber, setPageNumber] = React.useState(1);
   const profilePerPage = 5;
 
-  const noOfPages = animals.hasOwnProperty(`${animal}`)
-    ? Math.ceil(animals[`${animal}`].length / profilePerPage)
-    : 1;
+  const noOfPages =
+    street[animal].length > 0
+      ? Math.ceil(street[animal].length / profilePerPage)
+      : 1;
 
   const updatePage = (newPage) => {
     if (newPage > 0 && newPage <= noOfPages) setPageNumber(newPage);
@@ -37,7 +35,7 @@ const AnimalList = (props) => {
     let profileCount = profilePerPage;
     const startingIndex = (pageNumber - 1) * profilePerPage;
     return street && street[`${animal}`].length > 0
-      ? animals[`${animal}`].map((animal, index) => {
+      ? street[animal].map((animal, index) => {
           if (index >= startingIndex && profileCount-- > 0) {
             // console.log('printing this profile');
             return (
@@ -60,15 +58,13 @@ const AnimalList = (props) => {
 
   React.useEffect(() => {
     console.log('useEffect');
-    if (street) getStreetAnimals(street._id);
-  }, [street]);
+  }, []);
 
   return (
     <React.Fragment>
-      {/* <Accordion> */}
       <Card>
         <Accordion.Toggle as={Button} variant='link' eventKey={index}>
-          {street ? street[`${animal}`].length + ` ` : ' 0 '}
+          {street ? street[animal].length + ` ` : ' 0 '}
           <i className={`${faClass}`}></i>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey={index}>
@@ -82,20 +78,15 @@ const AnimalList = (props) => {
           </>
         </Accordion.Collapse>
       </Card>
-      {/* </Accordion> */}
     </React.Fragment>
   );
 };
 
 AnimalList.propTypes = {
   street: PropTypes.object.isRequired,
-  animals: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   street: state.street,
-  animals: state.animals,
 });
-export default connect(mapStateToProps, { getStreetAnimals })(
-  React.memo(AnimalList)
-);
+export default connect(mapStateToProps)(React.memo(AnimalList));

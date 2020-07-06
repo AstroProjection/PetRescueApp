@@ -33,7 +33,7 @@ export const GET_LOCALITY_INFO = 'GET_LOCALITY_INFO';
 
 export const SET_CURRENT_STREET = 'SET_CURRENT_STREET';
 
-export const ADD_ANIMAL = 'ADD_ANIMAL';
+export const ANIMAL_ADDED = 'ANIMAL_ADDED';
 export const ANIMAL_DELETED = 'ANIMAL_DELETED';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

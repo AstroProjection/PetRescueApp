@@ -3,11 +3,15 @@ import VaccineItem from './VaccineItem';
 import { AnimalContext } from '../AnimalProfile';
 
 const VaccineProfile = (props) => {
+  // const context = React.useContext(AnimalContext);
   const {
     animal: {
       medical: { vaccines },
     },
   } = React.useContext(AnimalContext);
+
+  // console.log(context);
+
   return (
     <div className='table'>
       <div className='tr'>

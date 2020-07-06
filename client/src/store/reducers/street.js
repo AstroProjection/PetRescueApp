@@ -4,20 +4,20 @@ import {
   FETCH_ERROR,
   UPDATED_STREET_DATA,
   STREET_LOADING,
-  UPDATE_STREETDB,
   STREET_UPDATED,
+  ANIMAL_DELETED,
+  ANIMAL_ADDED,
 } from '../types';
 
 const initialState = {
-  streets: [],
   loading: false,
   street: null,
-  error: [],
-  updatedDB: false,
+  error: {},
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
+  let key;
   switch (type) {
     case FETCHED_STREET_DATA:
       return {
@@ -48,14 +48,32 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        updatedDB: true,
       };
-
-    case UPDATE_STREETDB:
+    case ANIMAL_DELETED:
+      key = `${payload.type}s`;
       return {
         ...state,
-        updatedDB: false,
+        loading: false,
+        street: {
+          ...state.street,
+          [key]: state.street[key].filter(
+            (animal) => animal._id !== payload.animalId
+          ),
+        },
       };
+
+    case ANIMAL_ADDED:
+      key = `${payload.type}s`;
+      console.log(state.street);
+      return {
+        ...state,
+        loading: false,
+        street: {
+          ...state.street,
+          [key]: [...state.street[key], payload.animal],
+        },
+      };
+
     case FETCH_ERROR:
       return {
         ...state,

@@ -87,7 +87,7 @@ router.post(
   }
 );
 
-//   @route POST api/post
+//   @route POST api/post/upload/:postId
 //   @desc Upload picture to post on the bulletin
 //   @access private
 
@@ -115,7 +115,7 @@ router.post(
         });
       }
       /// saving new image to img path
-      post.image = await req.files[0].path;
+      post.image = req.files[0].path;
       await post.save();
       res.json(post);
     } catch (error) {
@@ -131,8 +131,17 @@ router.post(
 // above are just descriptions of the route.
 
 router.get('/', async (req, res) => {
+  // const ROOT_DIR = process.mainModule.path;
+  // const doesExist = fs.exists(
+  //   ROOT_DIR +
+  //     '/uploads/2020-05-21T18-46-02.160Z-WIN_20180220_11s_02_40_Pro.jpg',
+  //   (a) => {
+  //     console.log(a);
+  //   }
+  // );
+  // return res.json(doesExist);
   try {
-    const posts = await Post.find()
+    const posts = await Post.find({})
       .populate({
         path: 'user',
         select: 'name _id',
@@ -226,12 +235,15 @@ router.delete('/:postId', auth, async (req, res) => {
   console.log('deleting');
   try {
     const post = await Post.findById(req.params.postId);
+    // console.log(post);
     if (!post) return res.status(404).json({ msg: 'post not found' });
 
     if (post.user.toString() !== req.user.id)
       return res.status(401).json({ msg: 'User not authorized' });
 
+    console.log('pre-deleted');
     await post.remove();
+    console.log('deleted');
 
     res.json({ msg: 'post removed' });
   } catch (error) {

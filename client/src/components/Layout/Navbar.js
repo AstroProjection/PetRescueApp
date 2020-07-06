@@ -6,7 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
 import { logout } from '../../store/actions/auth';
 
-const NavbarComponent = ({ logout, isLoggedin }) => {
+import { loadUser } from '../../store/actions/auth';
+const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
+  React.useEffect(() => {
+    if (localStorage.token) loadUser();
+  }, [loadUser]);
+
   const guestLinks = (
     <React.Fragment>
       <LinkContainer to='/register'>
@@ -61,4 +66,4 @@ const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
 });
 
-export default connect(mapStateToProps, { logout })(NavbarComponent);
+export default connect(mapStateToProps, { loadUser, logout })(NavbarComponent);

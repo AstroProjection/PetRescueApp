@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Fragment } from 'react';
+import React, { useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import ReadMoreReact from 'read-more-react';
@@ -15,7 +15,6 @@ const Post = ({
   postId,
   img,
   title,
-  index,
   text,
   user: { name, _id: postUser },
   auth,

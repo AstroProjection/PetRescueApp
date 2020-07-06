@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const MapInfoHeader = (props) => {
-  const { setDisplayInfo, displayInformation, street } = props;
+  const { setDisplayInfo, street } = props;
   return (
     <>
       <div className='btn map-center' onClick={(e) => setDisplayInfo(false)}>

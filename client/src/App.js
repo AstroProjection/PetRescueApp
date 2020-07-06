@@ -23,7 +23,7 @@ import UserBadge from './components/Layout/UserBadge';
 function App({ loadUser }) {
   useEffect(() => {
     // console.log('app calling loaduser');
-    if (localStorage.token) loadUser();
+    // if (localStorage.token) loadUser();
   }, [loadUser]);
   return (
     <BrowserRouter>

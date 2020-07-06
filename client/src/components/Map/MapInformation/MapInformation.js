@@ -3,23 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../../Layout/Spinner';
 
-import { getStreetAnimals } from '../../../store/actions/animal';
-import { getLocalityInfo } from '../../../store/actions/locality';
 import AnimalButtons from '../../AnimalTracker/AnimalButtons';
 import { MapInfoHeader } from './MapInfoHeader';
 import MapInfoListing from './MapInfoListing';
 
 const MapInformation = ({
   street: { street, loading },
-  getStreetAnimals,
-  getLocalityInfo,
   displayInformation,
   setDisplayInfo,
 }) => {
   React.useEffect(() => {
     console.log('map information rendering');
-    street ? getStreetAnimals(street._id) : getLocalityInfo('victoria-layout');
-  }, [street, getStreetAnimals, getLocalityInfo]);
+    // street ? getStreetAnimals(street._id) : getLocalityInfo('victoria-layout');
+  }, []);
 
   return loading ? (
     <Spinner />
@@ -58,16 +54,13 @@ const MapInformation = ({
 };
 
 MapInformation.propTypes = {
-  animals: PropTypes.object.isRequired,
-  getStreetAnimals: PropTypes.func.isRequired,
-  getLocalityInfo: PropTypes.func.isRequired,
+  street: PropTypes.object.isRequired,
+  displayInformation: PropTypes.bool.isRequired,
+  setDisplayInfo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  animals: state.animals,
   street: state.street,
 });
 
-export default connect(mapStateToProps, { getStreetAnimals, getLocalityInfo })(
-  MapInformation
-);
+export default connect(mapStateToProps)(MapInformation);

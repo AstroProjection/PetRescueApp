@@ -34,4 +34,4 @@ const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
 });
 
-export default connect(mapStateToProps, null)(React.memo(AnimalButtons));
+export default connect(mapStateToProps)(React.memo(AnimalButtons));

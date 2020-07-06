@@ -140,7 +140,7 @@ export const removeComment = (postId, commentId) => async (dispatch) => {
       type: POST_LOADING,
     });
 
-    const res = await axios.delete(`api/post/comments/${postId}/${commentId}`);
+    await axios.delete(`api/post/comments/${postId}/${commentId}`);
 
     dispatch({
       type: REMOVED_COMMENT,

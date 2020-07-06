@@ -38,7 +38,6 @@ const AnimalProfile = (props) => {
     }
   };
 
-  // console.log(animal);
   return (
     <Accordion>
       <div className='animal-map-profile'>

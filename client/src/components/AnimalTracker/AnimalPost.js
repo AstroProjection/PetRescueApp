@@ -17,7 +17,6 @@ import { useSelector } from 'react-redux';
 import { addAnimal } from '../../store/actions/animal';
 import mapData from '../../resources/victoria-layout.json';
 
-import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -26,18 +25,18 @@ export const VaccineContext = React.createContext({});
 const animalPostSchema = yup.object({
   image: yup.mixed().notRequired(),
   name: yup.string().required('Please enter a name'),
-  type: yup.string().required('Please select an option'),
-  identity: yup.string().required('Please select an option'),
+  type: yup.string().required('Select an option'),
+  identity: yup.string().required('Select an option'),
   locality: yup.string().required(),
-  location: yup.string().required('Please select an option'),
-  'spayed-value': yup.string().required('Please select an option'),
-  'spayed-hospital': yup.string().notRequired(),
-  'spayed-date': yup.string().notRequired(),
+  location: yup.string().required('Select an option'),
+  spayedValue: yup.string().required('Select an option'),
+  spayedHospital: yup.string().notRequired(),
+  spayedDate: yup.date().notRequired(),
   vaccineArr: yup.array().of(
     yup.object({
-      vaccinename: yup.string().required('Please enter a name.'),
-      vaccineDateTaken: yup.string().notRequired(),
-      vaccineDateDue: yup.string().notRequired(),
+      vaccinename: yup.string().required('Enter vaccine name'),
+      vaccineDateTaken: yup.date().notRequired(),
+      vaccineDateDue: yup.date().notRequired(),
     })
   ),
 });
@@ -53,20 +52,24 @@ const AddPost = (props) => {
   locations.sort((locationA, locationB) =>
     locationA.name > locationB.name ? 1 : -1
   );
-  const [image, setImage] = React.useState({});
   const loading = useSelector((state) => state.auth.loading);
 
-  const onSubmit = (e, { isSubmitting, setSubmitting }) => {
+  const onSubmit = (e) => {
     let formSubmit = new FormData();
     for (const [key, value] of Object.entries(e)) {
-      formSubmit.append(key, value);
+      if (key !== 'vaccineArr') formSubmit.append(key, value);
+    }
+
+    for (const element of e.vaccineArr) {
+      formSubmit.append('vaccineArr[]', JSON.stringify(element));
     }
 
     addAnimal(formSubmit);
     props.onHide();
   };
 
-  const { addAnimal, ...rest } = props;
+  const { addAnimal, street, ...rest } = props;
+
   return (
     <Modal {...rest} size='lg' centered>
       {!loading ? (
@@ -85,10 +88,10 @@ const AddPost = (props) => {
                 type: '',
                 identity: '',
                 locality: 'victoria-layout',
-                location: '',
-                'spayed-value': '',
-                'spayed-hospital': '',
-                'spayed-date': new Date(),
+                location: street ? street.streetname : '8th-cross',
+                spayedValue: '',
+                spayedHospital: '',
+                spayedDate: new Date(),
                 vaccineArr: [],
               }}
               onSubmit={onSubmit}
@@ -96,8 +99,6 @@ const AddPost = (props) => {
               {({
                 values,
                 errors,
-                isSubmitting,
-                setSubmitting,
                 handleChange,
                 handleBlur,
                 handleSubmit,
@@ -194,26 +195,27 @@ const AddPost = (props) => {
                           disabled
                           name='locality'
                           size='sm'
-                          value={`Victoria Layout`}
+                          value={street.locality.locality}
                         ></Form.Control>
                       </Col>
                       <Col md={7}>
                         <Form.Label>Location*</Form.Label>
                         <Form.Control
-                          as='select'
+                          as='input'
                           name='location'
                           size='sm'
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          isInvalid={touched.location && !!errors.location}
-                          defaultValue={'default'}
-                        >
-                          {locations.length > 0 ? (
-                            <React.Fragment>
-                              <option value='default' disabled={true}>
-                                Select an option
-                              </option>
-                              {locations.map(
+                          // onChange={handleChange}
+                          value={street.displayName}
+                          disabled
+                          // onBlur={handleBlur}
+                          // isInvalid={touched.location && !!errors.location}
+                        />
+                        {/* {locations.length > 0 ? ( */}
+                        {/* <React.Fragment> */}
+                        {/* <option value={street.streetname} disabled={true}>
+                                {street.streetname}
+                              </option> */}
+                        {/* {locations.map(
                                 ({ displayName: streetName, name }, index) => {
                                   return (
                                     <option key={index} value={name}>
@@ -221,12 +223,12 @@ const AddPost = (props) => {
                                     </option>
                                   );
                                 }
-                              )}
-                            </React.Fragment>
-                          ) : (
-                            ''
-                          )}
-                        </Form.Control>
+                              )} */}
+                        {/* </React.Fragment> */}
+                        {/* ) : ( */}
+                        {/* '' */}
+                        {/* )} */}
+                        {/* </Form.Control> */}
                         <Form.Control.Feedback type='invalid'>
                           {errors.location}
                         </Form.Control.Feedback>
@@ -261,4 +263,8 @@ AddPost.propTypes = {
   addAnimal: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addAnimal })(React.memo(AddPost));
+const mapStateToProps = (state) => ({
+  street: state.street.street,
+});
+
+export default connect(mapStateToProps, { addAnimal })(React.memo(AddPost));

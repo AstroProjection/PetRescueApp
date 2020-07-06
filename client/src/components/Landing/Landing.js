@@ -2,7 +2,10 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux';
-const Landing = ({ auth: { user } }) => {
+import { Redirect } from 'react-router-dom';
+
+const Landing = ({ auth: { user, isLoggedin } }) => {
+  if (isLoggedin) return <Redirect to='/home' />;
   return (
     <Jumbotron fluid>
       <Container>

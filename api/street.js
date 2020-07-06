@@ -19,7 +19,9 @@ router.get('/:localityname/:streetname', async (req, res) => {
     const street = await Streets.findOne({
       streetname: req.params.streetname,
       // localityName: req.params.localityname,
-    }).populate({ path: 'locality', select: 'locality_unique _id' });
+    })
+      .populate({ path: 'locality', select: 'locality_unique locality _id' })
+      .populate({ path: 'cats dogs' });
 
     if (street.locality.locality_unique !== req.params.localityname)
       return res.status(400).json({ msg: 'Street Error!' });
@@ -51,7 +53,7 @@ router.post('/:locality', auth, async (req, res) => {
         async (err, street) => {
           console.log(street);
           try {
-            return;
+            // return;
             if (!street) {
               /// if street doesn't exit, create street
               const newStreet = Streets({
@@ -80,10 +82,17 @@ router.post('/:locality', auth, async (req, res) => {
 
 router.post('/:locality/:streetname', auth, async (req, res) => {
   try {
+    console.log('before adding animal to collection');
+    // console.log(typeof req.params.locality);
+    // console.log(typeof req.params.streetname);
     const street = await Streets.findOne({
       locality: req.params.locality,
       streetname: req.params.streetname,
     });
+
+    console.log(street);
+    // return;
+    if (!street) return;
 
     switch (req.body.type.toLowerCase()) {
       case 'cat':
@@ -101,6 +110,7 @@ router.post('/:locality/:streetname', auth, async (req, res) => {
 
     res.status(200).json(street);
   } catch (error) {
+    // console.log(error);
     return res.status(500).json({ error });
   }
 });

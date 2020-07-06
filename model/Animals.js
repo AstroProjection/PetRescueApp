@@ -114,15 +114,27 @@ const AnimalsSchema = new mongoose.Schema({
 });
 
 AnimalsSchema.post('remove', async (doc, next) => {
-  console.log(doc);
+  // removing the animal from the streets
   await Streets.updateMany(
     {
       $pullAll: { dogs: [doc._id], cats: [doc._id] },
     },
-    (err, street) => {
-      console.log(street);
+    (err, doc) => {
+      if (err) throw Error('Error clearing animal frm Street');
+      // console.log(doc);
     }
   );
+  // removing the image of the animal
+  if (doc.image) {
+    fs.unlink(doc.image, (err) => {
+      if (err) {
+        next(Error('Failed to delete the Image'));
+      } else {
+        console.log('deleted the file');
+        next();
+      }
+    });
+  }
   next();
 });
 

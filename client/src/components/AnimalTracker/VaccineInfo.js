@@ -1,7 +1,5 @@
 import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
-// import ReactDatePicker from 'react-date-picker';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -14,8 +12,6 @@ import VaccineItem from './VaccineItem';
 // import { VaccineContext } from './AnimalPost';
 
 import { FieldArray } from 'formik';
-
-import { parseISO } from 'date-fns';
 
 const VaccineInfo = ({
   handleChange,

@@ -1,9 +1,4 @@
-import {
-  GET_LOCALITY_INFO,
-  LOCALITY_ERROR,
-  LOCALITY_LOADING,
-  FETCHED_LOCALITY,
-} from '../types';
+import { LOCALITY_ERROR, LOCALITY_LOADING, FETCHED_LOCALITY } from '../types';
 
 const initialState = {
   locality: null,
@@ -20,15 +15,11 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       };
-    case GET_LOCALITY_INFO:
-      return {
-        ...state,
-        localityInfo: payload,
-      };
     case LOCALITY_ERROR:
       return {
         ...state,
         error: payload,
+        loading: false,
       };
     case FETCHED_LOCALITY:
       return {

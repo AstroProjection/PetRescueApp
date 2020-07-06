@@ -7,7 +7,7 @@ import { loadUser } from '../../store/actions/auth';
 // import setAuthToken from '../../utils/setAuthToken';
 const Home = ({ auth: { user }, loadUser }) => {
   useEffect(() => {
-    console.log('home useEffect');
+    // console.log('home useEffect');
     // loadUser();
   }, []);
   return (

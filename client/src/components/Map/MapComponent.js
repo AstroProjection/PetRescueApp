@@ -9,26 +9,24 @@ import {
 } from '../../store/actions/street';
 
 import MapInformation from './MapInformation/MapInformation';
-import victoriaLayoutJSON from '../../resources/victoria-layout.json';
-import ulsoorJSON from '../../resources/ulsoor.json';
 
 const MapComponent = ({
   setCurrentStreet,
   street: { street },
-  selectedLocality,
+  locality: { locality, loading },
 }) => {
   const DEFAULT_COLOUR = '#3388FF';
   const ACTIVE_COLOUR = '#00FFFF';
 
-  const mapList = {
-    'victoria-layout': victoriaLayoutJSON,
-    'ulsoor-1': ulsoorJSON,
-  };
+  // const mapList = {
+  //   'victoria-layout': victoriaLayoutJSON,
+  //   'ulsoor-1': ulsoorJSON,
+  // };
 
   //  center:[lat,lng]
   //  zoom:'int'
   //
-  let initCenter = mapList[selectedLocality].position;
+  let initCenter = locality.position;
 
   const dogCount = street ? street.dogs.length : 0;
   const catCount = street ? street.cats.length : 0;
@@ -38,7 +36,7 @@ const MapComponent = ({
 
   const [locationState, setLocationState] = React.useState(initCenter);
 
-  const mobileWindow = window.innerWidth <= 1000;
+  // const mobileWindow = window.innerWidth <= 1000;
 
   const position = [initCenter.center[0], initCenter.center[1]];
 
@@ -96,7 +94,9 @@ const MapComponent = ({
 
     layer.setStyle({
       fill: 'true',
-      fillColor: 'green',
+      fillColor: 'white',
+      weight: 5,
+      opacity: 0.7,
     });
 
     layer.on({
@@ -106,14 +106,14 @@ const MapComponent = ({
     });
   };
   console.log('render');
-  console.log(selectedLocality);
+  // console.log(selectedLocality);
 
   React.useEffect(() => {
     console.log(
-      'this is the selectedlocality value changing',
-      selectedLocality
+      'this is the selected locality value changing',
+      locality.locality_unique
     );
-  }, [selectedLocality]);
+  }, [locality]);
   return (
     <div className='map-contents'>
       {!displayInformation && (
@@ -133,7 +133,7 @@ const MapComponent = ({
               <i className='fas fa-map-marker'></i>Center the Map
             </div>
           </div>
-          {selectedLocality && (
+          {locality && !loading && (
             <Map
               className='animal-tracker-map'
               key={'1'}
@@ -152,13 +152,13 @@ const MapComponent = ({
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
               />
               <Marker position={position} onclick={() => markerClick()}>
-                <Tooltip>{mapList[selectedLocality].locality}</Tooltip>
+                <Tooltip>{locality.locality}</Tooltip>
               </Marker>
 
               <GeoJSON
-                key={selectedLocality}
+                key={locality.locality_unique}
                 id='geojson_roads'
-                data={mapList[selectedLocality]}
+                data={locality}
                 onEachFeature={onEachFeature}
               />
             </Map>
@@ -180,12 +180,12 @@ MapComponent.propTypes = {
   setCurrentStreet: PropTypes.func.isRequired,
   // fetchStreetData: PropTypes.func.isRequired,
   updateStreetsToDB: PropTypes.func.isRequired,
-  selectedLocality: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
   street: state.street,
+  locality: state.locality,
 });
 
 export default connect(mapStateToProps, {

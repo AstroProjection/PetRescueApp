@@ -12,7 +12,7 @@ const Locality = require('../model/Locality');
 
 router.get('/:locality', async (req, res) => {
   try {
-    const locality = await Locality.find({
+    const locality = await Locality.findOne({
       locality_unique: req.params.locality.toLowerCase(),
     });
     // console.log(localityInfo);

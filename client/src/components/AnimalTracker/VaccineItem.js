@@ -1,19 +1,10 @@
 import React from 'react';
 
 import DatePicker from 'react-datepicker';
-import Form from 'react-bootstrap/Form';
 
 import { FormControl } from 'react-bootstrap';
 const VaccineItem = (props) => {
-  const {
-    setFieldValue,
-    vaccine,
-    handleChange,
-    handleBlur,
-    index,
-    values,
-    arrayHelpers,
-  } = props;
+  const { setFieldValue, index, values, arrayHelpers } = props;
   return (
     <React.Fragment>
       <div className='tr'>

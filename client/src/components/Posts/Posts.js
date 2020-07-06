@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Spinner from '../Layout/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import PostButtons from './PostButtons';
 import Accordion from 'react-bootstrap/Accordion';
 
 const Posts = ({ getAllPosts, post: { posts, loading } }) => {
-  useEffect(() => {
+  React.useEffect(() => {
     getAllPosts();
   }, [getAllPosts]);
 
