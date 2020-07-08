@@ -7,7 +7,12 @@ import { connect } from 'react-redux';
 import { logout } from '../../store/actions/auth';
 
 import { loadUser } from '../../store/actions/auth';
-const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
+const NavbarComponent = ({
+  loadUser,
+  logout,
+  auth: { isLoggedin, user },
+  isMobile,
+}) => {
   React.useEffect(() => {
     if (localStorage.token) loadUser();
   }, [loadUser]);
@@ -42,6 +47,13 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
           <i className='fas fa-paw'></i>Pet RescYou
         </Navbar.Brand>
       </LinkContainer>
+      {!isMobile && isLoggedin && (
+        <React.Fragment>
+          <hr />
+          <div>Welcome {user.name}!</div>
+          <hr />
+        </React.Fragment>
+      )}
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav>
@@ -65,10 +77,12 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
 NavbarComponent.propTypes = {
   logout: PropTypes.func.isRequired,
   isLoggedin: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isLoggedin: state.auth.isLoggedin,
+  auth: state.auth,
+  isMobile: state.device.isMobile,
 });
 
 export default connect(mapStateToProps, { loadUser, logout })(NavbarComponent);
