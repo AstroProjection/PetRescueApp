@@ -19,7 +19,11 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const postValidationSchema = yup.object({
-  title: yup.string().required('Please enter a title'),
+  title: yup
+    .string()
+    .required('Please enter a title')
+    .min(8, 'Title must be at least 8 characters')
+    .max(80, 'Title cannot be more than 80 characters'),
   text: yup.string().required('Please enter a description'),
   image: yup.mixed().notRequired(),
   tag: yup.string().required('Please choose a tag'),
@@ -202,8 +206,8 @@ const AddPost = ({ createPost, ...props }) => {
                   )}
 
                   <Button type='submit'>Submit</Button>
-                  {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-                  {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
+                  <pre>{JSON.stringify(errors, null, 2)}</pre>
                 </Form>
               )}
             </Formik>

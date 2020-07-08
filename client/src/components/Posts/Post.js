@@ -32,7 +32,7 @@ const Post = ({
 
   let formData = new FormData();
   formData.append('image', null);
-
+  console.log(img);
   return (
     <React.Fragment>
       <div className='card-post-layout'>

@@ -16,7 +16,7 @@ const fileFilter = (req, file, callback) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, './uploads/');
+    callback(null, './client/public/uploads/');
   },
   filename: (req, file, callback) => {
     callback(
@@ -62,12 +62,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // console.log(req.files[0]);
     try {
       const newPost = new Post({
         text: req.body.text,
         title: req.body.title,
         user: req.user.id,
-        image: req.files.length > 0 ? req.files[0].path : null,
+        image:
+          req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
       });
 
       newPost.save(async (err, post) => {
@@ -115,7 +117,7 @@ router.post(
         });
       }
       /// saving new image to img path
-      post.image = req.files[0].path;
+      post.image = '\\uploads\\' + req.files[0].filename;
       await post.save();
       res.json(post);
     } catch (error) {
@@ -159,7 +161,15 @@ router.get('/', async (req, res) => {
 
 router.get('/:postId', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.postId)
+      .populate({
+        path: 'user',
+        select: '-password',
+      })
+      .populate({
+        path: 'user',
+        populate: { path: 'locality', select: 'locality locality_unique' },
+      });
     if (!post) return res.status(404).json({ msg: 'Post not found!' });
     res.json(post);
   } catch (error) {

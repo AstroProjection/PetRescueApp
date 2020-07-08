@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
+const path = require('path');
 
 ///connecting to MONGODB
 connectDB();
-
+console.log(__dirname);
 /// initializing middleware
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
+// app.use(express.static(path.join(__dirname, 'client', 'public')));
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 

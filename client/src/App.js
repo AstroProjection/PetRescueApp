@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
+import Navbarv2 from './components/Layout/Navbarv2';
 import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
 import Login from './components/Auth/Login';
@@ -26,29 +27,26 @@ function App({ loadUser, mobileCheck }) {
     mobileCheck();
   }, [loadUser, mobileCheck]);
 
-  // console.dir(process);
   return (
     <BrowserRouter>
       <Navbar />
       <div className='spacer-div'></div>
-      <UserBadge />
-      <Alert />
-      <Switch>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/about' component={About} />
-        <Route exact path='/' component={Landing} />
-        <Route exact path='/home' component={Home} />
-        <Route exact path='/animal-tracker' component={MapPage} />
-        <Route exact path='/post/:postId' component={PostPage} />
-        <Route component={NotFound} />
-      </Switch>
+      {/* <UserBadge /> */}
+      <div className='main-wrapper'>
+        <Alert />
+        <Switch>
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/home' component={Home} />
+          <Route exact path='/animal-tracker' component={MapPage} />
+          <Route exact path='/post/:postId' component={PostPage} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
-
-// const mapStateToProps = (state) => ({
-//   device: state.device,
-// });
 
 export default connect(null, { loadUser, mobileCheck })(App);

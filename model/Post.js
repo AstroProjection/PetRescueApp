@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
-
+const ROOT_PATH = require('../root');
 const commentSchema = new mongoose.Schema(
   {
     user: {
@@ -70,8 +70,9 @@ PostSchema.post('remove', (doc, next) => {
     console.log('no image to delete');
     next();
   }
-  fs.unlink(doc.image, (err) => {
+  fs.unlink(ROOT_PATH + '\\client\\public\\' + doc.image, (err) => {
     if (err) {
+      console.log(err);
       next(Error('Failed to delete the Image'));
     } else {
       console.log('deleted the file');

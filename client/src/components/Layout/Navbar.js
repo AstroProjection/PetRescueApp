@@ -15,24 +15,28 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
   const guestLinks = (
     <React.Fragment>
       <LinkContainer to='/register'>
-        <Nav.Link>Register</Nav.Link>
+        <Nav.Link className='auth-button'>
+          <i className='fas fa-user-plus'></i> Register
+        </Nav.Link>
       </LinkContainer>
       <LinkContainer to='/login'>
-        <Nav.Link>Login</Nav.Link>
+        <Nav.Link className='auth-button'>
+          <i className='fas fa-sign-in-alt'></i> Sign-in
+        </Nav.Link>
       </LinkContainer>
     </React.Fragment>
   );
 
   const authLinks = (
     <React.Fragment>
-      <Nav.Link onClick={logout}>
-        <i className='fa fa-sign-out' /> Logout
+      <Nav.Link onClick={logout} className='auth-button'>
+        <i className='fas fa-sign-out-alt' /> Logout
       </Nav.Link>
     </React.Fragment>
   );
 
   return (
-    <Navbar bg='light' expand='lg' fixed='top' collapseOnSelect>
+    <Navbar expand='lg' fixed='top' collapseOnSelect>
       <LinkContainer to='/home'>
         <Navbar.Brand>
           <i className='fas fa-paw'></i>Pet RescYou
@@ -51,7 +55,8 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
         </Nav>
-        <Nav>{isLoggedin ? authLinks : guestLinks}</Nav>
+        <hr />
+        <Nav className='auth-links'>{isLoggedin ? authLinks : guestLinks}</Nav>
       </Navbar.Collapse>
     </Navbar>
   );
