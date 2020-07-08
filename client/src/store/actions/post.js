@@ -89,7 +89,7 @@ export const createPost = (formData) => async (dispatch) => {
     dispatch({
       type: POST_LOADING,
     });
-    const res = await axios.post('api/post', formData, config);
+    const res = await axios.post('/api/post', formData, config);
     dispatch({
       type: CREATE_POST,
       payload: res.data,
@@ -107,7 +107,7 @@ export const removePost = (postId) => async (dispatch) => {
     dispatch({
       type: POST_LOADING,
     });
-    await axios.delete(`api/post/${postId}`);
+    await axios.delete(`/api/post/${postId}`);
 
     dispatch({
       type: POST_REMOVED,
@@ -137,7 +137,7 @@ export const addComment = (formData, postId) => async (dispatch) => {
       ...formData,
     };
 
-    const res = await axios.post(`api/post/comments/${postId}`, body, config);
+    const res = await axios.put(`/api/post/comments/${postId}`, body, config);
 
     dispatch({
       type: ADDED_COMMENT,
@@ -159,7 +159,7 @@ export const removeComment = (postId, commentId) => async (dispatch) => {
       type: POST_LOADING,
     });
 
-    await axios.delete(`api/post/comments/${postId}/${commentId}`);
+    await axios.delete(`/api/post/comments/${postId}/${commentId}`);
 
     dispatch({
       type: REMOVED_COMMENT,

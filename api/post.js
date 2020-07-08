@@ -57,12 +57,13 @@ router.post(
   async (req, res) => {
     ///checking that text/name,email is not empty
     const errors = validationResult(req);
-    console.log(errors);
+    // console.log(errors);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
     // console.log(req.files[0]);
+    // console.log(req.body);
     try {
       const newPost = new Post({
         text: req.body.text,
@@ -70,14 +71,18 @@ router.post(
         user: req.user.id,
         image:
           req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
+        tag: req.body.tag,
+        urgency: req.body.urgency,
       });
 
       newPost.save(async (err, post) => {
         /// get populated user post for posts array
+        if (err) throw err;
         const nPost = await Post.findById(post.id).populate({
           path: 'user',
           select: 'name _id',
         });
+        // console.log(nPost);
         res.json(nPost);
       });
 
@@ -161,15 +166,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:postId', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId)
-      .populate({
-        path: 'user',
-        select: '-password',
-      })
-      .populate({
-        path: 'user',
-        populate: { path: 'locality', select: 'locality locality_unique' },
-      });
+    const post = await Post.findById(req.params.postId).populate({
+      path: 'user',
+      select: '-password -email',
+      populate: { path: 'locality', select: 'locality locality_unique' },
+    });
+
     if (!post) return res.status(404).json({ msg: 'Post not found!' });
     res.json(post);
   } catch (error) {
@@ -182,7 +184,7 @@ router.get('/:postId', async (req, res) => {
 //   @desc Create a comment for post of id
 //   @access private
 
-router.post(
+router.put(
   '/comments/:postId',
   [auth, check('text', 'text is required').notEmpty()],
   async (req, res) => {
@@ -192,24 +194,27 @@ router.post(
 
       const newComment = {
         user: req.user.id,
-        name: user.name,
         text: req.body.text,
+        name: user.name,
       };
+      console.log(newComment);
       post.comments.unshift(newComment);
       await post.save();
-      res.json(post);
+      res.json(post.comments);
     } catch (error) {
+      console.log(error);
       res.status(400).json(error.errors);
     }
   }
 );
 
-//   @route DEL api/post/comment/:postId/:commentId
+//   @route DEL api/post/comments/:postId/:commentId
 //   @desc delete a comment[commentId] on post[postId]
 //   @access private
 
 router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
   try {
+    console.log();
     const post = await Post.findById(req.params.postId);
     const comment = post.comments.find((comment) => {
       return comment.id === req.params.commentId;
@@ -228,11 +233,12 @@ router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
         return comment.id.toString();
       })
       .indexOf(req.params.commentId);
-    post.comment.splice(removeIndex, 1);
+    post.comments.splice(removeIndex, 1);
     // save in the backend
     await post.save();
     res.status(200).json({ msg: 'Comment Removed!' });
   } catch (error) {
+    console.log(error);
     res.status(500).json('Server error');
   }
 });

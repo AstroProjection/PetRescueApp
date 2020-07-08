@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema(
 
     text: {
       type: String,
-      require: true,
+      required: true,
     },
     date: {
       type: Date,
@@ -18,6 +18,7 @@ const commentSchema = new mongoose.Schema(
     },
     name: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }
@@ -44,6 +45,18 @@ const PostSchema = new mongoose.Schema(
     image: {
       type: String,
       default: null,
+    },
+    urgency: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: 'open',
+    },
+    tag: {
+      type: String,
+      required: true,
     },
     comments: [commentSchema],
   },

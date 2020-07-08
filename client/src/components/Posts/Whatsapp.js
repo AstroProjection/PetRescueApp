@@ -11,7 +11,7 @@ const Whatsapp = () => {
         href={`whatsapp://send?text=${message}`}
         data-action='share/whatsapp/share'
       >
-        <i className='fab fa-whatsapp large-icon'></i>
+        <i className='fab fa-whatsapp large-icon whatsapp-color'></i>
       </a>
     )
   );

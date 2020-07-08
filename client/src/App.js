@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
-import Navbarv2 from './components/Layout/Navbarv2';
 import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
 import Login from './components/Auth/Login';
@@ -31,7 +30,7 @@ function App({ loadUser, mobileCheck }) {
     <BrowserRouter>
       <Navbar />
       <div className='spacer-div'></div>
-      {/* <UserBadge /> */}
+      <UserBadge />
       <div className='main-wrapper'>
         <Alert />
         <Switch>

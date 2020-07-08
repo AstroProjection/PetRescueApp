@@ -1,21 +1,18 @@
 import React from 'react';
+import CommentsHeader from './CommentsHeader';
+import CommentItem from './CommentItem';
 
-const Comments = () => {
+const Comments = (props) => {
+  const { post } = props;
   return (
     <div className='post-form'>
-      <div className='comments-header'>
-        <h3>Leave A Comment</h3>
-      </div>
-      <form className='form my-1'>
-        <textarea
-          name='text'
-          cols='30'
-          rows='5'
-          placeholder='Comment on this post'
-          required
-        ></textarea>
-        <input type='submit' className='btn btn-dark my-1' value='Submit' />
-      </form>
+      <CommentsHeader post={post} />
+
+      {post.comments.length > 0
+        ? post.comments.map((comment) => (
+            <CommentItem comment={comment} key={comment._id} post={post} />
+          ))
+        : 'No comments ...'}
     </div>
   );
 };

@@ -65,7 +65,7 @@ const AddPost = (props) => {
     }
 
     addAnimal(formSubmit);
-    props.onHide();
+    // props.onHide();
   };
 
   const { addAnimal, street, ...rest } = props;
@@ -223,7 +223,7 @@ const AddPost = (props) => {
                     setValues={setValues}
                   />
                   <Button type='submit'>Submit</Button>
-                  {/* <pre>{JSON.stringify(values, null, 2)} </pre> */}
+                  <pre>{JSON.stringify(values, null, 2)} </pre>
                   {/* <pre>{JSON.stringify(errors, null, 2)} </pre> */}
                 </Form>
               )}

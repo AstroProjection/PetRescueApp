@@ -16,12 +16,12 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
     <React.Fragment>
       <LinkContainer to='/register'>
         <Nav.Link className='auth-button'>
-          <i className='fas fa-user-plus'></i> Register
+          <i className='fas fa-user-plus'></i> Sign-Up
         </Nav.Link>
       </LinkContainer>
       <LinkContainer to='/login'>
         <Nav.Link className='auth-button'>
-          <i className='fas fa-sign-in-alt'></i> Sign-in
+          <i className='fas fa-sign-in-alt'></i> Sign-In
         </Nav.Link>
       </LinkContainer>
     </React.Fragment>
@@ -38,13 +38,13 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin }) => {
   return (
     <Navbar expand='lg' fixed='top' collapseOnSelect>
       <LinkContainer to='/home'>
-        <Navbar.Brand>
+        <Navbar.Brand className='petrescue-logo'>
           <i className='fas fa-paw'></i>Pet RescYou
         </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='mr-auto'>
+        <Nav>
           <LinkContainer to='/home'>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>

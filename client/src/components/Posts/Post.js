@@ -22,6 +22,10 @@ const Post = ({
   auth,
   uploadImage,
   removePost,
+  comments,
+  urgency,
+  tag,
+  status,
 }) => {
   let loggedUser = null;
   // const loading = auth.loading;
@@ -32,7 +36,7 @@ const Post = ({
 
   let formData = new FormData();
   formData.append('image', null);
-  console.log(img);
+  // console.log(img);
   return (
     <React.Fragment>
       <div className='card-post-layout'>
@@ -54,7 +58,7 @@ const Post = ({
                     }}
                   ></input>
                   <Button
-                    variant='info'
+                    variant='light'
                     className='stretch'
                     onClick={(e) => fileUploadRef.current.click()}
                   >
@@ -72,12 +76,26 @@ const Post = ({
         </div>
         <div className='post-information'>
           <Card.Title>{title}</Card.Title>
-          <ReadMoreReact text={text} max={200} min={40} ideal={80} />
+          {/* <ReadMoreReact text={text} max={200} min={40} ideal={80} /> */}
+          <Card.Body>
+            {text.length > 80 ? text.slice(0, 80) + '...' : text}
+          </Card.Body>
+        </div>
+        <div className='post-report'>
+          {urgency === 'high' && (
+            <i class='fas fa-exclamation-triangle animate-danger'></i>
+          )}
+          {urgency === 'mid' && (
+            <i class='fas fa-exclamation-triangle animate-medium'></i>
+          )}
+          {urgency === 'low' && (
+            <i class='fas fa-exclamation-triangle animate-low'></i>
+          )}
         </div>
         <div className='post-by'>
           <div className='card-post-by'>
             <small>
-              <span className='post-by'>Created By: {name}</span>
+              <span className='post-by'>Posted by: {name}</span>
             </small>
           </div>
         </div>
@@ -92,7 +110,7 @@ const Post = ({
             className='comments-btn'
             onClick={() => {}}
           >
-            Comments[ <b>0</b> ]
+            <i class='far fa-comment-alt'></i> <b>{comments}</b>
           </Link>
         </div>
         <div className='post-modifications'>

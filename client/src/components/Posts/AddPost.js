@@ -38,7 +38,7 @@ const postTags = [
 
 const urgencyTags = [
   ['low', 'Low '],
-  ['med', 'Medium'],
+  ['mid', 'Medium'],
   ['high', 'High'],
 ];
 const AddPost = ({ createPost, ...props }) => {
@@ -78,6 +78,7 @@ const AddPost = ({ createPost, ...props }) => {
                 text: '',
                 image: '',
                 tag: '',
+                urgency: '',
                 showLocation: true,
                 locationState: {
                   center: [],

@@ -23,7 +23,7 @@ const fileFilter = (req, file, callback) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, './uploads/');
+    callback(null, './client/public/uploads/');
   },
   filename: (req, file, callback) => {
     callback(

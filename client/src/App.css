@@ -17,7 +17,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: #fffdd0 !important;
   color: #333;
 }
 
@@ -33,6 +33,17 @@ p{
   margin-left:2rem !important;
   word-break: break-all;
   font-size:1.3rem;
+}
+
+.main-wrapper{
+  margin-left: 280px;
+  padding: 0 1rem;
+  width:1000px;
+} 
+
+
+.comments-section{
+  width:800px;
 }
 
 .leaflet-container {
@@ -76,6 +87,7 @@ p{
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+  border-radius:5px;
 }
 
 .form input[type='submit'],
@@ -108,17 +120,45 @@ button {
   color: #0077b5;
 }
 
+.displayed-text{
+  word-break: break-all;
+}
+
+.postpage{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postpage-img{
+  width: 400px;
+}
+
 .comments-header{
-  /* background-color: #17A2B8;
-   */
-   background-color:#469353;
+   background-color:darkslategrey;
   padding:0.2rem 1rem;
+  border-radius:5px;
+}
+
+.comment-heading{
+  display:flex;
 }
 
 .comments-header > h3{
   color:whitesmoke;
 }
 
+.comment-text{
+  font-size:1.1rem;
+  background-color: lightgrey;
+
+}
+
+.comment-date{
+  font-size:0.8rem;
+  background-color: whitesmoke;
+
+}
 /* end of Forms */
 
 a:hover {
@@ -164,14 +204,23 @@ img {
   padding: 0 2rem;
 } */
 
+.navbar-brand{
+  color: sandybrown!important;
+  font-size:1.8rem !important;
+}
+
 .navbar {
-  background-color:#5FCB71 !important;
+  background-color:#1b6b2d !important;
   margin-bottom: 1rem;
   height: 100%;
   width: 280px;
   border-right:black 1px solid;
   box-shadow:1px 0 1px black;
 
+  font-size: 1.3rem !important;
+    font-weight: 700 !important;
+
+    text-align: center;
 
 }
 
@@ -187,19 +236,25 @@ img {
   flex-flow: column nowrap !important;
 }
 
+.nav-link{
+  color: sandybrown !important;
+
+}
+
 .auth-links{
   justify-content: space-evenly;
   flex-direction: row !important;
+
 }
 
 .auth-button{
   border: 1px solid darkgreen;
     border-radius: 5px;
-    background-color: green;
-    color: greenyellow !important;
+    background-color: #1b6b2d;
+    color: sandybrown !important;
     padding:0.1rem 0.5rem !important;
     margin: 0.1rem 0.4rem;
-    height: 2rem;
+    /* height: 2rem; */
 }
 
 .auth-button:hover{
@@ -216,6 +271,12 @@ img {
   overflow: hidden;
   padding: 0 2rem;
   margin-bottom: 3rem;
+}
+
+.post {
+  grid-template-columns: 1fr;
+  border:1px solid black !important;
+  border-radius: 5px;
 }
 /* Text Styles*/
 .x-large {
@@ -263,10 +324,15 @@ img {
   border: 1px solid darkgreen;
   box-shadow: 0px 2px 1px rgb(1, 77, 1);
   grid-auto-columns: 2fr 2fr 2fr 2fr;
-  grid-auto-rows: 2fr 2fr 0.5fr;
+  grid-auto-rows: 2fr 2fr 50px;
   padding: 0.2em 0.5em;
 
   border-radius: 10px;
+  background-color: #e2d18c;
+}
+
+.card-body{
+  word-break: break-all;
 }
 
 .post-discuss {
@@ -275,13 +341,14 @@ img {
 }
 
 .comments-btn {
-  background-color: lightseagreen;
+  /* background-color: lightseagreen; */
   padding: 0.4rem 0.9rem;
-  border: 2px solid dimgrey;
+  /* border: 2px solid dimgrey; */
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
-  color: white;
+  color: black;
   cursor: pointer;
+  font-size: 25px;
 }
 
 .card-post-by {
@@ -296,10 +363,12 @@ img {
   flex-direction: column-reverse;
 }
 
-.port-report {
-  grid-area: post-report;
+.post-report {
+  grid-area:post-report;
   display: flex;
-  flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
 }
 
 .post-modifications {
@@ -320,7 +389,12 @@ img {
 
 .whatsapp {
   grid-area: whatsapp;
-  margin-left: 0.5rem;
+  margin: auto;
+  margin-top: 7px;
+}
+
+.whatsapp-color{
+  color: #00bb00;
 }
 
 .post-information {
@@ -328,13 +402,42 @@ img {
   margin-left: 0.7em;
 }
 
+.posts-buttons{
+  border: 1px solid green;
+  background-color: #d87d4b;
+}
+
+.posts-right{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.posts-left{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
 .post-image {
   padding: 0.2em;
-  border: 3px dashed lightseagreen;
+  /* border: 3px dashed lightseagreen; */
   grid-area: post-img;
   display: flex;
   justify-content: center;
   align-items: center;
+  height:160px;
+  border-radius:50%;
+}
+
+.post-image > img, .post-image button{
+  border-radius:50%;
+  font-size:1.2rem;
+  font-weight:700;
+}
+
+.round-img{
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
 }
 
 .button {
@@ -365,12 +468,19 @@ img {
 
 .delete-btn {
   grid-area: delete-btn;
-  background-color: red;
+  /* background-color: red; */
+  border:none !important;
+  box-shadow:none !important;
+  font-size: 2rem;
+  color: #b22222;
 }
 
 .edit-btn {
   grid-area: edit-btn;
-  background-color: lightblue;
+  /* background-color: lightblue; */
+  border:none !important;
+  box-shadow:none !important;
+  font-size: 2rem;
 }
 
 .post-edit-button {
@@ -442,6 +552,82 @@ img {
 .remove-padding {
   padding: 0 !important;
 }
+
+.animate-danger{
+  overflow:hidden;
+  animation-name:danger;
+  animation-duration:1.3s;
+  animation-iteration-count:infinite;
+}
+
+
+.animate-medium{
+  overflow:hidden;
+  animation-name:medium;
+  animation-duration:1.3s;
+  animation-iteration-count:infinite;
+}
+
+
+.animate-low{
+  overflow:hidden;
+  animation-name:low;
+  animation-duration:1.3s;
+  animation-iteration-count:infinite;
+}
+
+@keyframes danger {
+  0% {
+    color:darkred;
+    transform: scale(1,1);
+  }
+
+  50%{
+    color:red;
+    transform:scale(-1.3,1.3)
+  }
+
+  100%{
+    color:darkred;
+    transform:scale(1,1)
+  }
+}
+
+@keyframes medium {
+  0% {
+    color:yellow;
+    transform: scale(1,1);
+  }
+
+  50%{
+    color:orange;
+    transform:scale(-1.3,1.3)
+  }
+
+  100%{
+    color:yellow;
+    transform:scale(1,1)
+  }
+}
+
+
+@keyframes low {
+  0% {
+    color:green;
+    transform: scale(1,1);
+  }
+
+  50%{
+    color:darkgreen;
+    transform:scale(-1.3,1.3)
+  }
+
+  100%{
+    color:green;
+    transform:scale(1.2,1.2)
+  }
+}
+
 
 @keyframes slideout {
   100% {
@@ -633,9 +819,10 @@ img {
 /* Post styles for Home */
 
 /* Mobile Styles */
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .container {
     margin-top: 2rem;
+    padding:0;
   }
 
   .map-containment > nav {
@@ -668,13 +855,15 @@ img {
   }
 
   /* Navbar */
-  .navbar {
-    display: block;
-    text-align: center;
-    width:100%;
-    height:auto;
 
-    /* flex-direction: row !important; */
+  .petrescue-logo{
+    color: sandybrown !important;
+  }
+
+  .navbar{
+    width:100%;
+    flex-direction:row;
+    height:auto;
   }
 
   .navbar-expand-lg{
@@ -716,17 +905,35 @@ img {
 
   .post {
     grid-template-columns: 1fr;
+    border:1px solid black !important;
   }
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
   }
+
+  .main-wrapper{
+    margin-left:0;
+    width:auto;
+    padding:0;
+  }
+
+  .comments-section{
+    width:auto;
+  }
+  /* .post-image{
+    height:auto;
+  } */
+  
 }
 
 @media (max-width: 576px) {
   /* .post-image {
     /* display: none; */
   /* } */
+  .inner-container{
+    padding: 0 0.2rem;
+  }
 
   .table {
     font-size: 90%;
@@ -743,19 +950,58 @@ img {
   .card-post-layout {
     display: grid;
     grid-template-areas:
-      'post-img post-info post-info post-report'
-      'post-by post-info post-info post-report'
-      'post-by post-share post-discuss post-edits';
-
+        'post-img post-info post-info post-info'
+        'post-report post-info post-info post-info'
+        'post-by post-share post-discuss post-edits';
     /* margin-top: 0.8rem; */
     /* margin-bottom: 0.8rem; */
-
-    border: 1px solid darkgreen;
-    /* box-shadow: 0px 2px 1px rgb(1, 77, 1); */
-    grid-auto-columns: 100px 2fr 2fr 2fr;
-    grid-auto-rows: 100px 1fr 1fr;
+    /* border: 1px solid darkgreen; */
+    box-shadow: 0px 1px 1px rgb(1, 77, 1);
+    grid-auto-columns: 80px 1fr 1fr 100px;
+    grid-auto-rows: 80px minmax(60px,1fr) 40px;
     /* padding: 0.2em 0.5em; */
-
     border-radius: 10px;
   }
+
+  .comments-btn{
+    padding:0.4rem;
+  }
+
+  .post-image{
+    height:auto;
+  }
+
+  
+.post-image > img, .post-image button{
+  font-size:1rem;
+}
+
+@media(max-width:321px){
+
+  .card-post-layout{
+    grid-auto-columns: 80px 1fr 1.5fr 75px ;
+  }
+
+  .post-discuss{
+    justify-content: center;
+  }
+
+  .comments-btn{
+    font-size:1.4rem;
+    padding-top: 0.2rem;
+  }
+
+  .large-icon{
+    font-size:1.5rem !important;
+  }
+
+  .edit-btn{
+    margin-left:0.6rem;
+    font-size:1.3rem;
+  }
+
+  .delete-btn{
+    font-size:1.3rem;
+  }
+}
 }

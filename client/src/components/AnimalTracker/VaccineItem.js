@@ -24,7 +24,7 @@ const VaccineItem = (props) => {
         <div className='td'>
           <DatePicker
             selected={values.vaccineArr[`${index}`].vaccineDateTaken}
-            dateFormat='MMMM d, yyyy'
+            dateFormat='MMMM dd yyyy'
             autoComplete='new-password'
             className='form-control remove-padding'
             name={`values.vaccineArr.${index}.vaccineDateTaken`}
@@ -38,7 +38,7 @@ const VaccineItem = (props) => {
           <DatePicker
             autoComplete='new-password'
             selected={values.vaccineArr[`${index}`].vaccineDateDue}
-            dateFormat='MMMM d, yyyy'
+            dateFormat='MMMM dd yyyy'
             className='form-control remove-padding'
             name={`values.vaccineArr.${index}.vaccineDateDue`}
             placeholderText={'Click to select date'}
