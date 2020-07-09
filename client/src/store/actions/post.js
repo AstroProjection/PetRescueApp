@@ -6,6 +6,7 @@ import {
   UPLOAD_ERROR,
   POST_ERROR,
   CREATE_POST,
+  EDITED_POST,
   POST_REMOVED,
   POST_LOADING,
   ADDED_COMMENT,
@@ -92,6 +93,29 @@ export const createPost = (formData) => async (dispatch) => {
     const res = await axios.post('/api/post', formData, config);
     dispatch({
       type: CREATE_POST,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: error.errors,
+    });
+  }
+};
+
+export const editPost = (formData, postId) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    dispatch({
+      type: POST_LOADING,
+    });
+    const res = await axios.put(`/api/post/${postId}`, formData, config);
+    dispatch({
+      type: EDITED_POST,
       payload: res.data,
     });
   } catch (error) {

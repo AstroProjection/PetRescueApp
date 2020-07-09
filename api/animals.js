@@ -65,9 +65,7 @@ router.post(
     check('name', 'Please enter name!').notEmpty(),
   ],
   async (req, res) => {
-    // return res.status(400).send({ failed: 'yes it failed' });
     const errors = validationResult(req);
-    // console.log(errors);
     if (!errors.isEmpty())
       return res.status(400).send({ errors: errors.array() });
 
@@ -88,14 +86,14 @@ router.post(
         cost: req.body.spayedCost || null,
       };
 
-      // console.log(vaccineArr);
       //// identity - 0 - stray , 1 - pet...
       const animal = new Animals({
         name: req.body.name,
         location: req.body.location,
-        locality: req.user.locality,
+        locality: req.body.locality,
         type: req.body.type,
-        image: req.files.length > 0 ? req.files[0].path : null,
+        image:
+          req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
         user: req.user.id,
         identity: parseInt(req.body.identity),
         medical: {
@@ -103,13 +101,13 @@ router.post(
           vaccines: vaccineArr,
         },
       });
+
       await animal.save(async (err) => {
         if (err) return res.status(500).json({ msg: 'Error adding animal!' });
         // console.log('successful addition');
         const street = await Streets.findOne({
           streetname: req.body.location,
         });
-
         if (animal.locality !== street.locality.toString())
           throw Error('Locality dont match');
 

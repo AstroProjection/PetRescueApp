@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export const MapInfoHeader = (props) => {
-  const { setDisplayInfo, street } = props;
+const MapInfoHeader = (props) => {
+  const { setDisplayInfo, street, locality } = props;
   return (
     <>
       <div className='btn map-center' onClick={(e) => setDisplayInfo(false)}>
@@ -13,9 +14,15 @@ export const MapInfoHeader = (props) => {
             <span>{`${street.displayName}: `}</span>
           </React.Fragment>
         ) : (
-          <>Victoria Layout</>
+          <>{locality ? locality.locality.locality : ''}</>
         )}
       </h2>
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  locality: state.locality,
+});
+
+export default connect(mapStateToProps)(MapInfoHeader);

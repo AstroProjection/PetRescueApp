@@ -6,6 +6,7 @@ import {
   UPLOAD_ERROR,
   POST_ERROR,
   CREATE_POST,
+  EDITED_POST,
   POST_REMOVED,
   FETCH_ERROR,
   POST_LOADING,
@@ -16,7 +17,7 @@ import {
 const initialState = {
   posts: [],
   post: null,
-  loading: false,
+  loading: true,
   errors: {},
 };
 export default function (state = initialState, action) {
@@ -41,6 +42,15 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         posts: arr,
+      };
+    case EDITED_POST:
+      // let arr = state.posts;
+      return {
+        ...state,
+        loading: false,
+        posts: state.posts.map((post) => {
+          return post._id === payload.id ? payload.post : post;
+        }),
       };
 
     case ADDED_COMMENT:

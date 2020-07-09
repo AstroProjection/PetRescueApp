@@ -7,15 +7,25 @@ import { connect } from 'react-redux';
 import { logout } from '../../store/actions/auth';
 
 import { loadUser } from '../../store/actions/auth';
-const NavbarComponent = ({
-  loadUser,
-  logout,
-  auth: { isLoggedin, user },
-  isMobile,
-}) => {
+const NavbarComponent = ({ loadUser, logout, isLoggedin, user, isMobile }) => {
   React.useEffect(() => {
     if (localStorage.token) loadUser();
+
+    console.log('rendering useeffect');
+    return () => {
+      console.log('removed resize listener');
+      return window.removeEventListener('resize', updatePageSize);
+    };
   }, [loadUser]);
+
+  const [pageSize, updatePageSize] = React.useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+
+  window.addEventListener('resize', updatePageSize);
+
+  console.log('rendering...');
 
   const guestLinks = (
     <React.Fragment>
@@ -47,11 +57,21 @@ const NavbarComponent = ({
           <i className='fas fa-paw'></i>Pet RescYou
         </Navbar.Brand>
       </LinkContainer>
-      {!isMobile && isLoggedin && (
+      {!isMobile && window.innerWidth > 992 && (
         <React.Fragment>
-          <hr />
-          <div>Welcome {user.name}!</div>
-          <hr />
+          {isLoggedin ? (
+            <React.Fragment>
+              <hr />
+              {user && <div>Welcome {user.name}!</div>}
+              <hr />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <hr />
+              <div>Login to post..</div>
+              <hr />
+            </React.Fragment>
+          )}
         </React.Fragment>
       )}
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -77,12 +97,16 @@ const NavbarComponent = ({
 NavbarComponent.propTypes = {
   logout: PropTypes.func.isRequired,
   isLoggedin: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isLoggedin: state.auth.isLoggedin,
+  loading: state.auth.loading,
   isMobile: state.device.isMobile,
 });
 
-export default connect(mapStateToProps, { loadUser, logout })(NavbarComponent);
+export default connect(mapStateToProps, { loadUser, logout })(
+  React.memo(NavbarComponent)
+);

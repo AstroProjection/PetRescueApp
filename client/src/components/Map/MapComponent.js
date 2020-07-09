@@ -13,12 +13,13 @@ import MapInformation from './MapInformation/MapInformation';
 const MapComponent = ({
   setCurrentStreet,
   fetchStreetData,
-  street: { street, streets },
+  street,
+  streets,
   locality: { locality, loading },
-  device: { isMobile },
+  isMobile,
 }) => {
-  const DEFAULT_COLOUR = '#3388FF';
-  const ACTIVE_COLOUR = '#00FFFF';
+  const DEFAULT_COLOUR = '#3C8258';
+  const ACTIVE_COLOUR = '#65B886';
 
   let initCenter = locality.position;
 
@@ -28,6 +29,7 @@ const MapComponent = ({
   const [clickedLayer, setClickedLayer] = React.useState();
   const [displayInformation, setDisplayInfo] = React.useState(false);
   const [locationState, setLocationState] = React.useState(initCenter);
+
   const position = [initCenter.center[0], initCenter.center[1]];
 
   const addHighlight = (e) => {
@@ -45,7 +47,10 @@ const MapComponent = ({
   };
 
   const setActiveStreet = (e) => {
-    setCurrentStreet(e.target.feature.properties.name);
+    setCurrentStreet(
+      e.target.feature.properties.name,
+      locality.locality_unique
+    );
     setClickedLayer(e.target);
     setDisplayInfo(true);
   };
@@ -110,6 +115,7 @@ const MapComponent = ({
       fillColor: 'white',
       weight: isMobile ? 9 : 5,
       opacity: 0.7,
+      color: DEFAULT_COLOUR,
     });
 
     layer.on({
@@ -190,14 +196,16 @@ const MapComponent = ({
 MapComponent.propTypes = {
   setCurrentStreet: PropTypes.func.isRequired,
   fetchStreetData: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   // updateStreetsToDB: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
-  street: state.street,
+  street: state.street.street,
+  streets: state.street.streets,
   locality: state.locality,
-  device: state.device,
+  isMobile: state.device.isMobile,
 });
 
 export default connect(mapStateToProps, {

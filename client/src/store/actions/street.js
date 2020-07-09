@@ -2,18 +2,18 @@ import {
   FETCHED_STREET_DATA,
   SET_CURRENT_STREET,
   FETCH_ERROR,
-  // STREET_LOADING,
-  UPDATED_STREET_DATA,
   STREET_LOADING,
 } from '../types';
 // import config from 'config';
 import axios from 'axios';
 
-const locality = 'victoria-layout';
 const CancelToken = axios.CancelToken;
 let cancel;
 
-export const setCurrentStreet = (pStreet) => async (dispatch, ownProps) => {
+export const setCurrentStreet = (pStreetName, pLocalityName) => async (
+  dispatch,
+  ownProps
+) => {
   try {
     // cancel is defined then execute cancel
     cancel && cancel();
@@ -21,7 +21,7 @@ export const setCurrentStreet = (pStreet) => async (dispatch, ownProps) => {
     dispatch({
       type: STREET_LOADING,
     });
-    const res = await axios.get(`api/street/${locality}/${pStreet}`, {
+    const res = await axios.get(`api/street/${pLocalityName}/${pStreetName}`, {
       cancelToken: new CancelToken((c) => {
         cancel = c;
       }),
@@ -40,34 +40,6 @@ export const setCurrentStreet = (pStreet) => async (dispatch, ownProps) => {
         payload: error,
       });
     }
-  }
-};
-
-export const updateStreetsToDB = (streetJson) => async (dispatch) => {
-  try {
-    // config for post req
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    // array of unique street-name [ per locality ]
-    // const jsonFeatures = streetJson.features;
-
-    dispatch({
-      type: STREET_LOADING,
-    });
-    await axios.post(`api/street/${locality}`, streetJson, config);
-
-    dispatch({
-      type: UPDATED_STREET_DATA,
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_ERROR,
-      payload: error,
-    });
   }
 };
 

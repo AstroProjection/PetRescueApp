@@ -15,7 +15,6 @@ import Spinner from '../Layout/Spinner';
 
 import { useSelector } from 'react-redux';
 import { addAnimal } from '../../store/actions/animal';
-import mapData from '../../resources/victoria-layout.json';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -35,14 +34,20 @@ const animalPostSchema = yup.object({
   vaccineArr: yup.array().of(
     yup.object({
       vaccinename: yup.string().required('Enter vaccine name'),
-      vaccineDateTaken: yup.date().notRequired(),
-      vaccineDateDue: yup.date().notRequired(),
+      vaccineDateTaken: yup.string().notRequired(),
+      vaccineDateDue: yup.string().notRequired(),
     })
   ),
 });
 
 const AddPost = (props) => {
-  let locations = mapData.features;
+  const {
+    addAnimal,
+    street,
+    locality: { locality },
+    ...rest
+  } = props;
+  let locations = locality ? locality.features : [];
   locations = locations.map((feature) => {
     return {
       displayName: feature.properties.displayName,
@@ -63,12 +68,9 @@ const AddPost = (props) => {
     for (const element of e.vaccineArr) {
       formSubmit.append('vaccineArr[]', JSON.stringify(element));
     }
-
     addAnimal(formSubmit);
-    // props.onHide();
+    props.onHide();
   };
-
-  const { addAnimal, street, ...rest } = props;
 
   return (
     <Modal {...rest} size='lg' centered>
@@ -87,8 +89,8 @@ const AddPost = (props) => {
                 name: '',
                 type: '',
                 identity: '',
-                locality: 'victoria-layout',
-                location: street ? street.streetname : '8th-cross',
+                locality: locality ? locality._id : '',
+                location: street ? street.streetname : '',
                 spayedValue: '',
                 spayedHospital: '',
                 spayedDate: new Date(),
@@ -106,7 +108,7 @@ const AddPost = (props) => {
                 setValues,
                 touched,
               }) => (
-                <Form onSubmit={handleSubmit} noValidate={true}>
+                <Form onSubmit={handleSubmit} noValidate>
                   <FormFile custom>
                     <FormFile.Label>Add image</FormFile.Label>
                     <FormFile.Input
@@ -223,7 +225,7 @@ const AddPost = (props) => {
                     setValues={setValues}
                   />
                   <Button type='submit'>Submit</Button>
-                  <pre>{JSON.stringify(values, null, 2)} </pre>
+                  {/* <pre>{JSON.stringify(values, null, 2)} </pre> */}
                   {/* <pre>{JSON.stringify(errors, null, 2)} </pre> */}
                 </Form>
               )}
@@ -244,6 +246,7 @@ AddPost.propTypes = {
 
 const mapStateToProps = (state) => ({
   street: state.street.street,
+  locality: state.locality,
 });
 
 export default connect(mapStateToProps, { addAnimal })(React.memo(AddPost));

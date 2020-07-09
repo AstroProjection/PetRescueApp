@@ -7,10 +7,22 @@ import { Redirect } from 'react-router-dom';
 const Landing = ({ auth: { user, isLoggedin } }) => {
   if (isLoggedin) return <Redirect to='/home' />;
   return (
-    <Jumbotron fluid>
-      <Container>
-        <h1>Pet RescYou</h1>
-        <p>This is the pet RescYou landing page!</p>
+    <Jumbotron fluid className='landing'>
+      <Container className='container-class'>
+        <h1>
+          <i className='fas fa-paw'></i>Pet RescYou
+        </h1>
+        <p>
+          The <b>animal tracker</b> Tab has a map for easy visualization!
+        </p>
+        <p>
+          You can post incident reports on the <b>home</b> page
+        </p>
+        <br />
+        <p>Anyone can view what's on the webpages!</p>
+        <p>
+          You will need to <b>register</b> to post on the website!
+        </p>
       </Container>
     </Jumbotron>
   );

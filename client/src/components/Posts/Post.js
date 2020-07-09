@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import ReadMoreReact from 'read-more-react';
+import Moment from 'react-moment';
 
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
@@ -12,21 +13,24 @@ import Whatsapp from './Whatsapp';
 import { connect } from 'react-redux';
 
 import { uploadImage, removePost } from '../../store/actions/post';
+import EditPost from './EditPost';
 
 const Post = ({
-  postId,
-  img,
-  title,
-  text,
   user: { name, _id: postUser },
   auth,
   uploadImage,
   removePost,
   comments,
-  urgency,
-  tag,
-  status,
+  setEditModal,
+  editModal,
+  post,
+  setEditPost,
 }) => {
+  const { _id, image, title, text, tag, status, createdAt, urgency } = post;
+  const date = createdAt;
+  const img = image;
+  const postId = _id;
+
   let loggedUser = null;
   // const loading = auth.loading;
   const fileUploadRef = useRef(null);
@@ -36,7 +40,6 @@ const Post = ({
 
   let formData = new FormData();
   formData.append('image', null);
-  // console.log(img);
   return (
     <React.Fragment>
       <div className='card-post-layout'>
@@ -82,20 +85,29 @@ const Post = ({
           </Card.Body>
         </div>
         <div className='post-report'>
-          {urgency === 'high' && (
-            <i class='fas fa-exclamation-triangle animate-danger'></i>
-          )}
-          {urgency === 'mid' && (
-            <i class='fas fa-exclamation-triangle animate-medium'></i>
-          )}
-          {urgency === 'low' && (
-            <i class='fas fa-exclamation-triangle animate-low'></i>
-          )}
+          <div className='post-urgency'>
+            {urgency === 'high' && (
+              <i className='fas fa-exclamation-triangle animate-danger'></i>
+            )}
+            {urgency === 'mid' && (
+              <i className='fas fa-exclamation-triangle animate-medium'></i>
+            )}
+            {urgency === 'low' && (
+              <i className='fas fa-exclamation-triangle animate-low'></i>
+            )}
+            <p className='tag-animate'>{tag}</p>
+          </div>
+          <div className='post-status'>Status:{status}</div>
         </div>
         <div className='post-by'>
           <div className='card-post-by'>
             <small>
-              <span className='post-by'>Posted by: {name}</span>
+              <span className='post-by'>
+                <i className='fas fa-user'></i> {name}
+              </span>
+              <span>
+                <Moment format='DD/MM/YYYY'>{date}</Moment>
+              </span>
             </small>
           </div>
         </div>
@@ -110,7 +122,7 @@ const Post = ({
             className='comments-btn'
             onClick={() => {}}
           >
-            <i class='far fa-comment-alt'></i> <b>{comments}</b>
+            <i className='far fa-comment-alt'></i> <b>{comments}</b>
           </Link>
         </div>
         <div className='post-modifications'>
@@ -120,6 +132,8 @@ const Post = ({
                 className='button edit-btn'
                 onClick={(e) => {
                   // removePost(postId);
+                  setEditModal(true);
+                  setEditPost({ ...post });
                 }}
               >
                 <i className='fas fa-edit'></i>
@@ -140,16 +154,15 @@ const Post = ({
             </>
           )}
         </div>
+        {/* {JSON.stringify(post, null, 2)} */}
       </div>
     </React.Fragment>
   );
 };
 
 Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
-  img: PropTypes.string,
+  post: PropTypes.object.isRequired,
   uploadImage: PropTypes.func.isRequired,
   removePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,

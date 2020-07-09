@@ -15,18 +15,11 @@ import { connect } from 'react-redux';
 // import AnimalPost from '../AnimalTracker/AnimalPost';
 
 const MapPage = ({ setLocality, locality: { locality, loading } }) => {
-  // const localityList = ['Victoria Layout', 'Ulsoor'];
-
-  // const [activeLocality, setLocality] = React.useState('');
-
-  // const onChange = (e) => {
-  //   console.log('onChange');
-  //   console.dir(e);
-  // };
-
   return (
     <React.Fragment>
-      <h1>{locality ? locality.locality : 'Please select a locality'}</h1>
+      <div className='animal-tracker-title'>
+        <h1>{locality ? locality.locality : 'Select a locality'}</h1>
+      </div>
       <div className='map-containment'>
         <FormControl
           title='Change locality'
@@ -41,15 +34,16 @@ const MapPage = ({ setLocality, locality: { locality, loading } }) => {
           <option value='victoria-layout'>Victoria Layout</option>
           <option value='ulsoor-1'>Ulsoor</option>
         </FormControl>
-
-        <Tabs defaultActiveKey='animal-tracker' id='uncontrolled-tab-example'>
-          <Tab eventKey='animal-tracker' title='Animal Tracker'>
-            <strong>Click</strong> on the <strong>road</strong> to know about
-            the animals there...
-          </Tab>
-          {/* <Tab eventKey='feeding-route' title='Feeding Routes' disabled></Tab> */}
-          {/* <Tab eventKey='adoption' title='Adoption' disabled></Tab> */}
-        </Tabs>
+        {/* <Tabs defaultActiveKey='animal-tracker' id='uncontrolled-tab-example'> */}
+        {/* <Tab eventKey='animal-tracker' title='Animal Tracker'> */}
+        <div className='animal-tracker-text'>
+          <strong>Click</strong> on the <strong>road</strong> to know about the
+          animals there...
+        </div>
+        {/* </Tab> */}
+        {/* <Tab eventKey='feeding-route' title='Feeding Routes' disabled></Tab> */}
+        {/* <Tab eventKey='adoption' title='Adoption' disabled></Tab> */}
+        {/* </Tabs> */}
         {!!locality && !loading && <MapComponent />}
       </div>
     </React.Fragment>

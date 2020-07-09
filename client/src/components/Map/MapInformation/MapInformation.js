@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../../Layout/Spinner';
 
 import AnimalButtons from '../../AnimalTracker/AnimalButtons';
-import { MapInfoHeader } from './MapInfoHeader';
+import MapInfoHeader from './MapInfoHeader';
 import MapInfoListing from './MapInfoListing';
 
 const MapInformation = ({
@@ -14,7 +14,6 @@ const MapInformation = ({
 }) => {
   React.useEffect(() => {
     console.log('map information rendering');
-    // street ? getStreetAnimals(street._id) : getLocalityInfo('victoria-layout');
   }, []);
 
   return loading ? (

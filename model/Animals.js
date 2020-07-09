@@ -31,24 +31,25 @@ const VaccinesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  dateTaken: {
+  vaccineDateTaken: {
     type: String,
     // required: true,
-    default: null,
+    default: '',
   },
-  dateDue: {
+  vaccineDateDue: {
     type: String,
     // required: true,
-    default: null,
+    default: '',
   },
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     default: null,
+    ref: 'users',
     // required: true,
   },
   cost: {
     type: Number,
-    default: null,
+    default: '',
     // required: true,
   },
 });
@@ -72,7 +73,7 @@ const AnimalsSchema = new mongoose.Schema({
   },
   locality: {
     type: String,
-    default: 'victoria-layout',
+    default: '',
     required: true,
   },
   location: {

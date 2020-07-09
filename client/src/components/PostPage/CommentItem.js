@@ -13,7 +13,7 @@ const CommentItem = (props) => {
   return (
     <div className='post  p-1 my-1'>
       <div className='comment-heading'>
-        <a href='profile.html'>
+        <a>
           <img
             className='round-img'
             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
@@ -21,7 +21,7 @@ const CommentItem = (props) => {
           />
         </a>
         <p>
-          <b>{comment.name}</b> from <b>{comment.user.locality}</b>
+          <b>{comment.name}</b>
         </p>
       </div>
       <div>

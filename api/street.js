@@ -49,7 +49,7 @@ router.get('/:localityname/:streetname', async (req, res) => {
 //   @desc Update the Streets Collection with street-names
 //   @access private
 
-router.post('/:locality', auth, async (req, res) => {
+router.post('/:locality', adminAuth, async (req, res) => {
   // const features = req.body.features;
   let streets = [];
   try {
@@ -64,14 +64,14 @@ router.post('/:locality', auth, async (req, res) => {
           locality: mongoose.Types.ObjectId(req.params.locality),
         },
         async (err, street) => {
-          console.log(street);
           try {
             // return;
             if (!street) {
               /// if street doesn't exit, create street
-              const newStreet = Streets({
+              const newStreet = new Streets({
                 locality: req.params.locality,
                 streetname: feature.properties.name,
+                displayName: feature.properties.displayName,
               });
               await newStreet.save();
             }

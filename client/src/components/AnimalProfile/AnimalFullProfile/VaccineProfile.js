@@ -34,8 +34,8 @@ const VaccineProfile = (props) => {
         vaccines.map((vaccine, index) => (
           <VaccineItem
             vaccineName={vaccine.vaccinename}
-            dateDue={vaccine.dateDue}
-            dateTaken={vaccine.dateTaken}
+            dateDue={vaccine.vaccineDateDue}
+            dateTaken={vaccine.vaccineDateTaken}
             key={index}
           />
         ))

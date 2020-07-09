@@ -6,7 +6,7 @@ const Whatsapp = () => {
   const link = encodeURIComponent('www.google.com');
   const message = ` Attention! Check this post out ${link}`;
   return (
-    true && (
+    isMobile && (
       <a
         href={`whatsapp://send?text=${message}`}
         data-action='share/whatsapp/share'

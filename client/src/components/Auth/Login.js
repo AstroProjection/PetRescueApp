@@ -85,16 +85,17 @@ const Login = ({ login, auth: { isLoggedin } }) => {
                     name='password'
                     value={values.password}
                     autoComplete='password'
-                    // minLength='6'
-                    // maxLength='15'
-                    // isValid={touched.password && !errors.password}
                     isInvalid={touched.password && errors.password}
                   />
                   <Form.Control.Feedback type='invalid'>
                     {errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant='primary' type='submit' disabled={isSubmitting}>
+                <Button
+                  className='auth-button-form'
+                  type='submit'
+                  disabled={isSubmitting}
+                >
                   Login
                 </Button>
               </Form>

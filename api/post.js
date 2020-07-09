@@ -62,8 +62,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // console.log(req.files[0]);
     // console.log(req.body);
+    let locationState = JSON.parse(req.body.locationState);
     try {
       const newPost = new Post({
         text: req.body.text,
@@ -73,6 +73,8 @@ router.post(
           req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
         tag: req.body.tag,
         urgency: req.body.urgency,
+        status: req.body.status,
+        locationState: locationState,
       });
 
       newPost.save(async (err, post) => {
@@ -87,6 +89,59 @@ router.post(
       });
 
       // res.json(newPost);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error });
+    }
+  }
+);
+
+//   @route POST api/post/:postId
+//   @desc Edit a post on the bulletin
+//   @access private
+
+// above are just descriptions of the route.
+
+router.put(
+  '/:postId',
+  [
+    auth,
+    upload.array('image', 1),
+    check('text', 'text is required').notEmpty(),
+    check('title', 'title is required').notEmpty(),
+  ],
+  async (req, res) => {
+    ///checking that text/name,email is not empty
+    const errors = validationResult(req);
+    // console.log(errors);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // console.log(req.body);
+    // console.log(req.files[0]);
+    let locationState = JSON.parse(req.body.locationState);
+    try {
+      const post = await Post.findOneAndUpdate(
+        { _id: req.params.postId },
+        {
+          text: req.body.text,
+          title: req.body.title,
+          image:
+            req.files.length > 0
+              ? '\\uploads\\' + req.files[0].filename
+              : req.body.image,
+          tag: req.body.tag,
+          urgency: req.body.urgency,
+          status: req.body.status,
+          locationState,
+        },
+        {
+          new: true,
+        }
+      ).populate({ path: 'user', select: 'name _id' });
+
+      res.json({ post, id: req.params.postId });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ error });

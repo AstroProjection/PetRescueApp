@@ -3,18 +3,13 @@
     "center": [12.97655, 77.61797],
     "zoom": 17
   },
-  "locality": "Ulsoor",
-  "locality_unique": "ulsoor-1",
   "type": "FeatureCollection",
   "features": [
     {
       "type": "Feature",
       "properties": {
         "name": "mg-road-main",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Mg Road 1"
       },
       "geometry": {
         "type": "LineString",
@@ -29,10 +24,7 @@
       "type": "Feature",
       "properties": {
         "name": "dickenson-road-1",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Dickenson Road 1"
       },
       "geometry": {
         "type": "LineString",
@@ -46,10 +38,7 @@
       "type": "Feature",
       "properties": {
         "name": "dickenson-road-2",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Dickenson Road 2"
       },
       "geometry": {
         "type": "LineString",
@@ -63,10 +52,7 @@
       "type": "Feature",
       "properties": {
         "name": "dickenson-road-3",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Dickenson Road 3"
       },
       "geometry": {
         "type": "LineString",
@@ -79,11 +65,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "lake-road-1",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "name": "ulsoor-road-1",
+        "displayName": "Ulsoor lake road"
       },
       "geometry": {
         "type": "LineString",
@@ -100,10 +83,7 @@
       "type": "Feature",
       "properties": {
         "name": "aurobindo-society",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Aurobindo Society"
       },
       "geometry": {
         "type": "LineString",
@@ -126,11 +106,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "halasuru-road-1",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "name": "ulsoor-road-1",
+        "displayName": "Ulsoor road"
       },
       "geometry": {
         "type": "LineString",
@@ -145,10 +122,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-2",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 2"
       },
       "geometry": {
         "type": "LineString",
@@ -164,10 +138,7 @@
       "type": "Feature",
       "properties": {
         "name": "radisson-city-center-road",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Raddison Center Road"
       },
       "geometry": {
         "type": "LineString",
@@ -182,10 +153,7 @@
       "type": "Feature",
       "properties": {
         "name": "haudin-road-1",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Haudin Road 1"
       },
       "geometry": {
         "type": "LineString",
@@ -202,10 +170,7 @@
       "type": "Feature",
       "properties": {
         "name": "haudin-road-2",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Haudin Road 2"
       },
       "geometry": {
         "type": "LineString",
@@ -221,64 +186,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "aga-ali-abas-road-1",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.6182472705841, 12.979122676255054],
-          [77.61789321899414, 12.978735850744096],
-          [77.61766791343689, 12.978275841244862],
-          [77.61764109134674, 12.977977880092276],
-          [77.61818289756775, 12.97778446652138],
-          [77.61763036251068, 12.977972652700434],
-          [77.61760890483856, 12.977685145980553],
-          [77.61762499809265, 12.976906262468976],
-          [77.61803805828094, 12.97691671729737],
-          [77.61763036251068, 12.976906262468976],
-          [77.61760354042053, 12.976482841549657],
-          [77.6173084974289, 12.976493296395848],
-          [77.6175981760025, 12.976477614126402],
-          [77.61747479438782, 12.975975780981457],
-          [77.61744260787964, 12.975735318907233],
-          [77.61827945709229, 12.975756228662055],
-          [77.61743187904358, 12.975745773784872],
-          [77.61741042137146, 12.975473946823694]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "aga-ali-abas-road-2",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.6186442375183, 12.978484936577319],
-          [77.61843502521515, 12.978066745736559],
-          [77.61842966079712, 12.977789693917153],
-          [77.61840283870696, 12.978092882684704],
-          [77.61774837970734, 12.978375161549703]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "halasuru-road-3",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Ulsoor Road 3"
       },
       "geometry": {
         "type": "LineString",
@@ -292,10 +201,7 @@
       "type": "Feature",
       "properties": {
         "name": "halasuru-road-2",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Ulsoor Road 2"
       },
       "geometry": {
         "type": "LineString",
@@ -309,81 +215,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "halasuru-road-4",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.61702954769135, 12.977507414387405],
-          [77.61674523353577, 12.976623981936221],
-          [77.616428732872, 12.975818957915958]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "halasuru-road-5",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.61713683605194, 12.977036947792284],
-          [77.61710464954376, 12.976529888354085],
-          [77.61683642864227, 12.975677817072437]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "halasuru-road-3",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.61691153049468, 12.977094449312766],
-          [77.61760354042053, 12.977026492968944]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "aga-ali-abas-road-3",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [77.61675596237183, 12.97666057387521],
-          [77.61711001396179, 12.97652466093181]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "dickenson-road-4",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Dickenson Road 4"
       },
       "geometry": {
         "type": "LineString",
@@ -398,10 +231,7 @@
       "type": "Feature",
       "properties": {
         "name": "halasuru-road-4",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Ulsoor Road 4"
       },
       "geometry": {
         "type": "LineString",
@@ -423,10 +253,7 @@
       "type": "Feature",
       "properties": {
         "name": "dickenson-road-5",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "Dickenson Road 5"
       },
       "geometry": {
         "type": "LineString",
@@ -447,10 +274,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-3",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 3"
       },
       "geometry": {
         "type": "LineString",
@@ -468,10 +292,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-4",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 4"
       },
       "geometry": {
         "type": "LineString",
@@ -485,10 +306,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-5",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 5"
       },
       "geometry": {
         "type": "LineString",
@@ -505,10 +323,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-6",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 6"
       },
       "geometry": {
         "type": "LineString",
@@ -522,10 +337,7 @@
       "type": "Feature",
       "properties": {
         "name": "mg-road-main-7",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "displayName": "MG Road 7"
       },
       "geometry": {
         "type": "LineString",
@@ -540,11 +352,8 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "mg-road-main-7",
-        "dogs": [],
-        "cats": [],
-        "feeder": "",
-        "displayName": "7th Cross"
+        "name": "ulsoor-road-2",
+        "displayName": "Carnival De goa Area"
       },
       "geometry": {
         "type": "LineString",
@@ -553,6 +362,74 @@
           [77.62011408805846, 12.975102797993017],
           [77.61980026960373, 12.975170754862587],
           [77.61988341808319, 12.975560199641631]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aga-abbas-ali-road-1",
+        "displayName": "AAA"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6182472705841, 12.979101766783378],
+          [77.61803269386292, 12.978913581459016],
+          [77.61780470609665, 12.978534596692922],
+          [77.61772692203522, 12.978375161549703],
+          [77.61762499809265, 12.977954356828167],
+          [77.61817753314972, 12.977787080219272],
+          [77.6176518201828, 12.977985721179799],
+          [77.6177430152893, 12.978369934166233],
+          [77.61841624975204, 12.97806413204159],
+          [77.61841624975204, 12.977813217196832],
+          [77.61844038963318, 12.978079814210975],
+          [77.6186442375183, 12.978469254433481]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "aga-abbas-ali-road-2",
+        "displayName": "AAA-Swapnalok"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.61763036251068, 12.977951743132017],
+          [77.61762499809265, 12.976948081779911],
+          [77.61804342269897, 12.976937626952829],
+          [77.61761963367462, 12.976911489883223],
+          [77.61758744716644, 12.976456704432241],
+          [77.61730313301086, 12.976498523818783],
+          [77.61759281158447, 12.976430567312079],
+          [77.61744797229767, 12.975745773784872],
+          [77.61826872825623, 12.975756228662055],
+          [77.61744797229767, 12.975719636589966],
+          [77.61742651462555, 12.975468719379219]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "grazia-beauty-parlor-1",
+        "displayName": "Grazias Area"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.6168417930603, 12.975667362191947],
+          [77.61710464954376, 12.97651943350942],
+          [77.61714220046997, 12.977052630026463],
+          [77.6175981760025, 12.977026492968944],
+          [77.61692225933075, 12.977104904133245],
+          [77.61702954769135, 12.977507414387405],
+          [77.61641263961792, 12.975813730478734],
+          [77.61674523353577, 12.976676256133128],
+          [77.61707246303557, 12.976545570620246]
         ]
       }
     }

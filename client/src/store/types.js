@@ -1,6 +1,7 @@
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const CREATE_POST = 'CREATE_POST';
+export const EDITED_POST = 'EDITED_POST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const LOAD_USER = 'LOAD_USER';

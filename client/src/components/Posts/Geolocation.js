@@ -26,8 +26,8 @@ const Geolocation = ({ values, setFieldValue }) => {
         setLocationState({ ...locationState, center: [latitude, longitude] });
       },
       (geoLocationObj) => {
-        alert('geolocation failed');
-        alert(geoLocationObj.position);
+        // alert('geolocation failed');
+        // alert(geoLocationObj.position);
       },
       {
         enableHighAccuracy: true,
@@ -41,7 +41,7 @@ const Geolocation = ({ values, setFieldValue }) => {
       fetchGeoLocation();
     }
   } else {
-    alert('cannot geolocate');
+    // alert('cannot geolocate');
   }
 
   const markerClick = () => {

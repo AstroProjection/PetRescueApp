@@ -63,7 +63,12 @@ const AnimalList = (props) => {
   return (
     <React.Fragment>
       <Card>
-        <Accordion.Toggle as={Button} variant='link' eventKey={index}>
+        <Accordion.Toggle
+          as={Button}
+          variant='link'
+          eventKey={index}
+          className='animal-list-button'
+        >
           {street ? street[animal].length + ` ` : ' 0 '}
           <i className={`${faClass}`}></i>
         </Accordion.Toggle>
@@ -74,7 +79,9 @@ const AnimalList = (props) => {
               updatePage={updatePage}
               totalPages={noOfPages}
             />
-            <Card.Body>{animalList(pageNumber)}</Card.Body>
+            <Card.Body className='animal-list-body'>
+              {animalList(pageNumber)}
+            </Card.Body>
           </>
         </Accordion.Collapse>
       </Card>

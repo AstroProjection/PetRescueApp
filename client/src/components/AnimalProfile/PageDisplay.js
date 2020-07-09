@@ -5,7 +5,7 @@ const PageDisplay = ({ pageNumber, updatePage, totalPages }) => {
   return (
     totalPages > 0 && (
       <>
-        <div className='page-display'>
+        <div className='page-display animal-list-pagedisplay'>
           <button
             className='page-button'
             onClick={() => {

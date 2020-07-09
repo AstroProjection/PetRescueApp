@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import FormFile from 'react-bootstrap/FormFile';
@@ -11,9 +12,8 @@ import Geolocation from './Geolocation';
 import bsCustomFileInput from 'bs-custom-file-input';
 
 import Spinner from '../Layout/Spinner';
-
+import { editPost } from '../../store/actions/post';
 import { useSelector, connect } from 'react-redux';
-import { createPost } from '../../store/actions/post';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -22,7 +22,7 @@ const postValidationSchema = yup.object({
   title: yup
     .string()
     .required('Please enter a title')
-    .min(5, 'Title must be at least 5 characters')
+    .min(5, 'Title must be at least 8 characters')
     .max(80, 'Title cannot be more than 80 characters'),
   text: yup.string().required('Please enter a description'),
   image: yup.mixed().notRequired(),
@@ -41,9 +41,14 @@ const urgencyTags = [
   ['mid', 'Medium'],
   ['high', 'High'],
 ];
-const AddPost = ({ isMobile, createPost, ...props }) => {
-  // value | HTML
 
+const statusTags = [
+  ['open', 'Open'],
+  ['closed', 'Closed'],
+];
+const EditPost = ({ isMobile, editPost, post, ...props }) => {
+  /// tags to include for post types
+  // value | HTML
   const initLocationState = {
     center: [],
     zoom: 17,
@@ -53,11 +58,14 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
   const onSubmit = (e) => {
     let formData = new FormData();
     for (const [key, value] of Object.entries(e)) {
-      if (key !== 'locationState') formData.append(key, value);
-      else formData.append(key, JSON.stringify(value));
+      if (key !== 'locationState') {
+        formData.append(key, value);
+      } else if (key === 'locationState') {
+        formData.append(key, JSON.stringify(value));
+      }
     }
-    createPost(formData);
-    // props.onHide();
+    editPost(formData, post._id);
+    props.onHide();
   };
 
   return (
@@ -70,21 +78,22 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
       {!loading ? (
         <React.Fragment>
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-vcenter' name='title'>
-              Add a Post
+            <Modal.Title id='contained-modal-title-vcenter-1' name='title'>
+              Edit Post
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Formik
               onSubmit={onSubmit}
               initialValues={{
-                title: '',
-                text: '',
-                image: '',
-                tag: '',
-                urgency: '',
+                title: post.title,
+                text: post.text,
+                image: post && post.image ? post.image : '',
+                tag: post.tag,
+                urgency: post.urgency,
+                status: post.status,
                 showLocation: isMobile ? false : true,
-                locationState: initLocationState,
+                locationState: post.locationState,
               }}
               validationSchema={postValidationSchema}
             >
@@ -105,10 +114,10 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                         bsCustomFileInput.init();
                       }}
                     />
-                    <FormFile.Label>Add image</FormFile.Label>
+                    <FormFile.Label>New Image:</FormFile.Label>
                   </FormFile>
                   <Row>
-                    <Col lg={6}>
+                    <Col lg={4}>
                       <Form.Group controlId='addpost-title'>
                         <Form.Label>Title*</Form.Label>
                         <Form.Control
@@ -116,6 +125,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                           type='text'
                           autoComplete='new-password'
                           placeholder='enter title here...'
+                          defaultValue={values.title}
                           onChange={handleChange}
                           isInvalid={touched.title && !!errors.title}
                         />
@@ -124,7 +134,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                         </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
-                    <Col lg={3} sm={6}>
+                    <Col lg={4} sm={6}>
                       <Form.Group controlId='addpost-title'>
                         <Form.Label>Tag*</Form.Label>
                         <Form.Control
@@ -132,7 +142,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                           as='select'
                           autoComplete='new-password'
                           // placeholder='Please select an option...'
-                          defaultValue={''}
+                          defaultValue={values.tag}
                           onChange={handleChange}
                           isInvalid={touched.tag && !!errors.tag}
                         >
@@ -150,7 +160,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                         </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
-                    <Col lg={3} sm={6}>
+                    <Col lg={2} sm={6}>
                       <Form.Group controlId='addpost-title'>
                         <Form.Label>Urgency*</Form.Label>
                         <Form.Control
@@ -158,7 +168,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                           as='select'
                           autoComplete='new-password'
                           // placeholder='Please select an option...'
-                          defaultValue={''}
+                          defaultValue={values.urgency}
                           onChange={handleChange}
                           isInvalid={touched.urgency && !!errors.urgency}
                         >
@@ -172,7 +182,33 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                           ))}
                         </Form.Control>
                         <Form.Control.Feedback type='invalid'>
-                          {errors.tag}
+                          {errors.urgency}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col lg={2} sm={12}>
+                      <Form.Group controlId='addpost-title'>
+                        <Form.Label>Status*</Form.Label>
+                        <Form.Control
+                          name='status'
+                          as='select'
+                          autoComplete='new-password'
+                          // placeholder='Please select an option...'
+                          defaultValue={values.status}
+                          onChange={handleChange}
+                          isInvalid={touched.status && !!errors.status}
+                        >
+                          <option value='' disabled={true}>
+                            select an option
+                          </option>
+                          {statusTags.map((tag, index) => (
+                            <option key={index} value={tag[0]}>
+                              {tag[1]}
+                            </option>
+                          ))}
+                        </Form.Control>
+                        <Form.Control.Feedback type='invalid'>
+                          {errors.urgency}
                         </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
@@ -183,6 +219,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                       as='textarea'
                       rows='2'
                       name='text'
+                      defaultValue={values.text}
                       onChange={handleChange}
                       isInvalid={touched.text && !!errors.text}
                     />
@@ -214,7 +251,7 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                   )}
 
                   <Button type='submit'>Submit</Button>
-                  {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+                  <pre>{JSON.stringify(values, null, 2)}</pre>
                   {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
                 </Form>
               )}
@@ -229,10 +266,12 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
   );
 };
 
-AddPost.propTypes = {};
+EditPost.propTypes = {
+  editPost: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   isMobile: state.device.isMobile,
 });
 
-export default connect(mapStateToProps, { createPost })(React.memo(AddPost));
+export default connect(mapStateToProps, { editPost })(EditPost);

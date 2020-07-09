@@ -52,11 +52,20 @@ const PostSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      enum: ['open', 'closed'],
       default: 'open',
     },
     tag: {
       type: String,
       required: true,
+    },
+    locationState: {
+      center: {
+        type: [Number],
+      },
+      zoom: {
+        type: Number,
+      },
     },
     comments: [commentSchema],
   },

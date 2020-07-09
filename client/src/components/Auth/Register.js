@@ -143,10 +143,9 @@ const Register = ({ isLoggedin }) => {
                 </Form.Control.Feedback>
 
                 <Button
-                  variant='primary'
                   type='submit'
                   disabled={isSubmitting}
-                  className='btn'
+                  className='auth-button-form'
                 >
                   Submit
                 </Button>

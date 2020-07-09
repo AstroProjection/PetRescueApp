@@ -11,10 +11,12 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
   React.useEffect(() => {
     getAllPosts();
   }, [getAllPosts]);
-
+  //
+  const [editModal, setEditModal] = React.useState(false);
+  const [editPost, setEditPost] = React.useState({});
   const [pageNumber, setPageNumber] = React.useState(1);
 
-  const profilePerPage = 2;
+  const profilePerPage = 5;
   const noOfPages =
     posts.length > 0 ? Math.ceil(posts.length / profilePerPage) : 1;
 
@@ -34,16 +36,12 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
             return (
               <Post
                 key={post._id}
-                index={index}
-                postId={post._id}
-                img={post.image}
-                title={post.title}
-                text={post.text}
                 user={post.user}
+                post={post}
                 comments={post.comments.length}
-                urgency={post.urgency}
-                tag={post.tag}
-                status={post.status}
+                setEditModal={setEditModal}
+                editModal={editModal}
+                setEditPost={setEditPost}
               />
             );
           } else {
@@ -65,27 +63,31 @@ const Posts = ({ getAllPosts, post: { posts, loading } }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <PostButtons />
+            <PostButtons
+              setEditModal={setEditModal}
+              editModal={editModal}
+              editPost={editPost}
+            />
 
             <Accordion>{postList()}</Accordion>
             <div>
-              <nav class='blog-nav nav nav-justified my-4'>
+              <nav className='blog-nav nav nav-justified my-4'>
                 {!isFirstPage && (
                   <div
-                    class='posts-buttons nav-item posts-left'
+                    className='posts-buttons nav-item posts-left'
                     onClick={(e) => updatePage(pageNumber - 1)}
                   >
-                    <i class='arrow-prev fas fa-long-arrow-alt-left'></i>
+                    <i className='arrow-prev fas fa-long-arrow-alt-left'></i>
                     Previous
                   </div>
                 )}
                 {!isLastPage && (
                   <div
-                    class='posts-buttons nav-link-next nav-item posts-right'
+                    className='posts-buttons nav-link-next nav-item posts-right'
                     onClick={(e) => updatePage(pageNumber + 1)}
                   >
                     Next
-                    <i class='arrow-next fas fa-long-arrow-alt-right'></i>
+                    <i className='arrow-next fas fa-long-arrow-alt-right'></i>
                   </div>
                 )}
               </nav>

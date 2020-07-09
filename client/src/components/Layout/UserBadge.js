@@ -7,8 +7,8 @@ const UserBadge = ({ auth: { user } }) => {
     <React.Fragment>
       {user ? (
         <h5>
-          <Badge variant='light'>
-            <i className='fa fa-user' /> Welcome <b>{user.name}</b>
+          <Badge className='userbadge'>
+            <i className='fa fa-user' /> Welcome <>{user.name}</>
           </Badge>
         </h5>
       ) : (
