@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "An Application to track animals",
   "main": "index.js",
-  "homepage": "AstroProjection/github.io/PetRescueApp",
+  "homepage": "http://www.petrescyou.in",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index",
