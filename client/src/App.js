@@ -21,31 +21,38 @@ import { loadUser } from './store/actions/auth';
 import { mobileCheck } from './store/actions/device';
 import UserBadge from './components/Layout/UserBadge';
 
-function App({ loadUser, mobileCheck }) {
+function App({ loadUser, mobileCheck, loading }) {
   useEffect(() => {
     mobileCheck();
+    loadUser();
   }, [loadUser, mobileCheck]);
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className='spacer-div'></div>
-      <UserBadge />
-      <div className='main-wrapper'>
-        <Alert />
-        <Switch>
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/' component={Landing} />
-          <Route exact path='/home' component={Home} />
-          <Route exact path='/animal-tracker' component={MapPage} />
-          <Route exact path='/post/:postId' component={PostPage} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    !loading && (
+      <BrowserRouter>
+        <Navbar />
+        <div className='spacer-div'></div>
+        <UserBadge />
+        <div className='main-wrapper'>
+          <Alert />
+          <Switch>
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/home' component={Home} />
+            <Route exact path='/animal-tracker' component={MapPage} />
+            <Route exact path='/post/:postId' component={PostPage} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
   );
 }
 
-export default connect(null, { loadUser, mobileCheck })(App);
+const mapStateToProps = (state) => ({
+  loading: state.auth.loading,
+});
+
+export default connect(mapStateToProps, { loadUser, mobileCheck })(App);
