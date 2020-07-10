@@ -113,7 +113,7 @@ const MapComponent = ({
     layer.setStyle({
       fill: 'true',
       fillColor: 'white',
-      weight: isMobile ? 9 : 5,
+      weight: isMobile ? 9 : 7,
       opacity: 0.7,
       color: DEFAULT_COLOUR,
     });
