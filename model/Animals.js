@@ -131,7 +131,7 @@ AnimalsSchema.post('remove', async (doc, next) => {
       if (err) {
         next(Error('Failed to delete the Image'));
       } else {
-        console.log('deleted the file');
+        // console.log('deleted the file');
         next();
       }
     });

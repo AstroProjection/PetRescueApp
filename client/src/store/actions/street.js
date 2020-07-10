@@ -6,7 +6,7 @@ import {
 } from '../types';
 // import config from 'config';
 import axios from 'axios';
-
+import { setAlert } from './alert';
 const CancelToken = axios.CancelToken;
 let cancel;
 
@@ -39,6 +39,7 @@ export const setCurrentStreet = (pStreetName, pLocalityName) => async (
         type: FETCH_ERROR,
         payload: error,
       });
+      dispatch(setAlert('Connection error!Please try again...', 'danger'));
     }
   }
 };
@@ -56,5 +57,6 @@ export const fetchStreetData = (localityId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: FETCH_ERROR, payload: error });
+    dispatch(setAlert('Connection error!Please try again...', 'danger'));
   }
 };

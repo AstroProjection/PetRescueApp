@@ -24,11 +24,11 @@ export const getAllPosts = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    // console.log(error);
     dispatch({
       type: POST_ERROR,
       payload: error,
     });
+    dispatch(setAlert('Please try again...', 'danger'));
   }
 };
 
@@ -47,6 +47,7 @@ export const getPost = (postId) => async (dispatch) => {
       type: POST_ERROR,
       payload: error,
     });
+    dispatch(setAlert('Please try again...', 'danger'));
   }
 };
 
@@ -71,11 +72,11 @@ export const uploadImage = (formData, postId) => async (dispatch) => {
       },
     });
   } catch (error) {
-    console.error(error);
     dispatch({
       type: UPLOAD_ERROR,
       payload: error,
     });
+    dispatch(setAlert('Please try again...', 'danger'));
   }
 };
 
@@ -100,6 +101,7 @@ export const createPost = (formData) => async (dispatch) => {
       type: POST_ERROR,
       payload: error.errors,
     });
+    dispatch(setAlert('Please try again...', 'danger'));
   }
 };
 
@@ -123,6 +125,8 @@ export const editPost = (formData, postId) => async (dispatch) => {
       type: POST_ERROR,
       payload: error.errors,
     });
+
+    dispatch(setAlert('Connection error!Please try again...', 'danger'));
   }
 };
 
@@ -142,6 +146,7 @@ export const removePost = (postId) => async (dispatch) => {
       type: POST_ERROR,
       payload: error.errors,
     });
+    dispatch(setAlert('Post Error!', 'danger'));
   }
 };
 
@@ -174,6 +179,8 @@ export const addComment = (formData, postId) => async (dispatch) => {
       type: POST_ERROR,
       payload: error.errors,
     });
+
+    dispatch(setAlert('Connection error!Please try again...', 'danger'));
   }
 };
 
@@ -195,5 +202,7 @@ export const removeComment = (postId, commentId) => async (dispatch) => {
       type: POST_ERROR,
       payload: error.errors,
     });
+
+    dispatch(setAlert('Connection Error! Please try again...', 'danger'));
   }
 };

@@ -38,7 +38,7 @@ export const login = (formData) => async (dispatch) => {
       type: AUTH_ERROR,
     });
 
-    dispatch(setAlert(error.response.data.error, 'danger'));
+    dispatch(setAlert('Login error!', 'danger'));
   }
 };
 
@@ -68,6 +68,8 @@ export const loadUser = () => async (dispatch) => {
       type: AUTH_ERROR,
       errors: err,
     });
+
+    dispatch(setAlert('Error loading user! Please login!', 'danger'));
   }
 };
 
@@ -105,5 +107,7 @@ export const register = (formData) => async (dispatch) => {
       type: AUTH_ERROR,
       payload: err,
     });
+
+    dispatch(setAlert(err, 'danger'));
   }
 };

@@ -65,7 +65,6 @@ export default function (state = initialState, action) {
 
     case ANIMAL_ADDED:
       key = `${payload.type}s`;
-      console.log(state.street);
       return {
         ...state,
         loading: false,

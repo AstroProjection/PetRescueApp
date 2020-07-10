@@ -26,7 +26,7 @@ router.post(
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
-    console.log(req.body);
+    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -60,7 +60,7 @@ router.post(
         }
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.status(400).json({ error: 'invalid credentials' });
     }
   }

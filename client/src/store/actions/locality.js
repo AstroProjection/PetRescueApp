@@ -1,5 +1,6 @@
 import { LOCALITY_ERROR, LOCALITY_LOADING, FETCHED_LOCALITY } from '../types';
 import axios from 'axios';
+import { setAlert } from './alert';
 
 // this method will fetch locality from the DB
 export const setLocality = (locality) => async (dispatch) => {
@@ -11,6 +12,7 @@ export const setLocality = (locality) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    dispatch({ type: LOCALITY_ERROR, error: error.reponse.data });
+    dispatch({ type: LOCALITY_ERROR, error: 'Error fetching Locality!' });
+    dispatch(setAlert('Please try again..', 'danger'));
   }
 };

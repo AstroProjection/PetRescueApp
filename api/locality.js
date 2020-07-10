@@ -71,7 +71,7 @@ router.put('/:localityId', adminAuth, async (req, res) => {
 
     res.status(200).json({ msg: 'Updated Locality', locality });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({
       msg: 'Failed to add Locality',
     });

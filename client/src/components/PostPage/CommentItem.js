@@ -13,13 +13,9 @@ const CommentItem = (props) => {
   return (
     <div className='post  p-1 my-1'>
       <div className='comment-heading'>
-        <a>
-          <img
-            className='round-img'
-            src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-            alt=''
-          />
-        </a>
+        {/* <a href='#'> */}
+        <img className='round-img' src='/blank-user.webp' alt='' />
+        {/* </a> */}
         <p>
           <b>{comment.name}</b>
         </p>

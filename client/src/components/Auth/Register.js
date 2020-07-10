@@ -28,9 +28,6 @@ const Register = ({ isLoggedin }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (data, { setSubmitting }) => {
-    // setSubmitting(true);
-    // console.log('submitting');
-    console.log(data);
     dispatch(register(data));
   };
   return (

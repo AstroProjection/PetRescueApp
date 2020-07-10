@@ -3,20 +3,20 @@ import { getPost } from '../../store/actions/post';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 
-import { Map, TileLayer, Marker, Tooltip, Popup, GeoJSON } from 'react-leaflet';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import Comments from './Comments';
 const PostPage = ({ post: { post, loading }, match, getPost }) => {
   React.useEffect(() => {
     getPost(match.params.postId);
-  }, [getPost]);
+  }, [getPost, match.params.postId]);
 
   const position =
     post && post.locationState.center.length > 0
       ? [post.locationState.center[0], post.locationState.center[1]]
       : null;
 
-  console.log(post);
+  // console.log(post);
   return (
     post && (
       <React.Fragment>
@@ -24,7 +24,7 @@ const PostPage = ({ post: { post, loading }, match, getPost }) => {
           <div className='postpage-assets'>
             {post && post.image && (
               <div className='postpage-img'>
-                <img src={post.image} alt='No Image' />
+                <img src={post.image} />
               </div>
             )}
 

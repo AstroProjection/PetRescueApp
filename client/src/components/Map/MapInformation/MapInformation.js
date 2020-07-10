@@ -12,10 +12,6 @@ const MapInformation = ({
   displayInformation,
   setDisplayInfo,
 }) => {
-  React.useEffect(() => {
-    console.log('map information rendering');
-  }, []);
-
   return loading ? (
     <Spinner />
   ) : (

@@ -18,7 +18,7 @@ const CommentsHeader = ({
       ...e,
       user,
     };
-    console.log(formData);
+    // console.log(formData);
     addComment(formData, postId);
   };
 

@@ -2,8 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+// import Tabs from 'react-bootstrap/Tabs';
+// import Tab from 'react-bootstrap/Tab';
 import FormControl from 'react-bootstrap/FormControl';
 import MapComponent from './MapComponent';
 

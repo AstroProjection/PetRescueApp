@@ -33,6 +33,10 @@ export const addAnimal = (formData) => async (dispatch) => {
       type: ANIMALS_ERROR,
       payload: error,
     });
+
+    dispatch(
+      setAlert('There was an error adding an animal! Try again', 'danger')
+    );
   }
 };
 
@@ -57,5 +61,12 @@ export const deleteAnimal = (animalId, streetId) => async (dispatch) => {
       type: ANIMALS_ERROR,
       payload: error,
     });
+
+    dispatch(
+      setAlert({
+        message: 'There was an error removing the animal!',
+        alertType: 'danger',
+      })
+    );
   }
 };

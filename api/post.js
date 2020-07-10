@@ -143,7 +143,7 @@ router.put(
 
       res.json({ post, id: req.params.postId });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return res.status(400).json({ error });
     }
   }
@@ -172,7 +172,7 @@ router.post(
           if (err) {
             throw err;
           } else {
-            console.log('removed old image');
+            // console.log('removed old image');
           }
         });
       }
@@ -252,12 +252,12 @@ router.put(
         text: req.body.text,
         name: user.name,
       };
-      console.log(newComment);
+      // console.log(newComment);
       post.comments.unshift(newComment);
       await post.save();
       res.json(post.comments);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(400).json(error.errors);
     }
   }
@@ -269,7 +269,7 @@ router.put(
 
 router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
   try {
-    console.log();
+    // console.log();
     const post = await Post.findById(req.params.postId);
     const comment = post.comments.find((comment) => {
       return comment.id === req.params.commentId;
@@ -293,7 +293,7 @@ router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
     await post.save();
     res.status(200).json({ msg: 'Comment Removed!' });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json('Server error');
   }
 });
@@ -303,7 +303,7 @@ router.delete('/comments/:postId/:commentId', auth, async (req, res) => {
 //   @access private
 
 router.delete('/:postId', auth, async (req, res) => {
-  console.log('deleting');
+  // console.log('deleting');
   try {
     const post = await Post.findById(req.params.postId);
     // console.log(post);
@@ -312,9 +312,9 @@ router.delete('/:postId', auth, async (req, res) => {
     if (post.user.toString() !== req.user.id)
       return res.status(401).json({ msg: 'User not authorized' });
 
-    console.log('pre-deleted');
+    // console.log('pre-deleted');
     await post.remove();
-    console.log('deleted');
+    // console.log('deleted');
 
     res.json({ msg: 'post removed' });
   } catch (error) {

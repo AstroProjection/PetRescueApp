@@ -9,7 +9,6 @@ module.exports = function (req, res, next) {
   try {
     const userinfo = jwt.verify(token, config.get('secretkey'));
     req.user = userinfo.user;
-    console.log(req.user);
 
     if (req.user.role === 'admin') {
       next();
@@ -17,7 +16,6 @@ module.exports = function (req, res, next) {
       throw new Error('not authorized!');
     }
   } catch (error) {
-    console.log(error);
     res.status(401).json({ msg: 'User not authorized!' });
   }
 };

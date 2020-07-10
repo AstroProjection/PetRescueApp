@@ -85,7 +85,7 @@ const MapComponent = ({
   `;
     clickedLayer.closeTooltip();
     clickedLayer.setPopupContent(popupContent);
-    console.log('this is entering');
+    // console.log('this is entering');
   }, [streets, clickedLayer]);
 
   const markerClick = () => {};
@@ -93,7 +93,7 @@ const MapComponent = ({
   const onEachFeature = (feature, layer) => {
     const toolTipContent = ` <Tooltip><strong>Click</strong> for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
     layer.bindTooltip(toolTipContent).openTooltip();
-    console.log('oneachfeature');
+    // console.log('oneachfeature');
     const popupContent = `
       <Popup>
         <br /> <strong>${feature.properties.displayName}:
@@ -126,7 +126,6 @@ const MapComponent = ({
       popupclose: removeHighlight,
     });
   };
-  console.log('render');
 
   React.useEffect(() => {
     if (locality) fetchStreetData(locality._id);

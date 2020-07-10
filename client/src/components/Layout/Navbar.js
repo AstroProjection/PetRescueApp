@@ -11,9 +11,7 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin, user, isMobile }) => {
   React.useEffect(() => {
     if (localStorage.token) loadUser();
 
-    console.log('rendering useeffect');
     return () => {
-      console.log('removed resize listener');
       return window.removeEventListener('resize', updatePageSize);
     };
   }, [loadUser]);
@@ -24,8 +22,6 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin, user, isMobile }) => {
   ]);
 
   window.addEventListener('resize', updatePageSize);
-
-  console.log('rendering...');
 
   const guestLinks = (
     <React.Fragment>

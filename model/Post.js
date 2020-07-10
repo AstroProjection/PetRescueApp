@@ -94,7 +94,7 @@ PostSchema.post('remove', (doc, next) => {
   }
   fs.unlink(ROOT_PATH + '\\client\\public\\' + doc.image, (err) => {
     if (err) {
-      console.log(err);
+      // console.log(err);
       next(Error('Failed to delete the Image'));
     } else {
       console.log('deleted the file');
