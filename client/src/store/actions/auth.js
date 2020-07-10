@@ -69,7 +69,7 @@ export const loadUser = () => async (dispatch) => {
       errors: err,
     });
 
-    dispatch(setAlert('Error loading user! Please login!', 'danger'));
+    // dispatch(setAlert('Error loading user! Please login!', 'danger'));
   }
 };
 

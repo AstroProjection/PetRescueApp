@@ -7,14 +7,21 @@ import { connect } from 'react-redux';
 import { logout } from '../../store/actions/auth';
 
 import { loadUser } from '../../store/actions/auth';
-const NavbarComponent = ({ loadUser, logout, isLoggedin, user, isMobile }) => {
+const NavbarComponent = ({
+  loadUser,
+  logout,
+  isLoggedin,
+  user,
+  loading,
+  isMobile,
+}) => {
   React.useEffect(() => {
-    if (localStorage.token) loadUser();
+    // if (localStorage.token) loadUser();
 
     return () => {
       return window.removeEventListener('resize', updatePageSize);
     };
-  }, [loadUser]);
+  }, []);
 
   const [pageSize, updatePageSize] = React.useState([
     window.innerWidth,
@@ -47,46 +54,50 @@ const NavbarComponent = ({ loadUser, logout, isLoggedin, user, isMobile }) => {
   );
 
   return (
-    <Navbar expand='lg' fixed='top' collapseOnSelect>
-      <LinkContainer to='/home'>
-        <Navbar.Brand className='petrescue-logo'>
-          <i className='fas fa-paw'></i>Pet RescYou
-        </Navbar.Brand>
-      </LinkContainer>
-      {!isMobile && window.innerWidth > 992 && (
-        <React.Fragment>
-          {isLoggedin ? (
-            <React.Fragment>
-              <hr />
-              {user && <div>Welcome {user.name}!</div>}
-              <hr />
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <hr />
-              <div>Login to post..</div>
-              <hr />
-            </React.Fragment>
-          )}
-        </React.Fragment>
-      )}
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav>
-          <LinkContainer to='/home'>
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='/animal-tracker'>
-            <Nav.Link>Animal Tracker</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to='/about'>
-            <Nav.Link>About</Nav.Link>
-          </LinkContainer>
-        </Nav>
-        <hr />
-        <Nav className='auth-links'>{isLoggedin ? authLinks : guestLinks}</Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    !loading && (
+      <Navbar expand='lg' fixed='top' collapseOnSelect>
+        <LinkContainer to='/home'>
+          <Navbar.Brand className='petrescue-logo'>
+            <i className='fas fa-paw'></i>Pet RescYou
+          </Navbar.Brand>
+        </LinkContainer>
+        {!isMobile && window.innerWidth > 992 && (
+          <React.Fragment>
+            {isLoggedin ? (
+              <React.Fragment>
+                <hr />
+                {user && <div>Welcome {user.name}!</div>}
+                <hr />
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <hr />
+                <div>Login to post..</div>
+                <hr />
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        )}
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav>
+            <LinkContainer to='/home'>
+              <Nav.Link>Home</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to='/animal-tracker'>
+              <Nav.Link>Animal Tracker</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to='/about'>
+              <Nav.Link>About</Nav.Link>
+            </LinkContainer>
+          </Nav>
+          <hr />
+          <Nav className='auth-links'>
+            {isLoggedin ? authLinks : guestLinks}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    )
   );
 };
 
@@ -99,6 +110,7 @@ NavbarComponent.propTypes = {
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
+  user: state.auth.user,
   loading: state.auth.loading,
   isMobile: state.device.isMobile,
 });

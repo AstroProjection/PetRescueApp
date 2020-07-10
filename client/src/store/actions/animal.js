@@ -62,11 +62,6 @@ export const deleteAnimal = (animalId, streetId) => async (dispatch) => {
       payload: error,
     });
 
-    dispatch(
-      setAlert({
-        message: 'There was an error removing the animal!',
-        alertType: 'danger',
-      })
-    );
+    dispatch(setAlert('There was an error removing the animal!', 'danger'));
   }
 };
