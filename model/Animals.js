@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
+const path = require('path');
 //model for post hook
 const Streets = require('./Streets');
 
@@ -65,6 +66,12 @@ const MiscSchema = new mongoose.Schema({
   },
 });
 
+const ProfileSchema = new mongoose.Schema({
+  bio: {
+    type: String,
+  },
+});
+
 const AnimalsSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -72,8 +79,8 @@ const AnimalsSchema = new mongoose.Schema({
     required: true,
   },
   locality: {
-    type: String,
-    default: '',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'locality',
     required: true,
   },
   location: {
@@ -112,6 +119,7 @@ const AnimalsSchema = new mongoose.Schema({
     vaccines: [VaccinesSchema],
     misc: [MiscSchema],
   },
+  profile: ProfileSchema,
 });
 
 AnimalsSchema.post('remove', async (doc, next) => {
@@ -127,14 +135,22 @@ AnimalsSchema.post('remove', async (doc, next) => {
   );
   // removing the image of the animal
   if (doc.image) {
-    fs.unlink(doc.image, (err) => {
-      if (err) {
-        next(Error('Failed to delete the Image'));
-      } else {
-        // console.log('deleted the file');
-        next();
+    fs.unlink(
+      path.join(
+        __dirname,
+        '..',
+        'uploads',
+        doc.image.replace('/\\uploads\\/', '')
+      ),
+      (err) => {
+        if (err) {
+          next(Error('Failed to delete the Image'));
+        } else {
+          // console.log('deleted the file');
+          next();
+        }
       }
-    });
+    );
   }
   next();
 });

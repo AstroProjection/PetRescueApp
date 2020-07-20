@@ -5,14 +5,21 @@ const path = require('path');
 
 ///connecting to MONGODB
 connectDB();
+
+app.use(function (req, res, next) {
+  console.log('%s %s', req.method, req.url);
+  next();
+});
 // console.log(__dirname);
 /// initializing middleware
 // app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 // app.use(express.static(path.join(__dirname, 'client', 'public')));
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', require('./api/auth'));
+app.use('/api/file/', require('./api/file-uploader'));
 app.use('/api/locality', require('./api/locality'));
 app.use('/api/user', require('./api/user'));
 app.use('/api/post', require('./api/post'));

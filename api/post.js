@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+
 const fs = require('fs');
 
+const path = require('path');
 /// multer [ for images] enctype="multipart/form-data"
 const multer = require('multer');
 
@@ -16,7 +18,7 @@ const fileFilter = (req, file, callback) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, './client/public/uploads/');
+    callback(null, path.join(__dirname, '..', 'uploads'));
   },
   filename: (req, file, callback) => {
     callback(
@@ -319,7 +321,7 @@ router.delete('/:postId', auth, async (req, res) => {
     res.json({ msg: 'post removed' });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ msg: 'post not found' });
+    res.status(400).json({ error, id: req.params.postId });
   }
 });
 

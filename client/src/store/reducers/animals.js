@@ -1,7 +1,8 @@
-import { ANIMALS_LOADING, ANIMALS_ERROR } from '../types';
+import { ANIMALS_LOADING, ANIMALS_ERROR, GET_ANIMAL_PROFILE } from '../types';
 
 const initialState = {
   feeders: [],
+  animal: null,
   dogs: [],
   cats: [],
   loading: true,
@@ -23,6 +24,13 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         errors: payload,
+      };
+
+    case GET_ANIMAL_PROFILE:
+      return {
+        ...state,
+        animal: payload,
+        loading: false,
       };
 
     default:

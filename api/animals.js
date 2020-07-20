@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const { check, validationResult } = require('express-validator');
 
 /// auth middleware
@@ -14,7 +15,12 @@ const multer = require('multer');
 
 const fileFilter = (req, file, callback) => {
   /// cb(null,false) rejects file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  console.log(file.mimetype);
+  if (
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg'
+  ) {
     callback(null, true);
   } else {
     callback(null, false);
@@ -23,7 +29,7 @@ const fileFilter = (req, file, callback) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, './client/public/uploads/');
+    callback(null, path.join(__dirname, '..', 'uploads'));
   },
   filename: (req, file, callback) => {
     callback(
@@ -108,7 +114,10 @@ router.post(
         const street = await Streets.findOne({
           streetname: req.body.location,
         });
-        if (animal.locality !== street.locality.toString())
+        // console.log(street);
+        // console.log(animal.locality);
+        // console.log(street.locality);
+        if (animal.locality.toString() !== street.locality.toString())
           throw Error('Locality dont match');
 
         street[animal.type + 's'].unshift(animal);
@@ -142,7 +151,7 @@ router.put('/', async (req, res) => {
   }
 });
 
-/// @route DELETE api/animals/:streetname
+/// @route DELETE api/animals/:animalId
 /// @desc deleting the animal
 /// @access private
 
@@ -156,6 +165,23 @@ router.delete('/:animalId', auth, async (req, res) => {
     await animal.remove();
 
     res.status(200).json(type);
+  } catch (errors) {
+    console.dir(errors);
+    return res.status(404).send({ errors });
+  }
+});
+
+/// @route GET api/animals/:animalId
+/// @desc getting the animal profile
+/// @access public
+
+router.get('/:animalId', async (req, res) => {
+  try {
+    const animal = await Animals.findById(req.params.animalId).populate({
+      path: 'locality',
+      select: 'locality',
+    });
+    res.status(200).json(animal);
   } catch (errors) {
     console.dir(errors);
     return res.status(404).send({ errors });
