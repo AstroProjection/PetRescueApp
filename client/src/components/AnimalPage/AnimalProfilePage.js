@@ -26,7 +26,7 @@ const AnimalProfilePage = ({ match, getAnimalProfile, loading, animal }) => {
         <Link to='/home' className='button profile-buttons bg-sandybrown'>
           Back to Home page
         </Link>
-        <div className='button profile-buttons bg-sandybrown'>Edit Profile</div>
+        {/* <div className='button profile-buttons bg-sandybrown'>Edit Profile</div> */}
       </div>
       <div className='animalpage-profile bg-main'>
         <AnimalProfileTop animal={animal} />

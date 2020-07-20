@@ -7,7 +7,7 @@ const AnimalProfileAbout = ({ animal }) => {
       <div className='animalprofile-about bg-submain p-2'>
         {true && (
           <Fragment>
-            <h2>{animal.name}'s Bio</h2>
+            <h2>About {animal.name}</h2>
             {animal.profile ? (
               animal.profile.bio ? (
                 'Add in bio'

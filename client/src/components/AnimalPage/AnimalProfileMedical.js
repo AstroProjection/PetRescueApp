@@ -28,7 +28,8 @@ const AnimalProfileMedical = ({ animal }) => {
       {medicalInfo.misc.length > 0 ? (
         <MiscProfile medicalInfo={medicalInfo} />
       ) : (
-        <div className='button add-button'>Add additional medical info</div>
+        <div></div>
+        // <div className='button add-button'>Add additional medical info</div>
       )}
     </div>
   );

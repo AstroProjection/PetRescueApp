@@ -869,6 +869,8 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  border:1px solid black;
 }
 
 .animalprofile-top img {
@@ -888,6 +890,9 @@ img {
 .animalprofile-about {
   grid-area: profile-bio;
   text-align: center;
+
+  border:1px dashed black;
+
 }
 
 .animalprofile-about .skills {
@@ -902,6 +907,9 @@ img {
   display:flex;
   flex-direction: column;
   align-items: center;
+
+  border:1px dashed black;
+
 }
 
 .animalprofile-vaccinations{
@@ -937,7 +945,7 @@ img {
 .profile-buttons{
   margin: 0.9rem 0.2rem;
   color:black ;
-  box-shadow: none;;
+  box-shadow: none;
 }
 
 

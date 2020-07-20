@@ -181,7 +181,11 @@ router.get('/:animalId', async (req, res) => {
       path: 'locality',
       select: 'locality',
     });
-    res.status(200).json(animal);
+    const street = await Streets.findOne({
+      locality: animal.locality._id.toString(),
+      streetname: animal.location,
+    }).select('displayName');
+    res.status(200).json({ ...animal._doc, streetInfo: street });
   } catch (errors) {
     console.dir(errors);
     return res.status(404).send({ errors });

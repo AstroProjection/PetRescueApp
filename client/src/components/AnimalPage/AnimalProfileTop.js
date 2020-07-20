@@ -9,16 +9,16 @@ const AnimalProfileTop = ({ animal }) => {
       <p className='lead'>
         {
           <small>
-            is a <b>{animal.type}</b> in <b>{animal.locality.locality}</b>
+            A <b>{animal.type}</b> in <b>{animal.locality.locality}</b>
           </small>
         }
       </p>
       <p>
+        Location:{' '}
         {animal.location && (
           <span>
-            <i className='fas fa-map-marker'></i>
-            {'  '}
-            {animal.location}
+            <i className='fas fa-map-marker'></i>{' '}
+            {animal.streetInfo.displayName}
           </span>
         )}
       </p>
