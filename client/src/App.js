@@ -51,6 +51,7 @@ function App({ loadUser, mobileCheck, loading }) {
               path='/edit-animals/:animalId'
               component={AnimalPage}
             />
+            {/* <Route exact path='/confirmation/:token' component={About} /> */}
             <Route component={NotFound} />
           </Switch>
         </div>

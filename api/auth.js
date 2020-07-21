@@ -26,27 +26,29 @@ router.post(
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
-    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       const { email, password } = req.body;
-
       const user = await User.findOne({ email });
+      // user does not exist
+      if (!user) throw Error('Invalid credentials');
+      // user has not confirmed email
+      if (!user.confirmed) {
+        throw Error('Please verify your Email Address to login');
+      }
+
       const isMatch = await bcrypt.compare(password, user.password);
       /// check if password or user matches with db
-      if (!user || !isMatch)
-        return res.status(400).json({ error: 'invalid credentials' });
+      if (!isMatch) throw Error('Invalid credentials');
       // verify and produce auth token
       delete user['password'];
 
       const payload = {
         user: {
           id: user.id,
-          locality: user.locality,
           role: user.role,
         },
       };
@@ -60,8 +62,7 @@ router.post(
         }
       );
     } catch (error) {
-      // console.log(error);
-      return res.status(400).json({ error: 'invalid credentials' });
+      return res.status(400).send(error.message);
     }
   }
 );

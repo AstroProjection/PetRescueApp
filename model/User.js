@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       default: 'user',
       enum: ['user', 'moderator', 'admin'],
     },
+    confirmed: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

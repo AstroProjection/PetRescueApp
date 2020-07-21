@@ -17,9 +17,9 @@ app.use('/uploads', express.static('uploads'));
 // app.use(express.static(path.join(__dirname, 'client', 'public')));
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
-
+app.use('/confirmation', require('./api/confirmation'));
 app.use('/api/auth', require('./api/auth'));
-app.use('/api/file/', require('./api/file-uploader'));
+// app.use('/api/file/', require('./api/file-uploader'));
 app.use('/api/locality', require('./api/locality'));
 app.use('/api/user', require('./api/user'));
 app.use('/api/post', require('./api/post'));

@@ -36,9 +36,10 @@ export const login = (formData) => async (dispatch) => {
     // console.dir(error);
     dispatch({
       type: AUTH_ERROR,
+      payload: error.response.data,
     });
 
-    dispatch(setAlert('Login error!', 'danger'));
+    dispatch(setAlert(error.response.data, 'danger', 3500));
   }
 };
 
@@ -90,14 +91,19 @@ export const register = (formData) => async (dispatch) => {
 
     const res = await axios.post('/api/user/', body, config);
 
-    dispatch(setAlert('User Registered! logging in...', 'success'));
+    dispatch(
+      setAlert(
+        'Verification Email has been sent to your email address. [Check Spam Folder]',
+        'success',
+        10000
+      )
+    );
 
     dispatch({
       type: USER_REGISTERED,
-      payload: res.data,
     });
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (error) {
     const err = error.response
       ? error.response.data.errors

@@ -12,6 +12,7 @@ const initalState = {
   loading: true,
   user: null,
   token: localStorage.getItem('token'),
+  error: {},
 };
 
 export default function (state = initalState, action) {
@@ -41,6 +42,7 @@ export default function (state = initalState, action) {
         isLoggedin: false,
         user: null,
         token: null,
+        error: payload,
       };
 
     case LOAD_USER:
@@ -52,12 +54,10 @@ export default function (state = initalState, action) {
       };
 
     case USER_REGISTERED:
-      localStorage.setItem('token', payload.token);
+      // localStorage.setItem('token', payload.token);
       return {
         ...state,
-        token: payload.token,
         loading: false,
-        isLoggedin: true,
       };
 
     default:

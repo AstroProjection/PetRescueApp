@@ -23,11 +23,14 @@ const Login = ({ login, auth: { isLoggedin } }) => {
     };
   }, []);
 
+  const [showVerifyButton, setVerify] = React.useState(false);
+
   const onSubmit = (form, { setSubmitting }) => {
     login(form);
 
     timeoutVariable = setTimeout(() => {
       setSubmitting(false);
+      setVerify(true);
     }, 1600);
   };
 
@@ -102,6 +105,9 @@ const Login = ({ login, auth: { isLoggedin } }) => {
             );
           }}
         </Formik>
+        {showVerifyButton && (
+          <div className='button auth-buttons'>Resend Verification</div>
+        )}
       </Container>
     </React.Fragment>
   );
