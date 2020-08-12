@@ -73,20 +73,6 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// PostSchema.pre('remove', (next, removeOptions) => {
-//   console.log('pre ');
-//   next();
-//   // console.log(doc);
-//   // fs.unlink(doc.image, (err) => {
-//   //   if (err) {
-//   //     next(Error('Failed to delete the Image'));
-//   //   } else {
-//   //     console.log('deleted the file');
-//   //     next();
-//   //   }
-//   // });
-// });
-
 PostSchema.post('remove', (doc, next) => {
   /// removing the image for the post
   if (!doc.image) {

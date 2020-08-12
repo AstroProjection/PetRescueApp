@@ -130,7 +130,6 @@ AnimalsSchema.post('remove', async (doc, next) => {
     },
     (err, doc) => {
       if (err) throw Error('Error clearing animal frm Street');
-      // console.log(doc);
     }
   );
   // removing the image of the animal
@@ -146,7 +145,6 @@ AnimalsSchema.post('remove', async (doc, next) => {
         if (err) {
           next(Error('Failed to delete the Image'));
         } else {
-          // console.log('deleted the file');
           next();
         }
       }
