@@ -655,9 +655,10 @@ img {
 
 .animate-alert {
   overflow: hidden;
-  animation-name: slideout;
+  /* animation-name: slideout;
   animation-duration: 0.7s;
-  animation-iteration-count: 1;
+  animation-iteration-count: 1; */
+  transition-duration:1s !important;
 }
 
 .remove-padding {

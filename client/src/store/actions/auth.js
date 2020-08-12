@@ -6,6 +6,8 @@ import {
   LOAD_USER,
   AUTH_LOADING,
   USER_REGISTERED,
+  ENABLE_VERIFICATION,
+  ACCOUNT_VERIFIED,
 } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 
@@ -25,7 +27,7 @@ export const login = (formData) => async (dispatch) => {
     });
 
     const res = await axios.post('/api/auth', body, config);
-    // console.log(res);
+    console.log(res.data);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -33,13 +35,20 @@ export const login = (formData) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (error) {
-    // console.dir(error);
+    const errorObj = error.response.data;
+
     dispatch({
       type: AUTH_ERROR,
-      payload: error.response.data,
+      payload: errorObj,
     });
-
-    dispatch(setAlert(error.response.data, 'danger', 3500));
+    if (error.response.status === 401) {
+      dispatch(setAlert(errorObj, 'danger', 3500, true));
+      dispatch({
+        type: ENABLE_VERIFICATION,
+      });
+    } else {
+      dispatch(setAlert(errorObj, 'danger', 3500));
+    }
   }
 };
 
@@ -69,8 +78,6 @@ export const loadUser = () => async (dispatch) => {
       type: AUTH_ERROR,
       errors: err,
     });
-
-    // dispatch(setAlert('Error loading user! Please login!', 'danger'));
   }
 };
 

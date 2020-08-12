@@ -5,12 +5,15 @@ import {
   LOAD_USER,
   AUTH_LOADING,
   USER_REGISTERED,
+  ACCOUNT_VERIFIED,
+  ENABLE_VERIFICATION,
 } from '../types';
 
 const initalState = {
   isLoggedin: false,
   loading: true,
   user: null,
+  needsVerification: false,
   token: localStorage.getItem('token'),
   error: {},
 };
@@ -58,6 +61,19 @@ export default function (state = initalState, action) {
       return {
         ...state,
         loading: false,
+      };
+    case ENABLE_VERIFICATION:
+      return {
+        ...state,
+        loading: false,
+        needsVerification: true,
+      };
+
+    case ACCOUNT_VERIFIED:
+      return {
+        ...state,
+        loading: true,
+        needsVerification: false,
       };
 
     default:

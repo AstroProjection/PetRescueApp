@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Verification from './Verification';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/auth';
 
@@ -16,7 +17,7 @@ const schema = yup.object({
 
 let timeoutVariable;
 
-const Login = ({ login, auth: { isLoggedin } }) => {
+const Login = ({ login, auth: { isLoggedin, loading, needsVerification } }) => {
   React.useEffect(() => {
     return () => {
       clearInterval(timeoutVariable);
@@ -25,13 +26,14 @@ const Login = ({ login, auth: { isLoggedin } }) => {
 
   const [showVerifyButton, setVerify] = React.useState(false);
 
+  const handleVerification = () => {
+    // sendVerificationLink(email);
+    // disableVerificationButton();
+  };
+
   const onSubmit = (form, { setSubmitting }) => {
     login(form);
-
-    timeoutVariable = setTimeout(() => {
-      setSubmitting(false);
-      setVerify(true);
-    }, 1600);
+    setSubmitting(loading);
   };
 
   if (isLoggedin) return <Redirect to='/home' />;
@@ -50,7 +52,6 @@ const Login = ({ login, auth: { isLoggedin } }) => {
           {({
             handleSubmit,
             handleChange,
-            handleBlur,
             values,
             touched,
             errors,
@@ -105,8 +106,10 @@ const Login = ({ login, auth: { isLoggedin } }) => {
             );
           }}
         </Formik>
-        {showVerifyButton && (
-          <div className='button auth-buttons'>Resend Verification</div>
+        {needsVerification && (
+          <Verification onClick={handleVerification}>
+            Resend Verification
+          </Verification>
         )}
       </Container>
     </React.Fragment>

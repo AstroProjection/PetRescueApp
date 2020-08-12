@@ -36,15 +36,16 @@ router.post(
       // user does not exist
       if (!user) throw Error('Invalid credentials');
       // user has not confirmed email
-      if (!user.confirmed) {
-        throw Error('Please verify your Email Address to login');
-      }
 
       const isMatch = await bcrypt.compare(password, user.password);
       /// check if password or user matches with db
       if (!isMatch) throw Error('Invalid credentials');
       // verify and produce auth token
       delete user['password'];
+
+      if (!user.confirmed) {
+        return res.status(401).send('Please verify your Email Address');
+      }
 
       const payload = {
         user: {
@@ -62,6 +63,7 @@ router.post(
         }
       );
     } catch (error) {
+      console.log(error);
       return res.status(400).send(error.message);
     }
   }

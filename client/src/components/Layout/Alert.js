@@ -13,6 +13,7 @@ const AlertComp = ({ alerts }) => {
         key={alert.id}
         variant={`${alert.alertType}`}
         className='animate-alert'
+        dismissible={alert.dismissible}
       >
         {alert.message}
       </Alert>
