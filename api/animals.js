@@ -2,48 +2,13 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { check, validationResult } = require('express-validator');
-
 /// auth middleware
 const auth = require('../auth/auth');
-
 // Animals model
 const Animals = require('../model/Animals');
 const Streets = require('../model/Streets');
 
-/// multer [ for images] enctype="multipart/form-data"
-const multer = require('multer');
-
-const fileFilter = (req, file, callback) => {
-  /// cb(null,false) rejects file
-  console.log(file.mimetype);
-  if (
-    file.mimetype === 'image/jpeg' ||
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg'
-  ) {
-    callback(null, true);
-  } else {
-    callback(null, false);
-  }
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, path.join(__dirname, '..', 'uploads'));
-  },
-  filename: (req, file, callback) => {
-    callback(
-      null,
-      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`
-    );
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 1024 * 1024 * 15 },
-  fileFilter: fileFilter,
-});
+const upload = require('../services/imageUploader');
 ///////////////////////////////////////////
 
 /// @route GET api/animals/
@@ -58,11 +23,9 @@ router.get('/', async (req, res) => {
 
   return res.json(data);
 });
-
 /// @route  POST api/animals/
 /// @desc Adding an animal
 /// @access private
-
 router.post(
   '/',
   [

@@ -1,38 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
 const fs = require('fs');
-
 const path = require('path');
-/// multer [ for images] enctype="multipart/form-data"
-const multer = require('multer');
 
-const fileFilter = (req, file, callback) => {
-  /// cb(null,false) rejects file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    callback(null, true);
-  } else {
-    callback(null, false);
-  }
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, path.join(__dirname, '..', 'uploads'));
-  },
-  filename: (req, file, callback) => {
-    callback(
-      null,
-      `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`
-    );
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 1024 * 1024 * 15 },
-  fileFilter: fileFilter,
-});
+// image upload
+const upload = require('../services/imageUploader');
 
 /// authentication middleware
 const auth = require('../auth/auth');
@@ -45,9 +17,6 @@ const User = require('../model/User');
 //   @route POST api/post
 //   @desc Create a post on the bulletin
 //   @access private
-
-// above are just descriptions of the route.
-
 router.post(
   '/',
   [
