@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
-
 import { connect } from 'react-redux';
+import { removeAlert } from '../../store/actions/alert';
 
-const AlertComp = ({ alerts }) => {
+const AlertComp = ({ alerts, removeAlert }) => {
   return (
     alert !== null &&
     alerts.length > 0 &&
@@ -14,6 +14,7 @@ const AlertComp = ({ alerts }) => {
         variant={`${alert.alertType}`}
         className='animate-alert'
         dismissible={alert.dismissible}
+        onClose={() => removeAlert(alert.id)}
       >
         {alert.message}
       </Alert>
@@ -29,4 +30,4 @@ const mapStateToProps = (state) => ({
   alerts: state.alerts,
 });
 
-export default connect(mapStateToProps)(AlertComp);
+export default connect(mapStateToProps, { removeAlert })(AlertComp);

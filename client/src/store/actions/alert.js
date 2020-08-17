@@ -21,3 +21,10 @@ export const setAlert = (
   if (!dismissible)
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
 };
+
+export const removeAlert = (id) => (dispatch) => {
+  dispatch({
+    type: REMOVE_ALERT,
+    payload: id,
+  });
+};

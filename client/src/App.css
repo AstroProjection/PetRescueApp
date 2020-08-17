@@ -285,7 +285,7 @@ img {
 }
 
 .auth-button-form{
-  border-radius: 5px; 
+     border-radius: 5px !important; 
     color: green!important;
     padding: 1rem 2rem !important;
     font-size: 1.2rem !important;
@@ -547,8 +547,7 @@ img {
   -webkit-box-shadow: 0px 2px black;
   -o-box-shadow: 0px 2px black;
 
-
-  margin: 0em 0.1em;
+  margin: 0.4em 0.1em;
 
   display: flex;
   flex-direction: column;
@@ -556,7 +555,11 @@ img {
   align-items: center;
   cursor: pointer;
 
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.disabled{
+  opacity:0.4 !important;
 }
 
 .page-button {

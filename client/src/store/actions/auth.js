@@ -36,6 +36,8 @@ export const login = (formData) => async (dispatch) => {
     dispatch(loadUser());
   } catch (error) {
     const errorObj = error.response.data;
+    console.dir(errorObj);
+    console.log(error.response.status);
 
     dispatch({
       type: AUTH_ERROR,
@@ -46,6 +48,7 @@ export const login = (formData) => async (dispatch) => {
       dispatch({
         type: ENABLE_VERIFICATION,
       });
+      // return;
     } else {
       dispatch(setAlert(errorObj, 'danger', 3500));
     }

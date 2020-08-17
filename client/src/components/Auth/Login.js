@@ -15,27 +15,20 @@ const schema = yup.object({
   password: yup.string().required('Please enter a password').max(15),
 });
 
-let timeoutVariable;
+// let timeoutVariable;
 
-const Login = ({ login, auth: { isLoggedin, loading, needsVerification } }) => {
+const Login = ({ login, isLoggedin, loading, needsVerification }) => {
   React.useEffect(() => {
     return () => {
-      clearInterval(timeoutVariable);
+      // clearInterval(timeoutVariable);
     };
   }, []);
-
-  const [showVerifyButton, setVerify] = React.useState(false);
-
-  const handleVerification = () => {
-    // sendVerificationLink(email);
-    // disableVerificationButton();
-  };
 
   const onSubmit = (form, { setSubmitting }) => {
     login(form);
     setSubmitting(loading);
   };
-
+  console.log('rendering?');
   if (isLoggedin) return <Redirect to='/home' />;
   return (
     <React.Fragment>
@@ -106,18 +99,16 @@ const Login = ({ login, auth: { isLoggedin, loading, needsVerification } }) => {
             );
           }}
         </Formik>
-        {needsVerification && (
-          <Verification onClick={handleVerification}>
-            Resend Verification
-          </Verification>
-        )}
+        {needsVerification && <Verification>Resend Verification</Verification>}
       </Container>
     </React.Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isLoggedin: state.auth.isLoggedin,
+  needsVerification: state.auth.needsVerification,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { login })(React.memo(Login));
