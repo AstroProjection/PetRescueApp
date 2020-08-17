@@ -9,4 +9,16 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = transporter;
+module.exports = function (token, email) {
+  const url = `http://localhost:5000/confirmation/t/${token}`;
+  transporter.sendMail({
+    to: email,
+    subject: 'Email verification : for www.petrescyou.in',
+    html: `
+          This is only to verify that the email address belongs to you as it will be used for password reset and other user operations.
+          <br/>
+          Please click this link to confirm your email:
+          <br/>
+          <a href="${url}">${url}</a>`,
+  });
+};
