@@ -68,10 +68,10 @@ router.post(
         payload,
         config.get('EMAIL_SECRET'),
         {
-          expiresIn: '1d',
+          expiresIn: '7d',
         },
         (err, emailToken) => {
-          const url = `http://localhost:5000/confirmation/${emailToken}`;
+          const url = `http://localhost:5000/confirmation/t/${emailToken}`;
 
           transporter.sendMail({
             to: email,
@@ -86,7 +86,7 @@ router.post(
         }
       );
 
-      res.status(200).json({ msg: 'User Registered!' });
+      return res.status(200).json({ msg: 'User Registered!' });
     } catch (error) {
       return res.status(400).json({ error });
     }

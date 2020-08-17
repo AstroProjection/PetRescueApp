@@ -34,16 +34,16 @@ router.post(
       const { email, password } = req.body;
       const user = await User.findOne({ email });
       // user does not exist
-      if (!user) throw Error('Invalid credentials');
-      // user has not confirmed email
+      if (!user) return res.status(400).send('Invalid credentials!');
 
       const isMatch = await bcrypt.compare(password, user.password);
       /// check if password or user matches with db
-      if (!isMatch) throw Error('Invalid credentials');
+      if (!isMatch) return res.status(400).send('Invalid credentials!');
       // verify and produce auth token
-      delete user['password'];
-
+      // delete user.password;
       if (!user.confirmed) {
+        // user has not confirmed email
+        console.log('not confirmed');
         return res.status(401).send('Please verify your Email Address');
       }
 
@@ -53,18 +53,20 @@ router.post(
           role: user.role,
         },
       };
+      console.log('signing token');
       jwt.sign(
         payload,
         config.get('secretkey'),
         { expiresIn: 1800 },
         (err, token) => {
+          console.log(err);
           if (err) throw err;
           res.json({ token });
         }
       );
     } catch (error) {
       console.log(error);
-      return res.status(400).send(error.message);
+      return res.status(400).send('Invalid credentials!');
     }
   }
 );
