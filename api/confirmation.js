@@ -26,7 +26,7 @@ router.get('/t/:token', async (req, res) => {
     return res.status(401).send({ error });
   }
 
-  return res.redirect('http://localhost:3000/login');
+  return res.redirect('https://www.petrescyou.in/login');
 });
 
 //   @route POST /confirmation/r/

@@ -10,7 +10,7 @@ let transporter = nodemailer.createTransport({
 });
 
 module.exports = function (token, email) {
-  const url = `http://localhost:5000/confirmation/t/${token}`;
+  const url = `https://www.petrescyou.in/confirmation/t/${token}`;
   transporter.sendMail({
     to: email,
     subject: 'Email verification : for www.petrescyou.in',
