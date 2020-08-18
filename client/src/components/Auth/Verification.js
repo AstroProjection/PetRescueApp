@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { sendVerification } from '../../store/actions/auth';
 
-const Verification = (props) => {
+const Verification = ({ sendVerification, ...props }) => {
   const disableTime = 60;
   const [time, setTime] = React.useState(-1);
   const [disabled, setDisabled] = React.useState(false);
   let buttonText = `${props.children}`;
   buttonText += disabled ? ` (${time})` : '';
   let interval;
-  console.log('before useEffect');
+  // console.log('before useEffect');
   React.useEffect(() => {
     if (disabled) {
       interval = setInterval(() => {
@@ -16,7 +17,7 @@ const Verification = (props) => {
       }, 1000);
     }
     return () => {
-      console.log('cleanup useEffect');
+      // console.log('cleanup useEffect');
       clearInterval(interval);
       if (time === 0) {
         setDisabled(false);
@@ -28,6 +29,7 @@ const Verification = (props) => {
   const startTimer = () => {
     setDisabled(true);
     setTime(disableTime);
+    sendVerification();
   };
   return (
     <button
@@ -39,4 +41,4 @@ const Verification = (props) => {
   );
 };
 
-export default connect()(Verification);
+export default connect(null, { sendVerification })(Verification);

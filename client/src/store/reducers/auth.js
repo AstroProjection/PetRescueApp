@@ -7,6 +7,7 @@ import {
   USER_REGISTERED,
   ACCOUNT_VERIFIED,
   ENABLE_VERIFICATION,
+  VERIFICATION_SENT,
 } from '../types';
 
 const initalState = {
@@ -67,6 +68,11 @@ export default function (state = initalState, action) {
         ...state,
         loading: false,
         needsVerification: true,
+      };
+    case VERIFICATION_SENT:
+      return {
+        ...state,
+        loading: false,
       };
 
     case ACCOUNT_VERIFIED:

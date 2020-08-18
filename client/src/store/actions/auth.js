@@ -8,6 +8,7 @@ import {
   USER_REGISTERED,
   ENABLE_VERIFICATION,
   ACCOUNT_VERIFIED,
+  VERIFICATION_SENT,
 } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 
@@ -45,9 +46,9 @@ export const login = (formData) => async (dispatch) => {
     });
     if (error.response.status === 401) {
       dispatch(setAlert(errorObj, 'danger', 3500, true));
-      dispatch({
-        type: ENABLE_VERIFICATION,
-      });
+      // dispatch({
+      //   type: ENABLE_VERIFICATION,
+      // });
       // return;
     } else {
       dispatch(setAlert(errorObj, 'danger', 3500));
@@ -125,5 +126,20 @@ export const register = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert(err, 'danger'));
+  }
+};
+
+export const sendVerification = () => async (dispatch) => {
+  try {
+    const res = await axios.post('/confirmation/r');
+    dispatch({
+      type: VERIFICATION_SENT,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: AUTH_ERROR,
+      payload: error.response.data,
+    });
   }
 };
