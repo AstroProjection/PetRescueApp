@@ -8,8 +8,9 @@ module.exports = function (req, res, next) {
 
   try {
     const userinfo = jwt.verify(token, config.get('secretkey'));
+    console.log(userinfo);
     req.user = userinfo.user;
-    // console.log(req.user);
+    console.log('user is logged in');
     next();
   } catch (error) {
     res.status(401).json({ msg: 'Invalid token' });

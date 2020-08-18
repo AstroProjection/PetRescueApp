@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 /// model
+const sendEmail = require('../auth/email');
 const Post = require('../model/Post');
 const User = require('../model/User');
 const Locality = require('../model/Locality');
@@ -26,42 +27,58 @@ router.post(
   ],
   async (req, res) => {
     ///checking that text/name,email is not empty
-    // console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       const { email, password } = req.body;
-
       const user = await User.findOne({ email });
+      // user does not exist
+      if (!user) return res.status(400).send('Invalid credentials!');
+
       const isMatch = await bcrypt.compare(password, user.password);
       /// check if password or user matches with db
-      if (!user || !isMatch)
-        return res.status(400).json({ error: 'invalid credentials' });
+      if (!isMatch) return res.status(400).send('Invalid credentials!');
       // verify and produce auth token
-      delete user['password'];
-
       const payload = {
         user: {
           id: user.id,
-          locality: user.locality,
           role: user.role,
         },
       };
-      jwt.sign(
-        payload,
-        config.get('secretkey'),
-        { expiresIn: 1800 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+
+      if (!user.confirmed) {
+        // user has not confirmed email
+        jwt.sign(
+          payload,
+          config.get('EMAIL_SECRET'),
+          { expiresIn: '7d' },
+          (err, token) => {
+            sendEmail(token, email);
+            res
+              .status(401)
+              .send(
+                'Please verify your Email Address. Verification link sent to Registered Email'
+              );
+          }
+        );
+      } else {
+        // console.log('signing token');
+        jwt.sign(
+          payload,
+          config.get('secretkey'),
+          { expiresIn: 1800 },
+          (err, token) => {
+            console.log(err);
+            if (err) throw err;
+            res.json({ token });
+          }
+        );
+      }
     } catch (error) {
-      // console.log(error);
-      return res.status(400).json({ error: 'invalid credentials' });
+      console.log(error);
+      return res.status(400).send('Invalid credentials!');
     }
   }
 );

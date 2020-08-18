@@ -80,7 +80,7 @@ const AnimalProfile = (props) => {
           className='profile-btn btn-success profile-button'
           eventKey={profile_index}
         >
-          Show Medical Info
+          Show Info
         </CustomToggle>
         <Accordion.Collapse eventKey={profile_index} className='profile-full'>
           <AnimalContext.Provider value={{ animal }}>

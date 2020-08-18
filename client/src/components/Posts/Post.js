@@ -113,7 +113,7 @@ const Post = ({
         </div>
         <div className='post-share'>
           <div className='whatsapp'>
-            <Whatsapp />
+            <Whatsapp postURL={postId} />
           </div>
         </div>
         <div className='post-discuss'>

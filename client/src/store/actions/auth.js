@@ -6,6 +6,9 @@ import {
   LOAD_USER,
   AUTH_LOADING,
   USER_REGISTERED,
+  ENABLE_VERIFICATION,
+  ACCOUNT_VERIFIED,
+  VERIFICATION_SENT,
 } from '../types';
 import setAuthToken from '../../utils/setAuthToken';
 
@@ -25,7 +28,7 @@ export const login = (formData) => async (dispatch) => {
     });
 
     const res = await axios.post('/api/auth', body, config);
-    // console.log(res);
+    console.log(res.data);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -33,12 +36,23 @@ export const login = (formData) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (error) {
-    // console.dir(error);
+    const errorObj = error.response.data;
+    console.dir(errorObj);
+    console.log(error.response.status);
+
     dispatch({
       type: AUTH_ERROR,
+      payload: errorObj,
     });
-
-    dispatch(setAlert('Login error!', 'danger'));
+    if (error.response.status === 401) {
+      dispatch(setAlert(errorObj, 'danger', 3500, true));
+      // dispatch({
+      //   type: ENABLE_VERIFICATION,
+      // });
+      // return;
+    } else {
+      dispatch(setAlert(errorObj, 'danger', 3500));
+    }
   }
 };
 
@@ -54,7 +68,7 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get('api/auth');
+    const res = await axios.get('/api/auth');
     dispatch({
       type: LOAD_USER,
       payload: res.data,
@@ -68,8 +82,6 @@ export const loadUser = () => async (dispatch) => {
       type: AUTH_ERROR,
       errors: err,
     });
-
-    // dispatch(setAlert('Error loading user! Please login!', 'danger'));
   }
 };
 
@@ -88,16 +100,21 @@ export const register = (formData) => async (dispatch) => {
       type: AUTH_LOADING,
     });
 
-    const res = await axios.post('api/user/', body, config);
+    const res = await axios.post('/api/user/', body, config);
 
-    dispatch(setAlert('User Registered! logging in...', 'success'));
+    dispatch(
+      setAlert(
+        'Verification Email has been sent to your email address. [Check Spam Folder]',
+        'success',
+        10000
+      )
+    );
 
     dispatch({
       type: USER_REGISTERED,
-      payload: res.data,
     });
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (error) {
     const err = error.response
       ? error.response.data.errors
@@ -109,5 +126,20 @@ export const register = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert(err, 'danger'));
+  }
+};
+
+export const sendVerification = () => async (dispatch) => {
+  try {
+    const res = await axios.post('/confirmation/r');
+    dispatch({
+      type: VERIFICATION_SENT,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: AUTH_ERROR,
+      payload: error.response.data,
+    });
   }
 };

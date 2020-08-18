@@ -285,7 +285,7 @@ img {
 }
 
 .auth-button-form{
-  border-radius: 5px; 
+     border-radius: 5px !important; 
     color: green!important;
     padding: 1rem 2rem !important;
     font-size: 1.2rem !important;
@@ -547,8 +547,7 @@ img {
   -webkit-box-shadow: 0px 2px black;
   -o-box-shadow: 0px 2px black;
 
-
-  margin: 0em 0.1em;
+  margin: 0.4em 0.1em;
 
   display: flex;
   flex-direction: column;
@@ -556,7 +555,11 @@ img {
   align-items: center;
   cursor: pointer;
 
-  border-radius: 10px;
+  border-radius: 5px;
+}
+
+.disabled{
+  opacity:0.4 !important;
 }
 
 .page-button {
@@ -655,9 +658,10 @@ img {
 
 .animate-alert {
   overflow: hidden;
-  animation-name: slideout;
+  /* animation-name: slideout;
   animation-duration: 0.7s;
-  animation-iteration-count: 1;
+  animation-iteration-count: 1; */
+  transition-duration:1s !important;
 }
 
 .remove-padding {
@@ -836,7 +840,128 @@ img {
   border-radius:10px;
 }
 
+
+.bg-main{
+  background-color: #489164;
+}
+
+.bg-submain{
+  background-color: #56a073;
+}
+
+.bg-ternary{
+  background-color: #68aa81;
+}
+
+.bg-sandybrown{
+  background-color: sandybrown;
+}
+
 /* Profiles Page */
+.animalpage-profile{
+  display:grid;
+  grid-template-areas:'profile-top profile-top'
+                      'profile-bio profile-bio'
+                      'profile-medical profile-medical';
+  padding: 0.7rem;
+}
+
+.animalprofile-top {
+  grid-area: profile-top;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  border:1px solid black;
+}
+
+.animalprofile-top img {
+  width: 250px;
+  height:250px;
+}
+
+.animalprofile-top .icons a {
+  color: #fff;
+  margin: 0 0.3rem;
+}
+
+.animalprofile-top .icons a:hover {
+  color: orange;
+}
+
+.animalprofile-about {
+  grid-area: profile-bio;
+  text-align: center;
+
+  border:1px dashed black;
+
+}
+
+.animalprofile-about .skills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.animalprofile-medical{
+  grid-area:profile-medical;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+  border:1px dashed black;
+
+}
+
+.animalprofile-vaccinations{
+  display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.animalprofile-spayinformation{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.animalprofile-miscinformation{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.animalprofile-vaccine{
+  margin:0 !important;
+}
+
+.animalprofile-vaccineinfo{
+  margin:0 !important;
+}
+
+.add-button{
+  background-color:lightgreen;
+}
+
+.profile-buttons{
+  margin: 0.9rem 0.2rem;
+  color:black ;
+  box-shadow: none;
+}
+
+
+
+.profile-navigation{
+  display:flex;
+  justify-content: space-between;
+}
+
+/* animal profile end */
+
+
 .animal-tracker-title{
   background-color: #9DD2B2;
     border-radius: 10px;
@@ -995,6 +1120,7 @@ img {
   border: 1px solid orangered;
   width: inherit;
   height: inherit;
+  overflow:hidden;
 }
 .profile-information {
   grid-area: info;
@@ -1162,7 +1288,7 @@ img {
     grid-auto-rows: 80px 50px 50px 1fr;
     grid-template-areas:
         'image head type '
-        'info info btn '
+        'image info btn '
         'identity identity btn ';
     margin-bottom: 0.7rem;
   }

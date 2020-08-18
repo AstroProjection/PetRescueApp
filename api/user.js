@@ -3,7 +3,9 @@ const router = express();
 const config = require('config');
 //
 const auth = require('../auth/auth');
-//
+// email sender
+const transporter = require('../auth/email');
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
@@ -58,22 +60,33 @@ router.post(
       const payload = {
         user: {
           id: newUser.id,
-          locality: newUser.locality,
-          role: newUser.role,
+          // role: newUser.role,
         },
       };
-      //
+
       jwt.sign(
         payload,
-        config.get('secretkey'),
+        config.get('EMAIL_SECRET'),
         {
-          expiresIn: 1800,
+          expiresIn: '7d',
         },
-        (error, token) => {
-          if (error) throw error;
-          res.json({ token });
+        (err, emailToken) => {
+          const url = `http://localhost:5000/confirmation/t/${emailToken}`;
+
+          transporter.sendMail({
+            to: email,
+            subject: 'Email verification : for www.petrescyou.in',
+            html: `
+                  This is only to verify that the email address belongs to you as it will be used for password reset and other user operations.
+                  <br/>
+                  Please click this link to confirm your email:
+                  <br/>
+                  <a href="${url}">${url}</a>`,
+          });
         }
       );
+
+      return res.status(200).json({ msg: 'User Registered!' });
     } catch (error) {
       return res.status(400).json({ error });
     }

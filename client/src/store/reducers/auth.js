@@ -5,13 +5,18 @@ import {
   LOAD_USER,
   AUTH_LOADING,
   USER_REGISTERED,
+  ACCOUNT_VERIFIED,
+  ENABLE_VERIFICATION,
+  VERIFICATION_SENT,
 } from '../types';
 
 const initalState = {
   isLoggedin: false,
   loading: true,
   user: null,
+  needsVerification: false,
   token: localStorage.getItem('token'),
+  error: {},
 };
 
 export default function (state = initalState, action) {
@@ -41,6 +46,7 @@ export default function (state = initalState, action) {
         isLoggedin: false,
         user: null,
         token: null,
+        error: payload,
       };
 
     case LOAD_USER:
@@ -52,12 +58,28 @@ export default function (state = initalState, action) {
       };
 
     case USER_REGISTERED:
-      localStorage.setItem('token', payload.token);
+      // localStorage.setItem('token', payload.token);
       return {
         ...state,
-        token: payload.token,
         loading: false,
-        isLoggedin: true,
+      };
+    case ENABLE_VERIFICATION:
+      return {
+        ...state,
+        loading: false,
+        needsVerification: true,
+      };
+    case VERIFICATION_SENT:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case ACCOUNT_VERIFIED:
+      return {
+        ...state,
+        loading: true,
+        needsVerification: false,
       };
 
     default:

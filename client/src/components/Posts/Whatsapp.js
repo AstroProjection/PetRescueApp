@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-const Whatsapp = () => {
+const Whatsapp = ({ postURL }) => {
   const isMobile = useSelector((state) => state.device.isMobile);
 
-  const link = encodeURIComponent('www.google.com');
-  const message = ` Attention! Check this post out ${link}`;
+  const link = encodeURIComponent(`http://www.petrescyou.in/post/${postURL}`);
+  const message = ` Attention Required! Find oout about the report ${link}`;
   return (
     isMobile && (
       <a

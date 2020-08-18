@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
 import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import NotFound from './components/Info/NotFound';
+/// profile pages
 import PostPage from './components/PostPage/PostPage';
+import AnimalPage from './components/AnimalPage/AnimalProfilePage';
 
 import MapPage from './components/Map/MapPage';
 
@@ -29,7 +31,7 @@ function App({ loadUser, mobileCheck, loading }) {
 
   return (
     !loading && (
-      <BrowserRouter>
+      <Router>
         <Navbar />
         <div className='spacer-div'></div>
         <UserBadge />
@@ -43,10 +45,17 @@ function App({ loadUser, mobileCheck, loading }) {
             <Route exact path='/home' component={Home} />
             <Route exact path='/animal-tracker' component={MapPage} />
             <Route exact path='/post/:postId' component={PostPage} />
+            <Route exact path='/animals/:animalId' component={AnimalPage} />
+            <Route
+              exact
+              path='/edit-animals/:animalId'
+              component={AnimalPage}
+            />
+            {/* <Route exact path='/confirmation/:token' component={About} /> */}
             <Route component={NotFound} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   );
 }

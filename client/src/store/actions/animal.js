@@ -4,6 +4,7 @@ import {
   ANIMAL_ADDED,
   ANIMALS_LOADING,
   ANIMALS_ERROR,
+  GET_ANIMAL_PROFILE,
   // ANIMAL_DATA_RECEIVED
 } from '../types';
 import { setAlert } from './alert';
@@ -16,7 +17,7 @@ export const addAnimal = (formData) => async (dispatch) => {
     dispatch({
       type: ANIMALS_LOADING,
     });
-    const res = await axios.post('api/animals', formData, {
+    const res = await axios.post('/api/animals', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -46,7 +47,7 @@ export const deleteAnimal = (animalId, streetId) => async (dispatch) => {
       type: ANIMALS_LOADING,
     });
 
-    const res = await axios.delete(`api/animals/${animalId}`);
+    const res = await axios.delete(`/api/animals/${animalId}`);
 
     dispatch({
       type: ANIMAL_DELETED,
@@ -63,5 +64,24 @@ export const deleteAnimal = (animalId, streetId) => async (dispatch) => {
     });
 
     dispatch(setAlert('There was an error removing the animal!', 'danger'));
+  }
+};
+
+export const getAnimalProfile = (animalId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ANIMALS_LOADING,
+    });
+    const res = await axios.get(`/api/animals/${animalId}`);
+
+    dispatch({
+      type: GET_ANIMAL_PROFILE,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ANIMALS_ERROR,
+      payload: error,
+    });
   }
 };

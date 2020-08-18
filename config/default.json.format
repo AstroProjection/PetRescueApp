@@ -1,0 +1,8 @@
+{
+    "Remove This" :"This is the format for the file"
+  "mongoURI": "mongodb://127.0.0.1:27017/petrescuedb?retryWrites=true&w=majority",
+  "secretkey": "SOME_SECRET_KEY",
+  "EMAIL_SECRET": "SOME_SECRET_KEY_FOR_EMAIL_AUTH",
+  "GMAIL_ID": "MAILER_ID",
+  "GMAIL_PASS": "MAILED_PWD"
+}

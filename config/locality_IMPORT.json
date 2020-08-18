@@ -1,0 +1,982 @@
+[
+  {
+    "_id": {
+      "$oid": "5edb610bcab42fa12f264a52"
+    },
+    "locality": "Victoria Layout",
+    "locality_unique": "victoria-layout",
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "6th-cross",
+          "feeder": "",
+          "displayName": "6th Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61553287506104, 12.965938905440181],
+            [77.61612296104431, 12.96415104449812],
+            [77.61565089225769, 12.965531148812094],
+            [77.6153290271759, 12.965447506344274]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661eb"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "7th-cross",
+          "feeder": "",
+          "displayName": "7th Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61463165283203, 12.964841097611773],
+            [77.61576890945435, 12.965165212807795]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661ec"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "2nd-cross",
+          "feeder": "",
+          "displayName": "2nd Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61601567268372, 12.96452743734275],
+            [77.61688470840454, 12.964914284950995],
+            [77.61692762374878, 12.96549978288997]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661ed"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "linden-street",
+          "feeder": "",
+          "displayName": "Linden Street"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61139154434204, 12.963262336911889],
+            [77.61456727981567, 12.96370146340992]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661ee"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "palm-grove-road",
+          "feeder": "",
+          "displayName": "Palm Grove Main Road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61393427848816, 12.966472124638013],
+            [77.61439561843872, 12.964966561608696],
+            [77.61463165283203, 12.963732829558703]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661ef"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "victoria-road",
+          "feeder": "",
+          "displayName": "Victoria Main Road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61742115020752, 12.965353408534352],
+            [77.61393427848816, 12.966513945703252],
+            [77.61301159858704, 12.966670774635285]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f0"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "xavier-layout-1",
+          "feeder": "",
+          "displayName": "Xavier Layout"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6130223274231, 12.966618498335585],
+            [77.61301159858704, 12.965541604118611],
+            [77.61329054832458, 12.964569258734786]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f1"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "xavier-layout-2",
+          "feeder": "",
+          "displayName": "Xavier Layout"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61439561843872, 12.964600624774208],
+            [77.6129150390625, 12.96457971408171],
+            [77.61197090148926, 12.9643601517043],
+            [77.61198163032532, 12.963962847862344]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f2"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "8th-cross",
+          "feeder": "",
+          "displayName": "8th Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61474967002869, 12.966231653376516],
+            [77.61503934860228, 12.964945650946932]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f3"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "palm-grove-crossroad",
+          "feeder": "",
+          "displayName": "Palm Grove Crossroad"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61437416076659, 12.965039748911023],
+            [77.61541485786438, 12.963868749491093]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f4"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "1st-cross",
+          "feeder": "",
+          "displayName": "1st Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61463165283203, 12.963722374176221],
+            [77.61688470840454, 12.96453789269142],
+            [77.6168954372406, 12.964914284950995]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f5"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "4th-cross",
+          "feeder": "",
+          "displayName": "4th Cross"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61687397956848, 12.96451698199364],
+            [77.61685252189635, 12.964140589133207],
+            [77.61629462242126, 12.96391057099381],
+            [77.61614441871643, 12.96415104449812]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f6"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "nandans-road",
+          "feeder": "",
+          "displayName": "Nandans main road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61467456817627, 12.96364918648649],
+            [77.61478185653687, 12.962917308405643],
+            [77.61478185653687, 12.96178812085958],
+            [77.6147711277008, 12.961495367696678]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f7"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "austin-town-1",
+          "feeder": "",
+          "displayName": "Austin town"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61333346366882, 12.96345053407734],
+            [77.61335492134094, 12.96289639757171],
+            [77.61473894119263, 12.962969585482783]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f8"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "austin-town-2",
+          "feeder": "",
+          "displayName": "Austin town"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61334419250488, 12.963210059896221],
+            [77.61470675468445, 12.963314613916562]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661f9"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "austin-town-3",
+          "displayName": "Austin town"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6133871078491, 12.96283366505938],
+            [77.61355876922607, 12.962039051868045],
+            [77.61371970176697, 12.961767209930791],
+            [77.61406302452087, 12.96179857632332],
+            [77.61393427848816, 12.962875486736035]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661fa"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "austin-town-4",
+          "feeder": "",
+          "displayName": "Austin town"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.614266872406, 12.962927763821954],
+            [77.61440634727478, 12.961819487249477],
+            [77.61409521102905, 12.961819487249477],
+            [77.61456727981567, 12.961829942711892],
+            [77.61444926261902, 12.962917308405643]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661fb"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "austin-town-5",
+          "feeder": "",
+          "displayName": "Austin town"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61474967002869, 12.962404992468626],
+            [77.61399865150452, 12.962352715272901]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661fc"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "loyola-layout",
+          "feeder": "",
+          "displayName": "Loyola Layout"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61301159858704, 12.965562514730287],
+            [77.61237859725952, 12.965102480867316]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5eff2ad245ce5c2dfc0661fd"
+        }
+      }
+    ],
+    "position": {
+      "center": [12.96421, 77.6145],
+      "zoom": 17
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5eff034aecaffb3494b76737"
+    },
+    "type": "FeatureCollection",
+    "locality": "Ulsoor",
+    "locality_unique": "ulsoor-1",
+    "features": [
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main",
+          "displayName": "Mg Road 1"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6138913631439, 12.973738429220642],
+            [77.61940598487854, 12.972588380763499],
+            [77.6198673248291, 12.972713840853606]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dca9"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "dickenson-road-1",
+          "displayName": "Dickenson Road 1"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61388063430786, 12.973790704024143],
+            [77.61547923088074, 12.978944945689646]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcaa"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "dickenson-road-2",
+          "displayName": "Dickenson Road 2"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6154899597168, 12.978965855174526],
+            [77.614084482193, 12.979582684187267]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcab"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "dickenson-road-3",
+          "displayName": "Dickenson Road 3"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.614084482193, 12.979593138903118],
+            [77.61451363563538, 12.980837246948376]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcac"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "ulsoor-road-1",
+          "displayName": "Ulsoor lake road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61453509330748, 12.980826792284851],
+            [77.61545777320862, 12.980868610936264],
+            [77.61765718460082, 12.980115874134428],
+            [77.61912703514098, 12.977679918582552],
+            [77.62016773223877, 12.975787593290978]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcad"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "aurobindo-society",
+          "displayName": "Aurobindo Society"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61682033538818, 12.979457227562921],
+            [77.61691689491272, 12.97968723132588],
+            [77.61699736118317, 12.979713368103651],
+            [77.61708855628967, 12.979744732233367],
+            [77.617147564888, 12.979587911545256],
+            [77.61705100536346, 12.979342225601629],
+            [77.61715292930602, 12.979624503047999],
+            [77.61707782745361, 12.979760414296736],
+            [77.61726021766663, 12.980147238213345],
+            [77.6170402765274, 12.980230875737794],
+            [77.61725485324858, 12.980147238213345],
+            [77.61728167533875, 12.980241330426368]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcae"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "ulsoor-road-1",
+          "displayName": "Ulsoor road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61469602584837, 12.976404430189167],
+            [77.61904120445251, 12.974888472359604],
+            [77.62000679969788, 12.974731648608365]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcaf"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-2",
+          "displayName": "MG Road 2"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.62015700340271, 12.975787593290978],
+            [77.61996388435364, 12.974721193688106],
+            [77.62001752853394, 12.97318431562788],
+            [77.61987805366516, 12.972734750862465]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb0"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "radisson-city-center-road",
+          "displayName": "Raddison Center Road"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61897683143616, 12.974951201832406],
+            [77.61930942535399, 12.976320791377407],
+            [77.6196527481079, 12.976676256133128]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb1"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "haudin-road-1",
+          "displayName": "Haudin Road 1"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61922359466553, 12.977439458156454],
+            [77.61896610260008, 12.976540343198302],
+            [77.61874079704285, 12.976226697680517],
+            [77.6186442375183, 12.975735318907233],
+            [77.61841893196106, 12.975108025445177]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb2"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "haudin-road-2",
+          "displayName": "Haudin Road 2"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61890172958374, 12.97803538139513],
+            [77.61879444122314, 12.977951743132017],
+            [77.6185154914856, 12.976540343198302],
+            [77.61868715286255, 12.976320791377407],
+            [77.61869788169861, 12.976122149086684]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb3"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "halasuru-road-3",
+          "displayName": "Ulsoor Road 3"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61781007051468, 12.975311895993922],
+            [77.6175445318222, 12.973142495683991]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb4"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "halasuru-road-2",
+          "displayName": "Ulsoor Road 2"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61841356754303, 12.97511848034919],
+            [77.61822581291199, 12.974292541578789],
+            [77.6182472705841, 12.97428731410948]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb5"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "dickenson-road-4",
+          "displayName": "Dickenson Road 4"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61503934860228, 12.977523096591915],
+            [77.6155436038971, 12.977172860455656],
+            [77.61650383472443, 12.976848760904959]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb6"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "halasuru-road-4",
+          "displayName": "Ulsoor Road 4"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61614710092543, 12.975832026508513],
+            [77.6160478591919, 12.975458264489939],
+            [77.61587351560593, 12.975481787990196],
+            [77.61578232049942, 12.97542951354218],
+            [77.61576622724533, 12.974817901683787],
+            [77.61612564325331, 12.97475778590711],
+            [77.61618196964264, 12.974791764391366],
+            [77.6162651181221, 12.975372011636647],
+            [77.61623829603195, 12.975419058651244],
+            [77.61605858802795, 12.975453037045146]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb7"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "dickenson-road-5",
+          "displayName": "Dickenson Road 5"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61448413133621, 12.975453037045146],
+            [77.61526197195053, 12.975262235234625],
+            [77.6154363155365, 12.975251780336668],
+            [77.61554896831512, 12.97518643721447],
+            [77.61557310819626, 12.975081888183249],
+            [77.61544704437256, 12.974812674225522],
+            [77.61511713266373, 12.974606189536177],
+            [77.61482745409012, 12.974614030730043],
+            [77.61424005031586, 12.974786536932553]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb8"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-3",
+          "displayName": "MG Road 3"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61998802423477, 12.974112193824155],
+            [77.61911630630493, 12.974237653145572],
+            [77.61905461549759, 12.97419844711443],
+            [77.61906534433365, 12.974070374036303],
+            [77.61911362409592, 12.973989348177284],
+            [77.61999607086182, 12.973884798642773]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcb9"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-4",
+          "displayName": "MG Road 4"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61615246534348, 12.973270569239963],
+            [77.61635631322861, 12.974449365606928]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcba"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-5",
+          "displayName": "MG Road 5"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61558920145035, 12.974263790496238],
+            [77.61553823947906, 12.974109580087624],
+            [77.61553823947906, 12.973963210797779],
+            [77.6157447695732, 12.973662630736024],
+            [77.61577695608139, 12.973351595333147]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcbb"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-6",
+          "displayName": "MG Road 6"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6171287894249, 12.973884798642773],
+            [77.61702686548233, 12.973090220744222]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcbc"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "mg-road-main-7",
+          "displayName": "MG Road 7"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61635363101959, 12.973686154406137],
+            [77.61667281389236, 12.973599900938183],
+            [77.61668354272842, 12.973565922291096],
+            [77.61661112308502, 12.973173860642571]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcbd"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "ulsoor-road-2",
+          "displayName": "Carnival De goa Area"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61937916278839, 12.975254394061203],
+            [77.62011408805846, 12.975102797993017],
+            [77.61980026960373, 12.975170754862587],
+            [77.61988341808319, 12.975560199641631]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcbe"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "aga-abbas-ali-road-1",
+          "displayName": "AAA"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6182472705841, 12.979101766783378],
+            [77.61803269386292, 12.978913581459016],
+            [77.61780470609665, 12.978534596692922],
+            [77.61772692203522, 12.978375161549703],
+            [77.61762499809265, 12.977954356828167],
+            [77.61817753314972, 12.977787080219272],
+            [77.6176518201828, 12.977985721179799],
+            [77.6177430152893, 12.978369934166233],
+            [77.61841624975204, 12.97806413204159],
+            [77.61841624975204, 12.977813217196832],
+            [77.61844038963318, 12.978079814210975],
+            [77.6186442375183, 12.978469254433481]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcbf"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "aga-abbas-ali-road-2",
+          "displayName": "AAA-Swapnalok"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.61763036251068, 12.977951743132017],
+            [77.61762499809265, 12.976948081779911],
+            [77.61804342269897, 12.976937626952829],
+            [77.61761963367462, 12.976911489883223],
+            [77.61758744716644, 12.976456704432241],
+            [77.61730313301086, 12.976498523818783],
+            [77.61759281158447, 12.976430567312079],
+            [77.61744797229767, 12.975745773784872],
+            [77.61826872825623, 12.975756228662055],
+            [77.61744797229767, 12.975719636589966],
+            [77.61742651462555, 12.975468719379219]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcc0"
+        }
+      },
+      {
+        "properties": {
+          "dogs": [],
+          "cats": [],
+          "name": "grazia-beauty-parlor-1",
+          "displayName": "Grazias Area"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [77.6168417930603, 12.975667362191947],
+            [77.61710464954376, 12.97651943350942],
+            [77.61714220046997, 12.977052630026463],
+            [77.6175981760025, 12.977026492968944],
+            [77.61692225933075, 12.977104904133245],
+            [77.61702954769135, 12.977507414387405],
+            [77.61641263961792, 12.975813730478734],
+            [77.61674523353577, 12.976676256133128],
+            [77.61707246303557, 12.976545570620246]
+          ]
+        },
+        "type": "Feature",
+        "_id": {
+          "$oid": "5f071ceb932ec7290819dcc1"
+        }
+      }
+    ],
+    "position": {
+      "center": [12.97655, 77.61797],
+      "zoom": 17
+    }
+  }
+]

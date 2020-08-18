@@ -28,10 +28,14 @@ const userSchema = new mongoose.Schema(
       default: 'user',
       enum: ['user', 'moderator', 'admin'],
     },
+    confirmed: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema, 'users');

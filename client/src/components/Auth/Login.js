@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Verification from './Verification';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/auth';
 
@@ -14,23 +15,20 @@ const schema = yup.object({
   password: yup.string().required('Please enter a password').max(15),
 });
 
-let timeoutVariable;
+// let timeoutVariable;
 
-const Login = ({ login, auth: { isLoggedin } }) => {
+const Login = ({ login, isLoggedin, loading, needsVerification }) => {
   React.useEffect(() => {
     return () => {
-      clearInterval(timeoutVariable);
+      // clearInterval(timeoutVariable);
     };
   }, []);
 
   const onSubmit = (form, { setSubmitting }) => {
     login(form);
-
-    timeoutVariable = setTimeout(() => {
-      setSubmitting(false);
-    }, 1600);
+    setSubmitting(loading);
   };
-
+  console.log('rendering?');
   if (isLoggedin) return <Redirect to='/home' />;
   return (
     <React.Fragment>
@@ -47,7 +45,6 @@ const Login = ({ login, auth: { isLoggedin } }) => {
           {({
             handleSubmit,
             handleChange,
-            handleBlur,
             values,
             touched,
             errors,
@@ -102,13 +99,16 @@ const Login = ({ login, auth: { isLoggedin } }) => {
             );
           }}
         </Formik>
+        {/* {needsVerification && <Verification>Resend Verification</Verification>} */}
       </Container>
     </React.Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isLoggedin: state.auth.isLoggedin,
+  needsVerification: state.auth.needsVerification,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { login })(React.memo(Login));

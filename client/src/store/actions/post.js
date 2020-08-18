@@ -144,7 +144,7 @@ export const removePost = (postId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POST_ERROR,
-      payload: error.errors,
+      payload: error,
     });
     dispatch(setAlert('Post Error!', 'danger'));
   }
