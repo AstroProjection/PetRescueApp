@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 /// model
+const sendEmail = require('../auth/email');
 const Post = require('../model/Post');
 const User = require('../model/User');
 const Locality = require('../model/Locality');
@@ -40,30 +41,41 @@ router.post(
       /// check if password or user matches with db
       if (!isMatch) return res.status(400).send('Invalid credentials!');
       // verify and produce auth token
-      // delete user.password;
-      if (!user.confirmed) {
-        // user has not confirmed email
-        console.log('not confirmed');
-        return res.status(401).send('Please verify your Email Address');
-      }
-
       const payload = {
         user: {
           id: user.id,
           role: user.role,
         },
       };
-      console.log('signing token');
-      jwt.sign(
-        payload,
-        config.get('secretkey'),
-        { expiresIn: 1800 },
-        (err, token) => {
-          console.log(err);
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+
+      if (!user.confirmed) {
+        // user has not confirmed email
+        jwt.sign(
+          payload,
+          config.get('EMAIL_SECRET'),
+          { expiresIn: '7d' },
+          (err, token) => {
+            sendEmail(token, email);
+            res
+              .status(401)
+              .send(
+                'Please verify your Email Address. Verification link sent to Registered Email'
+              );
+          }
+        );
+      } else {
+        // console.log('signing token');
+        jwt.sign(
+          payload,
+          config.get('secretkey'),
+          { expiresIn: 1800 },
+          (err, token) => {
+            console.log(err);
+            if (err) throw err;
+            res.json({ token });
+          }
+        );
+      }
     } catch (error) {
       console.log(error);
       return res.status(400).send('Invalid credentials!');

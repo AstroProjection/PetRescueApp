@@ -10,7 +10,7 @@ const User = require('../model/User');
 const sendEmail = require('../auth/email');
 
 const router = express.Router();
-//   @route GET /confirmation/:token
+//   @route GET /api/confirmation/t/:token
 //   @desc authenticate the users email [Login]
 //   @access public
 // above are just descriptions of the route.
@@ -28,6 +28,10 @@ router.get('/t/:token', async (req, res) => {
 
   return res.redirect('http://localhost:3000/login');
 });
+
+//   @route POST /confirmation/r/
+//   @desc Resend email verification
+//   @access private
 
 router.post('/r', auth, async (req, res) => {
   try {
