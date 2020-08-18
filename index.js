@@ -11,8 +11,8 @@ app.use(function (req, res, next) {
   next();
 });
 /// initializing middleware
-app.use('/uploads', express.static('uploads'));
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 app.use('/confirmation', require('./api/confirmation'));
 app.use('/api/auth', require('./api/auth'));
 app.use('/api/locality', require('./api/locality'));
