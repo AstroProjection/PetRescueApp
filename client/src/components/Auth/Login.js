@@ -99,7 +99,7 @@ const Login = ({ login, isLoggedin, loading, needsVerification }) => {
             );
           }}
         </Formik>
-        {needsVerification && <Verification>Resend Verification</Verification>}
+        {/* {needsVerification && <Verification>Resend Verification</Verification>} */}
       </Container>
     </React.Fragment>
   );
