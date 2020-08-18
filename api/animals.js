@@ -61,8 +61,7 @@ router.post(
         location: req.body.location,
         locality: req.body.locality,
         type: req.body.type,
-        image:
-          req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
+        image: req.files.length > 0 ? req.files[0].filename : null,
         user: req.user.id,
         identity: parseInt(req.body.identity),
         medical: {

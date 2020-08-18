@@ -24,7 +24,7 @@ const PostPage = ({ post: { post, loading }, match, getPost }) => {
           <div className='postpage-assets'>
             {post && post.image && (
               <div className='postpage-img'>
-                <img src={post.image} />
+                <img src={`/uploads/${post.image}`} />
               </div>
             )}
 

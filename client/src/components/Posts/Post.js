@@ -45,7 +45,7 @@ const Post = ({
       <div className='card-post-layout'>
         <div className='post-image'>
           {img ? (
-            <Image thumbnail='true' src={img} key={img.uri} />
+            <Image thumbnail='true' src={`/uploads/${img}`} key={img.uri} />
           ) : (
             <React.Fragment>
               {loggedUser === postUser && !auth.loading ? (

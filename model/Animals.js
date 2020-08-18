@@ -134,21 +134,13 @@ AnimalsSchema.post('remove', async (doc, next) => {
   );
   // removing the image of the animal
   if (doc.image) {
-    fs.unlink(
-      path.join(
-        __dirname,
-        '..',
-        'uploads',
-        doc.image.replace('/\\uploads\\/', '')
-      ),
-      (err) => {
-        if (err) {
-          next(Error('Failed to delete the Image'));
-        } else {
-          next();
-        }
+    fs.unlink(path.join(__dirname, '..', 'uploads', doc.image), (err) => {
+      if (err) {
+        next(Error('Failed to delete the Image'));
+      } else {
+        next();
       }
-    );
+    });
   }
   next();
 });

@@ -79,24 +79,16 @@ PostSchema.post('remove', (doc, next) => {
     console.log('no image to delete');
     next();
   }
-  fs.unlink(
-    path.join(
-      __dirname,
-      '..',
-      'uploads',
-      doc.image.replace('/\\uploads\\/', '')
-    ),
-    (err) => {
-      if (err) {
-        // console.log(err);
-        next(Error('Failed to delete the Image'));
-      } else {
-        // console.log(ROOT_PATH + '\\client\\public\\' + doc.image);
-        console.log('deleted the file');
-        next();
-      }
+  fs.unlink(path.join(__dirname, '..', 'uploads', doc.image), (err) => {
+    if (err) {
+      // console.log(err);
+      next(Error('Failed to delete the Image'));
+    } else {
+      // console.log(ROOT_PATH + '\\client\\public\\' + doc.image);
+      // console.log('deleted the file');
+      next();
     }
-  );
+  });
 });
 
 module.exports = mongoose.model('posts', PostSchema);

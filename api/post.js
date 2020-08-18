@@ -40,8 +40,7 @@ router.post(
         text: req.body.text,
         title: req.body.title,
         user: req.user.id,
-        image:
-          req.files.length > 0 ? '\\uploads\\' + req.files[0].filename : null,
+        image: req.files.length > 0 ? req.files[0].filename : null,
         tag: req.body.tag,
         urgency: req.body.urgency,
         status: req.body.status,
@@ -98,10 +97,7 @@ router.put(
         {
           text: req.body.text,
           title: req.body.title,
-          image:
-            req.files.length > 0
-              ? '\\uploads\\' + req.files[0].filename
-              : req.body.image,
+          image: req.files.length > 0 ? req.files[0].filename : req.body.image,
           tag: req.body.tag,
           urgency: req.body.urgency,
           status: req.body.status,
@@ -148,7 +144,7 @@ router.post(
         });
       }
       /// saving new image to img path
-      post.image = '\\uploads\\' + req.files[0].filename;
+      post.image = req.files[0].filename;
       await post.save();
       res.json(post);
     } catch (error) {
@@ -164,15 +160,6 @@ router.post(
 // above are just descriptions of the route.
 
 router.get('/', async (req, res) => {
-  // const ROOT_DIR = process.mainModule.path;
-  // const doesExist = fs.exists(
-  //   ROOT_DIR +
-  //     '/uploads/2020-05-21T18-46-02.160Z-WIN_20180220_11s_02_40_Pro.jpg',
-  //   (a) => {
-  //     console.log(a);
-  //   }
-  // );
-  // return res.json(doesExist);
   try {
     const posts = await Post.find({})
       .populate({

@@ -65,7 +65,11 @@ const AnimalProfile = (props) => {
         <div className='profile-image'>
           {animal && animal.image ? (
             <>
-              <img className={`profile-img`} src={animal.image} alt='' />
+              <img
+                className={`profile-img`}
+                src={`/uploads/${animal.image}`}
+                alt=''
+              />
             </>
           ) : (
             <>'No Image'</>
