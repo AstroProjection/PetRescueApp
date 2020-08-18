@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const AnimalProfileTop = ({ animal }) => {
   return (
     <div className='animalprofile-top bg-main p-2'>
-      <img className='round-img my-1' src={animal.image} alt='' />
+      <img className='round-img my-1' src={`/uploads/${animal.image}`} alt='' />
       <h1 className='large'>{animal.name}</h1>
       <p className='lead'>
         {
