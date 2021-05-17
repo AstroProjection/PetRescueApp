@@ -25,6 +25,7 @@ import UserBadge from './components/Layout/UserBadge';
 
 function App({ loadUser, mobileCheck, loading }) {
   useEffect(() => {
+    /// adding this comment
     mobileCheck();
     loadUser();
   }, [loadUser, mobileCheck]);
