@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
 const path = require('path');
-
+const PORT = require("config").get('PORT');
+const morgan = require('morgan');
 ///connecting to MONGODB
 connectDB();
 
@@ -11,6 +12,8 @@ app.use(function (req, res, next) {
   next();
 });
 /// initializing middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/confirmation', require('./api/confirmation'));
@@ -29,5 +32,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));

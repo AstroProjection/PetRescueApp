@@ -2,18 +2,14 @@ import React, { useRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-// import ReadMoreReact from 'read-more-react';
 import Moment from 'react-moment';
 
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import Whatsapp from './Whatsapp';
-// import Accordion from 'react-bootstrap/Accordion';
-// import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 import { connect } from 'react-redux';
 
 import { uploadImage, removePost } from '../../store/actions/post';
-// import EditPost from './EditPost';
 
 const Post = ({
   user: { name, _id: postUser },
@@ -154,7 +150,6 @@ const Post = ({
             </>
           )}
         </div>
-        {/* {JSON.stringify(post, null, 2)} */}
       </div>
     </React.Fragment>
   );

@@ -72,13 +72,11 @@ router.post(
 
       await animal.save(async (err) => {
         if (err) return res.status(500).json({ msg: 'Error adding animal!' });
-        // console.log('successful addition');
+        console.log('successful addition');
         const street = await Streets.findOne({
           streetname: req.body.location,
         });
-        // console.log(street);
-        // console.log(animal.locality);
-        // console.log(street.locality);
+      
         if (animal.locality.toString() !== street.locality.toString())
           throw Error('Locality dont match');
 

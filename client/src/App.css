@@ -515,7 +515,6 @@ img {
 
 .post-image {
   padding: 0.2em;
-  /* border: 3px dashed lightseagreen; */
   grid-area: post-img;
   display: flex;
   justify-content: center;
@@ -529,7 +528,12 @@ img {
   font-size:1.2rem;
   font-weight:700;
   height: 160px;
-    width: 160px;
+  width: 160px;
+}
+
+.post-image > img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .round-img{
@@ -880,6 +884,8 @@ img {
 .animalprofile-top img {
   width: 250px;
   height:250px;
+  object-position: center;
+  object-fit: cover;
 }
 
 .animalprofile-top .icons a {
