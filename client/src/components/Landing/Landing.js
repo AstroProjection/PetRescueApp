@@ -1,29 +1,32 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { Box, Heading, Text, VStack, Icon } from '@chakra-ui/react';
 
 const Landing = ({ auth: { user, isLoggedin } }) => {
   if (isLoggedin) return <Navigate to='/home' replace />;
+  
   return (
-    <div className='landing p-5'>
-      <Container className='container-class'>
-        <h1>
-          <i className='fas fa-paw'></i>Pet RescYou
-        </h1>
-        <p>
-          The <b>animal tracker</b> Tab has a map for easy visualization!
-        </p>
-        <p>
-          You can post incident reports on the <b>home</b> page
-        </p>
-        <br />
-        <p>Anyone can view what's on the webpages!</p>
-        <p>
-          You will need to <b>register</b> to post on the website!
-        </p>
-      </Container>
-    </div>
+    <Box py={20} px={6} textAlign="center" bg="white" borderRadius="xl" boxShadow="sm" borderWidth="1px" borderColor="gray.100">
+      <VStack spacing={6} maxW="container.md" mx="auto">
+        <Heading size="2xl" color="brand.600" display="flex" alignItems="center" justifyContent="center">
+          <i className='fas fa-paw' style={{ marginRight: '15px' }}></i>Pet RescYou
+        </Heading>
+        
+        <Box fontSize="lg" color="gray.600">
+          <Text mb={4}>
+            The <b>Animal Tracker</b> tab has a map for easy visualization of pets in your area!
+          </Text>
+          <Text mb={4}>
+            You can post incident reports and updates on the <b>Home</b> page.
+          </Text>
+          <Text mb={4}>Anyone can view what's on the webpages!</Text>
+          <Text>
+            You will need to <b>register</b> to actively post on the website!
+          </Text>
+        </Box>
+      </VStack>
+    </Box>
   );
 };
 

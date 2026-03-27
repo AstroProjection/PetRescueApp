@@ -1,113 +1,113 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Verification from './Verification';
 import { connect } from 'react-redux';
 import { login } from '../../store/slices/authSlice';
-
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  VStack,
+  Heading,
+  Text,
+  Container,
+} from '@chakra-ui/react';
+
 const schema = yup.object({
-  email: yup.string().required('Please enter an email'),
-  password: yup.string().required('Please enter a password').max(15),
+  email: yup.string().email('Invalid email address').required('Please enter an email'),
+  password: yup.string().required('Please enter a password').min(6, 'Password is too short').max(15),
 });
 
-// let timeoutVariable;
-
-const Login = ({ login, isLoggedin, loading, needsVerification }) => {
-  React.useEffect(() => {
-    return () => {
-      // clearInterval(timeoutVariable);
-    };
-  }, []);
-
-  const onSubmit = (form, { setSubmitting }) => {
-    login(form);
-    setSubmitting(loading);
+const Login = ({ login, isLoggedin, loading }) => {
+  const onSubmit = async (form, { setSubmitting }) => {
+    await login(form);
+    setSubmitting(false);
   };
-  console.log('rendering?');
-  if (isLoggedin) return <Navigate to='/home' replace />;
-  return (
-    <React.Fragment>
-      <Container>
-        <h1>Sign In</h1>
-        <Formik
-          validationSchema={schema}
-          onSubmit={onSubmit}
-          initialValues={{
-            email: '',
-            password: '',
-          }}
-        >
-          {({
-            handleSubmit,
-            handleChange,
-            values,
-            touched,
-            errors,
-            isValid,
-            isSubmitting,
-          }) => {
-            return (
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='formBasicEmail'>
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type='email'
-                    placeholder='Enter email'
-                    onChange={handleChange}
-                    name='email'
-                    value={values.email}
-                    autoComplete='username'
-                    isInvalid={touched.email && errors.email}
-                    // isValid={touched.email && !errors.email}
-                  />
-                  <Form.Control.Feedback type='invalid'>
-                    {errors.email}
-                  </Form.Control.Feedback>
-                  <Form.Text className='text-muted'>
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
 
-                <Form.Group controlId='formBasicPassword'>
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type='password'
-                    placeholder='Password'
-                    onChange={handleChange}
-                    name='password'
-                    value={values.password}
-                    autoComplete='password'
-                    isInvalid={touched.password && errors.password}
-                  />
-                  <Form.Control.Feedback type='invalid'>
-                    {errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Button
-                  className='auth-button-form'
-                  type='submit'
-                  disabled={isSubmitting}
-                >
-                  Login
-                </Button>
-              </Form>
-            );
-          }}
-        </Formik>
-        {/* {needsVerification && <Verification>Resend Verification</Verification>} */}
-      </Container>
-    </React.Fragment>
+  if (isLoggedin) return <Navigate to='/home' replace />;
+
+  return (
+    <Container maxW="md" py={12}>
+      <Box 
+        p={8} 
+        bg="white" 
+        boxShadow="xl" 
+        borderRadius="2xl" 
+        borderWidth="1px" 
+        borderColor="gray.100"
+      >
+        <VStack spacing={6} align="stretch">
+          <Heading textAlign="center" color="brand.600" size="lg">Sign In</Heading>
+          
+          <Formik
+            validationSchema={schema}
+            onSubmit={onSubmit}
+            initialValues={{ email: '', password: '' }}
+          >
+            {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
+              <form onSubmit={handleSubmit}>
+                <VStack spacing={5}>
+                  <FormControl isInvalid={touched.email && errors.email}>
+                    <FormLabel>Email address</FormLabel>
+                    <Input
+                      type="email"
+                      placeholder="Enter email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      autoComplete="username"
+                      focusBorderColor="brand.400"
+                      size="lg"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isInvalid={touched.password && errors.password}>
+                    <FormLabel>Password</FormLabel>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      autoComplete="current-password"
+                      focusBorderColor="brand.400"
+                      size="lg"
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+
+                  <Button
+                    type="submit"
+                    colorScheme="brand"
+                    size="lg"
+                    w="full"
+                    mt={4}
+                    isLoading={isSubmitting || loading}
+                    loadingText="Logging in..."
+                  >
+                    Login
+                  </Button>
+                  <Text fontSize="sm" color="gray.500" textAlign="center" mt={4}>
+                    We'll never share your credentials with anyone else.
+                  </Text>
+                </VStack>
+              </form>
+            )}
+          </Formik>
+        </VStack>
+      </Box>
+    </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
-  needsVerification: state.auth.needsVerification,
   loading: state.auth.loading,
 });
 

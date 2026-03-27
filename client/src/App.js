@@ -16,13 +16,13 @@ import MapPage from './components/Map/MapPage';
 import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { connect } from 'react-redux';
 import { loadUser } from './store/slices/authSlice';
 import { mobileCheck } from './store/slices/deviceSlice';
 import UserBadge from './components/Layout/UserBadge';
 import supabase from './utils/supabase';
+import { Box } from '@chakra-ui/react';
 
 function App({ loadUser, mobileCheck, loading }) {
   useEffect(() => {
@@ -45,24 +45,25 @@ function App({ loadUser, mobileCheck, loading }) {
   return (
     !loading && (
       <Router>
-        <Navbar />
-        <div className='spacer-div'></div>
-        <UserBadge />
-        <div className='main-wrapper'>
-          <Alert />
-          <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/' element={<Landing />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/animal-tracker' element={<MapPage />} />
-            <Route path='/post/:postId' element={<PostPage />} />
-            <Route path='/animals/:animalId' element={<AnimalPage />} />
-            <Route path='/edit-animals/:animalId' element={<AnimalPage />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </div>
+        <Box minH="100vh" display="flex" flexDirection="column">
+          <Navbar />
+          <UserBadge />
+          <Box flex="1" as="main" p={4} maxW="container.xl" mx="auto" w="full">
+            <Alert />
+            <Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/' element={<Landing />} />
+              <Route path='/home' element={<Home />} />
+              <Route path='/animal-tracker' element={<MapPage />} />
+              <Route path='/post/:postId' element={<PostPage />} />
+              <Route path='/animals/:animalId' element={<AnimalPage />} />
+              <Route path='/edit-animals/:animalId' element={<AnimalPage />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </Box>
+        </Box>
       </Router>
     )
   );

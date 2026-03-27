@@ -1,7 +1,7 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
 import VaccineInfo from './VaccineInfo';
 import SpayInfo from './SpayInfo';
+import { Box, Heading, Divider, VStack } from '@chakra-ui/react';
 
 const AdditionalInfo = ({
   handleChange,
@@ -11,19 +11,19 @@ const AdditionalInfo = ({
   setValues,
 }) => {
   return (
-    <React.Fragment>
-      <h5>
-        <em>Additional Info.</em>
-      </h5>
-      <hr />
-      <Form.Group>
+    <Box mt={6}>
+      <Heading size="md" mb={4} color="gray.700">
+        <em>Additional Info</em>
+      </Heading>
+      <Divider mb={4} />
+      <VStack spacing={6} align="stretch">
         <SpayInfo
           handleChange={handleChange}
           handleBlur={handleBlur}
           setFieldValue={setFieldValue}
           values={values}
         />
-        <hr />
+        <Divider />
         <VaccineInfo
           handleChange={handleChange}
           handleBlur={handleBlur}
@@ -31,11 +31,9 @@ const AdditionalInfo = ({
           values={values}
           setValues={setValues}
         />
-      </Form.Group>
-    </React.Fragment>
+      </VStack>
+    </Box>
   );
 };
-
-AdditionalInfo.propTypes = {};
 
 export default AdditionalInfo;

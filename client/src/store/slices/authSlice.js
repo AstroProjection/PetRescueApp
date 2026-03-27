@@ -13,17 +13,23 @@ export const loadUser = createAsyncThunk(
       .from('profiles')
       .select('name, role, locality:localities(locality, locality_unique)')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
     if (profileError) return rejectWithValue(profileError.message);
+
+    const safeProfile = profile || {
+      name: user.user_metadata?.name || 'User',
+      role: 'user',
+      locality: { locality: 'Unknown', locality_unique: 'unknown' }
+    };
 
     return {
       _id: user.id,
       id: user.id,
       email: user.email,
-      name: profile.name,
-      role: profile.role,
-      locality: profile.locality,
+      name: safeProfile.name,
+      role: safeProfile.role,
+      locality: safeProfile.locality,
     };
   }
 );
@@ -39,7 +45,13 @@ export const login = createAsyncThunk(
       dispatch(setAlert(error.message, 'danger', 3500, true));
       return rejectWithValue(error.message);
     }
-    dispatch(loadUser());
+    
+    try {
+      await dispatch(loadUser()).unwrap();
+    } catch (err) {
+      dispatch(setAlert(err || 'Failed to load profile', 'danger', 3500, true));
+      return rejectWithValue(err);
+    }
   }
 );
 
@@ -133,8 +145,8 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(login.fulfilled, (state) => {
-        // user is set via the subsequent loadUser dispatch
         state.loading = false;
+        state.isLoggedin = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
