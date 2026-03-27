@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
-import { logout } from '../../store/actions/auth';
-
-import { loadUser } from '../../store/actions/auth';
+import { logout } from '../../store/slices/authSlice';
+import { loadUser } from '../../store/slices/authSlice';
 const NavbarComponent = ({
   loadUser,
   logout,

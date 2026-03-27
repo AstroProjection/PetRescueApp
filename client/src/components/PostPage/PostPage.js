@@ -1,22 +1,24 @@
 import React from 'react';
-import { getPost } from '../../store/actions/post';
+import { getPost } from '../../store/slices/postSlice';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
+import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 import Comments from './Comments';
-const PostPage = ({ post: { post, loading }, match, getPost }) => {
+const PostPage = ({ post: { post, loading }, getPost }) => {
+  const { postId } = useParams();
+
   React.useEffect(() => {
-    getPost(match.params.postId);
-  }, [getPost, match.params.postId]);
+    getPost(postId);
+  }, [getPost, postId]);
 
   const position =
     post && post.locationState.center.length > 0
       ? [post.locationState.center[0], post.locationState.center[1]]
       : null;
 
-  // console.log(post);
   return (
     post && (
       <React.Fragment>
@@ -24,13 +26,13 @@ const PostPage = ({ post: { post, loading }, match, getPost }) => {
           <div className='postpage-assets'>
             {post && post.image && (
               <div className='postpage-img'>
-                <img src={`/uploads/${post.image}`} />
+                <img src={post.image} alt='Post' />
               </div>
             )}
 
             <div className='-map'>
               {post && position && (
-                <Map
+                <MapContainer
                   className='postpage-map'
                   center={post.locationState.center}
                   zoom={post.locationState.zoom}
@@ -47,7 +49,7 @@ const PostPage = ({ post: { post, loading }, match, getPost }) => {
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                   />
                   <Marker position={position}></Marker>
-                </Map>
+                </MapContainer>
               )}
             </div>
           </div>
@@ -65,16 +67,13 @@ const PostPage = ({ post: { post, loading }, match, getPost }) => {
             <b>{post.user.locality.locality}</b>
             <br />
             Posted on{' '}
-            <b>
-              {<Moment format='YYYY/MM/DD @ HH:MM'>{post.createdAt}</Moment>}
-            </b>
+            <b>{moment(post.createdAt).format('YYYY/MM/DD @ HH:mm')}</b>
           </div>
         </section>
         <hr />
         <section className='comments-section'>
           {!loading && post && <Comments post={post} />}
         </section>
-        {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
       </React.Fragment>
     )
   );

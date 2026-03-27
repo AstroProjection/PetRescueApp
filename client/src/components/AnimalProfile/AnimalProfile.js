@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
-import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+import { useAccordionButton } from 'react-bootstrap';
 
 import AnimalFullProfile from './AnimalFullProfile/AnimalFullProfile';
-import { deleteAnimal } from '../../store/actions/animal';
+import { deleteAnimal } from '../../store/slices/animalsSlice';
 
 function CustomToggle({ children, eventKey, ...rest }) {
-  const decoratedOnClick = useAccordionToggle(eventKey, () => {
+  const decoratedOnClick = useAccordionButton(eventKey, () => {
     // console.log('custom toggle')
   });
 
@@ -67,7 +67,7 @@ const AnimalProfile = (props) => {
             <>
               <img
                 className={`profile-img`}
-                src={`/uploads/${animal.image}`}
+                src={animal.image}
                 alt=''
               />
             </>

@@ -1,19 +1,16 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import FormFile from 'react-bootstrap/FormFile';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Geolocation from './Geolocation';
 
-import bsCustomFileInput from 'bs-custom-file-input';
-
 import Spinner from '../Layout/Spinner';
 
 import { useSelector, connect } from 'react-redux';
-import { createPost } from '../../store/actions/post';
+import { createPost } from '../../store/slices/postSlice';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -97,16 +94,17 @@ const AddPost = ({ isMobile, createPost, ...props }) => {
                 values,
               }) => (
                 <Form onSubmit={handleSubmit} noValidate={true}>
-                  <FormFile custom>
-                    <FormFile.Input
+                  <Form.Group controlId='addpost-image'>
+                    <Form.Label>Add image</Form.Label>
+                    <Form.Control
+                      type='file'
                       name='image'
-                      onChange={(e) => {
-                        setFieldValue('image', e.currentTarget.files[0]);
-                        bsCustomFileInput.init();
-                      }}
+                      accept='image/jpeg,image/png'
+                      onChange={(e) =>
+                        setFieldValue('image', e.currentTarget.files[0])
+                      }
                     />
-                    <FormFile.Label>Add image</FormFile.Label>
-                  </FormFile>
+                  </Form.Group>
                   <Row>
                     <Col lg={6}>
                       <Form.Group controlId='addpost-title'>

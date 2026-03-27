@@ -1,13 +1,12 @@
 import React from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 const Landing = ({ auth: { user, isLoggedin } }) => {
-  if (isLoggedin) return <Redirect to='/home' />;
+  if (isLoggedin) return <Navigate to='/home' replace />;
   return (
-    <Jumbotron fluid className='landing'>
+    <div className='landing p-5'>
       <Container className='container-class'>
         <h1>
           <i className='fas fa-paw'></i>Pet RescYou
@@ -24,7 +23,7 @@ const Landing = ({ auth: { user, isLoggedin } }) => {
           You will need to <b>register</b> to post on the website!
         </p>
       </Container>
-    </Jumbotron>
+    </div>
   );
 };
 

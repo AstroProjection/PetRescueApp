@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Spinner from '../Layout/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAllPosts } from '../../store/actions/post';
+import { getAllPosts } from '../../store/slices/postSlice';
 import Post from './Post';
 import PostButtons from './PostButtons';
 import Accordion from 'react-bootstrap/Accordion';

@@ -1,6 +1,19 @@
 import React from 'react';
+import { MapContainer, TileLayer, Marker, Tooltip, useMapEvents } from 'react-leaflet';
 
-import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
+// Inner component: fires handleViewPortChange whenever the user pans or zooms
+const ViewportTracker = ({ onViewportChange }) => {
+  useMapEvents({
+    moveend: (e) => {
+      const map = e.target;
+      onViewportChange({
+        center: [map.getCenter().lat, map.getCenter().lng],
+        zoom: map.getZoom(),
+      });
+    },
+  });
+  return null;
+};
 
 const Geolocation = ({ values, setFieldValue }) => {
   const [locationState, setLocationState] = React.useState(
@@ -25,10 +38,7 @@ const Geolocation = ({ values, setFieldValue }) => {
         });
         setLocationState({ ...locationState, center: [latitude, longitude] });
       },
-      (geoLocationObj) => {
-        // alert('geolocation failed');
-        // alert(geoLocationObj.position);
-      },
+      () => {},
       {
         enableHighAccuracy: true,
         timeout: 2000,
@@ -40,13 +50,9 @@ const Geolocation = ({ values, setFieldValue }) => {
     if (values.locationState.center.length === 0) {
       fetchGeoLocation();
     }
-  } else {
-    // alert('cannot geolocate');
   }
 
-  const markerClick = () => {
-    console.log('marker clicked');
-  };
+  const markerClick = () => {};
 
   return (
     locationState.center.length > 0 && (
@@ -57,30 +63,31 @@ const Geolocation = ({ values, setFieldValue }) => {
           value={values.locationState}
         />
         <br />
-        <button type='button' onClick={(e) => fetchGeoLocation()}>
+        <button type='button' onClick={() => fetchGeoLocation()}>
           Reset Location
         </button>
-        <Map
+        <MapContainer
           className='post-map'
-          key={'2'}
           scrollWheelZoom={false}
           doubleClickZoom={true}
           center={locationState.center}
+          zoom={locationState.zoom}
           zoomControl={true}
-          closePopupOnClick={true}
-          viewport={locationState}
-          onViewportChanged={(viewport) => handleViewPortChange(viewport)}
-          maxZoom={`18`}
-          minZoom={`15`}
+          maxZoom={18}
+          minZoom={15}
         >
+          <ViewportTracker onViewportChange={handleViewPortChange} />
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
-          <Marker position={locationState.center} onClick={() => markerClick()}>
+          <Marker
+            position={locationState.center}
+            eventHandlers={{ click: () => markerClick() }}
+          >
             <Tooltip>Place marker on location</Tooltip>
           </Marker>
-        </Map>
+        </MapContainer>
       </React.Fragment>
     )
   );

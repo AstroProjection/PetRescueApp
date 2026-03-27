@@ -1,11 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Verification from './Verification';
 import { connect } from 'react-redux';
-import { login } from '../../store/actions/auth';
+import { login } from '../../store/slices/authSlice';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -29,7 +29,7 @@ const Login = ({ login, isLoggedin, loading, needsVerification }) => {
     setSubmitting(loading);
   };
   console.log('rendering?');
-  if (isLoggedin) return <Redirect to='/home' />;
+  if (isLoggedin) return <Navigate to='/home' replace />;
   return (
     <React.Fragment>
       <Container>

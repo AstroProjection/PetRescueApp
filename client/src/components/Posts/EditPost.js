@@ -2,17 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import FormFile from 'react-bootstrap/FormFile';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Geolocation from './Geolocation';
 
-import bsCustomFileInput from 'bs-custom-file-input';
-
 import Spinner from '../Layout/Spinner';
-import { editPost } from '../../store/actions/post';
+import { editPost } from '../../store/slices/postSlice';
 import { useSelector, connect } from 'react-redux';
 
 import { Formik } from 'formik';
@@ -106,16 +103,17 @@ const EditPost = ({ isMobile, editPost, post, ...props }) => {
                 values,
               }) => (
                 <Form onSubmit={handleSubmit} noValidate={true}>
-                  <FormFile custom>
-                    <FormFile.Input
+                  <Form.Group controlId='editpost-image'>
+                    <Form.Label>New Image:</Form.Label>
+                    <Form.Control
+                      type='file'
                       name='image'
-                      onChange={(e) => {
-                        setFieldValue('image', e.currentTarget.files[0]);
-                        bsCustomFileInput.init();
-                      }}
+                      accept='image/jpeg,image/png'
+                      onChange={(e) =>
+                        setFieldValue('image', e.currentTarget.files[0])
+                      }
                     />
-                    <FormFile.Label>New Image:</FormFile.Label>
-                  </FormFile>
+                  </Form.Group>
                   <Row>
                     <Col lg={4}>
                       <Form.Group controlId='addpost-title'>

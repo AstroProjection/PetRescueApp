@@ -1,14 +1,23 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Tooltip, Popup, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip, GeoJSON, useMap } from 'react-leaflet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   setCurrentStreet,
   // updateStreetsToDB,
   fetchStreetData,
-} from '../../store/actions/street';
+} from '../../store/slices/streetSlice';
 
 import MapInformation from './MapInformation/MapInformation';
+
+// Inner component: syncs locationState back into the Leaflet map instance
+const MapViewResetter = ({ center, zoom }) => {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
+};
 
 const MapComponent = ({
   setCurrentStreet,
@@ -70,12 +79,12 @@ const MapComponent = ({
         streets.filter(
           (street) => street.streetname === clickedLayer.feature.properties.name
         )[0].dogs.length
-      }              
+      }
       <br/>  Cats:${
         streets.filter(
           (street) => street.streetname === clickedLayer.feature.properties.name
         )[0].cats.length
-      }              
+      }
       </pre></strong>
       <br/>
       <br/>
@@ -85,7 +94,6 @@ const MapComponent = ({
   `;
     clickedLayer.closeTooltip();
     clickedLayer.setPopupContent(popupContent);
-    // console.log('this is entering');
   }, [streets, clickedLayer]);
 
   const markerClick = () => {};
@@ -93,13 +101,12 @@ const MapComponent = ({
   const onEachFeature = (feature, layer) => {
     const toolTipContent = ` <Tooltip><strong>Click</strong> for details of <strong>${feature.properties.displayName}</strong></pre></Tooltip>`;
     layer.bindTooltip(toolTipContent).openTooltip();
-    // console.log('oneachfeature');
     const popupContent = `
       <Popup>
         <br /> <strong>${feature.properties.displayName}:
         <br/>  <strong>Total</strong>
-        <br/>  Dogs:${dogCount}              
-        <br/>  Cats:${catCount}              
+        <br/>  Dogs:${dogCount}
+        <br/>  Cats:${catCount}
         </strong>
         <br/>
         <br/>
@@ -130,6 +137,7 @@ const MapComponent = ({
   React.useEffect(() => {
     if (locality) fetchStreetData(locality._id);
   }, [locality, fetchStreetData]);
+
   return (
     <div className='map-contents'>
       {!displayInformation && (
@@ -137,7 +145,7 @@ const MapComponent = ({
           <div>
             <div
               className='btn map-center'
-              onClick={(e) => {
+              onClick={() => {
                 if (
                   locationState.center[0] === initCenter.center[0] &&
                   locationState.center[1] === initCenter.center[1]
@@ -150,24 +158,28 @@ const MapComponent = ({
             </div>
           </div>
           {locality && !loading && (
-            <Map
+            <MapContainer
               className='animal-tracker-map'
-              key={'1'}
               scrollWheelZoom={false}
               doubleClickZoom={false}
               center={position}
+              zoom={initCenter.zoom}
               zoomControl={true}
-              closePopupOnClick={true}
-              viewport={locationState}
-              onViewportChanged={(viewport) => setLocationState(viewport)}
-              maxZoom={`${initCenter.zoom + 1}`}
-              minZoom={`${initCenter.zoom - 1}`}
+              maxZoom={initCenter.zoom + 1}
+              minZoom={initCenter.zoom - 1}
             >
+              <MapViewResetter
+                center={locationState.center}
+                zoom={locationState.zoom}
+              />
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
               />
-              <Marker position={position} onclick={() => markerClick()}>
+              <Marker
+                position={position}
+                eventHandlers={{ click: () => markerClick() }}
+              >
                 <Tooltip>{locality.locality}</Tooltip>
               </Marker>
 
@@ -177,7 +189,7 @@ const MapComponent = ({
                 data={locality}
                 onEachFeature={onEachFeature}
               />
-            </Map>
+            </MapContainer>
           )}
         </React.Fragment>
       )}

@@ -1,7 +1,7 @@
 import React from 'react';
-import Moment from 'react-moment';
+import moment from 'moment';
 import 'moment-timezone';
-import { removeComment } from '../../store/actions/post';
+import { removeComment } from '../../store/slices/postSlice';
 import { connect } from 'react-redux';
 const CommentItem = (props) => {
   const { comment, removeComment, post, user } = props;
@@ -24,7 +24,7 @@ const CommentItem = (props) => {
         <p className='my-1 comment-text'>{comment.text}</p>
         <p className='comment-date'>
           Posted on{' '}
-          <Moment format='YYYY/MM/DD HH:mm:ss'>{comment.createdAt}</Moment>
+          {moment(comment.createdAt).format('YYYY/MM/DD HH:mm:ss')}
         </p>
       </div>
       {canDelete && (

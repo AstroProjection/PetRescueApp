@@ -7,12 +7,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { register } from '../../store/actions/auth';
+import { register } from '../../store/slices/authSlice';
 import { useDispatch } from 'react-redux';
 const schema = yup.object({
   name: yup.string().required('Please enter a name'),
@@ -55,7 +55,7 @@ const Register = ({ isLoggedin }) => {
             isSubmitting,
             setSubmitting,
           }) => {
-            if (isLoggedin) return <Redirect to='/home' />;
+            if (isLoggedin) return <Navigate to='/home' replace />;
 
             return (
               <Form noValidate={true} onSubmit={handleSubmit}>

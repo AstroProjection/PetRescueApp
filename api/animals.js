@@ -119,7 +119,7 @@ router.delete('/:animalId', auth, async (req, res) => {
   try {
     const animal = await Animals.findById(req.params.animalId);
 
-    if (animal.user.toString() === req.user._id)
+    if (animal.user.toString() !== req.user.id)
       return res.status(401).send({ msg: 'Not authorized to delete' });
     const type = animal.type;
     await animal.remove();

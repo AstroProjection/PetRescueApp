@@ -38,6 +38,8 @@ router.post('/r', auth, async (req, res) => {
     const userId = req.user.id;
     const user = await User.findOne({ _id: userId });
     if (!user) return res.status(502).send({ msg: 'Bad Request' });
+    const payload = { user: { id: userId } };
+    const email = user.email;
     jwt.sign(
       payload,
       config.get('EMAIL_SECRET'),

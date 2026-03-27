@@ -5,13 +5,13 @@ import Spinner from '../Layout/Spinner';
 import AnimalProfileTop from './AnimalProfileTop';
 import AnimalProfileAbout from './AnimalProfileAbout';
 import AnimalProfileMedical from './AnimalProfileMedical';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getAnimalProfile } from '../../store/actions/animal';
+import { getAnimalProfile } from '../../store/slices/animalsSlice';
 
-const AnimalProfilePage = ({ match, getAnimalProfile, loading, animal }) => {
-  const animalId = match.params.animalId;
+const AnimalProfilePage = ({ getAnimalProfile, loading, animal }) => {
+  const { animalId } = useParams();
 
   const [editMode, setEditMode] = React.useState(false);
 

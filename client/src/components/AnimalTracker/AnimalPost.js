@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import FormFile from 'react-bootstrap/FormFile';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,12 +8,10 @@ import AdditionalInfo from './AdditionalInfo';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import bsCustomFileInput from 'bs-custom-file-input';
-
 import Spinner from '../Layout/Spinner';
 
 import { useSelector } from 'react-redux';
-import { addAnimal } from '../../store/actions/animal';
+import { addAnimal } from '../../store/slices/animalsSlice';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -109,21 +106,18 @@ const AddPost = (props) => {
                 touched,
               }) => (
                 <Form onSubmit={handleSubmit} noValidate>
-                  <FormFile custom>
-                    <FormFile.Label>Add image</FormFile.Label>
-                    <FormFile.Input
-                      name='image'
+                  <Form.Group controlId='animal-image'>
+                    <Form.Label>Add image</Form.Label>
+                    <Form.Control
                       type='file'
+                      name='image'
                       size='sm'
-                      accept='image/**'
-                      onChange={(e) => {
-                        let file = e.currentTarget.files[0];
-                        setFieldValue('image', file);
-
-                        bsCustomFileInput.init();
-                      }}
+                      accept='image/jpeg,image/png'
+                      onChange={(e) =>
+                        setFieldValue('image', e.currentTarget.files[0])
+                      }
                     />
-                  </FormFile>
+                  </Form.Group>
                   <Form.Group controlId='addpost-title'>
                     <Row>
                       <Col md={6}>

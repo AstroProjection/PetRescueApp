@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import FormControl from 'react-bootstrap/FormControl';
 import MapComponent from './MapComponent';
 
-import { setLocality } from '../../store/actions/locality';
+import { setLocality } from '../../store/slices/localitySlice';
 // import { getAllAnimals } from '../../store/actions/animal';
 // import { getAllStreetData } from '../../store/actions/street';
 

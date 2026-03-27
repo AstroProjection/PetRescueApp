@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { addComment } from '../../store/actions/post';
+import { addComment } from '../../store/slices/postSlice';
 import { connect } from 'react-redux';
 const commentValidation = yup.object({
   text: yup.string().required('cannot submit a blank comment'),

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
 import Alert from './components/Layout/Alert';
 import About from './components/Info/About';
@@ -19,16 +19,29 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { connect } from 'react-redux';
-import { loadUser } from './store/actions/auth';
-import { mobileCheck } from './store/actions/device';
+import { loadUser } from './store/slices/authSlice';
+import { mobileCheck } from './store/slices/deviceSlice';
 import UserBadge from './components/Layout/UserBadge';
+import supabase from './utils/supabase';
 
 function App({ loadUser, mobileCheck, loading }) {
   useEffect(() => {
     mobileCheck();
     loadUser();
-  }, [loadUser, mobileCheck]);
 
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+          loadUser();
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [loadUser, mobileCheck]);
+// Above code loads the user
   return (
     !loading && (
       <Router>
@@ -37,23 +50,18 @@ function App({ loadUser, mobileCheck, loading }) {
         <UserBadge />
         <div className='main-wrapper'>
           <Alert />
-          <Switch>
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/home' component={Home} />
-            <Route exact path='/animal-tracker' component={MapPage} />
-            <Route exact path='/post/:postId' component={PostPage} />
-            <Route exact path='/animals/:animalId' component={AnimalPage} />
-            <Route
-              exact
-              path='/edit-animals/:animalId'
-              component={AnimalPage}
-            />
-            {/* <Route exact path='/confirmation/:token' component={About} /> */}
-            <Route component={NotFound} />
-          </Switch>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/' element={<Landing />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/animal-tracker' element={<MapPage />} />
+            <Route path='/post/:postId' element={<PostPage />} />
+            <Route path='/animals/:animalId' element={<AnimalPage />} />
+            <Route path='/edit-animals/:animalId' element={<AnimalPage />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
         </div>
       </Router>
     )

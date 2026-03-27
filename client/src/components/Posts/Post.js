@@ -2,14 +2,14 @@ import React, { useRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import Moment from 'react-moment';
+import moment from 'moment';
 
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import Whatsapp from './Whatsapp';
 import { connect } from 'react-redux';
 
-import { uploadImage, removePost } from '../../store/actions/post';
+import { uploadImage, removePost } from '../../store/slices/postSlice';
 
 const Post = ({
   user: { name, _id: postUser },
@@ -41,7 +41,7 @@ const Post = ({
       <div className='card-post-layout'>
         <div className='post-image'>
           {img ? (
-            <Image thumbnail='true' src={`/uploads/${img}`} key={img.uri} />
+            <Image thumbnail='true' src={img} key={img.uri || img} />
           ) : (
             <React.Fragment>
               {loggedUser === postUser && !auth.loading ? (
@@ -102,7 +102,7 @@ const Post = ({
                 <i className='fas fa-user'></i> {name}
               </span>
               <span>
-                <Moment format='DD/MM/YYYY'>{date}</Moment>
+                {moment(date).format('DD/MM/YYYY')}
               </span>
             </small>
           </div>

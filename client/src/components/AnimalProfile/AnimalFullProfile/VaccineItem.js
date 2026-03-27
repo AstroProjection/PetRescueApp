@@ -1,5 +1,5 @@
 import React from 'react';
-import Moment from 'react-moment';
+import moment from 'moment';
 
 const VaccineItem = ({ vaccineName, dateTaken, dateDue }) => {
   return (
@@ -7,11 +7,11 @@ const VaccineItem = ({ vaccineName, dateTaken, dateDue }) => {
       <div className='tr'>
         <div className='td'>{vaccineName}</div>
         <div className='td'>
-          {dateTaken ? <Moment format='DD/MM/YYYY'>{dateTaken}</Moment> : '-'}
+          {dateTaken ? moment(dateTaken).format('DD/MM/YYYY') : '-'}
         </div>
         <div className='td'>
           <strong>
-            {dateDue ? <Moment format='DD/MM/YYYY'>{dateDue}</Moment> : '-'}
+            {dateDue ? moment(dateDue).format('DD/MM/YYYY') : '-'}
           </strong>
         </div>
       </div>
