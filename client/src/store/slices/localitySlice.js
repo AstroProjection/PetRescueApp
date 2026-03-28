@@ -14,7 +14,16 @@ export const setLocality = createAsyncThunk(
         
       if (error) throw new Error('Error fetching Locality!');
       
-      return { ...data, _id: data.id };
+      // Reshape the Supabase row to match the legacy MongoDB schema expected by MapComponent
+      return { 
+        ...data, 
+        ...data.geojson,
+        _id: data.id,
+        position: {
+          center: [data.center_lat, data.center_lng],
+          zoom: data.zoom,
+        }
+      };
     } catch (error) {
       dispatch(setAlert('Please try again..', 'danger'));
       return rejectWithValue('Error fetching Locality!');

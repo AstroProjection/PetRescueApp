@@ -159,7 +159,7 @@ const MapComponent = ({
           </div>
           {locality && !loading && (
             <MapContainer
-              className='animal-tracker-map'
+              style={{ height: '500px', width: '100%', zIndex: 1, borderRadius: 'inherit' }}
               scrollWheelZoom={false}
               doubleClickZoom={false}
               center={position}
