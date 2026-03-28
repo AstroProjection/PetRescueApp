@@ -1,43 +1,41 @@
 import React from 'react';
 import moment from 'moment';
-import 'moment-timezone';
 import { removeComment } from '../../store/slices/postSlice';
 import { connect } from 'react-redux';
-const CommentItem = (props) => {
-  const { comment, removeComment, post, user } = props;
+import { Box, Flex, Avatar, Text, IconButton, HStack, Spacer } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
+const CommentItem = ({ comment, removeComment, post, user }) => {
   const canDelete = user
-    ? user._id === comment.user || post.user._id === user._id
+    ? user._id === comment.user_id || post.user._id === user._id
     : false;
 
   return (
-    <div className='post  p-1 my-1'>
-      <div className='comment-heading'>
-        {/* <a href='#'> */}
-        <img className='round-img' src='/blank-user.webp' alt='' />
-        {/* </a> */}
-        <p>
-          <b>{comment.name}</b>
-        </p>
-      </div>
-      <div>
-        <p className='my-1 comment-text'>{comment.text}</p>
-        <p className='comment-date'>
-          Posted on{' '}
-          {moment(comment.createdAt).format('YYYY/MM/DD HH:mm:ss')}
-        </p>
-      </div>
-      {canDelete && (
-        <div
-          className='delete-button btn'
-          onClick={(e) => removeComment(post._id, comment._id)}
-        >
-          Delete
-        </div>
-      )}
-      {/* {JSON.stringify(comment, null, 2)} */}
-      {/* {JSON.stringify(post, null, 2)} */}
-    </div>
+    <Box p={4} mb={3} bg="white" borderRadius="lg" borderWidth="1px" borderColor="gray.100" shadow="sm">
+      <Flex direction="column">
+        <HStack mb={2}>
+          <Avatar size="sm" name={comment.name} src="/blank-user.webp" />
+          <Text fontWeight="bold" fontSize="sm">{comment.name}</Text>
+          <Spacer />
+          {canDelete && (
+             <IconButton 
+               size="xs" 
+               icon={<DeleteIcon />} 
+               colorScheme="red" 
+               variant="ghost" 
+               aria-label="Delete comment" 
+               onClick={() => removeComment({ postId: post._id, commentId: comment._id })} 
+             />
+          )}
+        </HStack>
+        <Text color="gray.800" fontSize="md" mb={2} whiteSpace="pre-wrap">
+          {comment.text}
+        </Text>
+        <Text fontSize="xs" color="gray.500">
+          Posted on {moment(comment.createdAt || comment.date).format('MMMM Do YYYY, h:mm a')}
+        </Text>
+      </Flex>
+    </Box>
   );
 };
 
@@ -45,4 +43,4 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { removeComment })(CommentItem);
+export default connect(mapStateToProps, { removeComment })(React.memo(CommentItem));

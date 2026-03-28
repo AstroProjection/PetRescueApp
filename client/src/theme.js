@@ -4,7 +4,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'gray.50',
+        bg: '#fffdd0',
         color: 'gray.800',
         lineHeight: 'base',
         fontFamily: "'Inter', sans-serif",

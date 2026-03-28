@@ -3,55 +3,54 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { addComment } from '../../store/slices/postSlice';
 import { connect } from 'react-redux';
+import { Box, Button, Textarea, VStack, Heading, FormControl, FormErrorMessage, Text } from '@chakra-ui/react';
+
 const commentValidation = yup.object({
-  text: yup.string().required('cannot submit a blank comment'),
+  text: yup.string().required('Cannot submit a blank comment'),
 });
 
-let formData = {};
 const CommentsHeader = ({
-  post: { _id: postId, user },
+  post: { _id: postId },
   addComment,
   isLoggedin,
 }) => {
-  const onSubmit = (e) => {
-    formData = {
-      ...e,
-      user,
-    };
-    // console.log(formData);
-    addComment(formData, postId);
-  };
-
   return isLoggedin ? (
-    <React.Fragment>
-      <div className='comments-header'>
-        <h3>Leave A Comment</h3>
-      </div>
+    <Box mb={6} bg="gray.50" p={5} borderRadius="xl" borderWidth="1px" borderColor="gray.200">
+      <Heading size="sm" mb={4} color="gray.700">Leave A Comment</Heading>
       <Formik
-        initialValues={{
-          text: '',
-        }}
+        initialValues={{ text: '' }}
         validationSchema={commentValidation}
-        onSubmit={onSubmit}
+        onSubmit={(values, { resetForm }) => {
+          addComment({ formData: values, postId });
+          resetForm();
+        }}
       >
-        {({ values, handleChange, handleSubmit }) => (
-          <form className='form my-1' noValidate={true} onSubmit={handleSubmit}>
-            <textarea
-              name='text'
-              cols='30'
-              rows='5'
-              placeholder='Comment on this post'
-              required
-              onChange={handleChange}
-            ></textarea>
-            <input type='submit' className='btn btn-dark my-1' value='Submit' />
-            {/* {JSON.stringify(values, null, 2)} */}
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+          <form onSubmit={handleSubmit}>
+            <VStack align="stretch" spacing={3}>
+              <FormControl isInvalid={errors.text && touched.text}>
+                <Textarea
+                  name="text"
+                  placeholder="Share a comment or update on this priority..."
+                  rows={3}
+                  bg="white"
+                  focusBorderColor="brand.400"
+                  value={values.text}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <FormErrorMessage>{errors.text}</FormErrorMessage>
+              </FormControl>
+              <Button type="submit" colorScheme="brand" alignSelf="flex-end" size="sm" isLoading={isSubmitting}>
+                Post Comment
+              </Button>
+            </VStack>
           </form>
         )}
       </Formik>
-    </React.Fragment>
+    </Box>
   ) : (
-    <h3>Login to add comments...</h3>
+    <Text color="gray.500" fontStyle="italic" mb={6}>Login to add comments...</Text>
   );
 };
 

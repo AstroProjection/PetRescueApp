@@ -38,37 +38,39 @@ const PostPage = ({ post: { post, loading }, getPost }) => {
     <Box maxW="container.lg" mx="auto" py={8}>
       <Flex direction={{ base: 'column', md: 'row' }} gap={8} mb={8}>
         {/* Left Side: Images & Maps */}
-        <VStack flex="1" spacing={4} align="stretch">
-          {post.image && (
-            <Box borderRadius="xl" overflow="hidden" boxShadow="md" bg="gray.100" maxH="500px">
-              <Image src={post.image} alt={post.title} objectFit="contain" w="100%" h="100%" />
-            </Box>
-          )}
+        {(post.image || position) && (
+          <VStack flex={{ base: "none", md: "1" }} w={{ base: "100%", md: "50%" }} spacing={4} align="stretch">
+            {post.image && (
+              <Box borderRadius="xl" overflow="hidden" boxShadow="md" bg="gray.100" maxH="500px">
+                <Image src={post.image} alt={post.title} objectFit="contain" w="100%" h="100%" />
+              </Box>
+            )}
 
-          {position && (
-            <Box borderRadius="xl" overflow="hidden" boxShadow="md" h="300px" borderWidth="1px" borderColor="gray.200">
-              <MapContainer
-                style={{ height: '100%', width: '100%', zIndex: 1 }}
-                center={post.locationState.center}
-                zoom={post.locationState.zoom}
-                dragging={false}
-                keyboard={false}
-                scrollWheelZoom={false}
-                tap={false}
-                doubleClickZoom={false}
-              >
-                <TileLayer
-                  attribution='&amp;copy OpenStreetMap contributors'
-                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                />
-                <Marker position={position}></Marker>
-              </MapContainer>
-            </Box>
-          )}
-        </VStack>
+            {position && (
+              <Box borderRadius="xl" overflow="hidden" boxShadow="md" h="300px" borderWidth="1px" borderColor="gray.200">
+                <MapContainer
+                  style={{ height: '100%', width: '100%', zIndex: 1 }}
+                  center={post.locationState.center}
+                  zoom={post.locationState.zoom}
+                  dragging={false}
+                  keyboard={false}
+                  scrollWheelZoom={false}
+                  tap={false}
+                  doubleClickZoom={false}
+                >
+                  <TileLayer
+                    attribution='&amp;copy OpenStreetMap contributors'
+                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                  />
+                  <Marker position={position}></Marker>
+                </MapContainer>
+              </Box>
+            )}
+          </VStack>
+        )}
 
         {/* Right Side: Details */}
-        <Box flex="1" bg="white" p={6} borderRadius="xl" boxShadow="sm" borderWidth="1px" borderColor="gray.100">
+        <Box flex={{ base: "none", md: (post.image || position) ? "1" : "none" }} w={{ base: "100%", md: (post.image || position) ? "50%" : "container.md" }} mx="auto" bg="white" p={6} borderRadius="xl" boxShadow="sm" borderWidth="1px" borderColor="gray.100">
           <HStack mb={4} spacing={2}>
             <Badge colorScheme={post.status === 'Open' ? 'green' : 'gray'} px={2} py={1} borderRadius="md">{post.status}</Badge>
             <Badge colorScheme="purple" px={2} py={1} borderRadius="md">{post.tag}</Badge>
