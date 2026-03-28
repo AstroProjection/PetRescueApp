@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendVerification } from '../../store/actions/auth';
+import { sendVerification } from '../../store/slices/authSlice';
 
 const Verification = ({ sendVerification, ...props }) => {
   const disableTime = 60;

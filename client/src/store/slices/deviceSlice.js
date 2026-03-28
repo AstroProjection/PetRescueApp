@@ -1,9 +1,20 @@
-import { DEVICE_IDENTIFIED } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
-// this method will identify if the device is a mobile
+const deviceSlice = createSlice({
+  name: 'device',
+  initialState: { isMobile: false },
+  reducers: {
+    deviceIdentified: (state, action) => {
+      state.isMobile = action.payload;
+    },
+  },
+});
+
+const { deviceIdentified } = deviceSlice.actions;
+
 export const mobileCheck = () => (dispatch) => {
   let check = false;
-  let navComp = navigator.userAgent || navigator.vendor || window.opera;
+  const navComp = navigator.userAgent || navigator.vendor || window.opera;
   if (
     /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
       navComp
@@ -13,9 +24,7 @@ export const mobileCheck = () => (dispatch) => {
     )
   )
     check = true;
-
-  dispatch({
-    type: DEVICE_IDENTIFIED,
-    payload: check,
-  });
+  dispatch(deviceIdentified(check));
 };
+
+export default deviceSlice.reducer;

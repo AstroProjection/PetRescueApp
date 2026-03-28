@@ -3,28 +3,35 @@ import AddPost from './AddPost';
 import EditPost from './EditPost';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button, Box } from '@chakra-ui/react';
 
 const PostButtons = ({ isLoggedin, editModal, editPost, setEditModal }) => {
   const [postModal, setPostModal] = React.useState(false);
 
   return isLoggedin ? (
-    <React.Fragment>
-      <h1 className='large button-holder'>
-        <button className='btn  add-post' onClick={(e) => setPostModal(true)}>
-          <i className='fa fa-plus-circle'></i> Add Post
-        </button>
-      </h1>
+    <Box mb={4}>
+      <Button 
+        colorScheme="brand" 
+        size="md" 
+        onClick={() => setPostModal(true)}
+        leftIcon={<i className='fa fa-plus-circle'></i>}
+        boxShadow="md"
+        _hover={{ transform: 'translateY(-2px)', boxShadow: 'lg' }}
+      >
+        Create New Post
+      </Button>
 
-      <AddPost show={postModal} onHide={() => setPostModal(false)} />
+      <AddPost isOpen={postModal} onClose={() => setPostModal(false)} />
+      {/* Fallback to legacy edit post temporarily while migrating edit component */}
       <EditPost
-        show={editModal}
+        isOpen={editModal}
+        show={editModal} 
         onHide={() => setEditModal(false)}
+        onClose={() => setEditModal(false)}
         post={editPost}
       />
-    </React.Fragment>
-  ) : (
-    ''
-  );
+    </Box>
+  ) : null;
 };
 
 PostButtons.propTypes = {

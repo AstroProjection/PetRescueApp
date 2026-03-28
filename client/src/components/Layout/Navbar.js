@@ -1,102 +1,124 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
-import { logout } from '../../store/actions/auth';
+import { logout } from '../../store/slices/authSlice';
+import {
+  Box,
+  Flex,
+  HStack,
+  Button,
+  useDisclosure,
+  IconButton,
+  Stack,
+  Text,
+  Divider,
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
-import { loadUser } from '../../store/actions/auth';
-const NavbarComponent = ({
-  loadUser,
-  logout,
-  isLoggedin,
-  user,
-  loading,
-  isMobile,
-}) => {
-  React.useEffect(() => {
-    // if (localStorage.token) loadUser();
+const NavbarComponent = ({ logout, isLoggedin, user, loading }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    return () => {
-      return window.removeEventListener('resize', updatePageSize);
-    };
-  }, []);
+  const Links = [
+    { name: 'Home', path: '/home' },
+    { name: 'Animal Tracker', path: '/animal-tracker' },
+    { name: 'About', path: '/about' },
+  ];
 
-  const [pageSize, updatePageSize] = React.useState([
-    window.innerWidth,
-    window.innerHeight,
-  ]);
-
-  window.addEventListener('resize', updatePageSize);
-
-  const guestLinks = (
-    <React.Fragment>
-      <LinkContainer to='/register'>
-        <Nav.Link className='auth-button'>
-          <i className='fas fa-user-plus'></i> Sign-Up
-        </Nav.Link>
-      </LinkContainer>
-      <LinkContainer to='/login'>
-        <Nav.Link className='auth-button'>
-          <i className='fas fa-sign-in-alt'></i> Sign-In
-        </Nav.Link>
-      </LinkContainer>
-    </React.Fragment>
-  );
-
-  const authLinks = (
-    <React.Fragment>
-      <Nav.Link onClick={logout} className='auth-button'>
-        <i className='fas fa-sign-out-alt' /> Logout
-      </Nav.Link>
-    </React.Fragment>
+  const NavLink = ({ children, path }) => (
+    <Button
+      as={RouterLink}
+      to={path}
+      variant="ghost"
+      colorScheme="brand"
+      onClick={onClose}
+    >
+      {children}
+    </Button>
   );
 
   return (
     !loading && (
-      <Navbar expand='lg' fixed='top' collapseOnSelect>
-        <LinkContainer to='/home'>
-          <Navbar.Brand className='petrescue-logo'>
-            <i className='fas fa-paw'></i>Pet RescYou
-          </Navbar.Brand>
-        </LinkContainer>
-        {!isMobile && window.innerWidth > 992 && (
-          <React.Fragment>
+      <Box 
+        bg="rgba(255, 255, 255, 0.8)" 
+        backdropFilter="blur(10px)" 
+        px={4} 
+        position="sticky" 
+        top={0} 
+        zIndex={1000} 
+        boxShadow="sm"
+        w="full"
+      >
+        <Flex h={16} alignItems="center" justify="space-between" maxW="container.xl" mx="auto">
+          <IconButton
+            size="md"
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label="Open Menu"
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+
+          <HStack spacing={8} alignItems="center">
+            <Box as={RouterLink} to="/home" fontWeight="bold" fontSize="xl" color="brand.600" display="flex" alignItems="center">
+              <i className="fas fa-paw" style={{ marginRight: '8px' }}></i>Pet RescYou
+            </Box>
+            <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
+              {Links.map((link) => (
+                <NavLink key={link.name} path={link.path}>{link.name}</NavLink>
+              ))}
+            </HStack>
+          </HStack>
+
+          <Flex alignItems="center" display={{ base: 'none', md: 'flex' }}>
             {isLoggedin ? (
-              <React.Fragment>
-                <hr />
-                {user && <div>Welcome {user.name}!</div>}
-                <hr />
-              </React.Fragment>
+              <HStack spacing={4}>
+                <Text fontWeight="medium" color="gray.600">Welcome {user?.name}!</Text>
+                <Button onClick={logout} colorScheme="red" variant="outline" size="sm">
+                  <i className="fas fa-sign-out-alt" style={{ marginRight: '5px' }}></i> Logout
+                </Button>
+              </HStack>
             ) : (
-              <React.Fragment>
-                <hr />
-                <div>Login to post..</div>
-                <hr />
-              </React.Fragment>
+              <HStack spacing={4}>
+                <Button as={RouterLink} to="/login" variant="ghost" colorScheme="brand" size="sm">
+                  <i className="fas fa-sign-in-alt" style={{ marginRight: '5px' }}></i> Sign-In
+                </Button>
+                <Button as={RouterLink} to="/register" colorScheme="brand" size="sm">
+                  <i className="fas fa-user-plus" style={{ marginRight: '5px' }}></i> Sign-Up
+                </Button>
+              </HStack>
             )}
-          </React.Fragment>
-        )}
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav>
-            <LinkContainer to='/home'>
-              <Nav.Link>Home</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/animal-tracker'>
-              <Nav.Link>Animal Tracker</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/about'>
-              <Nav.Link>About</Nav.Link>
-            </LinkContainer>
-          </Nav>
-          <hr />
-          <Nav className='auth-links'>
-            {isLoggedin ? authLinks : guestLinks}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+          </Flex>
+        </Flex>
+
+        {/* Mobile Nav */}
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as="nav" spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link.name} path={link.path}>{link.name}</NavLink>
+              ))}
+              <Divider />
+              {isLoggedin ? (
+                <Stack spacing={2}>
+                  <Text textAlign="center" fontWeight="medium" color="gray.600">Welcome {user?.name}!</Text>
+                  <Button onClick={() => { logout(); onClose(); }} colorScheme="red" variant="outline" w="full">
+                    Logout
+                  </Button>
+                </Stack>
+              ) : (
+                <Stack spacing={2} align="stretch">
+                  <Button as={RouterLink} to="/login" variant="outline" colorScheme="brand" w="full" onClick={onClose}>
+                    Sign-In
+                  </Button>
+                  <Button as={RouterLink} to="/register" colorScheme="brand" w="full" onClick={onClose}>
+                    Sign-Up
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
     )
   );
 };
@@ -105,16 +127,12 @@ NavbarComponent.propTypes = {
   logout: PropTypes.func.isRequired,
   isLoggedin: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isLoggedin: state.auth.isLoggedin,
   user: state.auth.user,
   loading: state.auth.loading,
-  isMobile: state.device.isMobile,
 });
 
-export default connect(mapStateToProps, { loadUser, logout })(
-  React.memo(NavbarComponent)
-);
+export default connect(mapStateToProps, { logout })(React.memo(NavbarComponent));

@@ -1,15 +1,22 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './index';
+import { configureStore } from '@reduxjs/toolkit';
+import alertReducer from './slices/alertSlice';
+import deviceReducer from './slices/deviceSlice';
+import authReducer from './slices/authSlice';
+import postReducer from './slices/postSlice';
+import animalsReducer from './slices/animalsSlice';
+import streetReducer from './slices/streetSlice';
+import localityReducer from './slices/localitySlice';
 
-const initialState = {};
-const middleware = [thunk];
-
-const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = configureStore({
+  reducer: {
+    alert: alertReducer,
+    device: deviceReducer,
+    auth: authReducer,
+    post: postReducer,
+    animals: animalsReducer,
+    street: streetReducer,
+    locality: localityReducer,
+  },
+});
 
 export default store;

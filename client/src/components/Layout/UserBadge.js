@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Badge from 'react-bootstrap/Badge';
+import { Badge, Box } from '@chakra-ui/react';
 
 const UserBadge = ({ auth: { user } }) => {
   return (
     <React.Fragment>
       {user ? (
-        <h5>
-          <Badge className='userbadge'>
-            <i className='fa fa-user' /> Welcome <>{user.name}</>
+        <Box textAlign="center" my={2}>
+          <Badge colorScheme="brand" variant="subtle" fontSize="md" px={3} py={1} borderRadius="full">
+            <i className='fa fa-user' style={{ marginRight: '5px' }} /> Welcome {user.name}
           </Badge>
-        </h5>
-      ) : (
-        ''
-      )}
+        </Box>
+      ) : null}
     </React.Fragment>
   );
 };

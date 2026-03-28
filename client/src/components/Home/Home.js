@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PostsComponent from '../Posts/PostsComponent';
-import { loadUser } from '../../store/actions/auth';
+import { loadUser } from '../../store/slices/authSlice';
 // import UserBadge from '../Layout/UserBadge';
 // import setAuthToken from '../../utils/setAuthToken';
 const Home = ({ auth: { user }, loadUser }) => {

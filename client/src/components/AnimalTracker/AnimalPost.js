@@ -1,23 +1,32 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import FormFile from 'react-bootstrap/FormFile';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { useSelector, connect } from 'react-redux';
+import { addAnimal } from '../../store/slices/animalsSlice';
 import AdditionalInfo from './AdditionalInfo';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import bsCustomFileInput from 'bs-custom-file-input';
-
 import Spinner from '../Layout/Spinner';
-
-import { useSelector } from 'react-redux';
-import { addAnimal } from '../../store/actions/animal';
-
 import { Formik } from 'formik';
 import * as yup from 'yup';
+
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Select,
+  VStack,
+  HStack,
+  SimpleGrid,
+  Box,
+  Divider,
+} from '@chakra-ui/react';
 
 export const VaccineContext = React.createContext({});
 
@@ -45,197 +54,171 @@ const AddPost = (props) => {
     addAnimal,
     street,
     locality: { locality },
-    ...rest
+    isOpen,
+    onClose,
   } = props;
+  
   let locations = locality ? locality.features : [];
-  locations = locations.map((feature) => {
-    return {
-      displayName: feature.properties.displayName,
-      name: feature.properties.name,
-    };
-  });
-  locations.sort((locationA, locationB) =>
-    locationA.name > locationB.name ? 1 : -1
-  );
+  locations = locations.map((feature) => ({
+    displayName: feature.properties.displayName,
+    name: feature.properties.name,
+  }));
+  locations.sort((locationA, locationB) => locationA.name > locationB.name ? 1 : -1);
+  
   const loading = useSelector((state) => state.auth.loading);
 
-  const onSubmit = (e) => {
+  const onSubmit = (values) => {
     let formSubmit = new FormData();
-    for (const [key, value] of Object.entries(e)) {
+    for (const [key, value] of Object.entries(values)) {
       if (key !== 'vaccineArr') formSubmit.append(key, value);
     }
-
-    for (const element of e.vaccineArr) {
+    for (const element of values.vaccineArr) {
       formSubmit.append('vaccineArr[]', JSON.stringify(element));
     }
     addAnimal(formSubmit);
-    props.onHide();
+    if (onClose) onClose();
+    else if (props.onHide) props.onHide();
   };
 
-  return (
-    <Modal {...rest} size='lg' centered>
-      {!loading ? (
-        <React.Fragment>
-          <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-vcenter' size='sm'>
-              Add an Animal
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Formik
-              validationSchema={animalPostSchema}
-              initialValues={{
-                image: '',
-                name: '',
-                type: '',
-                identity: '',
-                locality: locality ? locality._id : '',
-                location: street ? street.streetname : '',
-                spayedValue: '',
-                spayedHospital: '',
-                spayedDate: new Date(),
-                vaccineArr: [],
-              }}
-              onSubmit={onSubmit}
-            >
-              {({
-                values,
-                errors,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                setFieldValue,
-                setValues,
-                touched,
-              }) => (
-                <Form onSubmit={handleSubmit} noValidate>
-                  <FormFile custom>
-                    <FormFile.Label>Add image</FormFile.Label>
-                    <FormFile.Input
-                      name='image'
-                      type='file'
-                      size='sm'
-                      accept='image/**'
-                      onChange={(e) => {
-                        let file = e.currentTarget.files[0];
-                        setFieldValue('image', file);
+  const isModalOpen = isOpen !== undefined ? isOpen : props.show;
 
-                        bsCustomFileInput.init();
-                      }}
-                    />
-                  </FormFile>
-                  <Form.Group controlId='addpost-title'>
-                    <Row>
-                      <Col md={6}>
-                        <Form.Label>Name*</Form.Label>
-                        <Form.Control
-                          name='name'
-                          type='text'
-                          size='sm'
-                          placeholder='enter the animals name...'
+  return (
+    <Modal isOpen={isModalOpen} onClose={onClose || props.onHide} size="xl" isCentered scrollBehavior="inside">
+      <ModalOverlay backdropFilter="blur(4px)" bg="blackAlpha.300" />
+      <ModalContent borderRadius="2xl" boxShadow="2xl">
+        <ModalHeader color="brand.600" borderBottomWidth="1px" borderColor="gray.100">
+          <i className="fa fa-paw" style={{ marginRight: '10px' }}></i> Add an Animal Tracker
+        </ModalHeader>
+        <ModalCloseButton />
+        
+        {!loading ? (
+          <Formik
+            validationSchema={animalPostSchema}
+            initialValues={{
+              image: '',
+              name: '',
+              type: '',
+              identity: '',
+              locality: locality ? locality._id : '',
+              location: street ? street.streetname : '',
+              spayedValue: '',
+              spayedHospital: '',
+              spayedDate: new Date(),
+              vaccineArr: [],
+            }}
+            onSubmit={onSubmit}
+          >
+            {({ values, errors, handleChange, handleBlur, handleSubmit, setFieldValue, setValues, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <ModalBody py={6}>
+                  <VStack spacing={6} align="stretch">
+                    <FormControl>
+                      <FormLabel fontWeight="bold">Add Image</FormLabel>
+                      <Box p={4} borderWidth="2px" borderStyle="dashed" borderRadius="md" borderColor="gray.300" bg="gray.50" textAlign="center" _hover={{ borderColor: 'brand.400' }} transition="all 0.2s">
+                        <Input
+                          type="file"
+                          name="image"
+                          accept="image/jpeg,image/png"
+                          onChange={(e) => setFieldValue('image', e.currentTarget.files[0])}
+                          variant="unstyled"
+                          p={1}
+                        />
+                      </Box>
+                    </FormControl>
+
+                    <SimpleGrid columns={{ base: 1, md: 5 }} spacing={4}>
+                      <FormControl isInvalid={touched.name && !!errors.name} gridColumn={{ md: "span 2" }}>
+                        <FormLabel fontWeight="bold">Name *</FormLabel>
+                        <Input
+                          name="name"
+                          type="text"
+                          placeholder="Animal name..."
                           required
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          isInvalid={touched.name && !!errors.name}
+                          focusBorderColor="brand.400"
                         />
-                        <Form.Control.Feedback type='invalid'>
-                          {errors.name}
-                        </Form.Control.Feedback>
-                      </Col>
-                      <Col md={3}>
-                        <Form.Label>Type*</Form.Label>
-                        <Form.Control
-                          as='select'
-                          name='type'
-                          size='sm'
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          defaultValue={'default'}
-                          isInvalid={touched.type && !!errors.type}
-                        >
-                          <option value='default' disabled={true}>
-                            Select an option
-                          </option>
-                          <option value='dog'>Dog</option>
-                          <option value='cat'>Cat</option>
-                        </Form.Control>
-                        <Form.Control.Feedback type='invalid'>
-                          {errors.type}
-                        </Form.Control.Feedback>
-                      </Col>
-                      <Col md={3}>
-                        <Form.Label>Stray/Pet*</Form.Label>
-                        <Form.Control
-                          as='select'
-                          name='identity'
-                          size='sm'
-                          // defaultValue={'0'}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          isInvalid={touched.identity && !!errors.identity}
-                          defaultValue={'default'}
-                        >
-                          <option value='default' disabled={true}>
-                            Select an option
-                          </option>
-                          <option value='1'>Pet</option>
-                          <option value='0'>Stray</option>
-                        </Form.Control>
-                        <Form.Control.Feedback type='invalid'>
-                          {errors.identity}
-                        </Form.Control.Feedback>
-                      </Col>
-                    </Row>
-                  </Form.Group>
+                        <FormErrorMessage>{errors.name}</FormErrorMessage>
+                      </FormControl>
 
-                  <Form.Group controlId='addpost-text'>
-                    <Row>
-                      <Col md={5}>
-                        <Form.Label>Locality:</Form.Label>
-                        <Form.Control
-                          as='input'
-                          disabled
-                          name='locality'
-                          size='sm'
-                          value={street.locality.locality}
-                        ></Form.Control>
-                      </Col>
-                      <Col md={7}>
-                        <Form.Label>Location*</Form.Label>
-                        <Form.Control
-                          as='input'
-                          name='location'
-                          size='sm'
-                          // onChange={handleChange}
-                          value={street.displayName}
-                          disabled
-                        />
-                        <Form.Control.Feedback type='invalid'>
-                          {errors.location}
-                        </Form.Control.Feedback>
-                      </Col>
-                    </Row>
-                  </Form.Group>
-                  <hr />
-                  <AdditionalInfo
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    setFieldValue={setFieldValue}
-                    values={values}
-                    setValues={setValues}
-                  />
-                  <Button type='submit'>Submit</Button>
-                  {/* <pre>{JSON.stringify(values, null, 2)} </pre> */}
-                  {/* <pre>{JSON.stringify(errors, null, 2)} </pre> */}
-                </Form>
-              )}
-            </Formik>
-          </Modal.Body>
-          <Modal.Footer></Modal.Footer>
-        </React.Fragment>
-      ) : (
-        <Spinner />
-      )}
+                      <FormControl isInvalid={touched.type && !!errors.type} gridColumn={{ md: "span 1" }}>
+                        <FormLabel fontWeight="bold">Type *</FormLabel>
+                        <Select
+                          name="type"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          defaultValue="default"
+                          focusBorderColor="brand.400"
+                        >
+                          <option value="default" disabled>Select</option>
+                          <option value="dog">Dog</option>
+                          <option value="cat">Cat</option>
+                        </Select>
+                        <FormErrorMessage>{errors.type}</FormErrorMessage>
+                      </FormControl>
+
+                      <FormControl isInvalid={touched.identity && !!errors.identity} gridColumn={{ md: "span 2" }}>
+                        <FormLabel fontWeight="bold">Identity *</FormLabel>
+                        <Select
+                          name="identity"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          defaultValue="default"
+                          focusBorderColor="brand.400"
+                        >
+                          <option value="default" disabled>Select status</option>
+                          <option value="1">Pet</option>
+                          <option value="0">Stray</option>
+                        </Select>
+                        <FormErrorMessage>{errors.identity}</FormErrorMessage>
+                      </FormControl>
+                    </SimpleGrid>
+
+                    <Box p={4} bg="brand.50" borderRadius="md" borderWidth="1px" borderColor="brand.100">
+                      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
+                        <FormControl>
+                          <FormLabel fontWeight="bold">Locality</FormLabel>
+                          <Input name="locality_fake" value={street?.locality?.locality || ''} disabled bg="white" />
+                        </FormControl>
+                        <FormControl isInvalid={touched.location && !!errors.location}>
+                          <FormLabel fontWeight="bold">Location *</FormLabel>
+                          <Input name="location" value={street?.displayName || ''} disabled bg="white" />
+                          <FormErrorMessage>{errors.location}</FormErrorMessage>
+                        </FormControl>
+                      </SimpleGrid>
+                    </Box>
+
+                    <Divider />
+                    
+                    <AdditionalInfo
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      setFieldValue={setFieldValue}
+                      values={values}
+                      setValues={setValues}
+                    />
+                  </VStack>
+                </ModalBody>
+                
+                <ModalFooter bg="gray.50" borderTopWidth="1px" borderColor="gray.100" borderBottomRadius="2xl">
+                  <HStack spacing={3}>
+                    <Button variant="ghost" onClick={onClose || props.onHide}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" colorScheme="brand">
+                      Submit Record
+                    </Button>
+                  </HStack>
+                </ModalFooter>
+              </form>
+            )}
+          </Formik>
+        ) : (
+          <ModalBody py={10}>
+            <Spinner />
+          </ModalBody>
+        )}
+      </ModalContent>
     </Modal>
   );
 };
